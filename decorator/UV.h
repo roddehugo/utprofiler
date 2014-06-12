@@ -1,36 +1,33 @@
 #ifndef UV_h
 #define UV_h
 
-#include "Creditable.h"
-#include "QString.h"
-#include "Saison.h"
+#include "decorator/Creditable.h"
+#include <QString>
 
-class Inscription;
-class Inscription;
 
 class UV : public Creditable {
 
  public:
 
-    virtual QString getCode();
+    UV();
 
-    virtual QString getTitre();
+    QString getCode();
 
-    virtual Saison getSaisons();
+    QString getTitre();
 
-    virtual void setCode(QString c);
+    void setCode(QString c);
 
-    virtual void setTitre(QString t);
+    void setTitre(QString t);
 
-    virtual void setSaison(int s);
+    void setSaison(int s);
 
-    virtual int getSaison();
+    int getSaison();
 
  public:
-    int SAISON_PRINTEMPS;
-    int SAISON_AUTOMNE;
-    int SAISON_NULL;
-    int SAISON_BOTH;
+    static const int SAISON_PRINTEMPS = 0;
+    static const int SAISON_AUTOMNE = 1;
+    static const int SAISON_NULL = 2;
+    static const int SAISON_BOTH = 3;
 
  private:
     QString code;
@@ -38,15 +35,6 @@ class UV : public Creditable {
 
  public:
 
-    /**
-     * @element-type Inscription
-     */
-    Inscription *myInscription;
-
-    /**
-     * @element-type Semestre
-     */
-    Inscription *InscriptionAssoc;
 };
 
 #endif // UV_h

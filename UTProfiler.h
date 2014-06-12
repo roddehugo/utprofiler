@@ -1,22 +1,19 @@
 #ifndef UTProfiler_h
 #define UTProfiler_h
 
-#include "AbstractDAOFactory.h"
-#include "Etudiant.h"
-#include "ObservableDFP.h"
+#include <QString>
+#include "dao/AbstractDAOFactory.h"
+#include "dao/UVDAO.h"
 
-
-class UTProfiler : virtual public ObservableDFP {
-
- public:
-
-    virtual void pressButton();
+class UTProfiler{
 
  public:
+    UTProfiler();
 
-    Etudiant myEtudiant;
+    AbstractDAOFactory *getCurrentFactory();
 
-    AbstractDAOFactory &myAbstractDAOFactory;
+private:
+    AbstractDAOFactory *factory;
 };
 
 #endif // UTProfiler_h

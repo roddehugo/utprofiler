@@ -1,24 +1,16 @@
 #ifndef AlgoManager_h
 #define AlgoManager_h
 
-#include "AlgoManager.h"
-#include "ComputeBehavior.h"
-#include "Dossier.h"
+#include "algorithm/ComputeBehavior.h"
+#include "dossier/Dossier.h"
+#include "Singleton.h"
 
 
-class AlgoManager {
-
- public:
-
-    virtual AlgoManager getInstance();
+class AlgoManager : public Singleton<AlgoManager> {
 
  private:
 
-    virtual AlgoManager();
-
-
- private:
-    AlgoManager instance;
+    AlgoManager();
 
  public:
 

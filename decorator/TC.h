@@ -1,8 +1,8 @@
 #ifndef TC_h
 #define TC_h
 
-#include "Cursus.h"
-#include "QString.h"
+#include "decorator/Cursus.h"
+#include <QString>
 
 
 class TC : public Cursus {

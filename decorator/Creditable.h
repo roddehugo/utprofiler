@@ -1,7 +1,7 @@
 #ifndef Creditable_h
 #define Creditable_h
 
-#include "QString.h"
+#include <QString>
 
 
 class Creditable {

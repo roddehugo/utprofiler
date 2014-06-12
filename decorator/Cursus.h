@@ -1,9 +1,8 @@
 #ifndef Cursus_h
 #define Cursus_h
 
-#include "Creditable.h"
-#include "QString.h"
-#include "Qstring.h"
+#include "decorator/Creditable.h"
+#include <QString>
 
 class Dossier;
 
@@ -19,8 +18,8 @@ class Cursus : public Creditable {
 
 
  private:
-    Qstring code;
-    Qstring titre;
+    QString code;
+    QString titre;
     int maxSemestres;
     unsigned int current;
 

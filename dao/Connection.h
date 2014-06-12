@@ -1,22 +1,20 @@
 #ifndef Connection_h
 #define Connection_h
 
-#include "Connection.h"
+#include <QSqlDatabase>
+#include "Singleton.h"
 
+class Connection : public Singleton<Connection> {
 
-class Connection {
+    friend class Singleton<Connection>;
 
  public:
-
-    virtual Connection getInstance();
-
- private:
-
-    virtual Connection();
-
+    const QSqlDatabase& getDataBase(){return db;}
+    void setConnection();
 
  private:
-    Connection instance;
+    QSqlDatabase db;
+
 };
 
 #endif // Connection_h

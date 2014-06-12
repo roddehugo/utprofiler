@@ -1,7 +1,7 @@
 #ifndef ComputeBehavior_h
 #define ComputeBehavior_h
 
-#include "Dossier.h"
+#include "dossier/Dossier.h"
 
 class AlgoManager;
 

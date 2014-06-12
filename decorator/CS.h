@@ -1,9 +1,9 @@
 #ifndef CS_h
 #define CS_h
 
-#include "CategorieDecorator.h"
-#include "Creditable.h"
-#include "QString.h"
+#include "decorator/CategorieDecorator.h"
+#include "decorator/Creditable.h"
+#include <QString>
 
 
 class CS : public CategorieDecorator {

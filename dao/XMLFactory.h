@@ -1,10 +1,15 @@
-#ifndef XMLFactory_h
-#define XMLFactory_h
+#ifndef XMLFACTORY_H
+#define XMLFACTORY_H
 
-#include "AbstractDAOFactory.h"
+#include "dao/AbstractDAOFactory.h"
+
+class XMLFactory : public AbstractDAOFactory {
+
+public:
+    const DossierDAO& getDossierDAO();
+
+    const UVDAO& getUVDAO();
+};
 
 
-class XMLFactory : public AbstractDAOFactory {};
-
-#endif // XMLFactory_h
-
+#endif // XMLFACTORY_H

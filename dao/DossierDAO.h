@@ -1,10 +1,13 @@
 #ifndef DossierDAO_h
 #define DossierDAO_h
 
-#include "DAO<T>.h"
+#include "dao/DAO.h"
+#include "dossier/Dossier.h"
 
+class DossierDAO : public DAO<Dossier>
+{
 
-class DossierDAO : public DAO<T> {};
+};
 
 #endif // DossierDAO_h
 

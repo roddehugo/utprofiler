@@ -1,10 +1,11 @@
 #include "UTProfiler.h"
 
+UTProfiler::UTProfiler(){
+    factory = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
+    UVDAO* uvDao = factory->getUVDAO();
+}
 
-
-
-void UTProfiler::pressButton()
-{
-    
+AbstractDAOFactory* UTProfiler::getCurrentFactory(){
+    return factory;
 }
 

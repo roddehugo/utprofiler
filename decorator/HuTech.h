@@ -1,8 +1,8 @@
 #ifndef HuTech_h
 #define HuTech_h
 
-#include "Cursus.h"
-#include "QString.h"
+#include "decorator/Cursus.h"
+#include <QString>
 
 
 class HuTech : public Cursus {

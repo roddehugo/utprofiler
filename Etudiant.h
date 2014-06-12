@@ -1,31 +1,27 @@
 #ifndef Etudiant_h
 #define Etudiant_h
 
-#include "Dossier.h"
-#include "QString.h"
+#include <QString>
 
-class UTProfiler;
-
-class Etudiant {
-
+class Etudiant
+{
  public:
 
-    virtual QString getPrenom();
+    const QString& getPrenom() {return prenom;}
 
-    virtual QString getNom();
+    const QString& getNom() {return nom;}
 
-    virtual QString getLogin();
+    const QString& getLogin() {return login;}
 
-    virtual bool isAdmin();
+    const bool& isAdmin() {return admin;}
 
-    virtual void setPrenom(QString p);
+    void setPrenom(const QString & p){prenom = p;}
 
-    virtual void setNom(QString s);
+    void setNom(const QString & n){nom = n;}
 
-    virtual void setLogin(QString l);
+    void setLogin(const QString & l){login=l;}
 
-    virtual void setAdmin(bool a);
-
+    void setAdmin(const bool & a){admin=a;}
 
  private:
     QString prenom;
@@ -36,12 +32,6 @@ class Etudiant {
 
  public:
 
-    /**
-     * @element-type UTProfiler
-     */
-    UTProfiler *myUTProfiler;
-
-    Dossier myDossier;
 };
 
 #endif // Etudiant_h

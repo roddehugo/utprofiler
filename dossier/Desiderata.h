@@ -1,10 +1,15 @@
 #ifndef Desiderata_h
 #define Desiderata_h
 
-#include "QString.h"
-#include "TypeDesiderata.h"
+#include <QString>
 
 class Dossier;
+
+enum TypeDesiderata {
+    Preference,
+    Exigence,
+    Rejet
+};
 
 class Desiderata {
 

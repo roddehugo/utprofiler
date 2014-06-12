@@ -1,20 +1,16 @@
-#ifndef DAOFactory_h
-#define DAOFactory_h
+#ifndef DAOFACTORY_H
+#define DAOFACTORY_H
 
-#include "AbstractDAOFactory.h"
-#include "Connection.h"
-
+#include "dao/AbstractDAOFactory.h"
+#include "dao/UVDAO.h"
 
 class DAOFactory : public AbstractDAOFactory {
 
  public:
+//    const DossierDAO& getDossierDAO();
 
-    virtual Connection getConnection();
+    UVDAO* getUVDAO(){return new UVDAO;}
 
-
- private:
-    Connection connection;
 };
 
-#endif // DAOFactory_h
-
+#endif // DAOFACTORY_H

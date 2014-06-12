@@ -3,9 +3,8 @@
 
 #include <vector>
 
-#include "QString.h"
+#include <QString>
 
-class Inscription;
 class Inscription;
 class Dossier;
 
@@ -13,7 +12,7 @@ class Semestre {
 
  public:
 
-    virtual void Semestre(QString s, QString a);
+    Semestre(QString s, QString a);
 
     virtual QString getSaison();
 

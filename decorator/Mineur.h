@@ -1,8 +1,8 @@
 #ifndef Mineur_h
 #define Mineur_h
 
-#include "Cursus.h"
-#include "QString.h"
+#include "decorator/Cursus.h"
+#include <QString>
 
 
 class Mineur : public Cursus {

@@ -5,6 +5,7 @@
 
 QString Branche::getTitre()
 {
+    return "";
 }
 
 QString Branche::getCode()

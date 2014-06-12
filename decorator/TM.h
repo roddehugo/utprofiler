@@ -1,9 +1,9 @@
 #ifndef TM_h
 #define TM_h
 
-#include "CategorieDecorator.h"
-#include "Creditable.h"
-#include "QString.h"
+#include "decorator/CategorieDecorator.h"
+#include "decorator/Creditable.h"
+#include <QString>
 
 
 class TM : public CategorieDecorator {

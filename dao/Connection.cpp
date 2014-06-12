@@ -1,13 +1,7 @@
 #include "Connection.h"
 
 
-
-
-Connection Connection::getInstance()
-{
+void Connection::setConnection(){
+    db = QSqlDatabase::addDatabase("QSQLITE", "UTProfilerDatabase");
+    db.setDatabaseName("database.db");
 }
-
-Connection::Connection()
-{
-}
-

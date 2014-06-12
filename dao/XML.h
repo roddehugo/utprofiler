@@ -1,21 +1,36 @@
-#ifndef XML<T>_h
-#define XML<T>_h
+#ifndef XML_h
+#define XML_h
 
-#include "T.h"
-
-
-class XML<T> {
+template <class T>
+class XML {
 
  public:
 
-    virtual T find(unsigned int id);
+    XML();
 
-    virtual void update(T obj);
+    virtual T& find(const unsigned int& id) const;
 
-    virtual void delete(T obj);
+    virtual void update(const T& obj);
 
-    virtual void create(T obj);
+    virtual void remove(const T& obj);
+
+    virtual void create(const T& obj);
+
+    virtual ~XML();
+
+ protected:
+
 };
 
-#endif // XML<T>_h
+template <class T>
+XML<T>::XML() {
+
+}
+
+template <class T>
+XML<T>::~XML() {
+
+}
+
+#endif // XML_h
 

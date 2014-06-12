@@ -11,10 +11,6 @@ QString UV::getTitre()
 {
 }
 
-Saison UV::getSaisons()
-{
-}
-
 void UV::setCode(QString c)
 {
     

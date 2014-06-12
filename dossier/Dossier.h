@@ -2,12 +2,12 @@
 #define Dossier_h
 
 #include <vector>
+#include <QString>
 
-#include "Cursus.h"
-#include "Desiderata.h"
-#include "Inscription.h"
-#include "QString.h"
-#include "Semestre.h"
+#include "decorator/Cursus.h"
+#include "dossier/Desiderata.h"
+#include "dossier/Inscription.h"
+#include "dossier/Semestre.h"
 
 class AlgoManager;
 class Etudiant;
@@ -16,13 +16,15 @@ class Dossier {
 
  public:
 
-    virtual void setTitre(QString t);
+    Dossier();
 
-    virtual QString getTitre();
+    void setTitre(const QString& t){titre=t;}
 
-    virtual void setSolution(bool s);
+    const QString& getTitre(){return titre;}
 
-    virtual bool isSolution();
+    void setSolution(const bool& s){solution=s;}
+
+    const bool& isSolution(){return solution;}
 
 
  private:

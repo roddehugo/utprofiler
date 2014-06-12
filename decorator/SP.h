@@ -1,9 +1,9 @@
 #ifndef SP_h
 #define SP_h
 
-#include "CategorieDecorator.h"
-#include "Creditable.h"
-#include "QString.h"
+#include "decorator/CategorieDecorator.h"
+#include "decorator/Creditable.h"
+#include <QString>
 
 
 class SP : public CategorieDecorator {

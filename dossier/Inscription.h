@@ -1,18 +1,23 @@
 #ifndef Inscription_h
 #define Inscription_h
 
-#include "Resultat.h"
-#include "Semestre.h"
-#include "UV.h"
+#include "dossier/Semestre.h"
+#include "decorator/UV.h"
 
+enum Resultat{
+    A,B,C,D,E,F,FX,
+    RES, /*Reserve*/
+    ACT, /*En cours*/
+    EQU  /*Equivalence*/
+};
 
 class Inscription {
 
  public:
 
-    virtual Resultat getResultat();
+    Resultat getResultat();
 
-    virtual void setResultat(Resultat r);
+    void setResultat(Resultat r);
 
 
  private:
@@ -20,15 +25,6 @@ class Inscription {
 
  public:
 
-    /**
-     * @element-type Semestre
-     */
-    Semestre mySemestre;
-
-    /**
-     * @element-type UV
-     */
-    UV myUV;
 };
 
 #endif // Inscription_h

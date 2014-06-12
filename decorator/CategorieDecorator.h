@@ -1,8 +1,8 @@
 #ifndef CategorieDecorator_h
 #define CategorieDecorator_h
 
-#include "Creditable.h"
-#include "QString.h"
+#include "decorator/Creditable.h"
+#include <QString>
 
 
 class CategorieDecorator : public Creditable {

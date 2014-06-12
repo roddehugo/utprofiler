@@ -1,9 +1,6 @@
 #include "Semestre.h"
 
-
-
-
-void Semestre::Semestre(QString s, QString a)
+Semestre::Semestre(QString s, QString a)
 {
 }
 

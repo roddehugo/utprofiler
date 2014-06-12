@@ -3,9 +3,9 @@
 
 #include <vector>
 
-#include "Cursus.h"
-#include "Filiere.h"
-#include "QString.h"
+#include "decorator/Cursus.h"
+#include "decorator/Filiere.h"
+#include <QString>
 
 
 class Branche : public Cursus {

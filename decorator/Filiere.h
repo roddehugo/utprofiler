@@ -1,9 +1,8 @@
 #ifndef Filiere_h
 #define Filiere_h
 
-#include "Cursus.h"
-#include "QString.h"
-#include "Qstring.h"
+#include "decorator/Cursus.h"
+#include <QString>
 
 class Branche;
 
@@ -16,7 +15,7 @@ class Filiere : public Cursus {
     virtual QString getCode();
 
  public:
-    Qstring codeBranche;
+    QString codeBranche;
 
  public:
 
