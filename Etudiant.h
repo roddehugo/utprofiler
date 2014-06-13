@@ -24,9 +24,9 @@ class Etudiant
     void setAdmin(const bool & a){admin=a;}
 
  private:
+    unsigned int id;
     QString prenom;
     QString nom;
-    unsigned int id;
     QString login;
     bool admin;
 

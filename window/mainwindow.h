@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "UTProfilerException.h"
 
 namespace Ui {
 class MainWindow;

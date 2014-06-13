@@ -1,7 +1,7 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 
-#include <iostream>
+#include "writers/LogWriter.h"
 
 template <class T>
 class Singleton
@@ -9,23 +9,18 @@ class Singleton
 protected:
     // Constructeur/destructeur
     Singleton () { }
-    ~Singleton () { std::cout << "destroying singleton." << std::endl; }
-
+    ~Singleton () { LogWriter::write("Singleton.h","Destruction du singleton"); }
+    static T *instance;
 public:
 
-    static T* getInstance ()
-    {
-        if (0 == instance)
-        {
-            std::cout << "creating singleton." << std::endl;
+    static T* getInstance (){
+        if (0 == instance){
+            LogWriter::write("Singleton.h","Création du singleton");
             instance = new T;
-        }
-        else
-        {
-            std::cout << "singleton already created!" << std::endl;
+        }else{
+            LogWriter::write("Singleton.h","Singleton déjà existant");
         }
 
-        std::cout<<"Valeure de retour de la fonction : "<<instance<<"\n";
         return (static_cast<T*> (instance));
     }
 
@@ -33,13 +28,13 @@ public:
     {
         if (0 != instance)
         {
+            LogWriter::write("Singleton.h","Destruction du singleton");
             delete instance;
             instance = 0;
         }
     }
 
 private:
-    static T *instance;
     Singleton(const Singleton&);
     Singleton& operator =(const Singleton&);
 };

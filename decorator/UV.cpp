@@ -1,33 +1,5 @@
 #include "UV.h"
 
-
-
-
-QString UV::getCode()
-{
+QTextStream& operator<<(QTextStream& f, const UV& uv){
+    return f << uv.getCode() << " - " << uv.getTitre();
 }
-
-QString UV::getTitre()
-{
-}
-
-void UV::setCode(QString c)
-{
-    
-}
-
-void UV::setTitre(QString t)
-{
-    
-}
-
-void UV::setSaison(int s)
-{
-    
-}
-
-int UV::getSaison()
-{
-    return 0;
-}
-
