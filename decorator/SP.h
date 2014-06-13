@@ -1,7 +1,6 @@
 #ifndef SP_h
 #define SP_h
 
-#include "decorator/CategorieDecorator.h"
 #include "decorator/Creditable.h"
 #include <QString>
 

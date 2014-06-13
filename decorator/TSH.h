@@ -1,7 +1,6 @@
 #ifndef TSH_h
 #define TSH_h
 
-#include "decorator/CategorieDecorator.h"
 #include "decorator/Creditable.h"
 #include <QString>
 

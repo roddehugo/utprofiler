@@ -2,8 +2,6 @@
 #define Creditable_h
 
 #include <QString>
-#include "decorator/CategorieDecorator.h"
-
 
 class Creditable {
 

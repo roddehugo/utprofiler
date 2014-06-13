@@ -1,7 +1,6 @@
 #ifndef CS_h
 #define CS_h
 
-#include "decorator/CategorieDecorator.h"
 #include "decorator/Creditable.h"
 #include <QString>
 
