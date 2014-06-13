@@ -1,4 +1,5 @@
 #include "dao/Connexion.h"
+#include <QDebug>
 
 QSqlDatabase Connexion::getDataBase() const{
     return db;
@@ -6,13 +7,13 @@ QSqlDatabase Connexion::getDataBase() const{
 
 
 void Connexion::setConnexion(const QString& dbfile){
-    LogWriter::write("Connection.cpp","Ajout de la base de données");
+    LogWriter::writeln("Connection.cpp","Ajout de la base de données");
     db = QSqlDatabase::addDatabase("QSQLITE", "UTProfilerDatabase");
     db.setDatabaseName(dbfile);
 
     if(db.open()){
-        LogWriter::write("Connexion.cpp","La connexion est active");
+        LogWriter::writeln("Connexion.cpp","La connexion est active");
     }else{
-        LogWriter::write("Connexion.cpp","La connexion a échoué");
+        LogWriter::writeln("Connexion.cpp","La connexion a échoué");
     }
 }

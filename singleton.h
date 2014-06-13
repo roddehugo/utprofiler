@@ -9,16 +9,16 @@ class Singleton
 protected:
     // Constructeur/destructeur
     Singleton () { }
-    ~Singleton () { LogWriter::write("Singleton.h","Destruction du singleton"); }
+    ~Singleton () { LogWriter::writeln("Singleton.h","Destruction du singleton"); }
     static T *instance;
 public:
 
     static T* getInstance (){
         if (0 == instance){
-            LogWriter::write("Singleton.h","Création du singleton");
+            LogWriter::writeln("Singleton.h","Création du singleton");
             instance = new T;
         }else{
-            LogWriter::write("Singleton.h","Singleton déjà existant");
+            LogWriter::writeln("Singleton.h","Singleton déjà existant");
         }
 
         return (static_cast<T*> (instance));
@@ -28,7 +28,7 @@ public:
     {
         if (0 != instance)
         {
-            LogWriter::write("Singleton.h","Destruction du singleton");
+            LogWriter::writeln("Singleton.h","Destruction du singleton");
             delete instance;
             instance = 0;
         }

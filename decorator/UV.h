@@ -8,9 +8,17 @@
 class UV //: public Creditable
 {
 
+private:
+   QString code;
+   QString titre;
+   bool printemps;
+   bool automne;
+   bool demiuv;
+   int categorie;
+
  public:
     UV(const QString& c, const QString& t, const bool& p, const bool& a, const bool& d, const int& cat)
-        :code(c), titre(t), printemps(p), automne(a), demiUV(d), categorie(cat)
+        :code(c), titre(t), printemps(p), automne(a), demiuv(d), categorie(cat)
     {}
 
     UV();
@@ -19,30 +27,25 @@ class UV //: public Creditable
 
     QString getTitre() const { return titre; }
 
-    bool ouvertureAutomne() const { return automne; }
+    bool getAutomne() const { return automne; }
 
-    bool ouverturePrintemps() const { return printemps; }
+    bool getPrintemps() const { return printemps; }
+
+    bool getDemiUV() const { return demiuv; }
+
+    int getCategorie() const { return categorie; }
 
     void setCode(const QString& c) { code=c; }
 
     void setTitre(const QString& t) { titre=t; }
 
-    void setOuvertureAutomne(bool a) { automne=a; }
+    void setAutomne(bool a) { automne=a; }
 
-    void setOuverturePrintemps(bool p) { printemps=p; }
+    void setPrintemps(bool p) { printemps=p; }
 
-    void setDemiUV(bool d) { demiUV=d; }
+    void setDemiUV(bool d) { demiuv=d; }
 
- private:
-    QString code;
-    QString titre;
-    bool printemps;
-    bool automne;
-    bool demiUV;
-    int categorie;
-
-
- public:
+    void setCategorie(int cat){ categorie = cat; }
 
 };
 
