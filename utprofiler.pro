@@ -19,9 +19,21 @@ SOURCES += main.cpp \
     dossier/Dossier.cpp \
     Etudiant.cpp \
     dao/Connexion.cpp \
-    dao/UVDAO.cpp
+    dao/UVDAO.cpp \
+    decorator/Branche.cpp \
+    decorator/CS.cpp \
+    decorator/Cursus.cpp \
+    decorator/Filiere.cpp \
+    decorator/HuTech.cpp \
+    decorator/Mineur.cpp \
+    decorator/SP.cpp \
+    decorator/TC.cpp \
+    decorator/TM.cpp \
+    decorator/TSH.cpp \
+    decorator/Creditable.cpp
 
-HEADERS  += window/mainwindow.h \
+
+HEADERS  += \
     writers/LogWriter.h \
     Singleton.h \
     decorator/UV.h \
@@ -31,9 +43,22 @@ HEADERS  += window/mainwindow.h \
     dao/DossierDAO.h \
     dao/Factories.h \
     Etudiant.h \
-    dao/Connexion.h
+    dao/Connexion.h \
+    window/loginwindow.h \
+    decorator/Branche.h \
+    decorator/Creditable.h \
+    decorator/CS.h \
+    decorator/Cursus.h \
+    decorator/Filiere.h \
+    decorator/HuTech.h \
+    decorator/Mineur.h \
+    decorator/SP.h \
+    decorator/TC.h \
+    decorator/TM.h \
+    decorator/TSH.h
 
-FORMS += window/mainwindow.ui
+FORMS += \
+    window/loginwindow.ui
 
 OTHER_FILES += \
     README.md \
