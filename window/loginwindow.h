@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDialog>
 #include "writers/LogWriter.h"
 #include "dao/Factories.h"
 

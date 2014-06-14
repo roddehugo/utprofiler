@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 //    CategorieDecorator* v=new TSH("titre",6,*c,Theorique,Perception);
 //    qDebug()<<(v)<<endl;
 
-    Connexion::getInstance()->setConnexion("/Users/hugo/Dropbox/UVs/LO21/Projet/save.db");
+    Connexion::getInstance()->setConnexion("/Users/fsamuel/Dropbox/LO21/Projet/save.db");
     Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
 
 

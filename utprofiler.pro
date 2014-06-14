@@ -19,6 +19,7 @@ SOURCES += main.cpp \
     Etudiant.cpp \
     dao/Connexion.cpp \
     dao/UVDAO.cpp \
+    #dao/CategorieDAO.cpp \
     decorator/Branche.cpp \
     decorator/CS.cpp \
     decorator/Cursus.cpp \
@@ -32,7 +33,14 @@ SOURCES += main.cpp \
     decorator/Creditable.cpp \
     dao/EtudiantDAO.cpp \
     window/loginwindow.cpp \
-    dao/Factories.cpp
+    window/mainwindow.cpp \
+    dao/Factories.cpp \
+    window/modifuvwindow.cpp \
+    window/supprimeruvwindow.cpp \
+    window/ajoutcursuswindow.cpp \
+    window/modifiercursuswindow.cpp \
+    window/ajouteruvwindow.cpp \
+    window/supprimercursus.cpp
 
 
 HEADERS  += \
@@ -44,9 +52,11 @@ HEADERS  += \
     dao/UVDAO.h \
     dao/DossierDAO.h \
     dao/Factories.h \
+    #dao/CategorieDAO.h \
     Etudiant.h \
     dao/Connexion.h \
     window/loginwindow.h \
+    window/mainwindow.h \
     decorator/Branche.h \
     decorator/Creditable.h \
     decorator/CS.h \
@@ -58,10 +68,23 @@ HEADERS  += \
     decorator/TC.h \
     decorator/TM.h \
     decorator/TSH.h \
-    dao/EtudiantDAO.h
+    dao/EtudiantDAO.h \
+    window/modifuvwindow.h \
+    window/supprimeruvwindow.h \
+    window/ajoutcursuswindow.h \
+    window/modifiercursuswindow.h \
+    window/ajouteruvwindow.h \
+    window/supprimercursus.h
 
 FORMS += \
-    window/loginwindow.ui
+    window/loginwindow.ui \
+    window/mainwindow.ui \
+    window/modifuvwindow.ui \
+    window/supprimeruvwindow.ui \
+    window/ajoutcursuswindow.ui \
+    window/modifiercursuswindow.ui \
+    window/ajouteruvwindow.ui \
+    window/supprimercursus.ui
 
 OTHER_FILES += \
     README.md \

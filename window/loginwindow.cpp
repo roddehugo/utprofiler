@@ -19,7 +19,7 @@ LoginWindow::~LoginWindow()
 }
 
 void LoginWindow::setUpMainWindow(){
-    QWidget::hide();
+    LoginWindow::hide();
     MainWindow* m= new MainWindow;
     m->show();
 }
