@@ -1,9 +1,5 @@
 #include "dao/UVDAO.h"
 
-UVDAO::UVDAO(){}
-
-UVDAO::~UVDAO(){}
-
 QMap<int, UV *> UVDAO::findAll(){
     QSqlQuery query(Connexion::getInstance()->getDataBase());
     if (!query.exec("SELECT * FROM uvs ORDER BY code;")){

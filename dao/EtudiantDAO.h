@@ -4,11 +4,11 @@
 #include "Etudiant.h"
 #include "dao/SqlDAOTemplate.h"
 
-class EtudiantDAO : public SqlDAOTemplate<Etudiant> {
+class EtudiantDAO : public SqlDAOTemplate<Etudiant, EtudiantDAO> {
+
+    friend class Singleton<EtudiantDAO>;
 
 public:
-
-    EtudiantDAO();
 
     QMap<int, Etudiant *> findAll();
 
@@ -20,11 +20,12 @@ public:
 
     void create(const Etudiant& obj);
 
+    EtudiantDAO();
     ~EtudiantDAO();
 
 private:
-    //QSqlDatabase db;
     QMap<int, Etudiant *> etumap;
 };
 
 #endif // ETUDIANTDAO_H
+

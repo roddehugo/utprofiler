@@ -2,21 +2,29 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "writers/LogWriter.h"
+
+struct Factory;
 
 namespace Ui {
-class MainWindow;
+class LoginWindow;
 }
 
-class MainWindow : public QMainWindow
+class LoginWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+    explicit LoginWindow(Factory* factory, QWidget *parent = 0);
+
+    ~LoginWindow();
+
+private slots:
+    void loginMe();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::LoginWindow *ui;
+    Factory* fac;
 };
 
 #endif // MAINWINDOW_H

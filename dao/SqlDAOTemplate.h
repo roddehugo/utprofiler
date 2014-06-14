@@ -10,12 +10,12 @@
 #include "UTProfilerException.h"
 #include "dao/Connexion.h"
 
-template <class T>
-class SqlDAOTemplate {
+template <class T, class DAO>
+class SqlDAOTemplate : public Singleton<DAO> {
+
+    friend class Singleton<DAO>;
 
  public:
-
-    SqlDAOTemplate();
 
     virtual QMap<int,T*> findAll() =0;
 
@@ -27,15 +27,17 @@ class SqlDAOTemplate {
 
     virtual void create(const T& obj) =0;
 
-    virtual ~SqlDAOTemplate();
+protected:
+    SqlDAOTemplate(){
+
+    }
+
+    ~SqlDAOTemplate(){
+
+    }
 
 };
 
-template <class T>
-SqlDAOTemplate<T>::SqlDAOTemplate() {}
-
-template <class T>
-SqlDAOTemplate<T>::~SqlDAOTemplate() {}
 
 #endif // DAO_h
 

@@ -4,11 +4,11 @@
 #include "decorator/UV.h"
 #include "dao/SqlDAOTemplate.h"
 
-class UVDAO : public SqlDAOTemplate<UV> {
+class UVDAO : public SqlDAOTemplate<UV, UVDAO> {
+
+    friend class Singleton<UVDAO>;
 
 public:
-
-    UVDAO();
 
     QMap<int, UV *> findAll();
 
@@ -20,10 +20,10 @@ public:
 
     void create(const UV& obj);
 
-    ~UVDAO();
+    ~UVDAO(){}
+    UVDAO(){}
 
 private:
-    //QSqlDatabase db;
     QMap<int, UV *> uvmap;
 };
 

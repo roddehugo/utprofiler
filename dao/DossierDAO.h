@@ -4,11 +4,11 @@
 #include "dossier/Dossier.h"
 #include "dao/SqlDAOTemplate.h"
 
-class DossierDAO : public SqlDAOTemplate<Dossier> {
+class DossierDAO : public SqlDAOTemplate<Dossier, DossierDAO> {
+
+    friend class Singleton<DossierDAO>;
 
 public:
-
-    DossierDAO();
 
     QMap<int, Dossier *> findAll();
 
@@ -20,10 +20,11 @@ public:
 
     void create(const Dossier& obj);
 
-    ~DossierDAO();
+    ~DossierDAO(){}
+    DossierDAO(){}
 
 private:
-    QSqlDatabase db;
+    QMap<int, UV *> dossiermap;
 };
 
 #endif // DossierDAO_h

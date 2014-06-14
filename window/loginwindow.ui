@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>LoginWindow</class>
+ <widget class="QMainWindow" name="LoginWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -47,7 +47,7 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <widget class="QLabel" name="backgroundimage">
+   <widget class="QLabel" name="utcBackground">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -69,23 +69,60 @@
      <pixmap resource="../resources/files.qrc">:/images/login-background</pixmap>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>680</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuFichier">
-    <property name="title">
-     <string>Fichier</string>
+   <widget class="QLineEdit" name="loginEdit">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>110</y>
+      <width>121</width>
+      <height>21</height>
+     </rect>
     </property>
-    <addaction name="actionCharger"/>
+    <property name="focusPolicy">
+     <enum>Qt::StrongFocus</enum>
+    </property>
+    <property name="toolTip">
+     <string>Entrer votre login</string>
+    </property>
+    <property name="maxLength">
+     <number>8</number>
+    </property>
+    <property name="placeholderText">
+     <string>Votre login</string>
+    </property>
+    <property name="cursorMoveStyle">
+     <enum>Qt::LogicalMoveStyle</enum>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>false</bool>
+    </property>
    </widget>
-   <addaction name="menuFichier"/>
+   <widget class="QPushButton" name="seConnecter">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>110</y>
+      <width>31</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::StrongFocus</enum>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="../resources/files.qrc">
+      <normaloff>:/images/earth</normaloff>:/images/earth</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>14</width>
+      <height>14</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <action name="actionCharger">
    <property name="text">
@@ -97,5 +134,22 @@
  <resources>
   <include location="../resources/files.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>loginEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>seConnecter</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>340</x>
+     <y>120</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>415</x>
+     <y>120</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

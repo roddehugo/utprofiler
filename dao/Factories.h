@@ -10,20 +10,16 @@
 
 struct Factory{
     virtual UVDAO* getUVDAO() =0;
-    virtual DossierDAO* getDossierDAO() =0;
+    virtual EtudiantDAO* getEtudiantDAO() = 0;
 };
 
-class DAOFactory : public Factory
+class DAOFactory : public Factory, public Singleton<DAOFactory>
 {
 
 public:
-    UVDAO* getUVDAO(){
-        return new UVDAO();
-    }
+    UVDAO* getUVDAO();
 
-    DossierDAO* getDossierDAO(){
-        //return new DossierDAO();
-    }
+    EtudiantDAO* getEtudiantDAO();
 
 };
 
@@ -31,21 +27,10 @@ class AbstractDAOFactory : public Factory
 {
 public:
 
-    static Factory* getFactory(const int& type){
-        switch (type) {
-        case DAO_FACTORY:
-            return new DAOFactory();
-            break;
-        default:
-            return NULL;
-            break;
-        }
-    }
+    static Factory* getFactory(const int& type);
 
     static const unsigned int DAO_FACTORY = 0;
 };
-
-const unsigned int AbstractDAOFactory::DAO_FACTORY;
 
 #endif // AbstractDAOFactory_h
 
