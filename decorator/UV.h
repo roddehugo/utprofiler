@@ -21,7 +21,7 @@ private:
         :code(c), titre(t), printemps(p), automne(a), demiuv(d), categorie(cat)
     {}
 
-    UV();
+    UV(){}
 
     QString getCode() const { return code; }
 

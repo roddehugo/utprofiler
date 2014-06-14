@@ -30,7 +30,8 @@ SOURCES += main.cpp \
     decorator/TC.cpp \
     decorator/TM.cpp \
     decorator/TSH.cpp \
-    decorator/Creditable.cpp
+    decorator/Creditable.cpp \
+    dao/EtudiantDAO.cpp
 
 
 HEADERS  += \
@@ -55,7 +56,8 @@ HEADERS  += \
     decorator/SP.h \
     decorator/TC.h \
     decorator/TM.h \
-    decorator/TSH.h
+    decorator/TSH.h \
+    dao/EtudiantDAO.h
 
 FORMS += \
     window/loginwindow.ui

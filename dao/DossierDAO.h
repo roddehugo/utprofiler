@@ -1,11 +1,10 @@
 #ifndef DossierDAO_h
 #define DossierDAO_h
 
-#include "dao/SqlDAOTemplate.h"
 #include "dossier/Dossier.h"
+#include "dao/SqlDAOTemplate.h"
 
-class DossierDAO : public SqlDAOTemplate<Dossier>
-{
+class DossierDAO : public SqlDAOTemplate<Dossier> {
 
 public:
 
@@ -13,11 +12,11 @@ public:
 
     QMap<int, Dossier *> findAll();
 
-    Dossier* find(const unsigned int& id);
+    Dossier* find(const int& id);
 
-    void update(const Dossier& obj);
+    void update(const int& id, const Dossier& obj);
 
-    void remove(const Dossier& obj);
+    void remove(const int& id, Dossier* obj);
 
     void create(const Dossier& obj);
 

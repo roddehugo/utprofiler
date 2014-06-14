@@ -7,13 +7,19 @@ class Etudiant
 {
  public:
 
-    const QString& getPrenom() {return prenom;}
+    Etudiant(const QString& login, const QString& prenom, const QString& nom)
+        :login(login), prenom(prenom), nom(nom)
+    {}
 
-    const QString& getNom() {return nom;}
+    ~Etudiant(){}
 
-    const QString& getLogin() {return login;}
+    QString getPrenom() const {return prenom;}
 
-    const bool& isAdmin() {return admin;}
+    QString getNom() const {return nom;}
+
+    QString getLogin() const {return login;}
+
+    bool isAdmin() const {return admin;}
 
     void setPrenom(const QString & p){prenom = p;}
 
@@ -24,10 +30,9 @@ class Etudiant
     void setAdmin(const bool & a){admin=a;}
 
  private:
-    unsigned int id;
+    QString login;
     QString prenom;
     QString nom;
-    QString login;
     bool admin;
 
  public:

@@ -4,8 +4,9 @@
 #include "UTProfilerException.h"
 #include "dao/UVDAO.h"
 #include "dao/DossierDAO.h"
+#include "dao/EtudiantDAO.h"
 
-#define DAO_FACTORY_DEFINE 1
+#define DAO_FACTORY_DEFINE 0
 
 struct Factory{
     virtual UVDAO* getUVDAO() =0;
@@ -16,17 +17,13 @@ class DAOFactory : public Factory
 {
 
 public:
-    virtual UVDAO* getUVDAO(){
+    UVDAO* getUVDAO(){
         return new UVDAO();
     }
 
-    virtual DossierDAO* getDossierDAO(){
-
+    DossierDAO* getDossierDAO(){
+        //return new DossierDAO();
     }
-
-private:
-    UVDAO* uvdao;
-    DossierDAO* dossierdao;
 
 };
 
