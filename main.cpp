@@ -1,33 +1,32 @@
-
 #define q2s(string) string.toStdString()
 
 #include <QApplication>
+#include <QDebug>
 #include "writers/LogWriter.h"
 #include "dao/Factories.h"
 #include "dao/Connexion.h"
-#include <QDebug>
 #include "decorator/Creditable.h"
 #include "decorator/CS.h"
 #include "decorator/TM.h"
 #include "decorator/TSH.h"
 #include "decorator/TC.h"
-
-
+#include "window/loginwindow.h"
+#include "decorator/Branche.h"
+#include "decorator/Filiere.h"
+#include "decorator/HuTech.h"
+#include "decorator/SP.h"
+#include "decorator/Mineur.h"
 
 
 int main(int argc, char *argv[])
 {
 
+    QApplication a(argc, argv);
+
     LogWriter::writeln("Main.cpp","Lancement de l'application");
 
-    //QApplication a(argc, argv);
-    //MainWindow w;
-    //w.show();
-    //Connexion::getInstance()->setConnexion("/Users/hugo/Dropbox/UVs/LO21/Projet/database.db");
 
-  //  Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
-    //UVDAO* uvdao = fac->getUVDAO();
-    //QMap <int, UV*> uvmap =  uvdao->findAll();
+
     Creditable *c=new TC("GI","info",2,32,2,2,3);
       qDebug()<< (c)<<endl;
       Creditable *u=new UV("GI","info",2,32,2,2,3);
@@ -44,6 +43,12 @@ int main(int argc, char *argv[])
             CategorieDecorator* v=new TSH("titre",6,*c,Theorique,Perception);
              qDebug()<<(v)<<endl;
 
-    //return a.exec();
-    return 0;
+    Connexion::getInstance()->setConnexion("/Users/hugo/Dropbox/UVs/LO21/Projet/database.db");
+    Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
+
+    LoginWindow w(fac);
+    w.show();
+
+
+    return a.exec();
 }

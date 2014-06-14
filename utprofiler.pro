@@ -13,7 +13,6 @@ TARGET = utprofiler
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    window/mainwindow.cpp \
     writers/LogWriter.cpp \
     decorator/UV.cpp \
     dossier/Dossier.cpp \
@@ -30,7 +29,10 @@ SOURCES += main.cpp \
     decorator/TC.cpp \
     decorator/TM.cpp \
     decorator/TSH.cpp \
-    decorator/Creditable.cpp
+    decorator/Creditable.cpp \
+    dao/EtudiantDAO.cpp \
+    window/loginwindow.cpp \
+    dao/Factories.cpp
 
 
 HEADERS  += \
@@ -50,12 +52,13 @@ HEADERS  += \
     decorator/CS.h \
      decorator/Cursus.h\
     decorator/Filiere.h \
-     decorator/HuTech.h \
-     decorator/Mineur.h \
-     decorator/SP.h \
-     decorator/TC.h \
-     decorator/TM.h\
-     decorator/TSH.h
+    decorator/HuTech.h \
+    decorator/Mineur.h \
+    decorator/SP.h \
+    decorator/TC.h \
+    decorator/TM.h \
+    decorator/TSH.h \
+    dao/EtudiantDAO.h
 
 FORMS += \
     window/loginwindow.ui

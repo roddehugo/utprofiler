@@ -20,8 +20,9 @@ private:
         :code(c), printemps(p), automne(a), demiuv(d), categorie(cat),Creditable(titre,ects)
     {}
 
-    UV();
     ~UV();
+
+
 
     QString getCode() const { return code; }
 

@@ -1,5 +1,17 @@
 <RCC>
     <qresource prefix="/images">
         <file alias="login-background">images/background.jpg</file>
+        <file alias="trash">images/trash.png</file>
+        <file alias="info">images/info.png</file>
+        <file alias="delete">images/erase.png</file>
+        <file alias="earth">images/earth.png</file>
+        <file alias="save">images/disk.png</file>
+        <file alias="reload">images/cycle.png</file>
+        <file alias="cancel">images/cross.png</file>
+        <file alias="accept">images/checkmark.png</file>
+        <file alias="up">images/arrow-up.png</file>
+        <file alias="right">images/arrow-right.png</file>
+        <file alias="left">images/arrow-left.png</file>
+        <file alias="down">images/arrow-down.png</file>
     </qresource>
 </RCC>

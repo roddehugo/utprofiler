@@ -1,30 +1,30 @@
 #ifndef DossierDAO_h
 #define DossierDAO_h
 
-#include "dao/SqlDAOTemplate.h"
 #include "dossier/Dossier.h"
+#include "dao/SqlDAOTemplate.h"
 
-class DossierDAO : public SqlDAOTemplate<Dossier>
-{
+class DossierDAO : public SqlDAOTemplate<Dossier, DossierDAO> {
+
+    friend class Singleton<DossierDAO>;
 
 public:
 
-    DossierDAO();
-
     QMap<int, Dossier *> findAll();
 
-    Dossier* find(const unsigned int& id);
+    Dossier* find(const int& id);
 
-    void update(const Dossier& obj);
+    void update(const int& id, const Dossier& obj);
 
-    void remove(const Dossier& obj);
+    void remove(const int& id, Dossier* obj);
 
     void create(const Dossier& obj);
 
-    ~DossierDAO();
+    ~DossierDAO(){}
+    DossierDAO(){}
 
 private:
-    QSqlDatabase db;
+    QMap<int, UV *> dossiermap;
 };
 
 #endif // DossierDAO_h
