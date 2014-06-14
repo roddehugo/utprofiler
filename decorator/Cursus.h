@@ -8,43 +8,48 @@ class Dossier;
 
 class Cursus : public Creditable {
 
- public:
-    Cursus(const QString& c, const QString& titre, const int& cat, const unsigned int& ects,const unsigned int m,const unsigned int cur, const unsigned int idparent )
-        :Creditable(titre,ects),code(c),categorie(cat)
-    {}
-
-    ~Cursus(){}
-
- protected:
-    QString code;
-    QString titre;
-    unsigned int maxSemestres;
-    unsigned int current;
-    unsigned int categorie;
-    Cursus* parent;
+protected:
+   QString code;
+   unsigned int maxSemestres;
+   bool current;
+   Cursus* parent;
+   Dossier* dossier;
+   Creditable* creditable;
 
  public:
+    Cursus(const QString& code, const QString& titre, const unsigned int ects,
+           const unsigned int maxSemestre, bool current,
+           Creditable* creditable, Dossier* dossier, Cursus* parent );
 
-    QString getCode() const { return code; }
+    Cursus(const QString& code, const QString& titre, const unsigned int ects,
+           const unsigned int maxSemestre, bool current,
+           Creditable* creditable, Dossier* dossier);
 
+    ~Cursus();
 
-    QString getTitre() const { return titre; }
+    QString getCode() const;
+    void setCode(const QString &value);
 
-    int getCategorie() const { return categorie; }
+    QString getTitre() const;
+    void setTitre(const QString &value);
 
-    void setCode(const QString& c) { code=c; }
+    unsigned int getMaxSemestres() const;
+    void setMaxSemestres(unsigned int value);
 
-    void setTitre(const QString& t) { titre=titre; }
+    bool getCurrent() const;
+    void setCurrent(bool value);
 
-    void setCategorie(int cat){ categorie = cat; }
+    Creditable *getCreditable() const;
+    void setCreditable(Creditable *value);
 
-    unsigned int getECTS() const {return ects;}
+    Cursus *getParent() const;
+    void setParent(Cursus *value);
 
+    Dossier *getDossier() const;
+    void setDossier(Dossier *value);
 
-    /**
-     * @element-type Dossier
-     */
-    Dossier *myDossier;
+    unsigned int getEcts() const;
+    void setEcts(unsigned int value);
 };
 
 

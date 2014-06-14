@@ -8,32 +8,32 @@ class Creditable {
  public:
 
     virtual QString getTitre() const;
-    virtual unsigned int getECTS() const  = 0;
+    virtual unsigned int getEcts() const  = 0;
 
 
  protected:
-    //les données de la classe de base
+
     QString titre;
     unsigned int ects;
 
     virtual ~Creditable();
-    Creditable(const QString& titre, const unsigned int &ects=0);
-    //Creditable(){}
+    Creditable(const QString& titre, const unsigned int ects=0);
 };
 
-class CategorieDecorator :virtual public Creditable {
+class CategorieDecorator : virtual public Creditable {
 
  public:
 
     virtual QString getTitre() const ;
-    virtual unsigned int getECTS() const  = 0;
+    virtual unsigned int getEcts() const  = 0;
 
-    Creditable* getCreditable() const {return &m_creditable;}
-
+    Creditable *getCreditable() const;
+    void setCreditable(Creditable *value);
 
 protected:
-    Creditable& m_creditable;
-    CategorieDecorator(Creditable&  creditable,const QString& titre,const unsigned int ects=0);
+    Creditable* creditable;
+    CategorieDecorator(const QString& titre,const unsigned int ects, Creditable* creditable);
+    CategorieDecorator(const QString& titre, Creditable* creditable);
     virtual ~CategorieDecorator();
 };
 

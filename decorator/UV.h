@@ -13,42 +13,32 @@ private:
    bool printemps;
    bool automne;
    bool demiuv;
-   int categorie;
+   Creditable* creditable;
 
  public:
-    UV(const QString& c, const QString& titre, const bool& p, const bool& a, const bool& d, const int& cat, const unsigned int& ects)
-        :code(c), printemps(p), automne(a), demiuv(d), categorie(cat),Creditable(titre,ects)
-    {}
-
+    UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv, Creditable* creditable);
+    UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv);
     ~UV();
 
+    QString getCode() const;
+    void setCode(const QString &value);
 
+    bool getPrintemps() const;
+    void setPrintemps(bool value);
 
-    QString getCode() const { return code; }
+    bool getAutomne() const;
+    void setAutomne(bool value);
 
-    QString getTitre() const { return titre; }
+    bool getDemiUV() const;
+    void setDemiUV(bool value);
 
-    bool getAutomne() const { return automne; }
+    Creditable *getCreditable() const;
+    void setCreditable(Creditable *value);
 
-    bool getPrintemps() const { return printemps; }
+    unsigned int getEcts() const;
+    void setEcts(unsigned int value);
 
-    bool getDemiUV() const { return demiuv; }
-
-    int getCategorie() const { return categorie; }
-
-    void setCode(const QString& c) { code=c; }
-
-    void setTitre(const QString& t) { titre=titre; }
-
-    void setAutomne(bool a) { automne=a; }
-
-    void setPrintemps(bool p) { printemps=p; }
-
-    void setDemiUV(bool d) { demiuv=d; }
-
-    void setCategorie(int cat){ categorie = cat; }
-
-    unsigned int getECTS() const {return ects;}
+    unsigned int getCategorie() const;
 
 };
 

@@ -7,21 +7,16 @@
 
 class TM : public CategorieDecorator {
 
- public:
+public:
 
-    virtual QString getTitre() const;
+     TM(const QString& titre,const unsigned int ects, Creditable* creditable);
+     ~TM();
 
-    virtual unsigned int getECTS() const;
+     QString getTitre() const;
+     void setTitre(const QString &value);
 
-    QString titre;
-    unsigned int ects;
-    CategorieDecorator* next;
-
-    TM(const QString& t,const unsigned int& ects,Creditable& credit)
-        :titre(t),ects(ects),CategorieDecorator(credit,t,ects),Creditable(credit){
-
-    }
-    ~TM(){};
+     unsigned int getEcts() const;
+     void setEcts(unsigned int value);
 };
 
 #endif // TM_h

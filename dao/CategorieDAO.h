@@ -1,5 +1,6 @@
 #ifndef CATEGORIEDAO_H
 #define CATEGORIEDAO_H
+
 #include "dao/SqlDAOTemplate.h"
 #include "decorator/Creditable.h"
 #include "decorator/CS.h"
@@ -16,13 +17,13 @@ public:
 
     Creditable* find(const int &id);
 
-    bool update(const int& id, const Creditable& obj);
+    bool update(const int& id, Creditable* obj);
 
     bool remove(const int& id, Creditable* obj);
 
-    bool create(const Creditable& obj);
+    bool create(Creditable* obj);
 
-    Creditable* parse(const QString& code,const QString& t,const unsigned int& c,const Creditable& creditable);
+    Creditable* parse(const QString& code,const QString& titre,const unsigned int& ects,const Creditable& creditable);
 
     ~CategorieDAO(){}
     CategorieDAO(){}

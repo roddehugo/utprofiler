@@ -7,19 +7,16 @@
 
 class SP : public CategorieDecorator {
 
- public:
+public:
 
-    virtual QString getTitre()const;
-    virtual unsigned int getECTS()const;
-    QString titre;
-    unsigned int ects;
-    CategorieDecorator* next;
-    ~SP(){};
-    SP(const QString& t,const unsigned int& ects,Creditable& credit)
-        :Creditable(credit),CategorieDecorator(credit,t,ects),titre(t),ects(ects){
+     SP(const QString& titre,const unsigned int ects, Creditable* creditable);
+     ~SP();
 
-    }
+     QString getTitre() const;
+     void setTitre(const QString &value);
 
+     unsigned int getEcts() const;
+     void setEcts(unsigned int value);
 };
 
 
