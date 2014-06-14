@@ -3,11 +3,12 @@
 
 
 
-QString CS::getTitre()
+QString CS::getTitre() const
 {
 }
 
-unsigned int CS::getESCTS()
+unsigned int CS::getECTS() const
 {
 }
+
 

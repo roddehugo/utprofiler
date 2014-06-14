@@ -3,11 +3,11 @@
 
 
 
-QString TM::getTitre()
+QString TM::getTitre() const
 {
 }
 
-unsigned int TM::getECTS()
+unsigned int TM::getECTS() const
 {
 }
 

@@ -3,20 +3,34 @@
 
 #include "decorator/Creditable.h"
 #include <QString>
-
+enum ligne {Communiquer,Perception};
+enum colonne{Pratique,Theorique};
 class TSH : public CategorieDecorator {
 
  public:
 
-    virtual int getX();
+    virtual ligne getTagl();
 
-    virtual int getY();
+    virtual colonne getTagc();
+    virtual QString getTitre() const;
 
+    virtual unsigned int getECTS() const;
+    QString titre;
+    unsigned int ects;
+    CategorieDecorator* next;
 
+    TSH(const QString& t,const unsigned int& ects,Creditable& credit,colonne c, ligne l)
+        :titre(t),ects(ects),CategorieDecorator(credit,t,ects),Creditable(credit),tagc(c),tagl(l){
+
+    }
+    ~TSH(){};
  private:
-    Creditable &credits;
-    int x;
-    int y;
+    colonne tagc;
+    ligne tagl;
+
+
+
+
 };
 
 #endif // TSH_h

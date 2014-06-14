@@ -3,11 +3,11 @@
 
 
 
-QString HuTech::getTitre()
+QString HuTech::getTitre()const
 {
 }
 
-QString HuTech::getCode()
+QString HuTech::getCode()const
 {
 }
 

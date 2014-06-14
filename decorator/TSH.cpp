@@ -3,13 +3,20 @@
 
 
 
-int TSH::getX()
+ligne TSH::getTagl()
 {
-    return 0;
 }
 
-int TSH::getY()
+colonne TSH::getTagc()
 {
-    return 0;
+
+}
+
+QString TSH::getTitre() const
+{
+}
+
+unsigned int TSH::getECTS() const
+{
 }
 

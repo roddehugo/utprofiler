@@ -9,13 +9,19 @@ class TM : public CategorieDecorator {
 
  public:
 
-    virtual QString getTitre();
+    virtual QString getTitre() const;
 
-    virtual unsigned int getECTS();
+    virtual unsigned int getECTS() const;
 
+    QString titre;
+    unsigned int ects;
+    CategorieDecorator* next;
 
- private:
-    Creditable &credit;
+    TM(const QString& t,const unsigned int& ects,Creditable& credit)
+        :titre(t),ects(ects),CategorieDecorator(credit,t,ects),Creditable(credit){
+
+    }
+    ~TM(){};
 };
 
 #endif // TM_h

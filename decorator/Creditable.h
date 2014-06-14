@@ -8,7 +8,6 @@ class Creditable {
  public:
 
     virtual QString getTitre() const;
-
     virtual unsigned int getECTS() const  = 0;
 
 
@@ -22,19 +21,20 @@ class Creditable {
 //        Creditable(){}
 };
 
-class CategorieDecorator : public Creditable {
+class CategorieDecorator :virtual public Creditable {
 
  public:
 
-    virtual QString getTitre() const  = 0;
-    Creditable* getCreditable() const {return &m_creditable;}
+    virtual QString getTitre() const ;
+    virtual unsigned int getECTS() const  = 0;
+
+     Creditable* getCreditable() const {return &m_creditable;}
 
 
      protected:
         Creditable& m_creditable;
         CategorieDecorator(Creditable&  creditable,const QString& titre,const unsigned int ects=0);
         virtual ~CategorieDecorator();
-
 };
 
 #endif // Creditable_h

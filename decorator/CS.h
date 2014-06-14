@@ -9,13 +9,21 @@ class CS : public CategorieDecorator {
 
  public:
 
-    virtual QString getTitre();
+     QString getTitre()const;
+     unsigned int getECTS() const;
 
-    virtual unsigned int getESCTS();
+     QString titre;
+     unsigned int ects;
+     CategorieDecorator* next;
+
+     CS(const QString& t,const unsigned int& ects,Creditable& credit)
+         :titre(t),ects(ects),CategorieDecorator(credit,t,ects),Creditable(credit){
+
+     }
+     ~CS(){};
 
 
- private:
-    Creditable &credit;
+
 };
 
 #endif // CS_h

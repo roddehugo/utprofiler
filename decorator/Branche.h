@@ -12,9 +12,13 @@ class Branche : public Cursus {
 
  public:
 
-    virtual QString getTitre();
+    Branche(const QString& c, const QString& titre, const int& cat, const unsigned int& ects,const unsigned int m,const unsigned int cur, const unsigned int idparent )
+        :Cursus(c,titre,cat,ects,m,cur,idparent){}
 
-    virtual QString getCode();
+    virtual QString getTitre() const;
+    virtual QString getCode() const;
+
+    ~Branche(){}
 
  public:
 

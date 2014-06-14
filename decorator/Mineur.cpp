@@ -3,11 +3,11 @@
 
 
 
-QString Mineur::getTitre()
+QString Mineur::getTitre() const
 {
 }
 
-QString Mineur::getCode()
+QString Mineur::getCode() const
 {
 }
 

@@ -3,12 +3,13 @@
 
 
 
-QString Branche::getTitre()
+QString Branche::getTitre()const
 {
-    return "";
+    return titre;
 }
 
-QString Branche::getCode()
+QString Branche::getCode()const
 {
+    return code;
 }
 

@@ -10,15 +10,12 @@ class Cursus : public Creditable {
 
  public:
     Cursus(const QString& c, const QString& titre, const int& cat, const unsigned int& ects,const unsigned int m,const unsigned int cur, const unsigned int idparent )
-        :code(c),categorie(cat),Creditable(titre,ects)
+        :Creditable(titre,ects),code(c),categorie(cat)
     {}
 
     ~Cursus(){}
-//    virtual QString getTitre()  = 0;
 
-//    virtual QString getCode()  = 0;
-
- private:
+ protected:
     QString code;
     QString titre;
     unsigned int maxSemestres;

@@ -3,11 +3,13 @@
 
 
 
-QString SP::getTitre()
+QString SP::getTitre() const
 {
+    return titre;
 }
 
-unsigned int SP::getECTS()
+unsigned int SP::getECTS() const
 {
+    return ects;
 }
 

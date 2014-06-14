@@ -8,10 +8,14 @@
 class HuTech : public Cursus {
 
  public:
+    HuTech(const QString& c, const QString& titre, const int& cat, const unsigned int& ects,const unsigned int m,const unsigned int cur, const unsigned int idparent )
+        :Cursus("HuTech","Humanité et Technologie",cat,ects,m,cur,idparent){}
 
-    virtual QString getTitre();
+    virtual QString getTitre() const;
+    virtual QString getCode() const;
 
-    virtual QString getCode();
+    ~HuTech(){}
+
 };
 
 #endif // HuTech_h

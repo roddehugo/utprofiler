@@ -14,6 +14,11 @@ CategorieDecorator::~CategorieDecorator(){
 }
 
 
-CategorieDecorator::CategorieDecorator(Creditable& creditable,const QString& titre,const unsigned int ects):m_creditable(creditable),Creditable(titre,ects){
+CategorieDecorator::CategorieDecorator(Creditable& creditable,const QString& titre,const unsigned int ects)
+    :m_creditable(creditable),Creditable(titre,ects){
+
+}
+
+QString CategorieDecorator::getTitre() const {
 
 }

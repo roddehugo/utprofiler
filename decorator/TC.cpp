@@ -3,11 +3,13 @@
 
 
 
-QString TC::getTitre()
+QString TC::getTitre() const
 {
+    return "Tronc commun";
 }
 
-QString TC::getCode()
+QString TC::getCode() const
 {
+    return "TC";
 }
 

@@ -3,11 +3,11 @@
 
 
 
-QString Filiere::getTitre()
+QString Filiere::getTitre()const
 {
 }
 
-QString Filiere::getCode()
+QString Filiere::getCode()const
 {
 }
 
