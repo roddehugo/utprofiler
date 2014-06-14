@@ -25,7 +25,7 @@ QMap<int, UV *> UVDAO::findAll(){
             throw UTProfilerException("L'UV "+c+" existe déjà dans la QMap");
         }else{
             LogWriter::writeln("UVDAO.cpp","Lecture de l'UV : " + c);
-            UV* newuv=new UV(c,t,p,a,d,cat);
+            UV* newuv=new UV(c,t,p,a,d,cat,0);
             uvmap.insert(id,newuv);
         }
     }
@@ -48,7 +48,7 @@ UV* UVDAO::find(const unsigned int& id){
         const bool p = rec.value("printemps").toBool();
         const bool d = rec.value("demiuv").toBool();
         LogWriter::writeln("UVDAO.cpp","Lecture de l'UV : " + c);
-        return new UV(c,t,p,a,d,cat);
+        return new UV(c,t,p,a,d,cat,0);
     }
 }
 

@@ -1,27 +1,27 @@
 #ifndef UV_h
 #define UV_h
 
-//#include "decorator/Creditable.h"
+#include "decorator/Creditable.h"
 #include <QString>
 #include <QTextStream>
 
-class UV //: public Creditable
+class UV : public Creditable
 {
 
 private:
    QString code;
-   QString titre;
    bool printemps;
    bool automne;
    bool demiuv;
    int categorie;
 
  public:
-    UV(const QString& c, const QString& t, const bool& p, const bool& a, const bool& d, const int& cat)
-        :code(c), titre(t), printemps(p), automne(a), demiuv(d), categorie(cat)
+    UV(const QString& c, const QString& titre, const bool& p, const bool& a, const bool& d, const int& cat, const unsigned int& ects)
+        :code(c), printemps(p), automne(a), demiuv(d), categorie(cat),Creditable(titre,ects)
     {}
 
     UV();
+    ~UV();
 
     QString getCode() const { return code; }
 
@@ -37,7 +37,7 @@ private:
 
     void setCode(const QString& c) { code=c; }
 
-    void setTitre(const QString& t) { titre=t; }
+    void setTitre(const QString& t) { titre=titre; }
 
     void setAutomne(bool a) { automne=a; }
 
@@ -47,9 +47,13 @@ private:
 
     void setCategorie(int cat){ categorie = cat; }
 
+    unsigned int getECTS() const {return ects;}
+
 };
 
 QTextStream& operator<<(QTextStream& f, const UV& uv);
+
+
 
 #endif // UV_h
 

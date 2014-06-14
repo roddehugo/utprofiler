@@ -7,9 +7,9 @@ class Creditable {
 
  public:
 
-    virtual QString getTitre();
+    virtual QString getTitre() const;
 
-    virtual unsigned int getECTS()  = 0;
+    virtual unsigned int getECTS() const  = 0;
 
 
  protected:
@@ -18,20 +18,21 @@ class Creditable {
         unsigned int ects;
 
         virtual ~Creditable();
-        Creditable(QString& titre,unsigned int ects=0);
+        Creditable(const QString& titre, const unsigned int &ects=0);
+//        Creditable(){}
 };
 
 class CategorieDecorator : public Creditable {
 
  public:
 
-    virtual QString getTitre()  = 0;
-    Creditable* GetCreditable() const {return &m_creditable;}
+    virtual QString getTitre() const  = 0;
+    Creditable* getCreditable() const {return &m_creditable;}
 
 
      protected:
         Creditable& m_creditable;
-        CategorieDecorator(Creditable&  creditable, QString& titre, unsigned int ects=0);
+        CategorieDecorator(Creditable&  creditable,const QString& titre,const unsigned int ects=0);
         virtual ~CategorieDecorator();
 
 };

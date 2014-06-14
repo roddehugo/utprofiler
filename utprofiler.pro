@@ -20,16 +20,16 @@ SOURCES += main.cpp \
     Etudiant.cpp \
     dao/Connexion.cpp \
     dao/UVDAO.cpp \
-    decorator/Branche.cpp \
+    #decorator/Branche.cpp \
     decorator/CS.cpp \
-    decorator/Cursus.cpp \
-    decorator/Filiere.cpp \
-    decorator/HuTech.cpp \
-    decorator/Mineur.cpp \
-    decorator/SP.cpp \
-    decorator/TC.cpp \
-    decorator/TM.cpp \
-    decorator/TSH.cpp \
+    #decorator/Cursus.cpp \
+    #decorator/Filiere.cpp \
+    #decorator/HuTech.cpp \
+    #decorator/Mineur.cpp \
+    #decorator/SP.cpp \
+    #decorator/TC.cpp \
+    #decorator/TM.cpp \
+    #decorator/TSH.cpp \
     decorator/Creditable.cpp
 
 
@@ -45,17 +45,17 @@ HEADERS  += \
     Etudiant.h \
     dao/Connexion.h \
     window/loginwindow.h \
-    decorator/Branche.h \
+#    decorator/Branche.h \
     decorator/Creditable.h \
-    decorator/CS.h \
-    decorator/Cursus.h \
-    decorator/Filiere.h \
-    decorator/HuTech.h \
-    decorator/Mineur.h \
-    decorator/SP.h \
-    decorator/TC.h \
-    decorator/TM.h \
-    decorator/TSH.h
+#    decorator/CS.h \
+#    decorator/Cursus.h \
+#    decorator/Filiere.h \
+#    decorator/HuTech.h \
+#    decorator/Mineur.h \
+#    decorator/SP.h \
+#    decorator/TC.h \
+#    decorator/TM.h \
+#    decorator/TSH.h
 
 FORMS += \
     window/loginwindow.ui
