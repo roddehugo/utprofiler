@@ -9,27 +9,48 @@ class Dossier;
 class Cursus : public Creditable {
 
  public:
+    Cursus(const QString& c, const QString& titre, const int& cat, const unsigned int& ects,const unsigned int m,const unsigned int cur, const unsigned int idparent )
+        :code(c),categorie(cat),Creditable(titre,ects)
+    {}
 
-    virtual QString getTitre()  = 0;
+    ~Cursus(){}
+//    virtual QString getTitre()  = 0;
 
-    virtual QString getCode()  = 0;
-
-    virtual int newOperation();
-
+//    virtual QString getCode()  = 0;
 
  private:
     QString code;
     QString titre;
-    int maxSemestres;
+    unsigned int maxSemestres;
     unsigned int current;
+    unsigned int categorie;
+    Cursus* parent;
 
  public:
+
+    QString getCode() const { return code; }
+
+
+    QString getTitre() const { return titre; }
+
+    int getCategorie() const { return categorie; }
+
+    void setCode(const QString& c) { code=c; }
+
+    void setTitre(const QString& t) { titre=titre; }
+
+    void setCategorie(int cat){ categorie = cat; }
+
+    unsigned int getECTS() const {return ects;}
+
 
     /**
      * @element-type Dossier
      */
     Dossier *myDossier;
 };
+
+
 
 #endif // Cursus_h
 

@@ -22,7 +22,7 @@ SOURCES += main.cpp \
     dao/UVDAO.cpp \
     #decorator/Branche.cpp \
     decorator/CS.cpp \
-    #decorator/Cursus.cpp \
+    decorator/Cursus.cpp \
     #decorator/Filiere.cpp \
     #decorator/HuTech.cpp \
     #decorator/Mineur.cpp \
@@ -48,7 +48,7 @@ HEADERS  += \
 #    decorator/Branche.h \
     decorator/Creditable.h \
 #    decorator/CS.h \
-#    decorator/Cursus.h \
+     decorator/Cursus.h
 #    decorator/Filiere.h \
 #    decorator/HuTech.h \
 #    decorator/Mineur.h \

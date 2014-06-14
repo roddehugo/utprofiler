@@ -3,8 +3,4 @@
 
 
 
-int Cursus::newOperation()
-{
-    return 0;
-}
 
