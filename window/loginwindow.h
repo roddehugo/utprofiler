@@ -21,9 +21,10 @@ public:
 
     ~LoginWindow();
 
+
 private slots:
     void loginMe();
-
+    void setUpMainWindow();
     void on_ajouterEtudiant_clicked();
 
 private:

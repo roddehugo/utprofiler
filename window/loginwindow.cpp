@@ -1,4 +1,5 @@
 #include "window/loginwindow.h"
+#include "window/mainwindow.h"
 #include "ui_loginwindow.h"
 #include <QMessageBox>
 
@@ -17,8 +18,10 @@ LoginWindow::~LoginWindow()
     delete ui;
 }
 
-void setUpMainWindow(){
-
+void LoginWindow::setUpMainWindow(){
+    QWidget::hide();
+    MainWindow* m= new MainWindow;
+    m->show();
 }
 
 void LoginWindow::loginMe(){
