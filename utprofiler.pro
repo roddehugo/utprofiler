@@ -19,15 +19,16 @@ SOURCES += main.cpp \
     Etudiant.cpp \
     dao/Connexion.cpp \
     dao/UVDAO.cpp \
+<<<<<<< HEAD
     #dao/CategorieDAO.cpp \
     decorator/Branche.cpp \
     decorator/CS.cpp \
+=======
+    dao/CategorieDAO.cpp \
+>>>>>>> 819a29886b44d6b0abfde97e7bf0e8e27a0fcc15
     decorator/Cursus.cpp \
-    decorator/Filiere.cpp \
-    decorator/HuTech.cpp \
-    decorator/Mineur.cpp \
-     decorator/SP.cpp \
-    decorator/TC.cpp \
+    decorator/CS.cpp \
+    decorator/SP.cpp \
     decorator/TM.cpp \
     decorator/TSH.cpp \
     decorator/Creditable.cpp \
@@ -51,21 +52,21 @@ HEADERS  += \
     dao/SqlDAOTemplate.h \
     dao/UVDAO.h \
     dao/DossierDAO.h \
+    dao/CategorieDAO.h \
     dao/Factories.h \
     #dao/CategorieDAO.h \
     Etudiant.h \
     dao/Connexion.h \
     window/loginwindow.h \
+<<<<<<< HEAD
     window/mainwindow.h \
     decorator/Branche.h \
+=======
+>>>>>>> 819a29886b44d6b0abfde97e7bf0e8e27a0fcc15
     decorator/Creditable.h \
+    decorator/Cursus.h\
     decorator/CS.h \
-     decorator/Cursus.h\
-    decorator/Filiere.h \
-    decorator/HuTech.h \
-    decorator/Mineur.h \
     decorator/SP.h \
-    decorator/TC.h \
     decorator/TM.h \
     decorator/TSH.h \
     dao/EtudiantDAO.h \

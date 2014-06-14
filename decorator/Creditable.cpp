@@ -1,24 +1,53 @@
 #include "decorator/Creditable.h"
 
-QString Creditable::getTitre() const {}
-Creditable::Creditable(const QString& titre,const unsigned int& ects)
-    :titre(titre),ects(ects){
+Creditable::Creditable(const QString& titre,const unsigned int ects):
+    titre(titre),
+    ects(ects)
+{
 
 }
 
-Creditable::~Creditable(){
+CategorieDecorator::CategorieDecorator(const QString& titre,const unsigned int ects, Creditable* creditable):
+    creditable(creditable),
+    Creditable(titre,ects)
+{
+
+}
+
+CategorieDecorator::CategorieDecorator(const QString& titre, Creditable* creditable):
+    creditable(creditable),
+    Creditable(titre,0)
+{
+
+}
+
+Creditable::~Creditable()
+{
+
 }
 
 
-CategorieDecorator::~CategorieDecorator(){
+CategorieDecorator::~CategorieDecorator()
+{
+
 }
 
 
-CategorieDecorator::CategorieDecorator(Creditable& creditable,const QString& titre,const unsigned int ects)
-    :m_creditable(creditable),Creditable(titre,ects){
-
+QString Creditable::getTitre() const {
+    return titre;
 }
 
 QString CategorieDecorator::getTitre() const {
-
+    return creditable->getTitre() + " " + titre;
 }
+
+Creditable *CategorieDecorator::getCreditable() const
+{
+    return creditable;
+}
+
+void CategorieDecorator::setCreditable(Creditable *value)
+{
+    creditable = value;
+}
+

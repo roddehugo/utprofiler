@@ -7,23 +7,16 @@
 
 class CS : public CategorieDecorator {
 
- public:
+public:
 
-     QString getTitre()const;
-     unsigned int getECTS() const;
+     CS(const QString& titre,const unsigned int ects, Creditable* creditable);
+     ~CS();
 
-     QString titre;
-     unsigned int ects;
-     CategorieDecorator* next;
+     QString getTitre() const;
+     void setTitre(const QString &value);
 
-     CS(const QString& t,const unsigned int& ects,Creditable& credit)
-         :titre(t),ects(ects),CategorieDecorator(credit,t,ects),Creditable(credit){
-
-     }
-     ~CS(){};
-
-
-
+     unsigned int getEcts() const;
+     void setEcts(unsigned int value);
 };
 
 #endif // CS_h

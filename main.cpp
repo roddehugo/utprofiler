@@ -3,19 +3,14 @@
 #include <QApplication>
 #include <QDebug>
 #include "writers/LogWriter.h"
-#include "dao/Factories.h"
-#include "dao/Connexion.h"
 #include "decorator/Creditable.h"
 #include "decorator/CS.h"
 #include "decorator/TM.h"
 #include "decorator/TSH.h"
-#include "decorator/TC.h"
-#include "window/loginwindow.h"
-#include "decorator/Branche.h"
-#include "decorator/Filiere.h"
-#include "decorator/HuTech.h"
 #include "decorator/SP.h"
-#include "decorator/Mineur.h"
+#include "dao/Factories.h"
+#include "dao/Connexion.h"
+#include "window/loginwindow.h"
 
 
 int main(int argc, char *argv[])
@@ -44,11 +39,13 @@ int main(int argc, char *argv[])
 
     Connexion::getInstance()->setConnexion("/Users/fsamuel/Dropbox/LO21/Projet/save.db");
     Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
+    UVDAO* uvdao = fac->getUVDAO();
+    EtudiantDAO* etudao = fac->getEtudiantDAO();
 
 
-    LoginWindow w(fac);
+//    LoginWindow w(fac);
 
-    w.show();
+//    w.show();
 
     return a.exec();
 }
