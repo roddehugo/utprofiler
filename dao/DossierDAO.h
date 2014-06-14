@@ -23,8 +23,6 @@ public:
     ~DossierDAO(){}
     DossierDAO(){}
 
-private:
-    QMap<int, UV *> dossiermap;
 };
 
 #endif // DossierDAO_h

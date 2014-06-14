@@ -22,9 +22,6 @@ public:
 
     ~UVDAO(){}
     UVDAO(){}
-
-private:
-    QMap<int, UV *> uvmap;
 };
 
 #endif // UVDAO_h

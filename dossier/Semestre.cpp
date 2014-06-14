@@ -1,33 +1,59 @@
 #include "Semestre.h"
 
-Semestre::Semestre(QString s, QString a)
+Semestre::Semestre(const Saison &saison, const unsigned int annee, Dossier *dossier, const QMap<int, Inscription *> &inscriptions):
+    saison(saison),
+    annee(annee),
+    dossier(dossier),
+    inscriptions(inscriptions)
 {
+
 }
 
-QString Semestre::getSaison()
+Semestre::Semestre(const Saison &saison, const unsigned int annee, Dossier *dossier):
+    saison(saison),
+    annee(annee),
+    dossier(dossier)
 {
+
 }
 
-unsigned int Semestre::getAnnee()
+Saison Semestre::getSaison() const
 {
+    return saison;
 }
 
-QString Semestre::getCode()
+void Semestre::setSaison(const Saison &value)
 {
+    saison = value;
+}
+unsigned int Semestre::getAnnee() const
+{
+    return annee;
 }
 
-void Semestre::setSaison(QString s)
+void Semestre::setAnnee(unsigned int value)
 {
-    
+    annee = value;
 }
 
-void Semestre::setCode(QString c)
+QMap<int, Inscription *> Semestre::getInscriptions() const
 {
-    
+    return inscriptions;
 }
 
-void Semestre::setAnnee(unsigned int a)
+void Semestre::setInscriptions(const QMap<int, Inscription *> &value)
 {
-    
+    inscriptions = value;
 }
+Dossier *Semestre::getDossier() const
+{
+    return dossier;
+}
+
+void Semestre::setDossier(Dossier *value)
+{
+    dossier = value;
+}
+
+
 

@@ -1,52 +1,42 @@
 #ifndef Semestre_h
 #define Semestre_h
 
-#include <vector>
-
+#include <QMap>
 #include <QString>
 
-class Inscription;
 class Dossier;
+class Inscription;
+
+enum Saison{
+    Printemps,
+    Automne
+};
 
 class Semestre {
 
  public:
+    Semestre(const Saison& saison, const unsigned int annee, Dossier* dossier, const QMap<int, Inscription*>& inscriptions);
+    Semestre(const Saison& saison, const unsigned int annee, Dossier* dossier);
+    ~Semestre();
 
-    Semestre(QString s, QString a);
+    Saison getSaison() const;
+    void setSaison(const Saison &value);
 
-    virtual QString getSaison();
+    unsigned int getAnnee() const;
+    void setAnnee(unsigned int value);
 
-    virtual unsigned int getAnnee();
+    QMap<int, Inscription *> getInscriptions() const;
+    void setInscriptions(const QMap<int, Inscription *> &value);
 
-    virtual QString getCode();
+    Dossier *getDossier() const;
+    void setDossier(Dossier *value);
 
-    virtual void setSaison(QString s);
-
-    virtual void setCode(QString c);
-
-    virtual void setAnnee(unsigned int a);
-
-
- private:
-    QString saison;
+private:
+    Saison saison;
     unsigned int annee;
+    QMap<int, Inscription *> inscriptions;
+    Dossier* dossier;
 
- public:
-
-    /**
-     * @element-type Inscription
-     */
-    Inscription *myInscription;
-
-    /**
-     * @element-type UV
-     */
-    std::vector< Inscription* > InscriptionAssoc;
-
-    /**
-     * @element-type Dossier
-     */
-    Dossier *myDossier;
 };
 
 #endif // Semestre_h

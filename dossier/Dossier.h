@@ -5,60 +5,33 @@
 #include <QString>
 
 #include "decorator/Cursus.h"
-#include "dossier/Desiderata.h"
 #include "dossier/Inscription.h"
 #include "dossier/Semestre.h"
 
-class AlgoManager;
+//class AlgoManager;
 class Etudiant;
 
 class Dossier {
 
  public:
 
-    Dossier();
+    Dossier(const QString& titre, bool solution,Etudiant* etudiant);
+    ~Dossier();
 
-    void setTitre(const QString& t){titre=t;}
+    Etudiant *getEtudiant() const;
+    void setEtudiant(Etudiant *value);
 
-    const QString& getTitre(){return titre;}
+    bool getSolution() const;
+    void setSolution(bool value);
 
-    void setSolution(const bool& s){solution=s;}
+    QString getTitre() const;
+    void setTitre(const QString &value);
 
-    const bool& isSolution(){return solution;}
-
-
- private:
+private:
     QString titre;
     bool solution;
+    Etudiant* etudiant;
 
- public:
-
-    Cursus &myCursus;
-
-    /**
-     * @element-type Inscription
-     */
-    std::vector< Inscription > myInscription;
-
-    /**
-     * @element-type AlgoManager
-     */
-    AlgoManager *myAlgoManager;
-
-    /**
-     * @element-type Semestre
-     */
-    std::vector< Semestre > mySemestre;
-
-    /**
-     * @element-type Etudiant
-     */
-    Etudiant *myEtudiant;
-
-    /**
-     * @element-type Desiderata
-     */
-    std::vector< Desiderata > myDesiderata;
 };
 
 #endif // Dossier_h

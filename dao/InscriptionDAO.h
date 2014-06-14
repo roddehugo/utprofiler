@@ -1,0 +1,30 @@
+#ifndef INSCRIPTIONDAO_H
+#define INSCRIPTIONDAO_H
+
+#include "dossier/Inscription.h"
+#include "dao/SqlDAOTemplate.h"
+
+class InscriptionDAO : public SqlDAOTemplate<Inscription, InscriptionDAO> {
+
+    friend class Singleton<InscriptionDAO>;
+
+public:
+
+    QMap<int, Inscription *> findAll();
+
+    Inscription* find(const int &id);
+
+    Inscription* findByLogin(const QString& login);
+
+    bool update(const int& id, Inscription* obj);
+
+    bool remove(const int& id, Inscription* obj);
+
+    bool create(Inscription* obj);
+
+    InscriptionDAO(){}
+    ~InscriptionDAO(){}
+
+};
+
+#endif // INSCRIPTIONDAO_H

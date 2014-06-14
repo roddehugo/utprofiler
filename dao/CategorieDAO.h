@@ -25,11 +25,8 @@ public:
 
     Creditable* parse(const QString& code,const QString& titre,const unsigned int& ects,const Creditable& creditable);
 
-    ~CategorieDAO(){}
     CategorieDAO(){}
-
-private:
-    QMap<int, Creditable *> categoriemap;
+    ~CategorieDAO(){}
 
 };
 

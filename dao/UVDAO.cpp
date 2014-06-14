@@ -15,21 +15,21 @@ QMap<int, UV *> UVDAO::findAll(){
         const bool a = rec.value("automne").toBool();
         const bool p = rec.value("printemps").toBool();
         const bool d = rec.value("demiuv").toBool();
-        if (uvmap.contains(id)) {
+        if (Map.contains(id)) {
             throw UTProfilerException("L'UV "+c+" existe déjà dans la QMap");
         }else{
             LogWriter::writeln("UVDAO.cpp","Lecture de l'UV : " + c);
             UV* newuv=new UV(c,t,p,a,d);
-            uvmap.insert(id,newuv);
+            Map.insert(id,newuv);
         }
     }
 
-    return uvmap;
+    return Map;
 }
 
 UV* UVDAO::find(const int& id){
-    if (uvmap.contains(id)) {
-        return uvmap.value(id);
+    if (Map.contains(id)) {
+        return Map.value(id);
     }
     QSqlQuery query(Connexion::getInstance()->getDataBase());
     if (!query.exec("SELECT * FROM uvs WHERE id = " + QString(id) + ";")){
@@ -98,7 +98,7 @@ bool UVDAO::create(UV *obj){
         throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         return false;
     }else{
-        uvmap.insert(query.lastInsertId().toInt(),obj);
+        Map.insert(query.lastInsertId().toInt(),obj);
         LogWriter::writeln("UVDAO.cpp","Création de l'UV : " + obj->getCode());
         return true;
     }
