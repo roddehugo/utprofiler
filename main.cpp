@@ -26,29 +26,29 @@ int main(int argc, char *argv[])
     LogWriter::writeln("Main.cpp","Lancement de l'application");
 
 
+//    Creditable *c=new TC("GI","info",2,32,2,2,3);
+//    qDebug()<< (c)<<endl;
+//    Creditable *u=new UV("GI","info",2,32,2,2,3);
+//    qDebug()<< (u)<<endl;
+//    //           Creditable *d=new Cursus("GM","mec",2,32,2,2,3);
+//    //           std::cout<<(d)<<endl;
 
-    Creditable *c=new TC("GI","info",2,32,2,2,3);
-      qDebug()<< (c)<<endl;
-      Creditable *u=new UV("GI","info",2,32,2,2,3);
-        qDebug()<< (u)<<endl;
-//           Creditable *d=new Cursus("GM","mec",2,32,2,2,3);
-//           std::cout<<(d)<<endl;
 
+//    //           d=new CategorieDecorator(*d,15,"Puant");
+//    CategorieDecorator* d=new CS("titre",6,*c);
+//    qDebug()<<(d)<<endl;
+//    d=new TM("titre",6,*c);
+//    qDebug()<<(d)<<endl;
+//    CategorieDecorator* v=new TSH("titre",6,*c,Theorique,Perception);
+//    qDebug()<<(v)<<endl;
 
-//           d=new CategorieDecorator(*d,15,"Puant");
-          CategorieDecorator* d=new CS("titre",6,*c);
-           qDebug()<<(d)<<endl;
-           d=new TM("titre",6,*c);
-            qDebug()<<(d)<<endl;
-            CategorieDecorator* v=new TSH("titre",6,*c,Theorique,Perception);
-             qDebug()<<(v)<<endl;
-
-    Connexion::getInstance()->setConnexion("/Users/hugo/Dropbox/UVs/LO21/Projet/database.db");
+    Connexion::getInstance()->setConnexion("/Users/hugo/Dropbox/UVs/LO21/Projet/save.db");
     Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
 
-    LoginWindow w(fac);
-    w.show();
 
+    LoginWindow w(fac);
+
+    w.show();
 
     return a.exec();
 }

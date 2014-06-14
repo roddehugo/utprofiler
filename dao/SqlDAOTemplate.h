@@ -21,20 +21,16 @@ class SqlDAOTemplate : public Singleton<DAO> {
 
     virtual T* find(const int& id) =0;
 
-    virtual void update(const int& id, const T& obj) =0;
+    virtual bool update(const int& id, T* obj) =0;
 
-    virtual void remove(const int& id, T* obj) =0;
+    virtual bool remove(const int& id, T* obj) =0;
 
-    virtual void create(const T& obj) =0;
+    virtual bool create(T* obj) =0;
 
 protected:
-    SqlDAOTemplate(){
+    SqlDAOTemplate(){}
 
-    }
-
-    ~SqlDAOTemplate(){
-
-    }
+    ~SqlDAOTemplate(){}
 
 };
 

@@ -14,11 +14,11 @@ public:
 
     UV* find(const int &id);
 
-    void update(const int& id, const UV& obj);
+    bool update(const int& id, UV* obj);
 
-    void remove(const int& id, UV* obj);
+    bool remove(const int& id, UV* obj);
 
-    void create(const UV& obj);
+    bool create(UV* obj);
 
     ~UVDAO(){}
     UVDAO(){}

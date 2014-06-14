@@ -50,49 +50,56 @@ UV* UVDAO::find(const int& id){
     }
 }
 
-void UVDAO::update(const int& id, const UV& obj){
+bool UVDAO::update(const int& id, UV* obj){
     QSqlQuery query(Connexion::getInstance()->getDataBase());
     query.prepare("UPDATE uvs SET (code=:code, titre=:titre, categorie=:categorie, automne=:automne, printemps=:printemps, demiuv=:demiuv) WHERE id = :id ;");
     query.bindValue(":id", id);
-    query.bindValue(":code", obj.getCode() );
-    query.bindValue(":titre", obj.getTitre() );
-    query.bindValue(":categorie", obj.getCategorie() );
-    query.bindValue(":automne", obj.getAutomne() );
-    query.bindValue(":printemps", obj.getPrintemps() );
-    query.bindValue(":demiuv", obj.getDemiUV() );
+    query.bindValue(":code", obj->getCode() );
+    query.bindValue(":titre", obj->getTitre() );
+    query.bindValue(":categorie", obj->getCategorie() );
+    query.bindValue(":automne", obj->getAutomne() );
+    query.bindValue(":printemps", obj->getPrintemps() );
+    query.bindValue(":demiuv", obj->getDemiUV() );
     if (!query.exec()){
         throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        return false;
     }else{
-         LogWriter::writeln("UVDAO.cpp","Modification de l'UV : " + obj.getCode());
+        LogWriter::writeln("UVDAO.cpp","Modification de l'UV : " + obj->getCode());
+        return true;
     }
 
 }
 
-void UVDAO::remove(const int& id, UV* obj){
+bool UVDAO::remove(const int& id, UV* obj){
     QSqlQuery query(Connexion::getInstance()->getDataBase());
     query.prepare("DELETE FROM uvs WHERE id = :id ;");
     query.bindValue(":id", id);
     if (!query.exec()){
         throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        return false;
     }else{
-         LogWriter::writeln("UVDAO.cpp","Suprression de l'UV : " + obj->getCode());
-         delete obj;
+        LogWriter::writeln("UVDAO.cpp","Suprression de l'UV : " + obj->getCode());
+        delete obj;
+        return true;
     }
 }
 
-void UVDAO::create(const UV& obj){
+bool UVDAO::create(UV *obj){
     QSqlQuery query(Connexion::getInstance()->getDataBase());
     query.prepare("INSERT INTO uvs (id, code, titre, categorie, automne, printemps, demiuv) VALUES (:id, :code, :titre, :categorie, :automne, :printemps, :demiuv);");
     query.bindValue(":id", "NULL");
-    query.bindValue(":code", obj.getCode() );
-    query.bindValue(":titre", obj.getTitre() );
-    query.bindValue(":categorie", obj.getCategorie() );
-    query.bindValue(":automne", obj.getAutomne() );
-    query.bindValue(":printemps", obj.getPrintemps() );
-    query.bindValue(":demiuv", obj.getDemiUV() );
+    query.bindValue(":code", obj->getCode() );
+    query.bindValue(":titre", obj->getTitre() );
+    query.bindValue(":categorie", obj->getCategorie() );
+    query.bindValue(":automne", obj->getAutomne() );
+    query.bindValue(":printemps", obj->getPrintemps() );
+    query.bindValue(":demiuv", obj->getDemiUV() );
     if (!query.exec()){
         throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        return false;
     }else{
-        LogWriter::writeln("UVDAO.cpp","Création de l'UV : " + obj.getCode());
+        uvmap.insert(query.lastInsertId().toInt(),obj);
+        LogWriter::writeln("UVDAO.cpp","Création de l'UV : " + obj->getCode());
+        return true;
     }
 }

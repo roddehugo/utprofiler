@@ -13,12 +13,12 @@ class Creditable {
 
  protected:
     //les données de la classe de base
-        QString titre;
-        unsigned int ects;
+    QString titre;
+    unsigned int ects;
 
-        virtual ~Creditable();
-        Creditable(const QString& titre, const unsigned int &ects=0);
-//        Creditable(){}
+    virtual ~Creditable();
+    Creditable(const QString& titre, const unsigned int &ects=0);
+    //Creditable(){}
 };
 
 class CategorieDecorator :virtual public Creditable {
@@ -28,13 +28,13 @@ class CategorieDecorator :virtual public Creditable {
     virtual QString getTitre() const ;
     virtual unsigned int getECTS() const  = 0;
 
-     Creditable* getCreditable() const {return &m_creditable;}
+    Creditable* getCreditable() const {return &m_creditable;}
 
 
-     protected:
-        Creditable& m_creditable;
-        CategorieDecorator(Creditable&  creditable,const QString& titre,const unsigned int ects=0);
-        virtual ~CategorieDecorator();
+protected:
+    Creditable& m_creditable;
+    CategorieDecorator(Creditable&  creditable,const QString& titre,const unsigned int ects=0);
+    virtual ~CategorieDecorator();
 };
 
 #endif // Creditable_h

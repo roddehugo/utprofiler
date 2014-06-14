@@ -14,14 +14,17 @@ public:
 
     Etudiant* find(const int &id);
 
-    void update(const int& id, const Etudiant& obj);
+    Etudiant* findByLogin(const QString& login);
 
-    void remove(const int& id, Etudiant* obj);
+    bool update(const int& id, Etudiant* obj);
 
-    void create(const Etudiant& obj);
+    bool remove(const int& id, Etudiant* obj);
 
-    EtudiantDAO();
-    ~EtudiantDAO();
+    bool create(Etudiant* obj);
+
+    EtudiantDAO(){}
+    ~EtudiantDAO(){}
+
 
 private:
     QMap<int, Etudiant *> etumap;

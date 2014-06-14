@@ -3,8 +3,10 @@
 
 #include <QMainWindow>
 #include "writers/LogWriter.h"
+#include "dao/Factories.h"
 
 struct Factory;
+class EtudiantDAO;
 
 namespace Ui {
 class LoginWindow;
@@ -21,6 +23,8 @@ public:
 
 private slots:
     void loginMe();
+
+    void on_ajouterEtudiant_clicked();
 
 private:
     Ui::LoginWindow *ui;

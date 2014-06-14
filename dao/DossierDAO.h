@@ -14,11 +14,11 @@ public:
 
     Dossier* find(const int& id);
 
-    void update(const int& id, const Dossier& obj);
+    bool update(const int& id, const Dossier& obj);
 
-    void remove(const int& id, Dossier* obj);
+    bool remove(const int& id, Dossier* obj);
 
-    void create(const Dossier& obj);
+    bool create(Dossier* obj);
 
     ~DossierDAO(){}
     DossierDAO(){}

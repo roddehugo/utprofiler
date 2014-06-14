@@ -1,6 +1,6 @@
 #include "window/loginwindow.h"
 #include "ui_loginwindow.h"
-#include <QDebug>
+#include <QMessageBox>
 
 LoginWindow::LoginWindow(Factory *factory, QWidget *parent):
     QMainWindow(parent),
@@ -17,8 +17,35 @@ LoginWindow::~LoginWindow()
     delete ui;
 }
 
+void setUpMainWindow(){
+
+}
+
 void LoginWindow::loginMe(){
     LogWriter::writeln("LoginWindow.cpp","Login action");
+    EtudiantDAO* etudao = fac->getEtudiantDAO();
+    Etudiant* me = etudao->findByLogin(ui->loginEdit->text());
+    if(!me){
+        QMessageBox msgBox;
+        msgBox.setText("Aucun utilisateur trouvé.");
+        msgBox.exec();
+    }else{
+        setUpMainWindow();
+    }
+}
 
-
+void LoginWindow::on_ajouterEtudiant_clicked()
+{
+    LogWriter::writeln("LoginWindow.cpp","Ajouter étudiant action");
+    const QString login = ui->newLogin->text();
+    const QString prenom = ui->newPrenom->text();
+    const QString nom = ui->newNom->text();
+    EtudiantDAO* etudao = fac->getEtudiantDAO();
+    if(etudao->create(new Etudiant(login,prenom,nom))){
+        setUpMainWindow();
+    }else{
+        QMessageBox msgBox;
+        msgBox.setText("Impossible d'ajouter l'utilisateur.");
+        msgBox.exec();
+    }
 }
