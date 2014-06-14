@@ -14,7 +14,7 @@ TM::~TM()
 
 QString TM::getTitre() const
 {
-    return titre;
+    return creditable->getTitre() + " " + titre;
 }
 
 void TM::setTitre(const QString &value)
@@ -22,9 +22,11 @@ void TM::setTitre(const QString &value)
     titre = value;
 }
 
-unsigned int TM::getEcts() const
+QHash<QString, int> &TM::getEcts(QHash<QString, int> &ectsmap) const
 {
-    return ects;
+    ectsmap.insert(titre,ects);
+    creditable->getEcts(ectsmap);
+    return ectsmap;
 }
 
 void TM::setEcts(unsigned int value)

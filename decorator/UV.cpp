@@ -54,30 +54,9 @@ void UV::setCreditable(Creditable *value)
     creditable = value;
 }
 
-unsigned int UV::getEcts() const
-{
-    return ects;
-}
-
-void UV::setEcts(unsigned int value)
-{
-    ects = value;
-}
-
 unsigned int UV::getCategorie() const
 {
     return 0;
-}
-
-UV::UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv, Creditable* creditable):
-    Creditable(titre,0),
-    code(code),
-    printemps(printemps),
-    automne(automne),
-    demiuv(demiuv),
-    creditable(creditable)
-{
-
 }
 
 UV::UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv):

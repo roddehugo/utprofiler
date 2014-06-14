@@ -16,9 +16,8 @@ private:
    Creditable* creditable;
 
  public:
-    UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv, Creditable* creditable);
     UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv);
-    ~UV();
+    virtual ~UV();
 
     QString getCode() const;
     void setCode(const QString &value);
@@ -34,9 +33,6 @@ private:
 
     Creditable *getCreditable() const;
     void setCreditable(Creditable *value);
-
-    unsigned int getEcts() const;
-    void setEcts(unsigned int value);
 
     unsigned int getCategorie() const;
 

@@ -2,7 +2,7 @@
 
 Cursus::Cursus(const QString& code, const QString& titre, const unsigned int ects,
                const unsigned int maxSemestre, bool current,
-               Creditable* creditable, Dossier* dossier, Cursus* parent ):
+               Dossier* dossier, Cursus* parent ):
     Creditable(titre,ects),
     code(code),
     maxSemestres(maxSemestre),
@@ -13,7 +13,7 @@ Cursus::Cursus(const QString& code, const QString& titre, const unsigned int ect
 
 Cursus::Cursus(const QString& code, const QString& titre, const unsigned int ects,
                const unsigned int maxSemestre, bool current,
-               Creditable* creditable, Dossier* dossier):
+               Dossier* dossier):
     Creditable(titre,ects),
     code(code),
     maxSemestres(maxSemestre),
@@ -32,21 +32,6 @@ QString Cursus::getCode() const
 void Cursus::setCode(const QString &value)
 {
     code = value;
-}
-
-QString Cursus::getTitre() const
-{
-    return titre;
-}
-
-void Cursus::setTitre(const QString &value)
-{
-    titre = value;
-}
-
-unsigned int Cursus::getMaxSemestres() const
-{
-    return maxSemestres;
 }
 
 void Cursus::setMaxSemestres(unsigned int value)
@@ -93,15 +78,4 @@ Dossier *Cursus::getDossier() const
 void Cursus::setDossier(Dossier *value)
 {
     dossier = value;
-}
-
-
-unsigned int Cursus::getEcts() const
-{
-    return ects;
-}
-
-void Cursus::setEcts(unsigned int value)
-{
-    ects = value;
 }

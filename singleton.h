@@ -15,10 +15,10 @@ public:
 
     static T* getInstance (){
         if (0 == instance){
-            LogWriter::writeln("Singleton.h","Création du singleton");
+            LogWriter::writeln("Singleton.h","Création du singleton "+ QString(typeid(T).name()) );
             instance = new T;
         }else{
-            LogWriter::writeln("Singleton.h","Singleton déjà existant");
+            LogWriter::writeln("Singleton.h","Singleton déjà existant " + QString(typeid(T).name()));
         }
 
         return (static_cast<T*> (instance));

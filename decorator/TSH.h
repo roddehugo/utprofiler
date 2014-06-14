@@ -22,7 +22,7 @@ public:
      QString getTitre() const;
      void setTitre(const QString &value);
 
-     unsigned int getEcts() const;
+     QHash<QString, int> &getEcts(QHash<QString, int> &ectsmap) const;
      void setEcts(unsigned int value);
 
      colonne getTagc() const;

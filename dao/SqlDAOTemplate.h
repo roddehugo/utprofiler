@@ -17,7 +17,7 @@ class SqlDAOTemplate : public Singleton<DAO> {
 
  public:
 
-    virtual QMap<int,T*> findAll() =0;
+    virtual QMap<int, T*> findAll() =0;
 
     virtual T* find(const int& id) =0;
 
@@ -27,13 +27,20 @@ class SqlDAOTemplate : public Singleton<DAO> {
 
     virtual bool create(T* obj) =0;
 
+    QMap<int, T*> getMap() const{
+        return Map;
+    }
+    void setMap(const QMap<int, T*> &value){
+        Map = value;
+    }
+
 protected:
     SqlDAOTemplate(){}
-
     ~SqlDAOTemplate(){}
+
+    QMap<int, T*> Map;
 
 };
 
 
 #endif // DAO_h
-

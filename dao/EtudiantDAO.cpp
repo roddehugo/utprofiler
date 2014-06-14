@@ -1,7 +1,7 @@
 #include "dao/EtudiantDAO.h"
 #include <QDebug>
 
-QMap<int, Etudiant *> EtudiantDAO::findAll(){
+QMap<int, Etudiant*> EtudiantDAO::findAll(){
     try{
 
         QSqlQuery query(Connexion::getInstance()->getDataBase());
@@ -15,19 +15,19 @@ QMap<int, Etudiant *> EtudiantDAO::findAll(){
             const QString p = rec.value("prenom").toString();
             const QString n = rec.value("nom").toString();
             const QString l = rec.value("login").toString();
-            if (etumap.contains(id)) {
+            if (Map.contains(id)) {
                 throw UTProfilerException("L'étudiant "+l+" existe déjà dans la QMap");
             }else{
                 LogWriter::writeln("EtudiantDAO.cpp","Lecture de l'étudiant : " + l);
                 Etudiant* newetu=new Etudiant(l,p,n);
-                etumap.insert(id,newetu);
+                Map.insert(id,newetu);
             }
         }
     }catch(UTProfilerException *e){
         LogWriter::writeln("EtudiantDAO::findAll()",e->getMessage());
     }
 
-    return etumap;
+    return Map;
 }
 
 Etudiant* EtudiantDAO::findByLogin(const QString& login){
@@ -40,8 +40,8 @@ Etudiant* EtudiantDAO::findByLogin(const QString& login){
         if(query.first()){
             QSqlRecord rec = query.record();
             const int id = rec.value("id").toInt();
-            if (etumap.value(id)) {
-                return etumap.value(id);
+            if (Map.value(id)) {
+                return Map.value(id);
             }else{
                 const QString l = rec.value("login").toString();
                 const QString p = rec.value("prenom").toString();
@@ -60,8 +60,8 @@ Etudiant* EtudiantDAO::findByLogin(const QString& login){
 
 Etudiant* EtudiantDAO::find(const int& id){
     try{
-        if (etumap.contains(id)) {
-            return etumap.value(id);
+        if (Map.contains(id)) {
+            return Map.value(id);
         }
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         if (!query.exec("SELECT * FROM etudiants WHERE id = " + QString(id) + ";")){
@@ -129,7 +129,7 @@ bool EtudiantDAO::create(Etudiant *obj){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
             return false;
         }else{
-            etumap.insert(query.lastInsertId().toInt(),obj);
+            Map.insert(query.lastInsertId().toInt(),obj);
             LogWriter::writeln("Etudiant.cpp","Création de l'étudiant : " + obj->getLogin());
             return true;
         }

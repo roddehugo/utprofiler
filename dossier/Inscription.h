@@ -11,19 +11,30 @@ enum Resultat{
     EQU  /*Equivalence*/
 };
 
+class UV;
+class Semestre;
+
 class Inscription {
 
  public:
-
-    Resultat getResultat();
-
-    void setResultat(Resultat r);
+    Inscription(UV* uv, Semestre* semestre, const Resultat& resultat);
+    ~Inscription();
 
 
- private:
+    Resultat getResultat() const;
+    void setResultat(const Resultat &value);
+
+    Semestre *getSemestre() const;
+    void setSemestre(Semestre *value);
+
+    UV *getUv() const;
+    void setUv(UV *value);
+
+private:
     Resultat resultat;
+    Semestre* semestre;
+    UV* uv;
 
- public:
 
 };
 

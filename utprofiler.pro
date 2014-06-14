@@ -16,18 +16,15 @@ SOURCES += main.cpp \
     writers/LogWriter.cpp \
     decorator/UV.cpp \
     dossier/Dossier.cpp \
+    dossier/Inscription.cpp \
+    dossier/Semestre.cpp \
     Etudiant.cpp \
     dao/Connexion.cpp \
     dao/UVDAO.cpp \
-<<<<<<< HEAD
-    #dao/CategorieDAO.cpp \
-    decorator/Branche.cpp \
     decorator/CS.cpp \
-=======
     dao/CategorieDAO.cpp \
->>>>>>> 819a29886b44d6b0abfde97e7bf0e8e27a0fcc15
+    dao/DossierDAO.cpp \
     decorator/Cursus.cpp \
-    decorator/CS.cpp \
     decorator/SP.cpp \
     decorator/TM.cpp \
     decorator/TSH.cpp \
@@ -35,13 +32,17 @@ SOURCES += main.cpp \
     dao/EtudiantDAO.cpp \
     window/loginwindow.cpp \
     window/mainwindow.cpp \
-    dao/Factories.cpp \
     window/modifuvwindow.cpp \
     window/supprimeruvwindow.cpp \
     window/ajoutcursuswindow.cpp \
     window/modifiercursuswindow.cpp \
     window/ajouteruvwindow.cpp \
-    window/supprimercursus.cpp
+    window/supprimercursus.cpp \
+    dao/Factories.cpp \
+    dao/SemestreDAO.cpp \
+    dao/InscriptionDAO.cpp \
+    dao/CursusDAO.cpp \
+    dao/DesiderataDAO.cpp
 
 
 HEADERS  += \
@@ -49,20 +50,19 @@ HEADERS  += \
     Singleton.h \
     decorator/UV.h \
     dossier/Dossier.h \
+    dossier/Inscription.h \
+    dossier/Semestre.h \
     dao/SqlDAOTemplate.h \
     dao/UVDAO.h \
     dao/DossierDAO.h \
     dao/CategorieDAO.h \
     dao/Factories.h \
-    #dao/CategorieDAO.h \
+    dao/CategorieDAO.h \
     Etudiant.h \
     dao/Connexion.h \
     window/loginwindow.h \
-<<<<<<< HEAD
     window/mainwindow.h \
     decorator/Branche.h \
-=======
->>>>>>> 819a29886b44d6b0abfde97e7bf0e8e27a0fcc15
     decorator/Creditable.h \
     decorator/Cursus.h\
     decorator/CS.h \
@@ -75,7 +75,11 @@ HEADERS  += \
     window/ajoutcursuswindow.h \
     window/modifiercursuswindow.h \
     window/ajouteruvwindow.h \
-    window/supprimercursus.h
+    window/supprimercursus.h \
+    dao/SemestreDAO.h \
+    dao/InscriptionDAO.h \
+    dao/CursusDAO.h \
+    dao/DesiderataDAO.h
 
 FORMS += \
     window/loginwindow.ui \

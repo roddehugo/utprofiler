@@ -40,8 +40,16 @@ int main(int argc, char *argv[])
     Connexion::getInstance()->setConnexion("/Users/fsamuel/Dropbox/LO21/Projet/save.db");
     Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
     UVDAO* uvdao = fac->getUVDAO();
-    EtudiantDAO* etudao = fac->getEtudiantDAO();
+    QMap<int,UV*> uvmap = uvdao->findAll();
+    UV* lo21 = uvmap.value(1);
 
+    Creditable* tc = new CS("CS",35,new TM("TM",35,new TSH("TSH",35,lo21 ) ) );
+    LogWriter::writeln("Main.cpp",tc->getTitre());
+    QHash<QString, int> ectsmap;
+    ectsmap = tc->getEcts(ectsmap);
+    qDebug() << ectsmap;
+
+    //LogWriter::writeln("Main.cpp",QString::number(tc->getEcts()) );
 
 //    LoginWindow w(fac);
 

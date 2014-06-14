@@ -25,9 +25,6 @@ public:
     EtudiantDAO(){}
     ~EtudiantDAO(){}
 
-
-private:
-    QMap<int, Etudiant *> etumap;
 };
 
 #endif // ETUDIANTDAO_H
