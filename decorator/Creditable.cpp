@@ -8,15 +8,15 @@ Creditable::Creditable(const QString& titre,const unsigned int ects):
 }
 
 CategorieDecorator::CategorieDecorator(const QString& titre,const unsigned int ects, Creditable* creditable):
-    creditable(creditable),
-    Creditable(titre,ects)
+    Creditable(titre,ects),
+    creditable(creditable)
 {
 
 }
 
 CategorieDecorator::CategorieDecorator(const QString& titre, Creditable* creditable):
-    creditable(creditable),
-    Creditable(titre,0)
+    Creditable(titre,0),
+    creditable(creditable)
 {
 
 }
@@ -37,8 +37,25 @@ QString Creditable::getTitre() const {
     return titre;
 }
 
-QString CategorieDecorator::getTitre() const {
-    return creditable->getTitre() + " " + titre;
+void Creditable::setEcts(const unsigned int e){
+    ects = e;
+}
+
+QHash<QString, int>& Creditable::getEcts(QHash<QString, int>& ectsmap) const {
+
+    QHash<QString, int>::const_iterator i;
+    int s = 0;
+    for (i = ectsmap.constBegin(); i != ectsmap.constEnd(); ++i){
+        s+=i.value();
+    }
+    if(ects!=0){
+        ectsmap.insert("Crédits libres",ects-s);
+        ectsmap.insert(titre,ects);
+    }else{
+        ectsmap.insert(titre,s);
+    }
+
+    return ectsmap;
 }
 
 Creditable *CategorieDecorator::getCreditable() const

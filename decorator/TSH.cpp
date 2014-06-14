@@ -14,7 +14,7 @@ TSH::~TSH()
 
 QString TSH::getTitre() const
 {
-    return titre;
+    return creditable->getTitre() + " " + titre;
 }
 
 void TSH::setTitre(const QString &value)
@@ -22,9 +22,11 @@ void TSH::setTitre(const QString &value)
     titre = value;
 }
 
-unsigned int TSH::getEcts() const
+QHash<QString, int> &TSH::getEcts(QHash<QString, int> &ectsmap) const
 {
-    return ects;
+    ectsmap.insert(titre,ects);
+    creditable->getEcts(ectsmap);
+    return ectsmap;
 }
 
 void TSH::setEcts(unsigned int value)

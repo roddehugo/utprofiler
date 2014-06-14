@@ -15,7 +15,7 @@ SP::~SP()
 
 QString SP::getTitre() const
 {
-    return titre;
+    return creditable->getTitre() + " " + titre;
 }
 
 void SP::setTitre(const QString &value)
@@ -23,9 +23,12 @@ void SP::setTitre(const QString &value)
     titre = value;
 }
 
-unsigned int SP::getEcts() const
+
+QHash<QString, int> &SP::getEcts(QHash<QString, int> &ectsmap) const
 {
-    return ects;
+    ectsmap.insert(titre,ects);
+    creditable->getEcts(ectsmap);
+    return ectsmap;
 }
 
 void SP::setEcts(unsigned int value)

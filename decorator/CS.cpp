@@ -15,7 +15,7 @@ CS::~CS()
 
 QString CS::getTitre() const
 {
-    return titre;
+    return creditable->getTitre() + " " + titre;
 }
 
 void CS::setTitre(const QString &value)
@@ -23,9 +23,11 @@ void CS::setTitre(const QString &value)
     titre = value;
 }
 
-unsigned int CS::getEcts() const
+QHash<QString, int> &CS::getEcts(QHash<QString, int> &ectsmap) const
 {
-    return ects;
+    ectsmap.insert(titre,ects);
+    creditable->getEcts(ectsmap);
+    return ectsmap;
 }
 
 void CS::setEcts(unsigned int value)

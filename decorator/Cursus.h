@@ -19,19 +19,16 @@ protected:
  public:
     Cursus(const QString& code, const QString& titre, const unsigned int ects,
            const unsigned int maxSemestre, bool current,
-           Creditable* creditable, Dossier* dossier, Cursus* parent );
+           Dossier* dossier, Cursus* parent );
 
     Cursus(const QString& code, const QString& titre, const unsigned int ects,
            const unsigned int maxSemestre, bool current,
-           Creditable* creditable, Dossier* dossier);
+           Dossier* dossier);
 
-    ~Cursus();
+    virtual ~Cursus();
 
     QString getCode() const;
     void setCode(const QString &value);
-
-    QString getTitre() const;
-    void setTitre(const QString &value);
 
     unsigned int getMaxSemestres() const;
     void setMaxSemestres(unsigned int value);
@@ -48,8 +45,6 @@ protected:
     Dossier *getDossier() const;
     void setDossier(Dossier *value);
 
-    unsigned int getEcts() const;
-    void setEcts(unsigned int value);
 };
 
 
