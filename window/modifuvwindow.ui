@@ -68,20 +68,17 @@
                     <item>
                      <widget class="QWidget" name="widget" native="true">
                       <layout class="QGridLayout" name="gridLayout_11">
-                       <item row="0" column="0">
-                        <layout class="QVBoxLayout" name="verticalLayout"/>
-                       </item>
-                       <item row="0" column="1">
-                        <widget class="QPushButton" name="pushButton_2">
-                         <property name="text">
-                          <string>&gt;</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item row="1" column="1">
+                       <item row="1" column="0">
                         <widget class="QPushButton" name="pushButton_5">
                          <property name="text">
                           <string>&lt;</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item row="0" column="0">
+                        <widget class="QPushButton" name="pushButton_2">
+                         <property name="text">
+                          <string>&gt;</string>
                          </property>
                         </widget>
                        </item>
@@ -115,20 +112,17 @@
                      <item>
                       <widget class="QWidget" name="widget_4" native="true">
                        <layout class="QGridLayout" name="gridLayout_14">
-                        <item row="0" column="0">
-                         <layout class="QVBoxLayout" name="verticalLayout_3"/>
-                        </item>
-                        <item row="0" column="1">
-                         <widget class="QPushButton" name="pushButton_6">
-                          <property name="text">
-                           <string>&gt;</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item row="1" column="1">
+                        <item row="1" column="0">
                          <widget class="QPushButton" name="pushButton_7">
                           <property name="text">
                            <string>&lt;</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="0">
+                         <widget class="QPushButton" name="pushButton_6">
+                          <property name="text">
+                           <string>&gt;</string>
                           </property>
                          </widget>
                         </item>
@@ -159,47 +153,10 @@
               <layout class="QGridLayout" name="gridLayout_15">
                <item row="0" column="0">
                 <layout class="QGridLayout" name="gridLayout_16">
-                 <item row="1" column="1" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit_2"/>
-                 </item>
-                 <item row="0" column="1" colspan="2">
-                  <widget class="QLineEdit" name="lineEdit"/>
-                 </item>
-                 <item row="5" column="0">
-                  <widget class="QLabel" name="label_5">
+                 <item row="2" column="1">
+                  <widget class="QCheckBox" name="checkBox">
                    <property name="text">
-                    <string>CS</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="1">
-                  <widget class="QSpinBox" name="spinBox_2"/>
-                 </item>
-                 <item row="4" column="0" colspan="3">
-                  <widget class="QLabel" name="label_4">
-                   <property name="text">
-                    <string>Crédits</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QLabel" name="label">
-                   <property name="text">
-                    <string>Code</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="6" column="0">
-                  <widget class="QLabel" name="label_6">
-                   <property name="text">
-                    <string>TM</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="3" column="1">
-                  <widget class="QRadioButton" name="radioButton">
-                   <property name="text">
-                    <string>Demi UV</string>
+                    <string>Automne</string>
                    </property>
                   </widget>
                  </item>
@@ -210,22 +167,19 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="0">
-                  <widget class="QLabel" name="label_3">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label">
                    <property name="text">
-                    <string>Semestre disponibles</string>
+                    <string>Code</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="2" column="1">
-                  <widget class="QCheckBox" name="checkBox">
+                 <item row="3" column="1">
+                  <widget class="QRadioButton" name="radioButton">
                    <property name="text">
-                    <string>Automne</string>
+                    <string>Demi UV</string>
                    </property>
                   </widget>
-                 </item>
-                 <item row="5" column="1">
-                  <widget class="QSpinBox" name="spinBox"/>
                  </item>
                  <item row="1" column="0">
                   <widget class="QLabel" name="label_2">
@@ -234,25 +188,64 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="7" column="0">
-                  <widget class="QLabel" name="label_7">
+                 <item row="4" column="0" colspan="3">
+                  <widget class="QLabel" name="label_4">
                    <property name="text">
-                    <string>TSH</string>
+                    <string>Crédits</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="7" column="1">
-                  <widget class="QSpinBox" name="spinBox_3"/>
+                 <item row="1" column="1" colspan="2">
+                  <widget class="QLineEdit" name="lineEdit_2"/>
                  </item>
-                 <item row="8" column="0">
-                  <widget class="QLabel" name="label_8">
+                 <item row="0" column="1" colspan="2">
+                  <widget class="QLineEdit" name="lineEdit"/>
+                 </item>
+                 <item row="2" column="0">
+                  <widget class="QLabel" name="label_3">
                    <property name="text">
-                    <string>SP</string>
+                    <string>Semestre disponibles</string>
                    </property>
                   </widget>
                  </item>
-                 <item row="8" column="1">
-                  <widget class="QSpinBox" name="spinBox_4"/>
+                 <item row="5" column="0" colspan="3">
+                  <widget class="QWidget" name="widget_2" native="true">
+                   <layout class="QGridLayout" name="gridLayout_9">
+                    <item row="0" column="0">
+                     <layout class="QHBoxLayout" name="horizontalLayout_2">
+                      <item>
+                       <widget class="QColumnView" name="columnView_3"/>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="widget_5" native="true">
+                        <layout class="QGridLayout" name="gridLayout_12">
+                         <item row="1" column="0">
+                          <widget class="QPushButton" name="pushButton_3">
+                           <property name="text">
+                            <string>&gt;</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="2" column="0">
+                          <widget class="QPushButton" name="pushButton_8">
+                           <property name="text">
+                            <string>&lt;</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item row="0" column="0">
+                          <widget class="QSpinBox" name="spinBox"/>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QColumnView" name="columnView_8"/>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
+                  </widget>
                  </item>
                 </layout>
                </item>

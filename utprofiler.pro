@@ -43,6 +43,7 @@ SOURCES += main.cpp \
     dao/InscriptionDAO.cpp \
     dao/CursusDAO.cpp \
     dao/DesiderataDAO.cpp \
+    dao/CategorieDAO.cpp\
     window/remplirdossier.cpp \
     window/ajoutdossier.cpp
 

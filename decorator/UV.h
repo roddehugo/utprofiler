@@ -13,7 +13,6 @@ private:
    bool printemps;
    bool automne;
    bool demiuv;
-
  public:
     UV(const unsigned int id, const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv);
     UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv);
@@ -30,6 +29,10 @@ private:
 
     bool isDemiUV() const;
     void setDemiUV(bool value);
+
+    unsigned int getMaxSemestres() const;
+
+    Creditable* getCreditable() const;
 
 };
 

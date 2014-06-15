@@ -65,3 +65,13 @@ void UV::setDemiUV(bool value)
 {
     demiuv = value;
 }
+
+unsigned int UV::getMaxSemestres() const
+{
+    throw UTProfilerException("DA");
+}
+
+Creditable *UV::getCreditable() const
+{
+    return NULL;
+}

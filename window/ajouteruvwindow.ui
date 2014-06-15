@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>648</width>
-    <height>481</height>
+    <width>746</width>
+    <height>531</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,50 +30,6 @@
           <layout class="QGridLayout" name="gridLayout_3">
            <item row="0" column="0">
             <layout class="QGridLayout" name="gridLayout_2">
-             <item row="2" column="1">
-              <layout class="QGridLayout" name="gridLayout_4">
-               <item row="1" column="1">
-                <widget class="QSpinBox" name="credittm"/>
-               </item>
-               <item row="1" column="3">
-                <widget class="QSpinBox" name="creditsp"/>
-               </item>
-               <item row="1" column="0">
-                <widget class="QLabel" name="label_6">
-                 <property name="text">
-                  <string>TM</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="3">
-                <widget class="QSpinBox" name="credittsh"/>
-               </item>
-               <item row="0" column="1">
-                <widget class="QSpinBox" name="creditcs"/>
-               </item>
-               <item row="1" column="2">
-                <widget class="QLabel" name="label_8">
-                 <property name="text">
-                  <string>SP</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="2">
-                <widget class="QLabel" name="label_7">
-                 <property name="text">
-                  <string>TSH</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
-                <widget class="QLabel" name="label">
-                 <property name="text">
-                  <string>CS</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
              <item row="3" column="0">
               <widget class="QLabel" name="label_4">
                <property name="text">
@@ -131,6 +87,49 @@
                <property name="text">
                 <string>Code</string>
                </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QWidget" name="widget" native="true">
+               <layout class="QGridLayout" name="gridLayout_4">
+                <item row="0" column="0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_6">
+                  <item>
+                   <widget class="QColumnView" name="columnView_5"/>
+                  </item>
+                  <item>
+                   <widget class="QWidget" name="widget_3" native="true">
+                    <layout class="QVBoxLayout" name="verticalLayout_8">
+                     <item>
+                      <layout class="QVBoxLayout" name="verticalLayout_9">
+                       <item>
+                        <widget class="QSpinBox" name="spinBox"/>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="ajoutcursus_2">
+                         <property name="text">
+                          <string>&gt;</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="retirecursus_2">
+                         <property name="text">
+                          <string>&lt;</string>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QColumnView" name="columnView_6"/>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
               </widget>
              </item>
             </layout>

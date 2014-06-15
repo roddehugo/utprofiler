@@ -47,4 +47,9 @@ SemestreDAO *DAOFactory::getSemestreDAO()
    return SemestreDAO::getInstance();
 }
 
+CategorieDAO *DAOFactory::getCategorieDAO()
+{
+    return CategorieDAO::getInstance();
+}
+
 

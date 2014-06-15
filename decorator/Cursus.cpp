@@ -94,3 +94,8 @@ void Cursus::setDossier(Dossier *value)
 {
     dossier = value;
 }
+
+Creditable *Cursus::getCreditable() const
+{
+    return NULL;
+}

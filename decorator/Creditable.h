@@ -28,7 +28,7 @@ class Creditable {
     virtual bool isDemiUV() const;
     virtual void setDemiUV(bool value);
 
-    virtual unsigned int getMaxSemestres() const;
+    virtual unsigned int getMaxSemestres() const =0;
     virtual void setMaxSemestres(unsigned int value);
 
     virtual bool isCurrent() const;
@@ -43,6 +43,8 @@ class Creditable {
     unsigned int ID() const;
     void setID(unsigned int value);
     unsigned int getEctsValue() const;
+
+    virtual Creditable *getCreditable() const =0;
 
  protected:
     unsigned int id;
@@ -60,6 +62,8 @@ class CategorieDecorator : virtual public Creditable {
 
     Creditable *getCreditable() const;
     void setCreditable(Creditable *value);
+
+    unsigned int getMaxSemestres() const;
 
 protected:
     Creditable* creditable;

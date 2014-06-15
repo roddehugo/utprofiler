@@ -62,7 +62,7 @@ Creditable* UVDAO::find(const int& id){
             const bool p = rec.value("printemps").toBool();
             const bool d = rec.value("demiuv").toBool();
             LogWriter::writeln("UVDAO.cpp","Lecture de l'UV : " + c);
-            UV* newuv = new UV(id,c,t,p,a,d);
+            Creditable* newuv = new UV(id,c,t,p,a,d);
             Map.insert(id,newuv);
             return newuv;
         }else{
@@ -74,6 +74,7 @@ Creditable* UVDAO::find(const int& id){
 }
 
 bool UVDAO::update(Creditable* obj){
+
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         query.prepare("UPDATE uvs SET (code=:code, titre=:titre, categorie=:categorie, automne=:automne, printemps=:printemps, demiuv=:demiuv) WHERE id = :id ;");

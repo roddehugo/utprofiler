@@ -3,6 +3,8 @@
 
 #include <QDialog>
 #include "dao/Factories.h"
+#include <QString>
+#include <QMessageBox>
 
 
 namespace Ui {
@@ -19,8 +21,10 @@ public:
 
 private:
     Ui::ajouterUVwindow *ui;
-    Factory* fac;
+    Factory *fac;
 
+public slots:
+    void saveUV();
 };
 
 #endif // AJOUTERUVWINDOW_H

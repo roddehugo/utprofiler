@@ -131,8 +131,8 @@ void Creditable::setDemiUV(bool value){
     throw UTProfilerException("Methode de la classe mère appelée");
 }
 
-unsigned int Creditable::getMaxSemestres() const{
-    throw UTProfilerException("Methode de la classe mère appelée");
+unsigned int CategorieDecorator::getMaxSemestres() const{
+    return creditable->getMaxSemestres();
 }
 void Creditable::setMaxSemestres(unsigned int value){
     throw UTProfilerException("Methode de la classe mère appelée");

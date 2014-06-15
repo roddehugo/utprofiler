@@ -46,6 +46,9 @@ protected:
     Dossier *getDossier() const;
     void setDossier(Dossier *value);
 
+    Creditable *getCreditable() const;
+
+
 };
 
 

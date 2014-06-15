@@ -48,9 +48,14 @@ void MainWindow::on_ajouteruv()
 {
      ajouterUVwindow * uvw= new ajouterUVwindow(fac);
      if (uvw->exec()){
-            uvw->
-            QMessageBox::information(this,"suppression", "supprimé");
-        }}
+            QString code;
+//            code=uvw->getCode();
+//            QMessageBox msgBox;
+//            msgBox.setText(code);
+//            msgBox.exec();
+
+
+     }}
 void MainWindow::suppruv()
 {
      supprimerUVwindow * uvw= new supprimerUVwindow(fac);

@@ -25,7 +25,16 @@ int main(int argc, char *argv[])
 
     Creditable* tc = new Cursus(1,"TC","Tronc Commun",120,6,1,NULL,NULL);
     tc = new TM(1,"TM",30,tc);
-    qDebug()<<tc->getTitre();
+    tc = new CS(2,"CS",30,tc);
+    qDebug()<<tc->getMaxSemestres();
+
+
+    while(tc->getCreditable() != NULL){
+        qDebug() << tc->ID() << tc->getTitre() << tc->getEctsValue();
+        tc=tc->getCreditable();
+    }
+    qDebug()<<tc->getDossier();
+
 
     LoginWindow w(fac);
 

@@ -9,6 +9,7 @@
 #include "dao/DesiderataDAO.h"
 #include "dao/InscriptionDAO.h"
 #include "dao/SemestreDAO.h"
+#include "dao/CategorieDAO.h"
 
 #define DAO_FACTORY_DEFINE 0
 
@@ -20,6 +21,8 @@ struct Factory{
     virtual CursusDAO* getCursusDAO() =0;
     virtual DesiderataDAO* getDesiderataDAO() =0;
     virtual SemestreDAO* getSemestreDAO() = 0;
+    virtual CategorieDAO* getCategorieDAO() = 0;
+
 };
 
 class DAOFactory : public Factory, public Singleton<DAOFactory>
@@ -33,7 +36,7 @@ public:
     InscriptionDAO* getInscriptionDAO();
 
     DossierDAO* getDossierDAO();
-
+    CategorieDAO* getCategorieDAO();
     CursusDAO* getCursusDAO() ;
     DesiderataDAO* getDesiderataDAO() ;
     SemestreDAO* getSemestreDAO() ;
