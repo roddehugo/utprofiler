@@ -70,7 +70,7 @@ bool SemestreDAO::update(Semestre* obj){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
             return false;
         }else{
-            LogWriter::writeln("UVDAO.cpp","Modification de l'UV : " + QString::number(obj->ID()) );
+            LogWriter::writeln("SemestreDAO.cpp","Modification de l'UV : " + QString::number(obj->ID()) );
             return true;
         }
 

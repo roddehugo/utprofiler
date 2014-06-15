@@ -30,6 +30,11 @@ Semestre::Semestre(const Saison &saison, unsigned int annee, bool etranger, Doss
 
 }
 
+Semestre::~Semestre()
+{
+
+}
+
 Saison Semestre::getSaison() const
 {
     return saison;

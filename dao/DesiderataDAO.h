@@ -3,6 +3,8 @@
 
 #include "dossier/Desiderata.h"
 #include "dao/SqlDAOTemplate.h"
+#include "dao/DossierDAO.h"
+#include "dao/UVDAO.h"
 
 class DesiderataDAO : public SqlDAOTemplate<Desiderata, DesiderataDAO> {
 

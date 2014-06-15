@@ -1,9 +1,14 @@
 #ifndef Desiderata_h
 #define Desiderata_h
 
+#include <QMap>
 #include <QString>
+#include "UTProfilerException.h"
+
+
 
 class Dossier;
+class UV;
 
 enum TypeDesiderata {
     Preference,
@@ -13,23 +18,38 @@ enum TypeDesiderata {
 
 class Desiderata {
 
- public:
+public:
+    Desiderata(const unsigned int id,TypeDesiderata type,Dossier* dossier,UV* uv);
+    Desiderata(TypeDesiderata type,Dossier* dossier,UV* uv);
+    ~Desiderata();
 
-    virtual void setType(QString t);
+    unsigned int getId() const;
+    void setId(unsigned int value);
+    Dossier *getMyDossier() const;
+    void setMyDossier(Dossier *value);
+    UV *getUv() const;
+    void setUv(UV *value);
+    TypeDesiderata getType() const;
+    void setType(const TypeDesiderata &value);
+    static TypeDesiderata str2typeD(const QString& str);
+    static QString typeD2str(TypeDesiderata desiderata);
 
-    virtual QString getType();
 
-
- private:
-    int id;
+private:
+    unsigned int id;
     TypeDesiderata type;
 
- public:
+public:
 
     /**
      * @element-type Dossier
      */
     Dossier *myDossier;
+    UV *uv;
+
+
+
+
 };
 
 #endif // Desiderata_h
