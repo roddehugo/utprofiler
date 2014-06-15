@@ -23,7 +23,6 @@ SOURCES += main.cpp \
     dao/Connexion.cpp \
     dao/UVDAO.cpp \
     decorator/CS.cpp \
-    dao/CategorieDAO.cpp \
     dao/DossierDAO.cpp \
     decorator/Cursus.cpp \
     decorator/SP.cpp \
@@ -59,7 +58,6 @@ HEADERS  += \
     dao/SqlDAOTemplate.h \
     dao/UVDAO.h \
     dao/DossierDAO.h \
-    dao/CategorieDAO.h \
     dao/Factories.h \
     dao/CategorieDAO.h \
     Etudiant.h \

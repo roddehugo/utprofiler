@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 
     LogWriter::writeln("Main.cpp","Lancement de l'application");
 
-    Connexion::getInstance()->setConnexion("/Users/hugo/Dropbox/UVs/LO21/Projet/save.db");
+    Connexion::getInstance()->setConnexion("/Users/fsamuel/Dropbox/LO21/Projet/save.db");
     Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
 
     Creditable* tc = new Cursus(1,"TC","Tronc Commun",120,6,1,NULL,NULL);

@@ -1,9 +1,10 @@
 #include "ajoutdossier.h"
 #include "ui_ajoutdossier.h"
 
-ajoutDossier::ajoutDossier(QWidget *parent) :
+ajoutDossier::ajoutDossier(Factory* factory,QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::ajoutDossier)
+    ui(new Ui::ajoutDossier),
+    fac(factory)
 {
     ui->setupUi(this);
 }

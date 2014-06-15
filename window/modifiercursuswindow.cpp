@@ -1,9 +1,10 @@
 #include "modifiercursuswindow.h"
 #include "ui_modifiercursuswindow.h"
 
-modifiercursuswindow::modifiercursuswindow(QWidget *parent) :
+modifiercursuswindow::modifiercursuswindow(Factory* factory,QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::modifiercursuswindow)
+    ui(new Ui::modifiercursuswindow),
+    fac(factory)
 {
     ui->setupUi(this);
 }

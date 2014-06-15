@@ -1,9 +1,10 @@
 #include "remplirdossier.h"
 #include "ui_remplirdossier.h"
 
-remplirDossier::remplirDossier(QWidget *parent) :
+remplirDossier::remplirDossier(Factory* factory,QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::remplirDossier)
+    ui(new Ui::remplirDossier),
+    fac(factory)
 {
     ui->setupUi(this);
 }

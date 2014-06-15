@@ -22,6 +22,29 @@ EtudiantDAO* DAOFactory::getEtudiantDAO(){
     return EtudiantDAO::getInstance();
 }
 
-CategorieDAO *DAOFactory::getCategorieDAO(){
-    return CategorieDAO::getInstance();
+InscriptionDAO *DAOFactory::getInscriptionDAO()
+{
+    return InscriptionDAO::getInstance();
 }
+
+DossierDAO *DAOFactory::getDossierDAO()
+{
+    return DossierDAO::getInstance();
+}
+
+CursusDAO *DAOFactory::getCursusDAO()
+{
+    return CursusDAO::getInstance();
+}
+
+DesiderataDAO *DAOFactory::getDesiderataDAO()
+{
+    return DesiderataDAO::getInstance();
+}
+
+SemestreDAO *DAOFactory::getSemestreDAO()
+{
+   return SemestreDAO::getInstance();
+}
+
+

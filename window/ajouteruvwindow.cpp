@@ -1,9 +1,10 @@
 #include "ajouteruvwindow.h"
 #include "ui_ajouteruvwindow.h"
 
-ajouterUVwindow::ajouterUVwindow(QWidget *parent) :
+ajouterUVwindow::ajouterUVwindow(Factory* factory,QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::ajouterUVwindow)
+    ui(new Ui::ajouterUVwindow),
+    fac(factory)
 {
     ui->setupUi(this);
 }

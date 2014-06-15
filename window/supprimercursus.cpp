@@ -1,9 +1,10 @@
 #include "supprimercursus.h"
 #include "ui_supprimercursus.h"
 
-supprimerCursus::supprimerCursus(QWidget *parent) :
+supprimerCursus::supprimerCursus(Factory* factory,QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::supprimerCursus)
+    ui(new Ui::supprimerCursus),
+    fac(factory)
 {
     ui->setupUi(this);
 }

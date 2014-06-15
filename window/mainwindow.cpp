@@ -7,6 +7,7 @@
 #include "window/supprimercursus.h"
 #include "window/remplirdossier.h"
 #include <QDebug>
+#include <QMessageBox>
 
 #include "ui_mainwindow.h"
 
@@ -39,38 +40,40 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::modifieruv(){
-    modifUVwindow *uvw= new modifUVwindow();
+    modifUVwindow *uvw= new modifUVwindow(fac);
     uvw->exec();
 }
 
 void MainWindow::on_ajouteruv()
 {
-     ajouterUVwindow * uvw= new ajouterUVwindow();
+     ajouterUVwindow * uvw= new ajouterUVwindow(fac);
         uvw->exec();
 }
 void MainWindow::suppruv()
 {
-     supprimerUVwindow * uvw= new supprimerUVwindow();
-        uvw->exec();
+     supprimerUVwindow * uvw= new supprimerUVwindow(fac);
+     if (uvw->exec()){
+            QMessageBox::information(this,"suppression", "supprimé");
+        }
 }
 void MainWindow::ajoutercursus()
 {
-     ajoutcursuswindow * uvw= new ajoutcursuswindow();
+     ajoutcursuswindow * uvw= new ajoutcursuswindow(fac);
         uvw->exec();
 }
 void MainWindow::modifiercursus()
 {
-     modifiercursuswindow * uvw= new modifiercursuswindow();
+     modifiercursuswindow * uvw= new modifiercursuswindow(fac);
         uvw->exec();
 }
 void MainWindow::supprcursus()
 {
-     supprimerCursus * uvw= new supprimerCursus();
+     supprimerCursus * uvw= new supprimerCursus(fac);
         uvw->exec();
 }
 
 void MainWindow::on_remplirDossier_clicked()
 {
- remplirDossier* uvw=new remplirDossier();
+ remplirDossier* uvw=new remplirDossier(fac);
  uvw->exec();
 }
