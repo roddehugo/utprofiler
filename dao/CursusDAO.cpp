@@ -1,6 +1,6 @@
 #include "CursusDAO.h"
 
-QMap<int, Cursus *> CursusDAO::findAll(){
+QMap<int, Creditable *> CursusDAO::findAll(){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         if (!query.exec("SELECT * FROM cursus;")){
@@ -39,7 +39,7 @@ QMap<int, Cursus *> CursusDAO::findAll(){
     }
 }
 
-Cursus* CursusDAO::find(const int& id){
+Creditable* CursusDAO::find(const int& id){
     try{
         if (Map.contains(id)) {
             return Map.value(id);
@@ -76,7 +76,7 @@ Cursus* CursusDAO::find(const int& id){
     }
 }
 
-bool CursusDAO::update(Cursus* obj){
+bool CursusDAO::update(Creditable* obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         query.prepare("UPDATE cursus SET (code=:code, titre=:titre, maxsemestres=:maxSem, ects=:ects, current=:current, parent=:parent, dossier:dossier) WHERE id = :id ;");
@@ -104,7 +104,7 @@ bool CursusDAO::update(Cursus* obj){
     }
 }
 
-bool CursusDAO::remove(Cursus* obj){
+bool CursusDAO::remove(Creditable* obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         query.prepare("DELETE FROM cursus WHERE id = :id ;");
@@ -123,7 +123,7 @@ bool CursusDAO::remove(Cursus* obj){
     }
 }
 
-bool CursusDAO::create(Cursus* obj){
+bool CursusDAO::create(Creditable* obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         query.prepare("INSERT INTO cursus (code=:code, titre=:titre, maxsemestres=:maxSem, ects=:ects, current=:current, parent=:parent, dossier:dossier) VALUES (NULL, :code, :titre, :categorie, :automne, :printemps, :demiuv);");

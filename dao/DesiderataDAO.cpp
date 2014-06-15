@@ -19,7 +19,7 @@ QMap<int, Desiderata *> DesiderataDAO::findAll(){
             }else{
                 LogWriter::writeln("Desiderata.cpp","Lecture du desiderata : " + QString::number(id));
                 Dossier* dossier = DossierDAO::getInstance()->find(d);
-                UV* newuv = UVDAO::getInstance()->find(uv);
+                Creditable* newuv = UVDAO::getInstance()->find(uv);
                 Desiderata* newd =new Desiderata(id,Desiderata::str2typeD(t),dossier,newuv);
                 Map.insert(id,newd);
 
@@ -52,7 +52,7 @@ Desiderata* DesiderataDAO::find(const int& id){
 
             LogWriter::writeln("Desiderata.cpp","Lecture du desiderata : " + QString::number(id));
             Dossier* dossier = DossierDAO::getInstance()->find(d);
-            UV* newuv = UVDAO::getInstance()->find(uv);
+            Creditable* newuv = UVDAO::getInstance()->find(uv);
             Desiderata* newd =new Desiderata(id,Desiderata::str2typeD(t),dossier,newuv);
 
             Map.insert(id,newd);

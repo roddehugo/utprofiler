@@ -102,3 +102,59 @@ unsigned int Creditable::getEctsValue() const
 {
     return ects;
 }
+
+QString Creditable::getCode() const{
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+void Creditable::setCode(const QString &value){
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+
+bool Creditable::isPrintemps() const{
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+void Creditable::setPrintemps(bool value){
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+
+bool Creditable::isAutomne() const{
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+void Creditable::setAutomne(bool value){
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+
+bool Creditable::isDemiUV() const{
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+void Creditable::setDemiUV(bool value){
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+
+unsigned int Creditable::getMaxSemestres() const{
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+void Creditable::setMaxSemestres(unsigned int value){
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+
+bool Creditable::isCurrent() const{
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+void Creditable::setCurrent(bool value){
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+
+Creditable* Creditable::getParent() const{
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+void Creditable::setParent(Creditable *value){
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+
+Dossier* Creditable::getDossier() const{
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
+void Creditable::setDossier(Dossier *value){
+    throw UTProfilerException("Methode de la classe mère appelée");
+}
