@@ -65,18 +65,3 @@ void UV::setDemiUV(bool value)
 {
     demiuv = value;
 }
-
-Creditable *UV::getCreditable() const
-{
-    return creditable;
-}
-
-void UV::setCreditable(Creditable *value)
-{
-    creditable = value;
-}
-
-unsigned int UV::getCategorie() const
-{
-    return 0;
-}

@@ -19,7 +19,7 @@ QMap<int, Semestre *> SemestreDAO::findAll(){
             }else{
                 LogWriter::writeln("Semestre.cpp","Lecture du semestre : " + QString::number(id));
 //                Dossier* dossier = DossierDAO::getInstance()->find(d);
-//                Semestre* newsemestre=new Semestre(Semestre::str2saison(s),a,e,dossier);
+//                Semestre* newsemestre=new Semestre(id,Semestre::str2saison(s),a,e,dossier);
 //                Map.insert(id,newsemestre);
             }
         }
@@ -109,7 +109,9 @@ bool SemestreDAO::create(Semestre* obj){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
             return false;
         }else{
-            Map.insert(query.lastInsertId().toInt(),obj);
+            int id =query.lastInsertId().toInt();
+            obj->setID(id);
+            Map.insert(id,obj);
             LogWriter::writeln("SemestreDAO.cpp","Création du semestre : " + QString::number(obj->ID()));
             return true;
         }

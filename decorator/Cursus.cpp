@@ -54,12 +54,17 @@ void Cursus::setCode(const QString &value)
     code = value;
 }
 
+unsigned int Cursus::getMaxSemestres() const
+{
+    return maxSemestres;
+}
+
 void Cursus::setMaxSemestres(unsigned int value)
 {
     maxSemestres = value;
 }
 
-bool Cursus::getCurrent() const
+bool Cursus::isCurrent() const
 {
     return current;
 }
@@ -69,16 +74,6 @@ void Cursus::setCurrent(bool value)
     current = value;
 }
 
-
-Creditable *Cursus::getCreditable() const
-{
-    return creditable;
-}
-
-void Cursus::setCreditable(Creditable *value)
-{
-    creditable = value;
-}
 
 Cursus *Cursus::getParent() const
 {

@@ -97,3 +97,8 @@ unsigned int Creditable::ID() const
 void Creditable::setID(unsigned int value){
     id = value;
 }
+
+unsigned int Creditable::getEctsValue() const
+{
+    return ects;
+}

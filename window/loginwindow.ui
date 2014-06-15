@@ -269,13 +269,6 @@
      <bool>false</bool>
     </property>
    </widget>
-   <zorder>utcBackground</zorder>
-   <zorder>loginEdit</zorder>
-   <zorder>seConnecter</zorder>
-   <zorder>label</zorder>
-   <zorder>verticalLayoutWidget</zorder>
-   <zorder>horizontalLayoutWidget</zorder>
-   <zorder>ajouterEtudiant</zorder>
   </widget>
   <action name="actionCharger">
    <property name="text">
@@ -287,5 +280,22 @@
  <resources>
   <include location="../resources/files.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>loginEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>seConnecter</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>320</x>
+     <y>120</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>395</x>
+     <y>120</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

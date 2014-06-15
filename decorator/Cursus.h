@@ -3,6 +3,7 @@
 
 #include "decorator/Creditable.h"
 #include <QString>
+#include "dossier/Dossier.h"
 
 class Dossier;
 
@@ -14,7 +15,6 @@ protected:
    bool current;
    Cursus* parent;
    Dossier* dossier;
-   Creditable* creditable;
 
  public:
     Cursus(const unsigned int id, const QString& code, const QString& titre, const unsigned int ects,
@@ -40,11 +40,8 @@ protected:
     unsigned int getMaxSemestres() const;
     void setMaxSemestres(unsigned int value);
 
-    bool getCurrent() const;
+    bool isCurrent() const;
     void setCurrent(bool value);
-
-    Creditable *getCreditable() const;
-    void setCreditable(Creditable *value);
 
     Cursus *getParent() const;
     void setParent(Cursus *value);

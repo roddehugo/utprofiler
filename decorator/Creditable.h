@@ -15,6 +15,7 @@ class Creditable {
 
     unsigned int ID() const;
     void setID(unsigned int value);
+    unsigned int getEctsValue() const;
 
  protected:
     unsigned int id;

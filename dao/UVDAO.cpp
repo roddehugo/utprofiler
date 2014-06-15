@@ -12,7 +12,6 @@ QMap<int, UV *> UVDAO::findAll(){
             const int id = rec.value("id").toInt();
             const QString c = rec.value("code").toString();
             const QString t = rec.value("titre").toString();
-            const int cat = rec.value("categorie").toInt();
             const bool a = rec.value("automne").toBool();
             const bool p = rec.value("printemps").toBool();
             const bool d = rec.value("demiuv").toBool();
@@ -44,7 +43,6 @@ UV* UVDAO::find(const int& id){
             QSqlRecord rec = query.record();
             const QString c = rec.value("code").toString();
             const QString t = rec.value("titre").toString();
-            const int cat = rec.value("categorie").toInt();
             const bool a = rec.value("automne").toBool();
             const bool p = rec.value("printemps").toBool();
             const bool d = rec.value("demiuv").toBool();
@@ -67,7 +65,6 @@ bool UVDAO::update(UV* obj){
         query.bindValue(":id", obj->ID());
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
-        query.bindValue(":categorie", obj->getCategorie() );
         query.bindValue(":automne", obj->isAutomne() );
         query.bindValue(":printemps", obj->isPrintemps() );
         query.bindValue(":demiuv", obj->isDemiUV() );
@@ -108,7 +105,6 @@ bool UVDAO::create(UV *obj){
         query.prepare("INSERT INTO uvs (id, code, titre, categorie, automne, printemps, demiuv) VALUES (NULL, :code, :titre, :categorie, :automne, :printemps, :demiuv);");
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
-        query.bindValue(":categorie", obj->getCategorie() );
         query.bindValue(":automne", obj->isAutomne() );
         query.bindValue(":printemps", obj->isPrintemps() );
         query.bindValue(":demiuv", obj->isDemiUV() );
@@ -116,7 +112,9 @@ bool UVDAO::create(UV *obj){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
             return false;
         }else{
-            Map.insert(query.lastInsertId().toInt(),obj);
+            int id = query.lastInsertId().toInt();
+            obj->setID(id);
+            Map.insert(id,obj);
             LogWriter::writeln("UVDAO.cpp","Création de l'UV : " + obj->getCode());
             return true;
         }
