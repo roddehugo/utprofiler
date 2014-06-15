@@ -22,7 +22,7 @@ class Dossier {
     Etudiant *getEtudiant() const;
     void setEtudiant(Etudiant *value);
 
-    bool getSolution() const;
+    bool isSolution() const;
     void setSolution(bool value);
 
     QString getTitre() const;

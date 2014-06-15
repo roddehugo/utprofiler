@@ -18,6 +18,7 @@ SOURCES += main.cpp \
     dossier/Dossier.cpp \
     dossier/Inscription.cpp \
     dossier/Semestre.cpp \
+    dossier/Desiderata.cpp\
     Etudiant.cpp \
     dao/Connexion.cpp \
     dao/UVDAO.cpp \
@@ -54,6 +55,7 @@ HEADERS  += \
     dossier/Dossier.h \
     dossier/Inscription.h \
     dossier/Semestre.h \
+    dossier/Desiderata.h\
     dao/SqlDAOTemplate.h \
     dao/UVDAO.h \
     dao/DossierDAO.h \

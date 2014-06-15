@@ -26,7 +26,7 @@ void Dossier::setEtudiant(Etudiant *value)
 {
     etudiant = value;
 }
-bool Dossier::getSolution() const
+bool Dossier::isSolution() const
 {
     return solution;
 }
