@@ -1,6 +1,7 @@
 #include "window/loginwindow.h"
 #include "window/mainwindow.h"
 #include "ui_loginwindow.h"
+#include <QApplication>
 #include <QMessageBox>
 
 LoginWindow::LoginWindow(Factory *factory, QWidget *parent):

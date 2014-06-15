@@ -7,6 +7,8 @@
 #include "decorator/TM.h"
 #include "decorator/TSH.h"
 #include "decorator/SP.h"
+#include <QListWidget>
+
 
 class CategorieDAO : public Singleton<CategorieDAO>{
     friend class Singleton<CategorieDAO>;
@@ -38,6 +40,7 @@ public:
     CategorieDAO(){}
     ~CategorieDAO(){}
 
+    QStringList getStringList(QString colonne);
     protected:
     QMap<int,QString> Map;
 

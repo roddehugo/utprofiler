@@ -9,6 +9,7 @@
 #include "decorator/CS.h"
 #include "dao/SqlDAOTemplate.h"
 #include "dossier/Dossier.h"
+#include <QStringList>
 
 class Dossier;
 
@@ -29,6 +30,8 @@ public:
     bool remove(Creditable* obj);
 
     bool create(Creditable* obj);
+
+    QStringList getStringList(const QString colonne);
 
     CursusDAO(){}
     ~CursusDAO(){}

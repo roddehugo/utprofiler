@@ -63,7 +63,7 @@ int CategorieDAO::findbyStr(QString str){
         //        if ()
         if (!Map.key(str)){
             throw UTProfilerException("La chaine "+str+" n'est pas dans la map.");
-                    QSqlQuery query(Connexion::getInstance()->getDataBase());
+            QSqlQuery query(Connexion::getInstance()->getDataBase());
             query.prepare("SELECT id FROM categories WHERE titre = :s ;");
             query.bindValue(":s", str);
             if (!query.exec()){
@@ -85,8 +85,8 @@ int CategorieDAO::findbyStr(QString str){
         }
     }
     catch(UTProfilerException e){
-            LogWriter::writeln("CategorieDAO::findbyStr()",e.getMessage());
-        }
+        LogWriter::writeln("CategorieDAO::findbyStr()",e.getMessage());
+    }
 
 
 }
@@ -133,6 +133,29 @@ bool CategorieDAO::create(QString str){
         LogWriter::writeln("Categorie::create()",e.getMessage());
     }
     return false;
+}
+
+QStringList CategorieDAO::getStringList(const QString colonne)
+{
+    QStringList liste;
+    try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        query.prepare("SELECT "+colonne+" FROM categories;");
+        query.bindValue(":colonne",colonne);
+        if (!query.exec()){
+            throw UTProfilerException("La requête a échoué : " + query.lastQuery());
+        }
+        while (query.next()){
+            QSqlRecord rec = query.record();
+            liste<<(rec.value(0).toString());
+        }
+
+
+
+
+    }catch(UTProfilerException e){
+        LogWriter::writeln("Categorie::getColonne()",e.getMessage());}
+    return liste;
 }
 
 

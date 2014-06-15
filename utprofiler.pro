@@ -45,7 +45,8 @@ SOURCES += main.cpp \
     dao/DesiderataDAO.cpp \
     dao/CategorieDAO.cpp\
     window/remplirdossier.cpp \
-    window/ajoutdossier.cpp
+    window/ajoutdossier.cpp \
+    window/modeldossier.cpp
 
 
 HEADERS  += \
@@ -84,7 +85,8 @@ HEADERS  += \
     dao/CursusDAO.h \
     dao/DesiderataDAO.h \
     window/remplirdossier.h \
-    window/ajoutdossier.h
+    window/ajoutdossier.h \
+    window/modeldossier.h
 
 FORMS += \
     window/loginwindow.ui \
