@@ -11,12 +11,12 @@ class Connexion : public Singleton<Connexion> {
 
     friend class Singleton<Connexion>;
 
- public:
+public:
     QSqlDatabase getDataBase() const;
     void setConnexion(const QString &dbfile);
     void close();
 
- private:
+private:
     QSqlDatabase db;
     Connexion () {}
     ~Connexion (){db.close();}

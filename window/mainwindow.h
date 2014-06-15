@@ -2,7 +2,9 @@
 #define AJOUTUVWINDOW_H
 
 #include <QMainWindow>
+#include<QTableWidget>
 #include "dao/Factories.h"
+#include <QTableView>
 
 namespace Ui {
 class MainWindow;
@@ -18,6 +20,8 @@ public:
 private:
     Ui::MainWindow *ui;
     Factory* fac;
+    QTableWidget* m_pTableWidget;
+    QStringList m_TableHeader;
 
 private slots :
      void on_ajouteruv();

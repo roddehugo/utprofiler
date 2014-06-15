@@ -1,9 +1,10 @@
 #include "supprimeruvwindow.h"
 #include "ui_supprimeruvwindow.h"
 
-supprimerUVwindow::supprimerUVwindow(QWidget *parent) :
+supprimerUVwindow::supprimerUVwindow(Factory* factory,QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::supprimerUVwindow)
+    ui(new Ui::supprimerUVwindow),
+    fac(factory)
 {
     ui->setupUi(this);
 }

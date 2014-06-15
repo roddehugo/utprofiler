@@ -16,7 +16,7 @@ class SqlDAOTemplate : public Singleton<DAO> {
 
     friend class Singleton<DAO>;
 
- public:
+public:
 
     virtual QMap<int, T*> findAll() =0;
 
