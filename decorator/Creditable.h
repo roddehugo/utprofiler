@@ -4,6 +4,9 @@
 #include <QString>
 #include <QHash>
 #include <QDebug>
+#include "UTProfilerException.h"
+
+class Dossier;
 
 class Creditable {
 
@@ -12,6 +15,30 @@ class Creditable {
     virtual QString getTitre() const;
     virtual QHash<QString, int> &getEcts(QHash<QString, int> &ectsmap) const;
     virtual void setEcts(const unsigned int e);
+
+    virtual QString getCode() const;
+    virtual void setCode(const QString &value);
+
+    virtual bool isPrintemps() const;
+    virtual void setPrintemps(bool value);
+
+    virtual bool isAutomne() const;
+    virtual void setAutomne(bool value);
+
+    virtual bool isDemiUV() const;
+    virtual void setDemiUV(bool value);
+
+    virtual unsigned int getMaxSemestres() const;
+    virtual void setMaxSemestres(unsigned int value);
+
+    virtual bool isCurrent() const;
+    virtual void setCurrent(bool value);
+
+    virtual Creditable *getParent() const;
+    virtual void setParent(Creditable *value);
+
+    virtual Dossier *getDossier() const;
+    virtual void setDossier(Dossier *value);
 
     unsigned int ID() const;
     void setID(unsigned int value);

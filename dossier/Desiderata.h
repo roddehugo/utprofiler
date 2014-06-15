@@ -8,7 +8,7 @@
 
 
 class Dossier;
-class UV;
+class Creditable;
 
 enum TypeDesiderata {
     Preference,
@@ -19,16 +19,16 @@ enum TypeDesiderata {
 class Desiderata {
 
 public:
-    Desiderata(const unsigned int id,TypeDesiderata type,Dossier* dossier,UV* uv);
-    Desiderata(TypeDesiderata type,Dossier* dossier,UV* uv);
+    Desiderata(const unsigned int id,TypeDesiderata type,Dossier* dossier,Creditable* uv);
+    Desiderata(TypeDesiderata type,Dossier* dossier,Creditable* uv);
     ~Desiderata();
 
     unsigned int getId() const;
     void setId(unsigned int value);
     Dossier *getMyDossier() const;
     void setMyDossier(Dossier *value);
-    UV *getUv() const;
-    void setUv(UV *value);
+    Creditable *getUv() const;
+    void setUv(Creditable *value);
     TypeDesiderata getType() const;
     void setType(const TypeDesiderata &value);
     static TypeDesiderata str2typeD(const QString& str);
@@ -45,7 +45,7 @@ public:
      * @element-type Dossier
      */
     Dossier *myDossier;
-    UV *uv;
+    Creditable *uv;
 
 
 

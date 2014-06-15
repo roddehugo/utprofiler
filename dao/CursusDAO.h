@@ -1,26 +1,34 @@
 #ifndef CURSUSDAO_H
 #define CURSUSDAO_H
 
+#include "decorator/Creditable.h"
 #include "decorator/Cursus.h"
+#include "decorator/SP.h"
+#include "decorator/TM.h"
+#include "decorator/TSH.h"
+#include "decorator/CS.h"
 #include "dao/SqlDAOTemplate.h"
+#include "dossier/Dossier.h"
 
-class CursusDAO : public SqlDAOTemplate<Cursus, CursusDAO> {
+class Dossier;
+
+class CursusDAO : public SqlDAOTemplate<Creditable, CursusDAO> {
 
     friend class Singleton<CursusDAO>;
 
 public:
 
-    QMap<int, Cursus *> findAll();
+    QMap<int, Creditable *> findAll();
 
-    Cursus* find(const int &id);
+    Creditable* find(const int &id);
 
-    Cursus* findByLogin(const QString& login);
+    Creditable* findByLogin(const QString& login);
 
-    bool update(Cursus* obj);
+    bool update(Creditable* obj);
 
-    bool remove(Cursus* obj);
+    bool remove(Creditable* obj);
 
-    bool create(Cursus* obj);
+    bool create(Creditable* obj);
 
     CursusDAO(){}
     ~CursusDAO(){}
