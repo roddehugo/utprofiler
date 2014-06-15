@@ -47,8 +47,10 @@ void MainWindow::modifieruv(){
 void MainWindow::on_ajouteruv()
 {
      ajouterUVwindow * uvw= new ajouterUVwindow(fac);
-        uvw->exec();
-}
+     if (uvw->exec()){
+            uvw->
+            QMessageBox::information(this,"suppression", "supprimé");
+        }}
 void MainWindow::suppruv()
 {
      supprimerUVwindow * uvw= new supprimerUVwindow(fac);
