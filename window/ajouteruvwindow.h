@@ -25,6 +25,10 @@ private:
 
 public slots:
     void saveUV();
+    void addcursus();
+    void addcredit();
+    void removecredit();
+    void removecursus();
 };
 
 #endif // AJOUTERUVWINDOW_H

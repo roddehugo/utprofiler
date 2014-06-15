@@ -17,6 +17,8 @@ public:
 
     QString find(const int &id);
 
+    int findbyStr(QString str);
+
     bool update(QString str);
 
     bool remove(QString str);

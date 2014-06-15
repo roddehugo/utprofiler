@@ -54,6 +54,42 @@ bool CategorieDAO::update(QString str){
 
     return false;
 }
+int CategorieDAO::findbyStr(QString str){
+    try {
+        //        QMap<int, QString>::iterator it=Map.begin();
+        //        while(it!=Map.end()||it.value()!=str){
+        //            ++it;
+        //        }
+        //        if ()
+        if (!Map.key(str)){
+            throw UTProfilerException("La chaine "+str+" n'est pas dans la map.");
+                    QSqlQuery query(Connexion::getInstance()->getDataBase());
+            query.prepare("SELECT id FROM categories WHERE titre = :s ;");
+            query.bindValue(":s", str);
+            if (!query.exec()){
+                throw UTProfilerException("La requete a échoué : " + query.lastQuery());
+                return false;}
+            if(query.first()){
+                QSqlRecord rec = query.record();
+                const int id = rec.value("id").toInt();
+                const QString t = rec.value("titre").toString();
+                LogWriter::writeln("Categorie.cpp","Lecture de l categorie : " + t);
+                Map.insert(id,t);
+            }
+            else{
+                throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+            }
+        }
+        else{
+            return Map.key(str);
+        }
+    }
+    catch(UTProfilerException e){
+            LogWriter::writeln("CategorieDAO::findbyStr()",e.getMessage());
+        }
+
+
+}
 
 bool CategorieDAO::remove(QString str){
     try{

@@ -95,7 +95,7 @@
                 <item row="0" column="0">
                  <layout class="QHBoxLayout" name="horizontalLayout_6">
                   <item>
-                   <widget class="QColumnView" name="columnView_5"/>
+                   <widget class="QListView" name="listView"/>
                   </item>
                   <item>
                    <widget class="QWidget" name="widget_3" native="true">
@@ -125,7 +125,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QColumnView" name="columnView_6"/>
+                   <widget class="QListView" name="listView_6"/>
                   </item>
                  </layout>
                 </item>
@@ -146,7 +146,7 @@
            <item row="0" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
-              <widget class="QColumnView" name="columnView_3"/>
+              <widget class="QListView" name="listView_3"/>
              </item>
              <item>
               <widget class="QWidget" name="widget_2" native="true">
@@ -173,7 +173,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QColumnView" name="columnView_4"/>
+              <widget class="QListView" name="listView_4"/>
              </item>
             </layout>
            </item>

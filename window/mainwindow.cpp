@@ -14,8 +14,11 @@
 MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+     m_pTableWidget(NULL),
     fac(factory)
 {
+
+
     EtudiantDAO* etudao = fac->getEtudiantDAO();
     Etudiant* me = etudao->getCurrent();
     ui->setupUi(this);
@@ -30,6 +33,21 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     QObject::connect(ui->actionSupprimerCursus , SIGNAL(triggered()), this, SLOT(supprcursus()));
     QObject::connect(ui->actionModifierCursus , SIGNAL(triggered()), this, SLOT(modifiercursus()));
     QObject::connect(ui->remplirDossier , SIGNAL(clicked()), this, SLOT(on_remplirDossier_clicked()));
+
+
+//    ui->afficheDossier->
+       m_pTableWidget = new QTableWidget(this);
+       m_pTableWidget->setRowCount(10);
+       m_pTableWidget->setColumnCount(3);
+       m_TableHeader<<"#"<<"Name"<<"Text";
+       m_pTableWidget->setHorizontalHeaderLabels(m_TableHeader);
+       m_pTableWidget->verticalHeader()->setVisible(false);
+       m_pTableWidget->setSortingEnabled(true);
+       m_pTableWidget->setStyleSheet("QTableView {selection-background-color: red;}");
+
+       //insert data
+       m_pTableWidget->setItem(0, 1, new QTableWidgetItem("Hello"));
+
 
 
 }

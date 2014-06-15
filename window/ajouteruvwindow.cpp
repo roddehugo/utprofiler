@@ -35,7 +35,27 @@ void ajouterUVwindow::saveUV(){
 //        QMessageBox msgBox;
 //        msgBox.setText("Impossible d'ajouter l'uv.");
 //        msgBox.exec();
-//    }
+    //    }
+}
+
+void ajouterUVwindow::addcursus()
+{
+
+}
+
+void ajouterUVwindow::addcredit()
+{
+
+}
+
+void ajouterUVwindow::removecredit()
+{
+
+}
+
+void ajouterUVwindow::removecursus()
+{
+
 }
 
 ajouterUVwindow::~ajouterUVwindow()
