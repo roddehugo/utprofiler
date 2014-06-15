@@ -20,7 +20,7 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::setUpMainWindow(){
     LoginWindow::hide();
-    MainWindow* m= new MainWindow;
+    MainWindow* m= new MainWindow(fac);
     m->show();
 }
 
@@ -33,6 +33,7 @@ void LoginWindow::loginMe(){
         msgBox.setText("Aucun utilisateur trouvé.");
         msgBox.exec();
     }else{
+        etudao->setCurrent(me);
         setUpMainWindow();
     }
 }
@@ -44,7 +45,9 @@ void LoginWindow::on_ajouterEtudiant_clicked()
     const QString prenom = ui->newPrenom->text();
     const QString nom = ui->newNom->text();
     EtudiantDAO* etudao = fac->getEtudiantDAO();
+    Etudiant* me=new Etudiant(login,prenom,nom);
     if(etudao->create(new Etudiant(login,prenom,nom))){
+        etudao->setCurrent(me);
         setUpMainWindow();
     }else{
         QMessageBox msgBox;

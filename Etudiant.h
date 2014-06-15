@@ -29,13 +29,19 @@ class Etudiant
 
     void setAdmin(const bool & a){admin=a;}
 
+    bool isCurrent() const{return current;}
+
+    void setCurrent(const bool& v){current=v;}
+
  private:
     QString login;
     QString prenom;
     QString nom;
     bool admin;
+    bool current;
 
  public:
+
 
 };
 

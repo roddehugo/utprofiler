@@ -1,6 +1,17 @@
 #include "dao/EtudiantDAO.h"
 #include <QDebug>
 
+
+Etudiant *EtudiantDAO::getCurrent() const
+{
+    return current;
+}
+
+void EtudiantDAO::setCurrent(Etudiant *value)
+{
+    current = value;
+}
+
 QMap<int, Etudiant*> EtudiantDAO::findAll(){
     try{
 

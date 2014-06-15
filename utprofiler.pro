@@ -42,7 +42,9 @@ SOURCES += main.cpp \
     dao/SemestreDAO.cpp \
     dao/InscriptionDAO.cpp \
     dao/CursusDAO.cpp \
-    dao/DesiderataDAO.cpp
+    dao/DesiderataDAO.cpp \
+    window/remplirdossier.cpp \
+    window/ajoutdossier.cpp
 
 
 HEADERS  += \
@@ -79,7 +81,9 @@ HEADERS  += \
     dao/SemestreDAO.h \
     dao/InscriptionDAO.h \
     dao/CursusDAO.h \
-    dao/DesiderataDAO.h
+    dao/DesiderataDAO.h \
+    window/remplirdossier.h \
+    window/ajoutdossier.h
 
 FORMS += \
     window/loginwindow.ui \
@@ -89,7 +93,9 @@ FORMS += \
     window/ajoutcursuswindow.ui \
     window/modifiercursuswindow.ui \
     window/ajouteruvwindow.ui \
-    window/supprimercursus.ui
+    window/supprimercursus.ui \
+    window/remplirdossier.ui \
+    window/ajoutdossier.ui
 
 OTHER_FILES += \
     README.md \

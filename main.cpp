@@ -51,9 +51,10 @@ int main(int argc, char *argv[])
 
     //LogWriter::writeln("Main.cpp",QString::number(tc->getEcts()) );
 
-//    LoginWindow w(fac);
 
-//    w.show();
+    LoginWindow w(fac);
+
+    w.show();
 
     return a.exec();
 }

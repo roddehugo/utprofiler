@@ -17,6 +17,8 @@ public:
 
 private:
     Ui::ajouterUVwindow *ui;
+
+
 };
 
 #endif // AJOUTERUVWINDOW_H
