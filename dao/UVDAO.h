@@ -1,31 +1,25 @@
 #ifndef UVDAO_h
 #define UVDAO_h
 
-#include "decorator/Creditable.h"
-#include "decorator/UV.h"
-#include "decorator/SP.h"
-#include "decorator/TM.h"
-#include "decorator/TSH.h"
-#include "decorator/CS.h"
+#include "dossier/UV.h"
 #include "dao/SqlDAOTemplate.h"
+#include "dao/CategorieDAO.h"
 
-class UVDAO : public SqlDAOTemplate<Creditable, UVDAO> {
+class UVDAO : public SqlDAOTemplate<UV, UVDAO> {
 
-    friend class Singleton<UVDAO>;
+    friend class Singleton<UV>;
 
 public:
 
-    QMap<int, Creditable *> findAll();
+    QMap<int, UV *> findAll();
 
-    Creditable *find(const int &id);
+    UV *find(const int &id);
 
-    bool update(Creditable* obj);
+    bool update(UV* obj);
 
-    bool remove(Creditable* obj);
+    bool remove(UV* obj);
 
-    bool create(Creditable* obj);
-
-    Creditable* parse(const int cid, const QString& ctitre, const int ects,Creditable* cre );
+    bool create(UV* obj);
 
     ~UVDAO(){}
     UVDAO(){}

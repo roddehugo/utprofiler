@@ -22,6 +22,4 @@ EtudiantDAO* DAOFactory::getEtudiantDAO(){
     return EtudiantDAO::getInstance();
 }
 
-CategorieDAO *DAOFactory::getCategorieDAO(){
-    return CategorieDAO::getInstance();
-}
+

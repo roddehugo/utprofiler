@@ -3,12 +3,12 @@
 
 
 
-Desiderata::Desiderata(const unsigned int id, TypeDesiderata type, Dossier *dossier, Creditable *uv):
-    id(id),type(type),myDossier(dossier),uv(uv){
+Desiderata::Desiderata(const unsigned int id, TypeDesiderata type, Dossier *dossier, UV *uv):
+    id(id),type(type),dossier(dossier),uv(uv){
 }
 
-Desiderata::Desiderata(TypeDesiderata type, Dossier *dossier, Creditable *uv):
-    type(type),myDossier(dossier),uv(uv)
+Desiderata::Desiderata(TypeDesiderata type, Dossier *dossier, UV *uv):
+    type(type),dossier(dossier),uv(uv)
 {
 
 }
@@ -26,12 +26,12 @@ void Desiderata::setId(unsigned int value)
 {
     id = value;
 }
-Creditable *Desiderata::getUv() const
+UV *Desiderata::getUv() const
 {
     return uv;
 }
 
-void Desiderata::setUv(Creditable *value)
+void Desiderata::setUv(UV *value)
 {
     uv = value;
 }
@@ -79,12 +79,12 @@ void Desiderata::setType(const TypeDesiderata &value)
 
 Dossier *Desiderata::getMyDossier() const
 {
-    return myDossier;
+    return dossier;
 }
 
 void Desiderata::setMyDossier(Dossier *value)
 {
-    myDossier = value;
+    dossier = value;
 }
 
 

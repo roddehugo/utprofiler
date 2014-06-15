@@ -1,82 +1,123 @@
 #include "dao/UVDAO.h"
 
-QMap<int, Creditable *> UVDAO::findAll(){
+QMap<int, UV *> UVDAO::findAll(){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        if (!query.exec("SELECT u.id as uvid, u.code as codeuv, u.titre as titreuv, u.automne, u.printemps, u.demiuv, c.id as categorieid, c.titre as categorietitre, cud.ects FROM uvs u INNER JOIN categorie_uv_decorator cud ON u.id = cud.iduv INNER JOIN categories c ON c.id = cud.idcategorie;")){
-            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        if(!query.exec("SELECT u.id as uid, count(u.id) as nb FROM uvs u JOIN categorie_uv_decorator cud ON cud.iduv = uid GROUP BY u.id;") ){
+             throw UTProfilerException("La requête a échoué : " + query.lastQuery());
         }
-        Creditable* uv;
 
-        if(query.first()){
+        QMap<int,int> nbRowsById;
+
+        while(query.next()){
             QSqlRecord rec = query.record();
-            const int uvid = rec.value("uvid").toInt();
-            const QString codeuv = rec.value("codeuv").toString();
-            const QString titreuv = rec.value("titreuv").toString();
+            nbRowsById.insert(rec.value("uid").toInt(),rec.value("nb").toInt());
+        }
+
+        if (!query.exec("SELECT u.id as uid, u.titre as utitre, code, automne, printemps, demiuv, c.id as cid, c.titre as ctitre, ects FROM uvs u INNER JOIN categorie_uv_decorator cud ON cud.iduv = uid INNER JOIN categories c ON cud.idcategorie = cid;") ){
+            throw UTProfilerException("La requête a échoué : " + query.lastQuery());
+        }
+
+        QMap<int,int>::const_iterator i;
+        for (i = nbRowsById.constBegin(); i != nbRowsById.constEnd(); ++i){
+            if(!query.next()){
+                throw UTProfilerException("Plus de données à lire. Incohérence avec nbRowsById");
+            }
+
+            QSqlRecord rec = query.record();
+
+            const int uid = rec.value("uid").toInt();
+            const QString code = rec.value("code").toString();
+            const QString utitre = rec.value("utitre").toString();
             const bool automne = rec.value("automne").toBool();
             const bool printemps = rec.value("printemps").toBool();
             const bool demiuv = rec.value("demiuv").toBool();
-            if (Map.contains(uvid)) {
-                throw UTProfilerException("L'UV "+codeuv+" existe déjà dans la QMap");
-            }else{
-                LogWriter::write("UVDAO.cpp","Lecture de l'UV : " + uvid);
 
-                uv = new UV(uvid,codeuv,titreuv,printemps,automne,demiuv);
+            LogWriter::write("UVDAO.cpp","Lecture de l'UV : " + code);
+            UV* uv = new UV(uid,code,utitre,printemps,automne,demiuv);
 
-                while (query.next()){
-                    if(rec.value("uvid").toInt() != uvid){
-                        throw UTProfilerException("Erreur grave lors de la lecture des categories sur "+codeuv);
-                    }
-                    const int categorieid = rec.value("categorieid").toInt();
-                    const QString categorietitre = rec.value("categorietitre").toString();
-                    const int ects = rec.value("ects").toInt();
-                    uv = parse(categorieid,categorietitre,ects,uv);
+            const QString ctitre = rec.value("ctitre").toString();
+            const int ects = rec.value("ects").toInt();
+
+            LogWriter::append(ctitre+":"+QString::number(ects)+"...");
+
+            QMap<QString,int> credits;
+
+            for (int j = 0; j < i.value()-1; ++j){
+                if(!query.next()){
+                    throw UTProfilerException("Plus de données à lire. Incohérence avec nbRowsById");
                 }
-                qDebug() << uv->getTitre();
+                rec = query.record();
+                const QString ctitre = rec.value("ctitre").toString();
+                const int ects = rec.value("ects").toInt();
 
-                Map.insert(uvid,uv);
+                LogWriter::append(ctitre+":"+QString::number(ects)+"...");
+                credits.insert(ctitre,ects);
+
             }
+            uv->setCredits(credits);
+            LogWriter::endl();
+            Map.insert(uid,uv);
+
         }
-
-
         return Map;
     }catch(UTProfilerException e){
         LogWriter::writeln("UVDAO::findAll()",e.getMessage());
     }
 }
 
-Creditable* UVDAO::find(const int& id){
+UV* UVDAO::find(const int& id){
     try{
-        if (Map.contains(id)) {
-            return Map.value(id);
-        }
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        if (!query.exec("SELECT * FROM uvs WHERE id = " + QString(id) + ";")){
-            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        query.prepare("SELECT u.id as uid, u.titre as utitre, code, automne, printemps, demiuv, c.id as cid, c.titre as ctitre, ects FROM uvs u INNER JOIN categorie_uv_decorator cud ON cud.iduv = uid INNER JOIN categories c ON cud.idcategorie = cid WHERE uid = :id;");
+        query.bindValue(":id",id);
+        if (!query.exec() ){
+            throw UTProfilerException("La requête a échoué : " + query.lastQuery());
         }
+
         if(query.first()){
             QSqlRecord rec = query.record();
-            const QString c = rec.value("code").toString();
-            const QString t = rec.value("titre").toString();
-            const bool a = rec.value("automne").toBool();
-            const bool p = rec.value("printemps").toBool();
-            const bool d = rec.value("demiuv").toBool();
-            LogWriter::writeln("UVDAO.cpp","Lecture de l'UV : " + c);
-            UV* newuv = new UV(id,c,t,p,a,d);
-            Map.insert(id,newuv);
-            return newuv;
-        }else{
-            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+
+            const int uid = rec.value("uid").toInt();
+            const QString code = rec.value("code").toString();
+            const QString utitre = rec.value("utitre").toString();
+            const bool automne = rec.value("automne").toBool();
+            const bool printemps = rec.value("printemps").toBool();
+            const bool demiuv = rec.value("demiuv").toBool();
+
+            LogWriter::write("UVDAO.cpp","Lecture de l'UV : " + code);
+            UV* uv = new UV(uid,code,utitre,printemps,automne,demiuv);
+
+            const QString ctitre = rec.value("ctitre").toString();
+            const int ects = rec.value("ects").toInt();
+
+            LogWriter::append(ctitre+":"+QString::number(ects)+"...");
+            QMap<QString,int> credits;
+
+            while(query.next()){
+                rec = query.record();
+                const QString ctitre = rec.value("ctitre").toString();
+                const int ects = rec.value("ects").toInt();
+
+                LogWriter::append(ctitre+":"+QString::number(ects)+"...");
+                credits.insert(ctitre,ects);
+            }
+            uv->setCredits(credits);
+            LogWriter::endl();
+            Map.insert(uid,uv);
+            return uv;
         }
     }catch(UTProfilerException e){
         LogWriter::writeln("UVDAO::find()",e.getMessage());
     }
+
 }
 
-bool UVDAO::update(Creditable* obj){
+bool UVDAO::update(UV* obj){
+
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("UPDATE uvs SET (code=:code, titre=:titre, categorie=:categorie, automne=:automne, printemps=:printemps, demiuv=:demiuv) WHERE id = :id ;");
+        query.prepare("UPDATE uvs SET (code=:code, titre=:titre, automne=:automne, printemps=:printemps, demiuv=:demiuv) WHERE id = :id ;");
         query.bindValue(":id", obj->ID());
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
@@ -92,32 +133,44 @@ bool UVDAO::update(Creditable* obj){
         }
     }catch(UTProfilerException e){
         LogWriter::writeln("UVDAO::update()",e.getMessage());
+        return false;
     }
 
 }
 
-bool UVDAO::remove(Creditable* obj){
-    try{
-        QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("DELETE FROM uvs WHERE id = :id ;");
-        query.bindValue(":id", obj->ID());
-        if (!query.exec()){
-            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+bool UVDAO::remove(UV* obj){
+    QMessageBox msgBox;
+    msgBox.setText("L'UV "+ obj->getCode() + " ainsi que les entrées associées vont êtres supprimées.");
+    msgBox.setInformativeText("Voulez-vous vraiment continuer?");
+    msgBox.setStandardButtons(QMessageBox::Discard | QMessageBox::Ok);
+    msgBox.setDefaultButton(QMessageBox::Discard);
+    if(msgBox.exec()){
+        try{
+            QSqlQuery query(Connexion::getInstance()->getDataBase());
+            query.prepare("DELETE FROM uvs WHERE id = :id ;");
+            query.bindValue(":id", obj->ID());
+            if (!query.exec()){
+                throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+                return false;
+            }else{
+                LogWriter::writeln("UVDAO.cpp","Suprression de l'UV : " + obj->getCode());
+                Map.erase(Map.find(obj->ID()));
+                return true;
+            }
+        }catch(UTProfilerException e){
+            LogWriter::writeln("UVDAO::remove()",e.getMessage());
             return false;
-        }else{
-            LogWriter::writeln("UVDAO.cpp","Suprression de l'UV : " + obj->getCode());
-            Map.erase(Map.find(obj->ID()));
-            return true;
         }
-    }catch(UTProfilerException e){
-        LogWriter::writeln("UVDAO::remove()",e.getMessage());
     }
 }
 
-bool UVDAO::create(Creditable *obj){
+bool UVDAO::create(UV *obj){
+    QSqlQuery query(Connexion::getInstance()->getDataBase());
     try{
-        QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("INSERT INTO uvs (id, code, titre, categorie, automne, printemps, demiuv) VALUES (NULL, :code, :titre, :categorie, :automne, :printemps, :demiuv);");
+        if (!query.exec("BEGIN;"))
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+
+        query.prepare("INSERT INTO uvs (id, code, titre, automne, printemps, demiuv) VALUES (NULL, :code, :titre, :automne, :printemps, :demiuv);");
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
         query.bindValue(":automne", obj->isAutomne() );
@@ -125,7 +178,6 @@ bool UVDAO::create(Creditable *obj){
         query.bindValue(":demiuv", obj->isDemiUV() );
         if (!query.exec()){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
-            return false;
         }else{
             int id = query.lastInsertId().toInt();
             obj->setID(id);
@@ -133,21 +185,20 @@ bool UVDAO::create(Creditable *obj){
             LogWriter::writeln("UVDAO.cpp","Création de l'UV : " + obj->getCode());
             return true;
         }
+        QMap<QString,int> cats = obj->getCredits();
+        for(auto i = cats.begin(); i!= cats.constEnd(); ++i){
+            query.prepare("INSERT INTO categorie_uv_dao (iduv, idcategorie, ects) VALUES (:iduv, :idcat, :ects);");
+            query.bindValue(":iduv", obj->ID() );
+            query.bindValue(":idcat", CategorieDAO::getInstance()->findByStr(i.key()) );
+            query.bindValue(":ects", i.value() );
+        }
+        if (!query.exec("COMMIT;"))
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+
     }catch(UTProfilerException e){
+        query.exec("ROLLBACK;");
         LogWriter::writeln("UVDAO::create()",e.getMessage());
+        return false;
     }
 }
 
-Creditable *UVDAO::parse(const int cid, const QString &ctitre, const int ects, Creditable *cre)
-{
-    if(ctitre=="SP")
-        return new SP(cid,ctitre,ects,cre);
-    else if(ctitre=="TM")
-        return new TM(cid,ctitre,ects,cre);
-    else if(ctitre=="CS")
-        return new CS(cid,ctitre,ects,cre);
-    else if(ctitre=="TSH")
-        return new TSH(cid,ctitre,ects,cre);
-    else
-        throw UTProfilerException("Impossible de convertir le string de la categorie en class concrete");
-}

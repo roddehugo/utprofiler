@@ -1,6 +1,6 @@
 #include "dao/CategorieDAO.h"
 
-QMap<int, Creditable *> CategorieDAO::findAll(){
+QMap<int, QString> CategorieDAO::findAll(){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         if (!query.exec("SELECT * FROM categories;")){
@@ -22,27 +22,33 @@ QMap<int, Creditable *> CategorieDAO::findAll(){
             }
         }
 
-        return Map;
+        //return Map;
     }catch(UTProfilerException e){
         LogWriter::writeln("CategorieDAO::findAll()",e.getMessage());
     }
 }
 
-Creditable* CategorieDAO::find(const int& id){
+QString CategorieDAO::find(const int& id){
 
 }
 
-bool CategorieDAO::update(Creditable* obj){
+bool CategorieDAO::update(QString str){
 
     return false;
 }
 
-bool CategorieDAO::remove(Creditable* obj){
+bool CategorieDAO::remove(QString str){
 
     return false;
 }
 
-bool CategorieDAO::create(Creditable* obj){
+bool CategorieDAO::create(QString str){
 
     return false;
+}
+
+
+int CategorieDAO::findByString(QString str)
+{
+
 }

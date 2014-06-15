@@ -2,7 +2,7 @@
 #define Inscription_h
 
 #include "dossier/Semestre.h"
-#include "decorator/UV.h"
+#include "dossier/UV.h"
 
 enum Resultat{
     A,B,C,D,E,F,FX,

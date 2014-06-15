@@ -12,7 +12,7 @@
 struct Factory{
     virtual UVDAO* getUVDAO() =0;
     virtual EtudiantDAO* getEtudiantDAO() = 0;
-    virtual CategorieDAO* getCategorieDAO() =0;
+
 };
 
 class DAOFactory : public Factory, public Singleton<DAOFactory>
@@ -23,7 +23,7 @@ public:
 
     EtudiantDAO* getEtudiantDAO();
 
-    CategorieDAO *getCategorieDAO();
+
 
 };
 
