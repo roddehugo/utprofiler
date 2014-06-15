@@ -4,6 +4,7 @@
 
 #include "dossier/Semestre.h"
 #include "dao/SqlDAOTemplate.h"
+#include "dao/DossierDAO.h"
 
 class SemestreDAO : public SqlDAOTemplate<Semestre, SemestreDAO> {
 
@@ -17,9 +18,9 @@ public:
 
     Semestre* findByLogin(const QString& login);
 
-    bool update(const int& id, Semestre* obj);
+    bool update(Semestre* obj);
 
-    bool remove(const int& id, Semestre* obj);
+    bool remove(Semestre* obj);
 
     bool create(Semestre* obj);
 

@@ -14,9 +14,9 @@ public:
 
     Dossier* find(const int& id);
 
-    bool update(const int& id, Dossier* obj);
+    bool update(Dossier* obj);
 
-    bool remove(const int& id, Dossier* obj);
+    bool remove(Dossier* obj);
 
     bool create(Dossier* obj);
 

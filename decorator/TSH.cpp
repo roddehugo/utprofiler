@@ -1,5 +1,12 @@
 #include "TSH.h"
 
+TSH::TSH(const unsigned int id, const QString &titre, const unsigned int ects, Creditable *creditable):
+    Creditable(id,titre,ects),
+    CategorieDecorator(id,titre,ects,creditable)
+{
+
+}
+
 TSH::TSH(const QString &titre, const unsigned int ects, Creditable *creditable):
     Creditable(titre,ects),
     CategorieDecorator(titre,ects,creditable)

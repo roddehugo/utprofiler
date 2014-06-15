@@ -14,9 +14,9 @@ public:
 
     UV* find(const int &id);
 
-    bool update(const int& id, UV* obj);
+    bool update(UV* obj);
 
-    bool remove(const int& id, UV* obj);
+    bool remove(UV* obj);
 
     bool create(UV* obj);
 

@@ -1,6 +1,13 @@
 #include "Dossier.h"
 
+Dossier::Dossier(const unsigned int id, const QString &titre, bool solution, Etudiant *etudiant):
+    id(id),
+    titre(titre),
+    solution(solution),
+    etudiant(etudiant)
+{
 
+}
 
 Dossier::Dossier(const QString &titre, bool solution, Etudiant *etudiant):
     titre(titre),
@@ -9,6 +16,7 @@ Dossier::Dossier(const QString &titre, bool solution, Etudiant *etudiant):
 {
 
 }
+
 Etudiant *Dossier::getEtudiant() const
 {
     return etudiant;
@@ -36,6 +44,13 @@ void Dossier::setTitre(const QString &value)
 {
     titre = value;
 }
+unsigned int Dossier::ID() const
+{
+    return id;
+}
 
-
+void Dossier::setID(unsigned int value)
+{
+    id = value;
+}
 

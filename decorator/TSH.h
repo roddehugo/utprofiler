@@ -16,6 +16,7 @@ private:
 
 public:
 
+     TSH(const unsigned int id, const QString& titre,const unsigned int ects, Creditable* creditable);
      TSH(const QString& titre,const unsigned int ects, Creditable* creditable);
      ~TSH();
 

@@ -9,6 +9,7 @@ class SP : public CategorieDecorator {
 
 public:
 
+     SP(const unsigned int id, const QString& titre,const unsigned int ects, Creditable* creditable);
      SP(const QString& titre,const unsigned int ects, Creditable* creditable);
      ~SP();
 

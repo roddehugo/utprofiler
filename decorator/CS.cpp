@@ -1,6 +1,13 @@
 #include "CS.h"
 
 
+CS::CS(const unsigned int id, const QString &titre, const unsigned int ects, Creditable *creditable):
+    Creditable(id,titre,ects),
+    CategorieDecorator(id,titre,ects,creditable)
+{
+
+}
+
 CS::CS(const QString &titre, const unsigned int ects, Creditable *creditable):
     Creditable(titre,ects),
     CategorieDecorator(titre,ects,creditable)
@@ -34,3 +41,4 @@ void CS::setEcts(unsigned int value)
 {
     ects = value;
 }
+

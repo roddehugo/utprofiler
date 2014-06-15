@@ -6,8 +6,9 @@
 
 enum Resultat{
     A,B,C,D,E,F,FX,
+    ABS, /*Absent*/
     RES, /*Reserve*/
-    ACT, /*En cours*/
+    EC, /*En cours*/
     EQU  /*Equivalence*/
 };
 
@@ -17,7 +18,8 @@ class Semestre;
 class Inscription {
 
  public:
-    Inscription(UV* uv, Semestre* semestre, const Resultat& resultat);
+    Inscription(const unsigned int id, UV* uv, Semestre* semestre, const Resultat& resultat);
+    Inscription(UV *uv, Semestre *semestre, const Resultat &resultat);
     ~Inscription();
 
 
@@ -30,10 +32,17 @@ class Inscription {
     UV *getUv() const;
     void setUv(UV *value);
 
+    static Resultat str2resultat(const QString& str);
+    static QString resultat2str(Resultat res);
+
+    unsigned int ID() const;
+    void setID(unsigned int value);
+
 private:
     Resultat resultat;
     Semestre* semestre;
     UV* uv;
+    unsigned int id;
 
 
 };

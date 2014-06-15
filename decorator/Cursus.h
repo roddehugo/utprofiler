@@ -17,6 +17,13 @@ protected:
    Creditable* creditable;
 
  public:
+    Cursus(const unsigned int id, const QString& code, const QString& titre, const unsigned int ects,
+           const unsigned int maxSemestre, bool current,
+           Dossier* dossier, Cursus* parent );
+
+    Cursus(const unsigned int id, const QString& code, const QString& titre, const unsigned int ects,
+           const unsigned int maxSemestre, bool current,
+           Dossier* dossier);
     Cursus(const QString& code, const QString& titre, const unsigned int ects,
            const unsigned int maxSemestre, bool current,
            Dossier* dossier, Cursus* parent );

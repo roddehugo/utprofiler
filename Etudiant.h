@@ -5,38 +5,36 @@
 
 class Etudiant
 {
- public:
 
-    Etudiant(const QString& login, const QString& prenom, const QString& nom)
-        :login(login), prenom(prenom), nom(nom)
-    {}
+private:
+   QString login;
+   QString prenom;
+   QString nom;
+   bool admin;
+   unsigned int id;
 
-    ~Etudiant(){}
 
-    QString getPrenom() const {return prenom;}
+public:
 
-    QString getNom() const {return nom;}
+    Etudiant(const unsigned int id, const QString& login, const QString& prenom, const QString& nom);
+    Etudiant(const QString& login, const QString& prenom, const QString& nom);
 
-    QString getLogin() const {return login;}
+    ~Etudiant();
 
-    bool isAdmin() const {return admin;}
+    unsigned int ID() const;
+    void setID(unsigned int value);
 
-    void setPrenom(const QString & p){prenom = p;}
+    QString getLogin() const;
+    void setLogin(const QString &value);
 
-    void setNom(const QString & n){nom = n;}
+    QString getPrenom() const;
+    void setPrenom(const QString &value);
 
-    void setLogin(const QString & l){login=l;}
+    QString getNom() const;
+    void setNom(const QString &value);
 
-    void setAdmin(const bool & a){admin=a;}
-
- private:
-    QString login;
-    QString prenom;
-    QString nom;
-    bool admin;
-
- public:
-
+    bool isAdmin() const;
+    void setAdmin(bool value);
 };
 
 #endif // Etudiant_h

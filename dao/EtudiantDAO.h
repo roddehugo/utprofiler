@@ -16,9 +16,9 @@ public:
 
     Etudiant* findByLogin(const QString& login);
 
-    bool update(const int& id, Etudiant* obj);
+    bool update(Etudiant* obj);
 
-    bool remove(const int& id, Etudiant* obj);
+    bool remove(Etudiant* obj);
 
     bool create(Etudiant* obj);
 

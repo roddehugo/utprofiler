@@ -9,6 +9,7 @@ class TM : public CategorieDecorator {
 
 public:
 
+     TM(const unsigned int id, const QString& titre,const unsigned int ects, Creditable* creditable);
      TM(const QString& titre,const unsigned int ects, Creditable* creditable);
      ~TM();
 

@@ -8,11 +8,11 @@ Cursus* CursusDAO::find(const int& id){
 
 }
 
-bool CursusDAO::update(const int& id, Cursus* obj){
+bool CursusDAO::update(Cursus* obj){
 
 }
 
-bool CursusDAO::remove(const int& id, Cursus* obj){
+bool CursusDAO::remove(Cursus* obj){
 
 }
 

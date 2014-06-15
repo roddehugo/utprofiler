@@ -17,9 +17,9 @@ public:
 
     Creditable* find(const int &id);
 
-    bool update(const int& id, Creditable* obj);
+    bool update(Creditable* obj);
 
-    bool remove(const int& id, Creditable* obj);
+    bool remove(Creditable* obj);
 
     bool create(Creditable* obj);
 

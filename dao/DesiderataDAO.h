@@ -16,9 +16,9 @@ public:
 
     Desiderata* findByLogin(const QString& login);
 
-    bool update(const int& id, Desiderata* obj);
+    bool update(Desiderata* obj);
 
-    bool remove(const int& id, Desiderata* obj);
+    bool remove(Desiderata* obj);
 
     bool create(Desiderata* obj);
 

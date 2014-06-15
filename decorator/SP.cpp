@@ -1,6 +1,13 @@
 #include "SP.h"
 
 
+SP::SP(const unsigned int id, const QString &titre, const unsigned int ects, Creditable *creditable):
+    Creditable(id,titre,ects),
+    CategorieDecorator(id,titre,ects,creditable)
+{
+
+}
+
 SP::SP(const QString &titre, const unsigned int ects, Creditable *creditable):
     Creditable(titre,ects),
     CategorieDecorator(titre,ects,creditable)
@@ -35,3 +42,4 @@ void SP::setEcts(unsigned int value)
 {
     ects = value;
 }
+

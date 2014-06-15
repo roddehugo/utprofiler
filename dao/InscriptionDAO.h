@@ -16,9 +16,9 @@ public:
 
     Inscription* findByLogin(const QString& login);
 
-    bool update(const int& id, Inscription* obj);
+    bool update(Inscription* obj);
 
-    bool remove(const int& id, Inscription* obj);
+    bool remove(Inscription* obj);
 
     bool create(Inscription* obj);
 

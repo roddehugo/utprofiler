@@ -10,12 +10,12 @@ Creditable* CategorieDAO::find(const int& id){
 
 }
 
-bool CategorieDAO::update(const int& id, Creditable* obj){
+bool CategorieDAO::update(Creditable* obj){
 
     return false;
 }
 
-bool CategorieDAO::remove(const int& id, Creditable* obj){
+bool CategorieDAO::remove(Creditable* obj){
 
     return false;
 }

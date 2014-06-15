@@ -9,6 +9,7 @@ class CS : public CategorieDecorator {
 
 public:
 
+     CS(const unsigned int id, const QString& titre,const unsigned int ects, Creditable* creditable);
      CS(const QString& titre,const unsigned int ects, Creditable* creditable);
      ~CS();
 

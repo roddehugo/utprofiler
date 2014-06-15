@@ -1,12 +1,18 @@
 #include "TM.h"
 
+TM::TM(const unsigned int id, const QString &titre, const unsigned int ects, Creditable *creditable):
+    Creditable(id,titre,ects),
+    CategorieDecorator(id,titre,ects,creditable)
+{
+
+}
+
 TM::TM(const QString &titre, const unsigned int ects, Creditable *creditable):
     Creditable(titre,ects),
     CategorieDecorator(titre,ects,creditable)
 {
 
 }
-
 TM::~TM()
 {
 
@@ -33,3 +39,4 @@ void TM::setEcts(unsigned int value)
 {
     ects = value;
 }
+

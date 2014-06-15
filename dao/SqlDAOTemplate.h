@@ -21,9 +21,9 @@ class SqlDAOTemplate : public Singleton<DAO> {
 
     virtual T* find(const int& id) =0;
 
-    virtual bool update(const int& id, T* obj) =0;
+    virtual bool update(T* obj) =0;
 
-    virtual bool remove(const int& id, T* obj) =0;
+    virtual bool remove(T* obj) =0;
 
     virtual bool create(T* obj) =0;
 

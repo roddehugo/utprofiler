@@ -16,19 +16,20 @@ private:
    Creditable* creditable;
 
  public:
+    UV(const unsigned int id, const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv);
     UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv);
     virtual ~UV();
 
     QString getCode() const;
     void setCode(const QString &value);
 
-    bool getPrintemps() const;
+    bool isPrintemps() const;
     void setPrintemps(bool value);
 
-    bool getAutomne() const;
+    bool isAutomne() const;
     void setAutomne(bool value);
 
-    bool getDemiUV() const;
+    bool isDemiUV() const;
     void setDemiUV(bool value);
 
     Creditable *getCreditable() const;

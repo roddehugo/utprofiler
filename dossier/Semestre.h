@@ -3,6 +3,7 @@
 
 #include <QMap>
 #include <QString>
+#include "UTProfilerException.h"
 
 class Dossier;
 class Inscription;
@@ -15,8 +16,9 @@ enum Saison{
 class Semestre {
 
  public:
-    Semestre(const Saison& saison, const unsigned int annee, Dossier* dossier, const QMap<int, Inscription*>& inscriptions);
-    Semestre(const Saison& saison, const unsigned int annee, Dossier* dossier);
+    Semestre(const unsigned int id, const Saison& saison, unsigned int annee, bool etranger, Dossier* dossier, const QMap<int, Inscription*>& inscriptions);
+    Semestre(const unsigned int id, const Saison& saison, unsigned int annee, bool etranger, Dossier* dossier);
+    Semestre(const Saison& saison, unsigned int annee, bool etranger, Dossier* dossier);
     ~Semestre();
 
     Saison getSaison() const;
@@ -31,9 +33,21 @@ class Semestre {
     Dossier *getDossier() const;
     void setDossier(Dossier *value);
 
+    bool isEtranger() const;
+    void setEtranger(bool value);
+
+    static Saison str2saison(const QString& str);
+    static QString saison2str(Saison saison);
+
+    unsigned int ID() const;
+
+    void setID(unsigned int value);
+
 private:
     Saison saison;
     unsigned int annee;
+    bool etranger;
+    unsigned int id;
     QMap<int, Inscription *> inscriptions;
     Dossier* dossier;
 

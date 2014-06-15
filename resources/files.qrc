@@ -13,5 +13,7 @@
         <file alias="right">images/arrow-right.png</file>
         <file alias="left">images/arrow-left.png</file>
         <file alias="down">images/arrow-down.png</file>
+        <file alias="plus">images/plus.png</file>
+        <file alias="moins">images/minus.png</file>
     </qresource>
 </RCC>
