@@ -7,7 +7,8 @@
 class EtudiantDAO : public SqlDAOTemplate<Etudiant, EtudiantDAO> {
 
     friend class Singleton<EtudiantDAO>;
-
+private:
+    Etudiant* current;
 public:
 
     QMap<int, Etudiant *> findAll();
@@ -22,9 +23,12 @@ public:
 
     bool create(Etudiant* obj);
 
+
     EtudiantDAO(){}
     ~EtudiantDAO(){}
 
+    Etudiant *getCurrent() const;
+    void setCurrent(Etudiant *value);
 };
 
 #endif // ETUDIANTDAO_H

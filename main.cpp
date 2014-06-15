@@ -23,9 +23,10 @@ int main(int argc, char *argv[])
     Connexion::getInstance()->setConnexion("/Users/fsamuel/Dropbox/LO21/Projet/save.db");
     Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
 
-//    LoginWindow w(fac);
 
-//    w.show();
+    LoginWindow w(fac);
+
+    w.show();
 
     return a.exec();
 }
