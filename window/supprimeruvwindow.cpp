@@ -14,9 +14,8 @@ supprimerUVwindow::supprimerUVwindow(Factory* factory,QWidget *parent) :
 }
 void supprimerUVwindow::delUV(){
     QString nom = ui->listall->currentItem()->text();
-
-    //    UV* uv= fac->getUVDAO()->f
-    //  fac->getUVDAO()->remove();
+       UV* uv= fac->getUVDAO()->findByCode(nom);
+      fac->getUVDAO()->remove(uv);
 }
 
 supprimerUVwindow::~supprimerUVwindow()

@@ -31,6 +31,11 @@ private slots :
     void modifiercursus();
     void supprcursus();
     void on_remplirDossier_clicked();
+    void exigerUV();
+    void prefererUV();
+    void rejeterUV();
+    void retirerpref();
+
 };
 
 #endif

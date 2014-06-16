@@ -19,6 +19,8 @@ public:
 private:
     Ui::supprimerCursus *ui;
     Factory* fac;
+public slots:
+    void delCursus();
 };
 
 #endif // SUPPRIMERCURSUS_H

@@ -33,7 +33,12 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     QObject::connect(ui->actionAjouterCursus , SIGNAL(triggered()), this, SLOT(ajoutercursus()));
     QObject::connect(ui->actionSupprimerCursus , SIGNAL(triggered()), this, SLOT(supprcursus()));
     QObject::connect(ui->actionModifierCursus , SIGNAL(triggered()), this, SLOT(modifiercursus()));
+    QObject::connect(ui->exigerUV , SIGNAL(clicked()), this, SLOT(exigerUV()));
+    QObject::connect(ui->prefererUV , SIGNAL(clicked()), this, SLOT(prefererUV()));
+    QObject::connect(ui->rejeterUV , SIGNAL(clicked()), this, SLOT(rejeterUV()));
+    QObject::connect(ui->annulerUV ,SIGNAL(clicked()), this, SLOT(retirerpref()));
 
+    ui->listUV->addItems(fac->getUVDAO()->getStringList("code"));
 
 }
 
@@ -86,4 +91,48 @@ void MainWindow::on_remplirDossier_clicked()
 {
     RemplirUV* uvw=new RemplirUV(fac);
     uvw->exec();
+}
+
+void MainWindow::exigerUV()
+{
+
+    if(ui->listUV->currentItem()!=NULL){
+        ui->listUVexige->addItem(ui->listUV->currentItem()->text());
+        delete ui->listUV->currentItem();
+    }
+
+}
+
+void MainWindow::prefererUV()
+{
+
+    if(ui->listUV->currentItem()!=NULL){
+        ui->listUVpref->addItem(ui->listUV->currentItem()->text());
+        delete ui->listUV->currentItem();
+    }
+}
+
+void MainWindow::rejeterUV()
+{
+
+    if(ui->listUV->currentItem()!=NULL){
+        ui->listUVrejet->addItem(ui->listUV->currentItem()->text());
+        delete ui->listUV->currentItem();
+    }
+}
+
+void MainWindow::retirerpref()
+{
+    if(ui->listUVexige->currentItem()!=NULL){
+        ui->listUV->addItem(ui->listUVexige->currentItem()->text());
+        delete ui->listUVexige->currentItem();
+    }
+    if(ui->listUVpref->currentItem()!=NULL){
+        ui->listUV->addItem(ui->listUVpref->currentItem()->text());
+        delete ui->listUVpref->currentItem();
+    }
+    if(ui->listUVrejet->currentItem()!=NULL){
+        ui->listUV->addItem(ui->listUVrejet->currentItem()->text());
+        delete ui->listUVrejet->currentItem();
+    }
 }
