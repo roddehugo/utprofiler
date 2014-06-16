@@ -2,29 +2,39 @@
 
 
 Cursus::Cursus(const unsigned int id, const QString &code, const QString &titre, const unsigned int ects,
-               const unsigned int maxSemestre, bool current,
-               QMap<QString, int> credits, Dossier *dossier, Cursus *parent):
-id(id),
-titre(titre),
-code(code),
-ects(ects),
-maxSemestres(maxSemestre),
-current(current),
-dossier(dossier),
-credits(credits){
+               const unsigned int maxSemestre,const unsigned int previsionsSemestres, bool current,
+               QMap<QString, int> credits, Cursus *parent):
+    id(id),
+    titre(titre),
+    code(code),
+    ects(ects),
+    parent(parent),
+    maxSemestres(maxSemestre),
+    previsionsSemestres(previsionsSemestres),
+    credits(credits){
 
 }
 
+
+unsigned int Cursus::getPrevisionsSemestres() const
+{
+    return previsionsSemestres;
+}
+
+void Cursus::setPrevisionsSemestres(unsigned int value)
+{
+    previsionsSemestres = value;
+}
 Cursus::Cursus(const QString &code, const QString &titre, const unsigned int ects,
-               const unsigned int maxSemestre, bool current,
-               QMap<QString, int> credits, Dossier *dossier, Cursus *parent):
-titre(titre),
-code(code),
-ects(ects),
-maxSemestres(maxSemestre),
-current(current),
-dossier(dossier),
-credits(credits){
+               const unsigned int maxSemestre,const unsigned int previsionsSemestres, bool current,
+               QMap<QString, int> credits, Cursus *parent):
+    titre(titre),
+    code(code),
+    ects(ects),
+    maxSemestres(maxSemestre),
+    parent(parent),
+    previsionsSemestres(previsionsSemestres),
+    credits(credits){
 
 }
 
@@ -58,29 +68,9 @@ bool Cursus::isCurrent() const
     return current;
 }
 
-void Cursus::setCurrent(bool value)
-{
-    current = value;
-}
-
-Cursus *Cursus::getParent() const
-{
-    return parent;
-}
-
 void Cursus::setParent(Cursus *value)
 {
     parent = value;
-}
-
-Dossier *Cursus::getDossier() const
-{
-    return dossier;
-}
-
-void Cursus::setDossier(Dossier *value)
-{
-    dossier = value;
 }
 
 unsigned int Cursus::getEcts() const

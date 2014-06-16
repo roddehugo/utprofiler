@@ -15,17 +15,17 @@ protected:
     QString code;
     unsigned int ects;
     unsigned int maxSemestres;
+    unsigned int previsionsSemestres;
     bool current;
     Cursus* parent;
-    Dossier* dossier;
     QMap<QString,int> credits;
 
  public:
     Cursus(const unsigned int id, const QString& code, const QString& titre, const unsigned int ects,
-           const unsigned int maxSemestre, bool current,QMap<QString,int> credits, Dossier* dossier=0, Cursus* parent=0);
+           const unsigned int maxSemestre, bool current,QMap<QString,int> credits, Cursus* parent=0);
 
     Cursus(const QString& code, const QString& titre, const unsigned int ects,
-           const unsigned int maxSemestre, bool current,QMap<QString,int> credits, Dossier* dossier=0, Cursus* parent=0);
+           const unsigned int maxSemestre, bool current,QMap<QString,int> credits, Cursus* parent=0);
 
    ~Cursus();
 
@@ -35,14 +35,8 @@ protected:
     unsigned int getMaxSemestres() const;
     void setMaxSemestres(unsigned int value);
 
-    bool isCurrent() const;
-    void setCurrent(bool value);
-
     Cursus *getParent() const;
     void setParent(Cursus *value);
-
-    Dossier *getDossier() const;
-    void setDossier(Dossier *value);
 
     unsigned int getEcts() const;
     void setEcts(unsigned int value);
@@ -59,6 +53,8 @@ protected:
     QMap<QString, int> getCredits() const;
     void setCredits(const QMap<QString, int> &value);
 
+    unsigned int getPrevisionsSemestres() const;
+    void setPrevisionsSemestres(unsigned int value);
 };
 
 

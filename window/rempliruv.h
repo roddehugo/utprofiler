@@ -21,6 +21,7 @@ public:
 
 public slots:
     void on_ajouterItem();
+    void on_retirerItem();
 
 private:
 
