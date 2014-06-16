@@ -32,6 +32,8 @@ void modifUVwindow::on_modifuv_clicked(){
     ui->isautomne->setChecked(uv->isAutomne());
     ui->isprintemps->setChecked(uv->isPrintemps());
     ui->isdemiuv->setChecked(uv->isDemiUV());
+    ui->listcategorie->addItems(fac->getCategorieDAO()->getStringList());
+    ui->listecursus->addItems(fac->getCursusDAO()->getStringList());
 
 }
 
