@@ -7,6 +7,9 @@ ajoutDossier::ajoutDossier(Factory* factory,QWidget *parent) :
     fac(factory)
 {
     ui->setupUi(this);
+
+    ui->anneeCombo->addItems(fac->getSemestreDAO()->getStringListAnnee());
+    ui->saisonCombo->addItems(fac->getSemestreDAO()->getStringListSaison());
 }
 
 ajoutDossier::~ajoutDossier()

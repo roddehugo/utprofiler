@@ -87,7 +87,7 @@ UV *UVDAO::findByCode(const QString& str)
         if(query.first()){
             QSqlRecord rec = query.record();
 
-            const int id = rec.value("uid").toInt();
+            const int id = rec.value("id").toInt();
             const QString code = rec.value("code").toString();
             const QString titre = rec.value("titre").toString();
             const bool automne = rec.value("automne").toBool();

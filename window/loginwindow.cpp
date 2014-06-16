@@ -1,5 +1,5 @@
-#include "window/loginwindow.h"
-#include "window/mainwindow.h"
+#include "loginwindow.h"
+#include "mainwindow.h"
 #include "ui_loginwindow.h"
 #include <QApplication>
 #include <QMessageBox>

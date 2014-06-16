@@ -16,7 +16,7 @@ public:
 
     Semestre* find(const int &id);
 
-    Semestre* findByStr(const QString& annee, const QString &saison);
+    Semestre* findByStr(const QString& str);
 
     bool update(Semestre* obj);
 
@@ -26,6 +26,7 @@ public:
 
     QStringList getStringListSaison();
     QStringList getStringListAnnee();
+    QStringList getStringList();
 
 
 protected:

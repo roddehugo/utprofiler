@@ -1,27 +1,25 @@
-#include "rempliruv.h"
-#include "ui_rempliruv.h"
+#include "window/saisirinscription.h"
+#include "ui_saisirinscription.h"
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QtCore/QCoreApplication>
 #include <QHeaderView>
 #include <QMessageBox>
 
-RemplirUV::RemplirUV(Factory* factory,QWidget *parent) :
+saisirinscription::saisirinscription(Factory* factory,QWidget *parent) :
     QDialog(parent),
     m_pTableWidget(NULL),
-    ui(new Ui::RemplirUV),
+    ui(new Ui::saisirinscription),
     fac(factory)
 {
     ui->setupUi(this);
 
-    ui->anneeCombo->addItems(fac->getSemestreDAO()->getStringListAnnee());
     ui->resultatCombo->addItems(fac->getInscriptionDAO()->getStringListResultat());
-    ui->saisonCombo->addItems(fac->getSemestreDAO()->getStringListSaison());
     ui->listAll->addItems(fac->getUVDAO()->getStringList("code"));
 
     m_pTableWidget = new QTableWidget(ui->frame);
     m_pTableWidget->setRowCount(0);
-    m_pTableWidget->setColumnCount(4);
+    m_pTableWidget->setColumnCount(3);
     m_pTableWidget->verticalHeader()->setVisible(false);
     m_pTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_pTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -45,24 +43,24 @@ RemplirUV::RemplirUV(Factory* factory,QWidget *parent) :
 
     connect(ui->ajouterBouton,SIGNAL(clicked()),this, SLOT(on_ajouterItem()));
     connect(ui->retirerBouton,SIGNAL(clicked()),this, SLOT(on_retirerItem()));
+    connect(ui->buttonBox,SIGNAL(accepted()),this,SLOT(saveDossier()));
 
 }
 
-void RemplirUV::on_ajouterItem()
+void saisirinscription::on_ajouterItem()
 {
 
     int row = m_pTableWidget->rowCount();
     m_pTableWidget->setRowCount(row+1);
     m_pTableWidget->setItem(row, 0, new QTableWidgetItem(ui->listAll->currentItem()->text()) );
-    m_pTableWidget->setItem(row, 1, new QTableWidgetItem(ui->anneeCombo->currentText()) );
-    m_pTableWidget->setItem(row, 2, new QTableWidgetItem(ui->saisonCombo->currentText()) );
-    m_pTableWidget->setItem(row, 3, new QTableWidgetItem(ui->resultatCombo->currentText()) );
+    m_pTableWidget->setItem(row, 1, new QTableWidgetItem(ui->semestreCombo->currentText()) );
+    m_pTableWidget->setItem(row, 2, new QTableWidgetItem(ui->resultatCombo->currentText()) );
 
 
     delete ui->listAll->currentItem();
 }
 
-void RemplirUV::on_retirerItem()
+void saisirinscription::on_retirerItem()
 {
     QList<QTableWidgetItem *> l = m_pTableWidget->selectedItems();
     ui->listAll->addItem(l.first()->text());
@@ -70,8 +68,13 @@ void RemplirUV::on_retirerItem()
 
 }
 
+void saisirinscription::saveDossier()
+{
 
-RemplirUV::~RemplirUV()
+}
+
+
+saisirinscription::~saisirinscription()
 {
     delete ui;
 }

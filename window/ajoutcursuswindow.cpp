@@ -9,7 +9,7 @@ ajoutcursuswindow::ajoutcursuswindow(Factory* factory,QWidget *parent) :
     fac(factory)
 {
     ui->setupUi(this);
-    QObject::connect(ui->buttonBox , SIGNAL(accepted()), this, SLOT(saveCursus()));
+    connect(ui->buttonBox , SIGNAL(accepted()), this, SLOT(saveCursus()));
 
 }
 

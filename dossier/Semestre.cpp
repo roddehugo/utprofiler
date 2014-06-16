@@ -1,31 +1,34 @@
 #include "Semestre.h"
 
-Semestre::Semestre(const unsigned int id, const Saison &saison, unsigned int annee, bool etranger, Dossier *dossier, const QMap<int, Inscription *> &inscriptions):
+Semestre::Semestre(const unsigned int id, const QString& titre,const Saison &saison, unsigned int annee, bool etranger, Cursus *cursus, const QMap<int, Inscription *> &inscriptions):
     id(id),
+    titre(titre),
     saison(saison),
     annee(annee),
     etranger(etranger),
-    dossier(dossier),
+    cursus(cursus),
     inscriptions(inscriptions)
 {
 
 }
 
-Semestre::Semestre(const unsigned int id, const Saison &saison, unsigned int annee, bool etranger, Dossier *dossier):
+Semestre::Semestre(const unsigned int id, const QString& titre, const Saison &saison, unsigned int annee, bool etranger, Cursus *cursus):
     id(id),
+    titre(titre),
     saison(saison),
     annee(annee),
     etranger(etranger),
-    dossier(dossier)
+    cursus(cursus)
 {
 
 }
 
-Semestre::Semestre(const Saison &saison, unsigned int annee, bool etranger, Dossier *dossier):
+Semestre::Semestre(const QString& titre, const Saison &saison, unsigned int annee, bool etranger, Cursus *cursus):
+    titre(titre),
     saison(saison),
     annee(annee),
     etranger(etranger),
-    dossier(dossier)
+    cursus(cursus)
 {
 
 }
@@ -63,14 +66,14 @@ void Semestre::setInscriptions(const QMap<int, Inscription *> &value)
 {
     inscriptions = value;
 }
-Dossier *Semestre::getDossier() const
+Cursus *Semestre::getCursus() const
 {
-    return dossier;
+    return cursus;
 }
 
-void Semestre::setDossier(Dossier *value)
+void Semestre::setCursus(Cursus *value)
 {
-    dossier = value;
+    cursus = value;
 }
 bool Semestre::isEtranger() const
 {
@@ -115,6 +118,16 @@ void Semestre::setID(unsigned int value)
 {
     id = value;
 }
+QString Semestre::getTitre() const
+{
+    return titre;
+}
+
+void Semestre::setTitre(const QString &value)
+{
+    titre = value;
+}
+
 
 
 
