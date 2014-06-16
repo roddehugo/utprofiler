@@ -138,29 +138,28 @@ bool UVDAO::update(UV* obj){
 }
 
 bool UVDAO::remove(UV* obj){
-    QMessageBox msgBox;
-    msgBox.setText("L'UV "+ obj->getCode() + " ainsi que les entrées associées vont êtres supprimées.");
-    msgBox.setInformativeText("Voulez-vous vraiment continuer?");
-    msgBox.setStandardButtons(QMessageBox::Discard | QMessageBox::Ok);
-    msgBox.setDefaultButton(QMessageBox::Discard);
-    if(msgBox.exec()){
-        try{
-            QSqlQuery query(Connexion::getInstance()->getDataBase());
-            query.prepare("DELETE FROM uvs WHERE id = :id ;");
+    try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        query.prepare("DELETE FROM uvs WHERE id = :id ;");
+        query.bindValue(":id", obj->ID());
+        if (!query.exec()){
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+            return false;
+        }else{
+            LogWriter::writeln("UVDAO.cpp","Suprression de l'UV : " + obj->getCode());
+            query.prepare("DELETE FROM categorie_uv_decorator WHERE iduv = :id ;");
             query.bindValue(":id", obj->ID());
             if (!query.exec()){
                 throw UTProfilerException("La requète a échoué : " + query.lastQuery());
-                return false;
-            }else{
-                LogWriter::writeln("UVDAO.cpp","Suprression de l'UV : " + obj->getCode());
-                Map.erase(Map.find(obj->ID()));
-                return true;
             }
-        }catch(UTProfilerException e){
-            LogWriter::writeln("UVDAO::remove()",e.getMessage());
-            return false;
+            Map.erase(Map.find(obj->ID()));
+            return true;
         }
+    }catch(UTProfilerException e){
+        LogWriter::writeln("UVDAO::remove()",e.getMessage());
+        return false;
     }
+
 }
 
 bool UVDAO::create(UV *obj){

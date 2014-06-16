@@ -84,8 +84,8 @@ int CategorieDAO::findByStr(QString str){
 bool CategorieDAO::remove(QString str){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("DELETE FROM categories WHERE id = :id ;");
-        query.bindValue(":s", str);
+        query.prepare("DELETE FROM categories WHERE titre = :str ;");
+        query.bindValue(":str", str);
         if (!query.exec()){
             throw UTProfilerException("La requete a échoué : " + query.lastQuery());
             return false;
