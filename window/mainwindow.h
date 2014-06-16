@@ -37,6 +37,7 @@ private slots :
     void rejeterUV();
     void retirerpref();
 
+    void on_ajouterDossier_clicked();
 };
 
 #endif
