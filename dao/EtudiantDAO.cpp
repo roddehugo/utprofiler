@@ -84,7 +84,9 @@ Etudiant* EtudiantDAO::find(const int& id){
             const QString p = rec.value("prenom").toString();
             const QString n = rec.value("nom").toString();
             LogWriter::writeln("EtudiantDAO.cpp","Lecture de l'étudiant : " + l);
-            return new Etudiant(id,l,p,n);
+            Etudiant* etu = new Etudiant(id,l,p,n);
+            Map.insert(id,etu);
+            return etu;
         }
     }catch(UTProfilerException e){
         LogWriter::writeln("EtudiantDAO::find()",e.getMessage());

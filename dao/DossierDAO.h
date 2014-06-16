@@ -20,6 +20,11 @@ public:
 
     bool create(Dossier* obj);
 
+
+    QMap<QString, int> getCursusMap(unsigned int id);
+
+
+
 protected:
 
     ~DossierDAO(){}

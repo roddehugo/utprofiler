@@ -1,9 +1,12 @@
 #ifndef UV_h
 #define UV_h
 
+#include "dossier/Cursus.h"
 #include <QString>
 #include <QTextStream>
 #include <QMap>
+
+class Cursus;
 
 class UV
 {
@@ -16,10 +19,11 @@ private:
     bool automne;
     bool demiuv;
     QMap<QString,int> credits;
+    QList<Cursus*> cursus;
 
  public:
-    UV(const unsigned int id, const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv,QMap<QString,int> credits);
-    UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv,QMap<QString,int> credits);
+    UV(const unsigned int id, const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv,QMap<QString,int> credits, QList<Cursus*> cursus);
+    UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv,QMap<QString,int> credits, QList<Cursus*> cursus);
     UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv);
     UV(const unsigned int id, const QString &code, const QString &titre, const bool printemps, const bool automne, const bool demiuv);
 

@@ -114,8 +114,8 @@ void ajouterUVwindow::saveUV(){
         int cred=(ui->creditcol->item(boucle)->text()).toInt();
         mapUV[texte]=cred;
     }
-    UV* uv= new UV(c,t,p,a,d,mapUV);
-    fac->getUVDAO()->create(uv);
+//    UV* uv= new UV(c,t,p,a,d,mapUV);
+//    fac->getUVDAO()->create(uv);
 
 }
 

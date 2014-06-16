@@ -2,18 +2,9 @@
 
 
 
-Cursus *Cursus::getParent() const
-{
-    return parent;
-}
-
-void Cursus::setParent(Cursus *value)
-{
-    parent = value;
-}
 Cursus::Cursus(const unsigned int id, const QString &code, const QString &titre, const unsigned int ects,
-               const unsigned int maxSemestre,const unsigned int previsionsSemestres,
-               QMap<QString, int> credits, Cursus *parent):
+               const unsigned int maxSemestre, const unsigned int previsionsSemestres,
+               Cursus *parent, QMap<QString, int> credits):
     id(id),
     titre(titre),
     code(code),
@@ -26,8 +17,8 @@ Cursus::Cursus(const unsigned int id, const QString &code, const QString &titre,
 }
 
 Cursus::Cursus(const QString &code, const QString &titre, const unsigned int ects,
-               const unsigned int maxSemestre,const unsigned int previsionsSemestres,
-               QMap<QString, int> credits, Cursus *parent):
+               const unsigned int maxSemestre, const unsigned int previsionsSemestres,
+               Cursus *parent,QMap<QString, int> credits):
     titre(titre),
     code(code),
     ects(ects),
@@ -35,6 +26,31 @@ Cursus::Cursus(const QString &code, const QString &titre, const unsigned int ect
     parent(parent),
     previsionsSemestres(previsionsSemestres),
     credits(credits){
+
+}
+
+Cursus::Cursus(const unsigned int id, const QString &code, const QString &titre, const unsigned int ects,
+               const unsigned int maxSemestre, const unsigned int previsionsSemestres,
+               Cursus *parent):
+    id(id),
+    titre(titre),
+    code(code),
+    ects(ects),
+    parent(parent),
+    maxSemestres(maxSemestre),
+    previsionsSemestres(previsionsSemestres){
+
+}
+
+Cursus::Cursus(const QString &code, const QString &titre, const unsigned int ects,
+               const unsigned int maxSemestre, const unsigned int previsionsSemestres,
+               Cursus *parent):
+    titre(titre),
+    code(code),
+    ects(ects),
+    maxSemestres(maxSemestre),
+    parent(parent),
+    previsionsSemestres(previsionsSemestres){
 
 }
 
@@ -104,4 +120,14 @@ unsigned int Cursus::ID() const
 void Cursus::setID(unsigned int value)
 {
     id = value;
+}
+
+Cursus *Cursus::getParent() const
+{
+    return parent;
+}
+
+void Cursus::setParent(Cursus *value)
+{
+    parent = value;
 }
