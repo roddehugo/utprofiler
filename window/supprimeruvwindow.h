@@ -13,12 +13,15 @@ class supprimerUVwindow : public QDialog
     Q_OBJECT
 
 public:
+
     explicit supprimerUVwindow(Factory* factory,QWidget *parent = 0);
     ~supprimerUVwindow();
 
 private:
     Ui::supprimerUVwindow *ui;
     Factory* fac;
+public slots:
+    void delUV();
 };
 
 #endif // SUPPRIMERUVWINDOW_H

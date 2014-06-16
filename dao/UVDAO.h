@@ -15,6 +15,7 @@ public:
     QMap<int, UV *> findAll();
 
     UV *find(const int &id);
+    UV* findByCode(const QString str);
 
     bool update(UV* obj);
 

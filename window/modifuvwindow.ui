@@ -22,15 +22,15 @@
         <string>Chosir UV</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <widget class="QColumnView" name="colonneuv"/>
-        </item>
         <item row="0" column="1">
          <widget class="QPushButton" name="modifuv">
           <property name="text">
            <string>Modifier</string>
           </property>
          </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QListWidget" name="colonneuv"/>
         </item>
        </layout>
       </widget>
@@ -63,7 +63,7 @@
                   <item row="0" column="0">
                    <layout class="QHBoxLayout" name="horizontalLayout">
                     <item>
-                     <widget class="QColumnView" name="columnView_2"/>
+                     <widget class="QListWidget" name="listWidget_2"/>
                     </item>
                     <item>
                      <widget class="QWidget" name="widget" native="true">
@@ -86,7 +86,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QColumnView" name="columnView_5"/>
+                     <widget class="QListWidget" name="listWidget_5"/>
                     </item>
                    </layout>
                   </item>
@@ -107,7 +107,7 @@
                    <item row="0" column="0">
                     <layout class="QHBoxLayout" name="horizontalLayout_3">
                      <item>
-                      <widget class="QColumnView" name="columnView_6"/>
+                      <widget class="QListWidget" name="listWidget_6"/>
                      </item>
                      <item>
                       <widget class="QWidget" name="widget_4" native="true">
@@ -130,7 +130,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QColumnView" name="columnView_7"/>
+                      <widget class="QListWidget" name="listWidget_7"/>
                      </item>
                     </layout>
                    </item>
@@ -214,7 +214,7 @@
                     <item row="0" column="0">
                      <layout class="QHBoxLayout" name="horizontalLayout_2">
                       <item>
-                       <widget class="QColumnView" name="columnView_3"/>
+                       <widget class="QListWidget" name="listWidget_3"/>
                       </item>
                       <item>
                        <widget class="QWidget" name="widget_5" native="true">
@@ -240,7 +240,7 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QColumnView" name="columnView_8"/>
+                       <widget class="QListWidget" name="listWidget_8"/>
                       </item>
                      </layout>
                     </item>

@@ -1,5 +1,6 @@
 #include "modifuvwindow.h"
 #include "ui_modifuvwindow.h"
+#include <QApplication>
 #include <QDebug>
 #include <QListWidget>
 
@@ -8,13 +9,11 @@ modifUVwindow::modifUVwindow(Factory* factory,QWidget *parent) :
     ui(new Ui::modifUVwindow),
     fac(factory)
 {
-    UVDAO* uvdao=fac->getUVDAO();
      ui->setupUi(this);
 
     QObject::connect(ui->modifuv , SIGNAL(clicked()), this, SLOT(on_modifuv_clicked()));
-
     QObject::connect(ui->buttonBox , SIGNAL(accepted()), this, SLOT(saveuv()));
-
+    ui->colonneuv->addItems(fac->getUVDAO()->getStringList("code"));
 }
 void modifUVwindow::saveUV(){
     const QString c =  ui->codeuv->text();
@@ -26,13 +25,13 @@ void modifUVwindow::saveUV(){
 }
 
 void modifUVwindow::on_modifuv_clicked(){
-
-
-    ui->codeuv->setPlaceholderText("Nom");
-    ui->titreuv->setPlaceholderText("titre");
-    ui->isautomne->setChecked(true);
-    ui->isprintemps->setChecked(true);
-    ui->isdemiuv->setChecked(true);
+    QString code = ui->colonneuv->currentItem()->text();
+    UV* uv=fac->getUVDAO()->findByCode(code);
+    ui->codeuv->setPlaceholderText(uv->getCode());
+    ui->titreuv->setPlaceholderText(uv->getTitre());
+    ui->isautomne->setChecked(uv->isAutomne());
+    ui->isprintemps->setChecked(uv->isPrintemps());
+    ui->isdemiuv->setChecked(uv->isDemiUV());
 
 }
 
