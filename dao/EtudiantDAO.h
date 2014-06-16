@@ -4,7 +4,7 @@
 #include "Etudiant.h"
 #include "dao/SqlDAOTemplate.h"
 
-class EtudiantDAO : public SqlDAOTemplate<Etudiant, EtudiantDAO> {
+class EtudiantDAO :public SqlDAOTemplate<Etudiant, EtudiantDAO> {
 
     friend class Singleton<EtudiantDAO>;
 private:
@@ -23,12 +23,14 @@ public:
 
     bool create(Etudiant* obj);
 
+    Etudiant *getCurrent() const;
+    void setCurrent(Etudiant *value);
+
+protected:
 
     EtudiantDAO(){}
     ~EtudiantDAO(){}
 
-    Etudiant *getCurrent() const;
-    void setCurrent(Etudiant *value);
 };
 
 #endif // ETUDIANTDAO_H

@@ -2,6 +2,8 @@
 
 
 const unsigned int AbstractDAOFactory::DAO_FACTORY;
+const unsigned int AbstractDAOFactory::XML_FACTORY;
+
 
 Factory* AbstractDAOFactory::getFactory(const int& type){
     switch (type) {
@@ -18,7 +20,7 @@ UVDAO* DAOFactory::getUVDAO(){
     return UVDAO::getInstance();
 }
 
-EtudiantDAO* DAOFactory::getEtudiantDAO(){
+EtudiantDAO *DAOFactory::getEtudiantDAO(){
     return EtudiantDAO::getInstance();
 }
 
@@ -51,4 +53,7 @@ CategorieDAO *DAOFactory::getCategorieDAO()
 {
     return CategorieDAO::getInstance();
 }
+
+
+
 

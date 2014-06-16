@@ -25,6 +25,8 @@ public:
 
     bool create(Cursus* obj);
 
+protected:
+
     CursusDAO(){}
     ~CursusDAO(){}
 

@@ -20,6 +20,8 @@ public:
 
     bool create(Dossier* obj);
 
+protected:
+
     ~DossierDAO(){}
     DossierDAO(){}
 

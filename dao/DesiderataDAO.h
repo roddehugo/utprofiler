@@ -24,6 +24,8 @@ public:
 
     bool create(Desiderata* obj);
 
+protected:
+
     DesiderataDAO(){}
     ~DesiderataDAO(){}
 

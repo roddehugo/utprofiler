@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
     Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
 
 
-
     LoginWindow w(fac);
 
     w.show();

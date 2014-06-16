@@ -24,8 +24,8 @@ private:
     QStringList m_TableHeader;
 
 private slots :
-     void on_ajouteruv();
-     void modifieruv();
+    void on_ajouteruv();
+    void modifieruv();
     void suppruv();
     void ajoutercursus();
     void modifiercursus();

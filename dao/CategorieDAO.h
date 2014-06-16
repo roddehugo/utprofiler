@@ -25,10 +25,11 @@ public:
 
     void setMap(const QMap<int, QString> &value);
 
+protected:
+
     CategorieDAO(){}
     ~CategorieDAO(){}
 
-    protected:
     QMap<int,QString> Map;
 
 };
