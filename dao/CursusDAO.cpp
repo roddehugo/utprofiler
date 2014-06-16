@@ -21,13 +21,12 @@ QMap<int, Cursus *> CursusDAO::findAll(){
                 throw UTProfilerException("Le cursus "+c+" existe déjà dans la QMap");
             }else{
                 LogWriter::writeln("Cursus.cpp","Lecture du cursus : " + c);
-//                Dossier* dossier = DossierDAO::getInstance()->find(d);
 //                Cursus* cursus;
 //                if(parent != 0){
 //                    Cursus* par = find(p);
-//                    cursus=new Cursus(id,c,t,ects,maxSem,cur,dossier,par);
+//                    cursus=new Cursus(id,c,t,ects,maxSem,cur,par);
 //                }else{
-//                    cursus=new Cursus(id,c,t,ects,maxSem,cur,dossier,NULL);
+//                    cursus=new Cursus(id,c,t,ects,maxSem,cur,NULL);
 //                }
 //                Map.insert(id,cursus);
             }
@@ -55,7 +54,7 @@ Cursus* CursusDAO::find(const int& id){
             const QString t = rec.value("titre").toString();
             const int maxSem = rec.value("maxsemestres").toInt();
             const int ects = rec.value("ects").toInt();
-            const int cur = rec.value("current").toBool();
+            const int prevSem = rec.value("previsionssemestres").toInt();
             const int p = rec.value("parent").toInt();
             const int d = rec.value("dossier").toInt();
             LogWriter::writeln("Cursus.cpp","Lecture du cursus : " + c);
@@ -84,9 +83,8 @@ bool CursusDAO::update(Cursus* obj){
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
         query.bindValue(":maxsemestres", obj->getMaxSemestres() );
+        query.bindValue(":previsionssemestres", obj->getPrevisionsSemestres() );
         query.bindValue(":ects", obj->getEcts() );
-        query.bindValue(":current", obj->isCurrent() );
-        query.bindValue(":dossier", obj->getDossier()->ID() );
         if(obj->getParent()){
             query.bindValue(":parrent", obj->getParent()->ID() );
         }
@@ -126,13 +124,12 @@ bool CursusDAO::remove(Cursus* obj){
 bool CursusDAO::create(Cursus *obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("INSERT INTO cursus (code=:code, titre=:titre, maxsemestres=:maxSem, ects=:ects, current=:current, parent=:parent, dossier:dossier) VALUES (NULL, :code, :titre, :categorie, :automne, :printemps, :demiuv);");
+        query.prepare("INSERT INTO cursus (code=:code, titre=:titre, maxsemestres=:maxsemestres,previsionssemestres=:previsionssemestres, ects=:ects, current=:current, parent=:parent, dossier:dossier) VALUES (NULL, :code, :titre, :categorie, :automne, :printemps, :demiuv);");
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
         query.bindValue(":maxsemestres", obj->getMaxSemestres() );
-        query.bindValue(":ects", obj->getEcts() );
-        query.bindValue(":current", obj->isCurrent() );
-        query.bindValue(":dossier", obj->getDossier()->ID() );
+        query.bindValue(":ects", obj->getEcts() );    
+        query.bindValue(":previsionssemestres", obj->getPrevisionsSemestres() );
         if(obj->getParent()){
             query.bindValue(":parrent", obj->getParent()->ID() );
         }
@@ -150,6 +147,7 @@ bool CursusDAO::create(Cursus *obj){
         LogWriter::writeln("CursusDAO::create()",e.getMessage());
     }
 }
+
 QStringList CursusDAO::getStringList(const QString colonne)
 {
     QStringList liste;
