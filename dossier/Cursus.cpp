@@ -15,6 +15,16 @@ Cursus::Cursus(const unsigned int id, const QString &code, const QString &titre,
 
 }
 
+
+unsigned int Cursus::getPrevisionsSemestres() const
+{
+    return previsionsSemestres;
+}
+
+void Cursus::setPrevisionsSemestres(unsigned int value)
+{
+    previsionsSemestres = value;
+}
 Cursus::Cursus(const QString &code, const QString &titre, const unsigned int ects,
                const unsigned int maxSemestre,const unsigned int previsionsSemestres, bool current,
                QMap<QString, int> credits, Cursus *parent):
