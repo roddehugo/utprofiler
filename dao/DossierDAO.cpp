@@ -120,3 +120,26 @@ bool DossierDAO::create(Dossier* obj){
     }
 }
 
+QMap<QString, int> DossierDAO::getCursusMap(unsigned int id)
+{
+
+    QMap<QString,int> cursusmap;
+    try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        query.prepare("SELECT d.id ,cur.code, current FROM dossiers d JOIN cursus_dossiers cd ON cd.iddossier = d.id JOIN cursus cur ON cur.id = cd.idcursus WHERE d.id = :id;");
+        query.bindValue(":id",id);
+        if (!query.exec()){
+            throw UTProfilerException("La requête a échoué : " + query.lastQuery());
+        }
+        while (query.next()){
+            QSqlRecord rec = query.record();
+            cursusmap.insert(rec.value("titre").toString(),rec.value("current").toInt());
+        }
+        return cursusmap;
+
+    }catch(UTProfilerException e){
+        LogWriter::writeln("UVDAO::getCursusMap()",e.getMessage());}
+
+
+}
+

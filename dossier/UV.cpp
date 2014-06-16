@@ -1,26 +1,28 @@
 #include "UV.h"
 
 
-UV::UV(const unsigned int id, const QString &code, const QString &titre, const bool printemps, const bool automne, const bool demiuv, QMap<QString, int> credits):
+UV::UV(const unsigned int id, const QString &code, const QString &titre, const bool printemps, const bool automne, const bool demiuv, QMap<QString, int> credits,QList<Cursus*> cursus):
     id(id),
     code(code),
     titre(titre),
     printemps(printemps),
     automne(automne),
     demiuv(demiuv),
-    credits(credits)
+    credits(credits),
+    cursus(cursus)
 {
 
 }
 
 
-UV::UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv, QMap<QString, int> credits):
+UV::UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv, QMap<QString, int> credits,QList<Cursus*> cursus):
     code(code),
     titre(titre),
     printemps(printemps),
     automne(automne),
     demiuv(demiuv),
-    credits(credits)
+    credits(credits),
+    cursus(cursus)
 {
 
 }

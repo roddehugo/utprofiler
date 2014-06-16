@@ -27,6 +27,9 @@ public:
     bool create(Cursus* obj);
 
     QStringList getStringList(const QString colonne);
+
+    QMap<QString,int> getEctsMap(const unsigned int id);
+
 protected:
 
     CursusDAO(){}

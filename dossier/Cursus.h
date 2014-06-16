@@ -23,11 +23,19 @@ protected:
  public:
     Cursus(const unsigned int id, const QString &code, const QString &titre, const unsigned int ects,
             const unsigned int maxSemestre,const unsigned int previsionsSemestres,
-            QMap<QString, int> credits, Cursus *parent=0);
+            Cursus *parent, QMap<QString, int> credits);
 
     Cursus(const QString &code, const QString &titre, const unsigned int ects,
                    const unsigned int maxSemestre,const unsigned int previsionsSemestres,
-                   QMap<QString, int> credits, Cursus *parent);
+                   Cursus *parent, QMap<QString, int> credits);
+
+    Cursus(const unsigned int id, const QString &code, const QString &titre, const unsigned int ects,
+            const unsigned int maxSemestre,const unsigned int previsionsSemestres,
+            Cursus *parent);
+
+    Cursus(const QString &code, const QString &titre, const unsigned int ects,
+                   const unsigned int maxSemestre,const unsigned int previsionsSemestres,
+                   Cursus *parent);
 
    ~Cursus();
 
