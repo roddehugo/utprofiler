@@ -1,5 +1,6 @@
 #include "supprimercursus.h"
 #include "ui_supprimercursus.h"
+#include <QDebug>
 
 supprimerCursus::supprimerCursus(Factory* factory,QWidget *parent) :
     QDialog(parent),
@@ -15,8 +16,12 @@ supprimerCursus::supprimerCursus(Factory* factory,QWidget *parent) :
 
 }
 void supprimerCursus::delCursus(){
-    UV* uv = fac->getUVDAO()->findByCode(ui->listWidget->currentItem()->text());
-    fac->getUVDAO()->remove(uv);
+    if (ui->listWidget->currentItem()!=NULL){
+    Cursus* cursus = fac->getCursusDAO()->findByCode(ui->listWidget->currentItem()->text());
+    if(fac->getCursusDAO()->remove(cursus)){
+        qDebug()<<"Suppression effectuée";
+    }
+    }
 }
 
 supprimerCursus::~supprimerCursus()

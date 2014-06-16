@@ -1,5 +1,6 @@
 #include "dao/CursusDAO.h"
 #include "dao/CategorieDAO.h"
+#include <QDebug>
 
 QMap<int, Cursus *> CursusDAO::findAll(){
     try{
@@ -96,7 +97,6 @@ Cursus *CursusDAO::findByCode(const QString &str)
         }
         if(query.first()){
             QSqlRecord rec = query.record();
-
             const int id = rec.value("id").toInt();
             const QString c = rec.value("code").toString();
             const QString t = rec.value("titre").toString();
@@ -106,20 +106,24 @@ Cursus *CursusDAO::findByCode(const QString &str)
             const int p = rec.value("parent").toInt();
             if (Map.contains(id)) {
                 LogWriter::writeln("Cursus.cpp","Lecture du cursus depuis la map : " + str);
+
                 return Map.value(id);
             }
             LogWriter::writeln("Cursus.cpp","Lecture du cursus : " + c);
             QMap<QString,int> ectsmap = getEctsMap(id);
             Cursus* cursus;
-
             if(p != 0){
-                Cursus* par = find(p);
+               Cursus* par = find(p);
                 cursus=new Cursus(id,c,t,ects,maxSem,prevSem,par,ectsmap);
+
             }else{
                 cursus=new Cursus(id,c,t,ects,maxSem,prevSem,NULL,ectsmap);
-            }
 
+            }
             Map.insert(id,cursus);
+            qDebug()<<Map;
+            return cursus;
+
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
