@@ -1,7 +1,5 @@
 #include "ajoutcursuswindow.h"
 #include "ui_ajoutcursuswindow.h"
-#include <QDebug>
-#include <QListWidget>
 
 ajoutcursuswindow::ajoutcursuswindow(Factory* factory,QWidget *parent) :
     QDialog(parent),
@@ -20,5 +18,5 @@ ajoutcursuswindow::~ajoutcursuswindow()
 
 void ajoutcursuswindow::saveCursus()
 {
-    //Cursus* cursus=new Cursus(ui->codecursus->text(),ui->nomcursus->text(),ui->nbcredit,)
+    //Cursus* cursus=new c
 }

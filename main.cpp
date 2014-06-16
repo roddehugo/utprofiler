@@ -113,7 +113,7 @@ void runTests(Factory* fac){
 
 int main(int argc, char *argv[])
 {
-    //* Application
+    /* Application
 
     QApplication a(argc, argv);
 
@@ -129,7 +129,7 @@ int main(int argc, char *argv[])
 
     return a.exec();
 
-    /*///
+    //*///
 
     //* Tests
 
