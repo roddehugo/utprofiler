@@ -80,7 +80,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QTableView" name="afficheDossier"/>
+              <widget class="QTableWidget" name="afficheDossier"/>
              </item>
              <item>
               <widget class="QWidget" name="widget_5" native="true">

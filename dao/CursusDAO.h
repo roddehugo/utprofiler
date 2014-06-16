@@ -27,6 +27,7 @@ public:
     bool create(Cursus* obj);
 
     QStringList getStringList(const QString colonne);
+protected:
 
     CursusDAO(){}
     ~CursusDAO(){}

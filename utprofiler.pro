@@ -39,9 +39,9 @@ SOURCES += main.cpp \
     dao/InscriptionDAO.cpp \
     dao/CursusDAO.cpp \
     dao/DesiderataDAO.cpp \
-    window/remplirdossier.cpp \
+    window/modeldossier.cpp\
     window/ajoutdossier.cpp \
-    window/modeldossier.cpp
+    window/rempliruv.cpp
 
 
 HEADERS  += \
@@ -75,7 +75,9 @@ HEADERS  += \
     dao/DesiderataDAO.h \
     window/remplirdossier.h \
     window/ajoutdossier.h \
-    window/modeldossier.h
+    window/modeldossier.h\
+    UVXML.h \
+    window/rempliruv.h
 
 FORMS += \
     window/loginwindow.ui \
@@ -86,8 +88,8 @@ FORMS += \
     window/modifiercursuswindow.ui \
     window/ajouteruvwindow.ui \
     window/supprimercursus.ui \
-    window/remplirdossier.ui \
-    window/ajoutdossier.ui
+    window/ajoutdossier.ui \
+    window/rempliruv.ui
 
 OTHER_FILES += \
     README.md \

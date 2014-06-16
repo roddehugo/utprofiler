@@ -119,3 +119,10 @@ bool InscriptionDAO::create(Inscription* obj){
     }
 }
 
+QStringList InscriptionDAO::getStringListResultat()
+{
+    QStringList liste;
+    liste << "A" << "B"<<"C"<<"D"<<"E"<<"F"<<"FX"<<"ABS"<<"RES"<<"EC"<<"EQU";
+    return liste;
+}
+

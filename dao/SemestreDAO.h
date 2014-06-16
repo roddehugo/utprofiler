@@ -24,6 +24,12 @@ public:
 
     bool create(Semestre* obj);
 
+    QStringList getStringListSaison();
+    QStringList getStringListAnnee();
+
+
+protected:
+
     SemestreDAO(){}
     ~SemestreDAO(){}
 

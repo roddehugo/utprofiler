@@ -121,3 +121,22 @@ bool SemestreDAO::create(Semestre* obj){
     }
 }
 
+QStringList SemestreDAO::getStringListSaison()
+{
+    QStringList liste;
+    liste << "Automne" << "Printemps";
+    return liste;
+}
+
+QStringList SemestreDAO::getStringListAnnee()
+{
+    QDate now = QDate::currentDate();
+    QDate less = now.addYears(-4);
+    QDate more = now.addYears(4);
+
+    QStringList liste;
+    for (int var = less.year(); var < more.year(); ++var) {
+        liste << QString::number(var);
+    }
+    return liste;
+}

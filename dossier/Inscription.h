@@ -22,7 +22,6 @@ class Inscription {
     Inscription(UV *uv, Semestre *semestre, const Resultat &resultat);
     ~Inscription();
 
-
     Resultat getResultat() const;
     void setResultat(const Resultat &value);
 

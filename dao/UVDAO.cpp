@@ -1,4 +1,5 @@
 #include "dao/UVDAO.h"
+#include <QDebug>
 
 QMap<int, UV *> UVDAO::findAll(){
     try{
@@ -186,7 +187,7 @@ bool UVDAO::create(UV *obj){
             return true;
         }
         QMap<QString,int> cats = obj->getCredits();
-        for(auto i = cats.begin(); i!= cats.constEnd(); ++i){
+        for(QMap<QString,int>::const_iterator i = cats.begin(); i!= cats.constEnd(); ++i){
             query.prepare("INSERT INTO categorie_uv_dao (iduv, idcategorie, ects) VALUES (:iduv, :idcat, :ects);");
             query.bindValue(":iduv", obj->ID() );
             query.bindValue(":idcat", CategorieDAO::getInstance()->findByStr(i.key()) );
@@ -200,5 +201,24 @@ bool UVDAO::create(UV *obj){
         LogWriter::writeln("UVDAO::create()",e.getMessage());
         return false;
     }
+}
+
+QStringList UVDAO::getStringList(const QString &colonne)
+{
+    QStringList liste;
+
+    try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+
+        if(!query.exec("SELECT "+colonne+" FROM uvs;"))
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        while (query.next()) {
+            QSqlRecord rec = query.record();
+            liste<<rec.value(colonne).toString();
+        }
+    }catch(UTProfilerException e){
+        LogWriter::writeln("UVDAO::getStringList()",e.getMessage());
+    }
+    return liste;
 }
 

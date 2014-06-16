@@ -4,10 +4,11 @@
 #include "dossier/UV.h"
 #include "dao/SqlDAOTemplate.h"
 #include "dao/CategorieDAO.h"
+#include <QStringList>
 
 class UVDAO : public SqlDAOTemplate<UV, UVDAO> {
 
-    friend class Singleton<UV>;
+    friend class Singleton<UVDAO>;
 
 public:
 
@@ -20,6 +21,8 @@ public:
     bool remove(UV* obj);
 
     bool create(UV* obj);
+
+    QStringList getStringList(const QString& colonne);
 
     ~UVDAO(){}
     UVDAO(){}

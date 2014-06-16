@@ -32,6 +32,8 @@ public:
 
     void setMap(const QMap<int, QString> &value);
 
+protected:
+
     CategorieDAO(){}
     ~CategorieDAO(){}
 

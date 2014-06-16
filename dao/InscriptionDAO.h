@@ -22,6 +22,11 @@ public:
 
     bool create(Inscription* obj);
 
+    QStringList getStringListResultat();
+
+
+protected:
+
     InscriptionDAO(){}
     ~InscriptionDAO(){}
 
