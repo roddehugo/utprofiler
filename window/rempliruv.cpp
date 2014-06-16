@@ -41,6 +41,7 @@ RemplirUV::RemplirUV(Factory* factory,QWidget *parent) :
     m_pTableWidget->setHorizontalHeaderItem(1,h2);
     m_pTableWidget->setHorizontalHeaderItem(2,h3);
     m_pTableWidget->setHorizontalHeaderItem(3,h4);
+    m_pTableWidget->setFixedSize(425,308);
 
     connect(ui->ajouterBouton,SIGNAL(clicked()),this, SLOT(on_ajouterItem()));
 }
