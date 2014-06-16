@@ -44,6 +44,8 @@ RemplirUV::RemplirUV(Factory* factory,QWidget *parent) :
     m_pTableWidget->setFixedSize(425,308);
 
     connect(ui->ajouterBouton,SIGNAL(clicked()),this, SLOT(on_ajouterItem()));
+    connect(ui->retirerBouton,SIGNAL(clicked()),this, SLOT(on_retirerItem()));
+
 }
 
 void RemplirUV::on_ajouterItem()
@@ -58,6 +60,14 @@ void RemplirUV::on_ajouterItem()
 
 
     delete ui->listAll->currentItem();
+}
+
+void RemplirUV::on_retirerItem()
+{
+    QList<QTableWidgetItem *> l = m_pTableWidget->selectedItems();
+    ui->listAll->addItem(l.first()->text());
+    m_pTableWidget->removeRow(l.first()->row());
+
 }
 
 
