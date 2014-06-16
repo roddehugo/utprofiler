@@ -60,13 +60,11 @@ void MainWindow::on_ajouteruv()
     ajouterUVwindow * uvw= new ajouterUVwindow(fac);
     if (uvw->exec()){
         QString code;
-        //            code=uvw->getCode();
-        //            QMessageBox msgBox;
-        //            msgBox.setText(code);
-        //            msgBox.exec();
-    fillMainWindow(fac);
 
-    }}
+    }
+
+fillMainWindow(fac);
+}
 void MainWindow::suppruv()
 {
     supprimerUVwindow * uvw= new supprimerUVwindow(fac);

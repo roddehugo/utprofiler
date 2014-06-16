@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>835</width>
+    <width>977</width>
     <height>531</height>
    </rect>
   </property>
@@ -164,13 +164,6 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QRadioButton" name="obligatoire">
-                    <property name="text">
-                     <string>Obligatoire</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
                    <widget class="QPushButton" name="retirecursus">
                     <property name="text">
                      <string>&lt;</string>
@@ -184,9 +177,6 @@
              </item>
              <item>
               <widget class="QListWidget" name="cursusajoute"/>
-             </item>
-             <item>
-              <widget class="QListWidget" name="cursusobligatoire"/>
              </item>
             </layout>
            </item>

@@ -26,9 +26,9 @@ public:
     explicit ajouterUVwindow(Factory* factory,QWidget *parent = 0);
     ~ajouterUVwindow();
     void ajoutCategorie(QListWidget *listCat,  QListWidget* listeCategorieCol, QListWidget *listeCreditCol, QString  valcredit);
-    void ajoutCursus(QListWidget *listCursus,  QListWidget* listeCursusAjoute, QListWidget* listeCursusObl, const bool c);
+    void ajoutCursus(QListWidget *listCursus,  QListWidget* listeCursusAjoute);
     void retraitCategorie(QListWidget *listCat,  QListWidget* listeCategorieCol, QListWidget *listeCreditCol);
-    void retraitCursus(QListWidget *listCursus,  QListWidget* listeCursusAjoute,QListWidget* listeCursusObl);
+    void retraitCursus(QListWidget *listCursus,  QListWidget* listeCursusAjoute);
 
 private:
     Ui::ajouterUVwindow *ui;

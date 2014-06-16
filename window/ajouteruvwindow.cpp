@@ -42,11 +42,10 @@ void ajouterUVwindow::ajoutCategorie(QListWidget *listCat,  QListWidget* listeCr
         listeCreditCol->addItem(valcredit);
     }
 }
-void ajouterUVwindow::ajoutCursus(QListWidget *listCursus,  QListWidget* listeCursusAjoute,QListWidget* listeCursusObl,const bool c){
+void ajouterUVwindow::ajoutCursus(QListWidget *listCursus,  QListWidget* listeCursusAjoute){
     if (listCursus->currentItem() != NULL) {
         listeCursusAjoute->addItem(listCursus->currentItem()->text());
-        if (c){listeCursusObl->addItem("true");}
-        else{listeCursusObl->addItem("false");}
+
         delete listCursus->currentItem();
     }
 }
@@ -61,13 +60,12 @@ void ajouterUVwindow::retraitCategorie(QListWidget *listCat, QListWidget *listeC
     }
 }
 
-void ajouterUVwindow::retraitCursus(QListWidget *listCursus, QListWidget *listeCursusAjoute,QListWidget* listeCursusObl)
+void ajouterUVwindow::retraitCursus(QListWidget *listCursus, QListWidget *listeCursusAjoute)
 {
     if (listeCursusAjoute->currentItem()!=NULL){
         int n=listeCursusAjoute->currentRow();
         listCursus->addItem(listeCursusAjoute->currentItem()->text());
         delete listeCursusAjoute->currentItem();
-        delete listeCursusObl->item(n);
     }
 }
 
@@ -76,10 +74,8 @@ void ajouterUVwindow::retraitCursus(QListWidget *listCursus, QListWidget *listeC
 void ajouterUVwindow::addcursus(){
     QListWidget* c1=ui->cursuscolonne;
     QListWidget* c2=ui->cursusajoute;
-    QListWidget* c3=ui->cursusobligatoire;
-    const bool c=ui->obligatoire->isChecked();
 
-    ajoutCursus( c1 , c2 ,c3 ,c);
+    ajoutCursus( c1 , c2);
 
 
 }
@@ -138,9 +134,8 @@ void ajouterUVwindow::removecursus()
 {
     QListWidget* c1=ui->cursuscolonne;
     QListWidget* c2=ui->cursusajoute;
-    QListWidget* c3=ui->cursusobligatoire;
 
-    retraitCursus(c1,c2,c3);
+    retraitCursus(c1,c2);
 }
 
 ajouterUVwindow::~ajouterUVwindow()
