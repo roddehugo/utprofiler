@@ -1,6 +1,7 @@
 #include "supprimeruvwindow.h"
 #include "ui_supprimeruvwindow.h"
-
+#include <QString>
+#include <QDebug>
 supprimerUVwindow::supprimerUVwindow(Factory* factory,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::supprimerUVwindow),
@@ -14,8 +15,13 @@ supprimerUVwindow::supprimerUVwindow(Factory* factory,QWidget *parent) :
 }
 void supprimerUVwindow::delUV(){
     QString nom = ui->listall->currentItem()->text();
+
+
+
        UV* uv= fac->getUVDAO()->findByCode(nom);
-      fac->getUVDAO()->remove(uv);
+      if(fac->getUVDAO()->remove(uv)){
+            qDebug()<<"Suppression effectué";
+       }
 }
 
 supprimerUVwindow::~supprimerUVwindow()

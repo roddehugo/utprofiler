@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "dao/Factories.h"
+#include "dossier/Cursus.h"
 
 namespace Ui {
 class ajoutcursuswindow;
@@ -15,6 +16,7 @@ class ajoutcursuswindow : public QDialog
 public:
     explicit ajoutcursuswindow(Factory* factory,QWidget *parent = 0);
     ~ajoutcursuswindow();
+    void saveCursus();
 
 private:
     Ui::ajoutcursuswindow *ui;

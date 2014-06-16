@@ -76,7 +76,7 @@ UV *UVDAO::findByCode(const QString str)
 {
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("SELECT u.id as uid, u.titre as utitre, code, automne, printemps, demiuv, c.id as cid, c.titre as ctitre, ects FROM uvs u INNER JOIN categorie_uv_decorator cud ON cud.iduv = uid INNER JOIN categories c ON cud.idcategorie = cid WHERE utitre = :titre;");
+        query.prepare("SELECT u.id as uid, u.titre as utitre, code, automne, printemps, demiuv, c.id as cid, c.titre as ctitre, ects FROM uvs u INNER JOIN categorie_uv_decorator cud ON cud.iduv = uid INNER JOIN categories c ON cud.idcategorie = cid WHERE code = :titre;");
         query.bindValue(":titre",str);
         if (!query.exec() ){
             throw UTProfilerException("La requête a échoué : " + query.lastQuery());

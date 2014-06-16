@@ -22,8 +22,6 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     EtudiantDAO* etudao = fac->getEtudiantDAO();
     Etudiant* me = etudao->getCurrent();
     ui->setupUi(this);
-//    modelDossier modelDossier(0);
-//    ui->afficheDossier->setModel(&modelDossier);
     ui->nom->setText(me->getNom());
     ui->prenom->setText(me->getPrenom());
 
@@ -38,13 +36,18 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     QObject::connect(ui->rejeterUV , SIGNAL(clicked()), this, SLOT(rejeterUV()));
     QObject::connect(ui->annulerUV ,SIGNAL(clicked()), this, SLOT(retirerpref()));
 
-    ui->listUV->addItems(fac->getUVDAO()->getStringList("code"));
+    fillMainWindow(fac);
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::fillMainWindow(Factory *factory)
+{
+     ui->listUV->addItems(fac->getUVDAO()->getStringList("code"));
 }
 
 void MainWindow::modifieruv(){
@@ -61,7 +64,7 @@ void MainWindow::on_ajouteruv()
         //            QMessageBox msgBox;
         //            msgBox.setText(code);
         //            msgBox.exec();
-
+    fillMainWindow(fac);
 
     }}
 void MainWindow::suppruv()

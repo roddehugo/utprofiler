@@ -5,6 +5,8 @@
 #include "dao/Factories.h"
 #include "dao/CategorieDAO.h"
 #include "dao/UVDAO.h"
+#include "dao/CursusDAO.h"
+#include "dao/UVDAO.h"
 #include <QString>
 #include <QMessageBox>
 #include <QListWidget>

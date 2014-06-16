@@ -95,6 +95,61 @@ Cursus* CursusDAO::find(const int& id){
     }
 }
 
+Cursus *CursusDAO::findByLogin(const QString &login)
+{
+    try{
+
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        query.prepare("SELECT c.id as cid , c.titre as ctitre, c.code as ccode, c.ects as cetcs, c.maxsemestres, c.previsionsemestres, c.parent, cat.titre as cattitre, ccd.ects FROM cursus c JOIN categorie_cursus_decorator ccd ON ccd.idcursus = cid JOIN categories cat ON cat.id = ccd.idcategorie WHERE ctitre = :titre;");
+        query.bindValue(":titre",login);
+        if (!query.exec()){
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        }
+        if(query.first()){
+            QSqlRecord rec = query.record();
+            const int id = rec.value("cid").toInt();
+            const QString c = rec.value("ccode").toString();
+            const QString t = rec.value("ctitre").toString();
+            const int cects = rec.value("cects").toInt();
+            const int maxSem = rec.value("maxsemestres").toInt();
+            const int prevSem = rec.value("previsionssemestres").toInt();
+            const int p = rec.value("parent").toInt();
+
+            LogWriter::writeln("Cursus.cpp","Lecture du cursus : " + c);
+            Cursus* cursus;
+
+            if(p != 0){
+                Cursus* par = find(p);
+                cursus=new Cursus(id,c,t,cects,maxSem,prevSem,par);
+            }else{
+                cursus=new Cursus(id,c,t,cects,maxSem,prevSem,NULL);
+            }
+
+            const QString catitre = rec.value("catitre").toString();
+            const int ects = rec.value("ects").toInt();
+
+            LogWriter::append(catitre+":"+QString::number(ects)+"...");
+            QMap<QString,int> credits;
+
+            while(query.next()){
+                rec = query.record();
+                const QString ctitre = rec.value("catitre").toString();
+                const int ects = rec.value("ects").toInt();
+
+                LogWriter::append(catitre+":"+QString::number(ects)+"...");
+                credits.insert(catitre,ects);
+            }
+            cursus->setCredits(credits);
+            LogWriter::endl();
+            Map.insert(id,cursus);
+        }else{
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        }
+    }catch(UTProfilerException e){
+        LogWriter::writeln("Cursus::find()",e.getMessage());
+    }
+}
+
 bool CursusDAO::update(Cursus* obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());

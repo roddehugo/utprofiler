@@ -95,8 +95,6 @@ void ajouterUVwindow::addcredit(){
 }
 void ajouterUVwindow::valcredit(){
     int valcredit=ui->spinBox->value();
-
-
 }
 
 
@@ -107,15 +105,23 @@ void ajouterUVwindow::saveUV(){
     const bool p = ui->isprintemps->isChecked();
     const bool d = ui->isdemiuv->isChecked();
     QMap <QString,int>mapUV;
-
+    QList <Cursus*> listCursus;
     for (int boucle=0;boucle<ui->creditajoute->count();++boucle)
     {
         QString texte=ui->creditajoute->item(boucle)->text();
         int cred=(ui->creditcol->item(boucle)->text()).toInt();
         mapUV[texte]=cred;
     }
-//    UV* uv= new UV(c,t,p,a,d,mapUV);
-//    fac->getUVDAO()->create(uv);
+    for (int i=0;i<ui->cursusajoute->count();++i)
+    {
+        QString texte=ui->creditajoute->item(i)->text();
+        listCursus.append(fac->getCursusDAO()->findByLogin(texte));
+    }
+
+       UV* uv= new UV(c,t,p,a,d,mapUV,listCursus);
+       if(fac->getUVDAO()->create(uv)){
+           qDebug()<<"ajout effectue";
+       }
 
 }
 
