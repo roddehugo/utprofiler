@@ -59,7 +59,7 @@ UV* UVDAO::find(const int& id){
             const bool printemps = rec.value("printemps").toBool();
             const bool demiuv = rec.value("demiuv").toBool();
 
-            LogWriter::write("UVDAO.cpp","Lecture de l'UV : " + code);
+            LogWriter::writeln("UVDAO.cpp","Lecture de l'UV : " + code);
             QMap<QString,int> ectsmap = getEctsMap(id);
             QList<Cursus*> cursuslist = getCursusList(id);
 
@@ -87,7 +87,7 @@ UV *UVDAO::findByCode(const QString& str)
         if(query.first()){
             QSqlRecord rec = query.record();
 
-            const int id = rec.value("uid").toInt();
+            const int id = rec.value("id").toInt();
             const QString code = rec.value("code").toString();
             const QString titre = rec.value("titre").toString();
             const bool automne = rec.value("automne").toBool();

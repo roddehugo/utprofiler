@@ -41,12 +41,12 @@ void runTests(Factory* fac){
     fac->getCursusDAO()->create(tc);
     fac->getCursusDAO()->create(gi);
 
-    Semestre* tc01 = new Semestre(Automne,2011,0,monDossier);
-    Semestre* tc02 = new Semestre(Printemps,2012,0,monDossier);
-    Semestre* tc03 = new Semestre(Automne,2012,1,monDossier);
-    Semestre* tc04 = new Semestre(Printemps,2013,0,monDossier);
-    Semestre* gi01 = new Semestre(Automne,2013,0,monDossier);
-    Semestre* gi02 = new Semestre(Printemps,2014,0,monDossier);
+    Semestre* tc01 = new Semestre("TC01",Automne,2011,0,tc);
+    Semestre* tc02 = new Semestre("TC02",Printemps,2012,0,tc);
+    Semestre* tc03 = new Semestre("TC03",Automne,2012,1,tc);
+    Semestre* tc04 = new Semestre("TC04",Printemps,2013,0,tc);
+    Semestre* gi01 = new Semestre("GI01",Automne,2013,0,gi);
+    Semestre* gi02 = new Semestre("GI02",Printemps,2014,0,gi);
 
     fac->getSemestreDAO()->create(tc01);
     fac->getSemestreDAO()->create(tc02);
@@ -119,9 +119,8 @@ int main(int argc, char *argv[])
 
     LogWriter::writeln("Main.cpp","Lancement de l'application"); 
 
-    Connexion::getInstance()->setConnexion("/Users/fsamuel/Dropbox/LO21/Projet/utprofiler.db");
+    Connexion::getInstance()->setConnexion("/Users/hugo/Dropbox/UVs/LO21/Projet/utprofiler.db");
     Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
-
 
     LoginWindow w(fac);
 

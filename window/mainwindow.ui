@@ -27,7 +27,7 @@
     <item>
      <widget class="QTabWidget" name="tabwidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -42,6 +42,19 @@
              <item>
               <widget class="QWidget" name="widget_4" native="true">
                <layout class="QGridLayout" name="gridLayout_4">
+                <item row="0" column="2">
+                 <spacer name="horizontalSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
                 <item row="0" column="1">
                  <widget class="QLabel" name="prenom">
                   <property name="text">
@@ -56,18 +69,12 @@
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="2">
-                 <spacer name="horizontalSpacer">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
+                <item row="0" column="3">
+                 <widget class="QPushButton" name="ajouterDossier">
+                  <property name="text">
+                   <string>Ajouter un dossier</string>
                   </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
+                 </widget>
                 </item>
                </layout>
               </widget>
@@ -80,7 +87,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QTableWidget" name="afficheDossier"/>
+              <widget class="QTableWidget" name="m_afficheDossier"/>
              </item>
              <item>
               <widget class="QWidget" name="widget_5" native="true">

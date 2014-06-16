@@ -6,7 +6,7 @@
 #include "window/modifiercursuswindow.h"
 #include "window/supprimercursus.h"
 #include "window/modeldossier.h"
-#include "window/rempliruv.h"
+#include "window/saisirinscription.h"
 #include <QDebug>
 #include <QMessageBox>
 
@@ -90,7 +90,7 @@ void MainWindow::supprcursus()
 
 void MainWindow::on_remplirDossier_clicked()
 {
-    RemplirUV* uvw=new RemplirUV(fac);
+    saisirinscription* uvw=new saisirinscription(fac);
     uvw->exec();
 }
 

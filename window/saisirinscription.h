@@ -8,20 +8,21 @@
 #include <QDebug>
 
 namespace Ui {
-class RemplirUV;
+class saisirinscription;
 }
 
-class RemplirUV : public QDialog
+class saisirinscription : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit RemplirUV(Factory* factory,QWidget *parent = 0);
-    ~RemplirUV();
+    explicit saisirinscription(Factory* factory,QWidget *parent = 0);
+    ~saisirinscription();
 
 public slots:
     void on_ajouterItem();
     void on_retirerItem();
+    void saveDossier();
 
 private:
 
@@ -29,7 +30,7 @@ private:
 
     QStringList m_TableHeader;
 
-    Ui::RemplirUV *ui;
+    Ui::saisirinscription *ui;
     Factory* fac;
 };
 

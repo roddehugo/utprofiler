@@ -5,7 +5,7 @@
 #include <QString>
 #include "UTProfilerException.h"
 
-class Dossier;
+class Cursus;
 class Inscription;
 
 enum Saison{
@@ -16,9 +16,9 @@ enum Saison{
 class Semestre {
 
  public:
-    Semestre(const unsigned int id, const Saison& saison, unsigned int annee, bool etranger, Dossier* dossier, const QMap<int, Inscription*>& inscriptions);
-    Semestre(const unsigned int id, const Saison& saison, unsigned int annee, bool etranger, Dossier* dossier);
-    Semestre(const Saison& saison, unsigned int annee, bool etranger, Dossier* dossier);
+    Semestre(const unsigned int id, const QString& titre, const Saison& saison, unsigned int annee, bool etranger, Cursus* cursus, const QMap<int, Inscription*>& inscriptions);
+    Semestre(const unsigned int id, const QString& titre, const Saison& saison, unsigned int annee, bool etranger, Cursus* cursus);
+    Semestre(const QString& titre, const Saison& saison, unsigned int annee, bool etranger, Cursus* cursus);
     ~Semestre();
 
     Saison getSaison() const;
@@ -30,8 +30,8 @@ class Semestre {
     QMap<int, Inscription *> getInscriptions() const;
     void setInscriptions(const QMap<int, Inscription *> &value);
 
-    Dossier *getDossier() const;
-    void setDossier(Dossier *value);
+    Cursus *getCursus() const;
+    void setCursus(Cursus *value);
 
     bool isEtranger() const;
     void setEtranger(bool value);
@@ -43,13 +43,17 @@ class Semestre {
 
     void setID(unsigned int value);
 
+    QString getTitre() const;
+    void setTitre(const QString &value);
+
 private:
+    unsigned int id;
+    QString titre;
     Saison saison;
     unsigned int annee;
     bool etranger;
-    unsigned int id;
     QMap<int, Inscription *> inscriptions;
-    Dossier* dossier;
+    Cursus* cursus;
 
 };
 
