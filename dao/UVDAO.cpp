@@ -149,6 +149,7 @@ bool UVDAO::remove(UV* obj){
         }else{
             LogWriter::writeln("UVDAO.cpp","Suprression de l'UV : " + obj->getCode());
             Map.erase(Map.find(obj->ID()));
+            qDebug()<<Map;
             return true;
         }
     }catch(UTProfilerException e){

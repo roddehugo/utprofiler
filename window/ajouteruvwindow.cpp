@@ -1,10 +1,7 @@
 #include "ajouteruvwindow.h"
 #include "ui_ajouteruvwindow.h"
 #include <QDebug>
-#include <QListView>
 #include <QListWidget>
-#include <QTableView>
-#include <QStandardItemModel>
 
 
 ajouterUVwindow::ajouterUVwindow(Factory* factory,QWidget *parent) :
