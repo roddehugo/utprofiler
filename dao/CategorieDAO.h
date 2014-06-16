@@ -2,12 +2,19 @@
 #define CATEGORIEDAO_H
 
 #include "dao/SqlDAOTemplate.h"
+#include <QListWidget>
+#include <QStringList>
+#include <QString>
+
+
 
 class CategorieDAO : public Singleton<CategorieDAO>{
 
     friend class Singleton<CategorieDAO>;
 
 public:
+
+    QStringList getStringList(const QString colonne);
 
     QMap<int, QString> findAll();
 
@@ -30,27 +37,10 @@ protected:
     CategorieDAO(){}
     ~CategorieDAO(){}
 
+protected:
     QMap<int,QString> Map;
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif // CATEGORIEDAO_H

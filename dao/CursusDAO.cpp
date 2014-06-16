@@ -150,4 +150,25 @@ bool CursusDAO::create(Cursus *obj){
         LogWriter::writeln("CursusDAO::create()",e.getMessage());
     }
 }
+QStringList CursusDAO::getStringList(const QString colonne)
+{
+    QStringList liste;
+    try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        query.prepare("SELECT "+colonne+" FROM cursus;");
+        if (!query.exec()){
+            throw UTProfilerException("La requête a échoué : " + query.lastQuery());
+        }
+        while (query.next()){
+            QSqlRecord rec = query.record();
+            liste<<(rec.value(colonne).toString());
+        }
+
+
+
+
+    }catch(UTProfilerException e){
+        LogWriter::writeln("Categorie::getColonne()",e.getMessage());}
+    return liste;
+}
 

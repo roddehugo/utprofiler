@@ -3,8 +3,13 @@
 
 #include <QDialog>
 #include "dao/Factories.h"
+#include "dao/CategorieDAO.h"
+#include "dao/UVDAO.h"
 #include <QString>
 #include <QMessageBox>
+#include <QListWidget>
+#include <QTableView>
+#include <QStandardItemModel>
 
 
 namespace Ui {
@@ -18,6 +23,10 @@ class ajouterUVwindow : public QDialog
 public:
     explicit ajouterUVwindow(Factory* factory,QWidget *parent = 0);
     ~ajouterUVwindow();
+    void ajoutCategorie(QListWidget *listCat,  QListWidget* listeCategorieCol, QListWidget *listeCreditCol, QString  valcredit);
+    void ajoutCursus(QListWidget *listCursus,  QListWidget* listeCursusAjoute, QListWidget* listeCursusObl, const bool c);
+    void retraitCategorie(QListWidget *listCat,  QListWidget* listeCategorieCol, QListWidget *listeCreditCol);
+    void retraitCursus(QListWidget *listCursus,  QListWidget* listeCursusAjoute,QListWidget* listeCursusObl);
 
 private:
     Ui::ajouterUVwindow *ui;
@@ -29,6 +38,8 @@ public slots:
     void addcredit();
     void removecredit();
     void removecursus();
+    void valcredit();
+
 };
 
 #endif // AJOUTERUVWINDOW_H

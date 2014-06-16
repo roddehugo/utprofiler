@@ -4,6 +4,7 @@
 #include "dossier/Cursus.h"
 #include "dao/SqlDAOTemplate.h"
 #include "dossier/Dossier.h"
+#include <QStringList>
 
 class Dossier;
 
@@ -25,6 +26,7 @@ public:
 
     bool create(Cursus* obj);
 
+    QStringList getStringList(const QString colonne);
 protected:
 
     CursusDAO(){}

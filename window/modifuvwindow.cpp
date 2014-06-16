@@ -1,5 +1,7 @@
 #include "modifuvwindow.h"
 #include "ui_modifuvwindow.h"
+#include <QDebug>
+#include <QListWidget>
 
 modifUVwindow::modifUVwindow(Factory* factory,QWidget *parent) :
     QDialog(parent),

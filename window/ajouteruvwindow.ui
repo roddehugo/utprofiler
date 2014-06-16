@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>746</width>
+    <width>835</width>
     <height>531</height>
    </rect>
   </property>
@@ -57,21 +57,21 @@
              <item row="3" column="1">
               <layout class="QVBoxLayout" name="verticalLayout">
                <item>
-                <widget class="QRadioButton" name="isautomne">
+                <widget class="QCheckBox" name="isautomne">
                  <property name="text">
                   <string>Automne</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QRadioButton" name="isprintemps">
+                <widget class="QCheckBox" name="isprintemps">
                  <property name="text">
                   <string>Printemps</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QRadioButton" name="isdemiuv">
+                <widget class="QCheckBox" name="isdemiuv">
                  <property name="text">
                   <string>demi UV</string>
                  </property>
@@ -95,7 +95,7 @@
                 <item row="0" column="0">
                  <layout class="QHBoxLayout" name="horizontalLayout_6">
                   <item>
-                   <widget class="QListView" name="listView"/>
+                   <widget class="QListWidget" name="categoriecol"/>
                   </item>
                   <item>
                    <widget class="QWidget" name="widget_3" native="true">
@@ -106,14 +106,14 @@
                         <widget class="QSpinBox" name="spinBox"/>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="ajoutcursus_2">
+                        <widget class="QPushButton" name="ajoutcredit">
                          <property name="text">
                           <string>&gt;</string>
                          </property>
                         </widget>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="retirecursus_2">
+                        <widget class="QPushButton" name="retirecredit">
                          <property name="text">
                           <string>&lt;</string>
                          </property>
@@ -125,7 +125,10 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QListView" name="listView_6"/>
+                   <widget class="QListWidget" name="creditajoute"/>
+                  </item>
+                  <item>
+                   <widget class="QListWidget" name="creditcol"/>
                   </item>
                  </layout>
                 </item>
@@ -146,7 +149,7 @@
            <item row="0" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
-              <widget class="QListView" name="listView_3"/>
+              <widget class="QListWidget" name="cursuscolonne"/>
              </item>
              <item>
               <widget class="QWidget" name="widget_2" native="true">
@@ -157,6 +160,13 @@
                    <widget class="QPushButton" name="ajoutcursus">
                     <property name="text">
                      <string>&gt;</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QRadioButton" name="obligatoire">
+                    <property name="text">
+                     <string>Obligatoire</string>
                     </property>
                    </widget>
                   </item>
@@ -173,7 +183,10 @@
               </widget>
              </item>
              <item>
-              <widget class="QListView" name="listView_4"/>
+              <widget class="QListWidget" name="cursusajoute"/>
+             </item>
+             <item>
+              <widget class="QListWidget" name="cursusobligatoire"/>
              </item>
             </layout>
            </item>

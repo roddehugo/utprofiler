@@ -24,6 +24,7 @@ SOURCES += main.cpp \
     dao/DossierDAO.cpp \
     dossier/UV.cpp \
     dossier/Cursus.cpp \
+    dao/CategorieDAO.cpp\
     dao/EtudiantDAO.cpp \
     window/loginwindow.cpp \
     window/mainwindow.cpp \
@@ -38,6 +39,7 @@ SOURCES += main.cpp \
     dao/InscriptionDAO.cpp \
     dao/CursusDAO.cpp \
     dao/DesiderataDAO.cpp \
+    window/modeldossier.cpp\
     window/ajoutdossier.cpp \
     window/rempliruv.cpp
 
@@ -71,7 +73,9 @@ HEADERS  += \
     dao/InscriptionDAO.h \
     dao/CursusDAO.h \
     dao/DesiderataDAO.h \
+    window/remplirdossier.h \
     window/ajoutdossier.h \
+    window/modeldossier.h\
     UVXML.h \
     window/rempliruv.h
 

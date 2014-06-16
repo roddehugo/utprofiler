@@ -5,6 +5,7 @@
 #include "window/supprimeruvwindow.h"
 #include "window/modifiercursuswindow.h"
 #include "window/supprimercursus.h"
+#include "window/modeldossier.h"
 #include "window/rempliruv.h"
 #include <QDebug>
 #include <QMessageBox>
@@ -21,7 +22,8 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     EtudiantDAO* etudao = fac->getEtudiantDAO();
     Etudiant* me = etudao->getCurrent();
     ui->setupUi(this);
-    
+//    modelDossier modelDossier(0);
+//    ui->afficheDossier->setModel(&modelDossier);
     ui->nom->setText(me->getNom());
     ui->prenom->setText(me->getPrenom());
 
