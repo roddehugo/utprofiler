@@ -75,9 +75,39 @@ void runTests(Factory* fac){
     fac->getUVDAO()->create(nf93);
     fac->getUVDAO()->create(lo21);
 
-    fac->getInscriptionDAO()->create(new Inscription(nf93,tc03,B));
-    fac->getInscriptionDAO()->create(new Inscription(lo21,gi02,EC));
+    Inscription *i1 = new Inscription(nf93,tc03,B);
+    Inscription *i2 = new Inscription(lo21,gi02,EC);
 
+    fac->getInscriptionDAO()->create(i1);
+    fac->getInscriptionDAO()->create(i2);
+
+    /*Suppression des objets*/
+
+    fac->getInscriptionDAO()->remove(i1);
+    fac->getInscriptionDAO()->remove(i2);
+
+    fac->getUVDAO()->remove(nf93);
+    fac->getUVDAO()->remove(lo21);
+
+    fac->getSemestreDAO()->remove(tc01);
+    fac->getSemestreDAO()->remove(tc02);
+    fac->getSemestreDAO()->remove(tc03);
+    fac->getSemestreDAO()->remove(tc04);
+    fac->getSemestreDAO()->remove(gi01);
+    fac->getSemestreDAO()->remove(gi02);
+
+    fac->getCursusDAO()->remove(tc);
+    fac->getCursusDAO()->remove(gi);
+
+    fac->getCategorieDAO()->remove("CS");
+    fac->getCategorieDAO()->remove("TM");
+    fac->getCategorieDAO()->remove("TSH");
+    fac->getCategorieDAO()->remove("SP");
+    fac->getCategorieDAO()->remove("Libre");
+
+    fac->getEtudiantDAO()->remove(me);
+
+    fac->getDossierDAO()->remove(monDossier);
 
 }
 

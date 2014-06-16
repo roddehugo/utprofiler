@@ -138,7 +138,6 @@ bool UVDAO::update(UV* obj){
 }
 
 bool UVDAO::remove(UV* obj){
-
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         query.prepare("DELETE FROM uvs WHERE id = :id ;");
@@ -148,14 +147,19 @@ bool UVDAO::remove(UV* obj){
             return false;
         }else{
             LogWriter::writeln("UVDAO.cpp","Suprression de l'UV : " + obj->getCode());
+            query.prepare("DELETE FROM categorie_uv_decorator WHERE iduv = :id ;");
+            query.bindValue(":id", obj->ID());
+            if (!query.exec()){
+                throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+            }
             Map.erase(Map.find(obj->ID()));
-            qDebug()<<Map;
             return true;
         }
     }catch(UTProfilerException e){
         LogWriter::writeln("UVDAO::remove()",e.getMessage());
         return false;
     }
+
 }
 
 
@@ -180,14 +184,17 @@ bool UVDAO::create(UV *obj){
             Map.insert(id,obj);
             LogWriter::writeln("UVDAO.cpp","Création de l'UV : " + obj->getCode());
 
-            query.prepare("INSERT INTO categorie_uv_decorator (iduv, idcategorie, ects) VALUES (:iduv, :idcat, :ects);");
-            QMap<QString,int> cats = obj->getCredits();
+            QMap<QString,int> cat = obj->getCredits();
+            query.prepare("INSERT INTO categorie_uv_decorator (iduv, idcategorie, ects) VALUES (:iduv, :idcategorie, :ects);");
 
-            for(QMap<QString,int>::const_iterator i = cats.begin(); i != cats.constEnd(); ++i){
+            for(QMap<QString,int>::const_iterator i = cat.begin(); i != cat.end(); ++i){
                 int idcat = CategorieDAO::getInstance()->findByStr(i.key());
                 query.bindValue(":iduv", obj->ID() );
-                query.bindValue(":idcat", idcat );
+                query.bindValue(":idcategorie", idcat );
                 query.bindValue(":ects", i.value() );
+                if (!query.exec()){
+                    throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+                }
                 LogWriter::writeln("UVDAO.cpp","Ajout de la reference categorie : " + QString::number(idcat));
             }
 

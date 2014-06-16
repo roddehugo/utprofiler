@@ -167,6 +167,11 @@ bool CursusDAO::remove(Cursus* obj){
             return false;
         }else{
             LogWriter::writeln("CursusDAO.cpp","Suprression du cursus : " + obj->getCode());
+            query.prepare("DELETE FROM categorie_cursus_decorator WHERE idcursus = :id ;");
+            query.bindValue(":id", obj->ID());
+            if (!query.exec()){
+                throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+            }
             Map.erase(Map.find(obj->ID()));
             return true;
         }
