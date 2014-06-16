@@ -1,8 +1,18 @@
 #include "Cursus.h"
 
 
+
+Cursus *Cursus::getParent() const
+{
+    return parent;
+}
+
+void Cursus::setParent(Cursus *value)
+{
+    parent = value;
+}
 Cursus::Cursus(const unsigned int id, const QString &code, const QString &titre, const unsigned int ects,
-               const unsigned int maxSemestre,const unsigned int previsionsSemestres, bool current,
+               const unsigned int maxSemestre,const unsigned int previsionsSemestres,
                QMap<QString, int> credits, Cursus *parent):
     id(id),
     titre(titre),
@@ -15,18 +25,8 @@ Cursus::Cursus(const unsigned int id, const QString &code, const QString &titre,
 
 }
 
-
-unsigned int Cursus::getPrevisionsSemestres() const
-{
-    return previsionsSemestres;
-}
-
-void Cursus::setPrevisionsSemestres(unsigned int value)
-{
-    previsionsSemestres = value;
-}
 Cursus::Cursus(const QString &code, const QString &titre, const unsigned int ects,
-               const unsigned int maxSemestre,const unsigned int previsionsSemestres, bool current,
+               const unsigned int maxSemestre,const unsigned int previsionsSemestres,
                QMap<QString, int> credits, Cursus *parent):
     titre(titre),
     code(code),
@@ -38,9 +38,23 @@ Cursus::Cursus(const QString &code, const QString &titre, const unsigned int ect
 
 }
 
+unsigned int Cursus::getPrevisionsSemestres() const
+{
+    return previsionsSemestres;
+}
+
+void Cursus::setPrevisionsSemestres(unsigned int value)
+{
+    previsionsSemestres = value;
+}
+
 QString Cursus::getCode() const
 {
     return code;
+}
+
+void Cursus::setCode(const QString& value){
+    code = value;
 }
 
 QMap<QString, int> Cursus::getCredits() const
@@ -61,16 +75,6 @@ unsigned int Cursus::getMaxSemestres() const
 void Cursus::setMaxSemestres(unsigned int value)
 {
     maxSemestres = value;
-}
-
-bool Cursus::isCurrent() const
-{
-    return current;
-}
-
-void Cursus::setParent(Cursus *value)
-{
-    parent = value;
 }
 
 unsigned int Cursus::getEcts() const
