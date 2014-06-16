@@ -52,4 +52,3 @@ CategorieDAO *DAOFactory::getCategorieDAO()
     return CategorieDAO::getInstance();
 }
 
-

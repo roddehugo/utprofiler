@@ -32,9 +32,7 @@ public:
     UVDAO* getUVDAO();
 
     EtudiantDAO* getEtudiantDAO();
-
     InscriptionDAO* getInscriptionDAO();
-
     DossierDAO* getDossierDAO();
     CategorieDAO* getCategorieDAO();
     CursusDAO* getCursusDAO() ;

@@ -6,6 +6,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QVariant>
+#include <QMessageBox>
 #include "writers/LogWriter.h"
 #include "UTProfilerException.h"
 #include "dao/Connexion.h"

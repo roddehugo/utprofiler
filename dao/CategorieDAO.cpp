@@ -1,5 +1,7 @@
 #include "dao/CategorieDAO.h"
 
+
+
 QMap<int, QString> CategorieDAO::findAll(){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
@@ -54,13 +56,9 @@ bool CategorieDAO::update(QString str){
 
     return false;
 }
-int CategorieDAO::findbyStr(QString str){
+int CategorieDAO::findByStr(QString str){
     try {
-        //        QMap<int, QString>::iterator it=Map.begin();
-        //        while(it!=Map.end()||it.value()!=str){
-        //            ++it;
-        //        }
-        //        if ()
+
         if (!Map.key(str)){
             throw UTProfilerException("La chaine "+str+" n'est pas dans la map.");
             QSqlQuery query(Connexion::getInstance()->getDataBase());
@@ -83,12 +81,9 @@ int CategorieDAO::findbyStr(QString str){
         else{
             return Map.key(str);
         }
-    }
-    catch(UTProfilerException e){
+    }catch(UTProfilerException e){
         LogWriter::writeln("CategorieDAO::findbyStr()",e.getMessage());
     }
-
-
 }
 
 bool CategorieDAO::remove(QString str){
@@ -135,13 +130,13 @@ bool CategorieDAO::create(QString str){
     return false;
 }
 
+
 QStringList CategorieDAO::getStringList(const QString colonne)
 {
     QStringList liste;
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         query.prepare("SELECT "+colonne+" FROM categories;");
-        query.bindValue(":colonne",colonne);
         if (!query.exec()){
             throw UTProfilerException("La requête a échoué : " + query.lastQuery());
         }
@@ -149,14 +144,21 @@ QStringList CategorieDAO::getStringList(const QString colonne)
             QSqlRecord rec = query.record();
             liste<<(rec.value(0).toString());
         }
-
-
-
-
     }catch(UTProfilerException e){
         LogWriter::writeln("Categorie::getColonne()",e.getMessage());}
-    return liste;
+
+   return liste;
 }
 
+
+QMap<int, QString> CategorieDAO::getMap() const
+{
+    return Map;
+}
+
+void CategorieDAO::setMap(const QMap<int, QString> &value)
+{
+    Map = value;
+}
 
 

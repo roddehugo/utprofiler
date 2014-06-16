@@ -164,6 +164,13 @@
                    </widget>
                   </item>
                   <item>
+                   <widget class="QRadioButton" name="obligatoire">
+                    <property name="text">
+                     <string>Obligatoire</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
                    <widget class="QPushButton" name="retirecursus">
                     <property name="text">
                      <string>&lt;</string>
@@ -177,6 +184,9 @@
              </item>
              <item>
               <widget class="QListWidget" name="cursusajoute"/>
+             </item>
+             <item>
+              <widget class="QListWidget" name="cursusobligatoire"/>
              </item>
             </layout>
            </item>

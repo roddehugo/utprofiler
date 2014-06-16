@@ -4,7 +4,7 @@
 #include <vector>
 #include <QString>
 
-#include "decorator/Cursus.h"
+#include "dossier/Cursus.h"
 #include "dossier/Inscription.h"
 #include "dossier/Semestre.h"
 

@@ -22,7 +22,6 @@ ajouterUVwindow::ajouterUVwindow(Factory* factory,QWidget *parent) :
     QObject::connect(ui->ajoutcredit , SIGNAL(clicked()), this, SLOT(addcredit()));
     QObject::connect(ui->retirecredit , SIGNAL(clicked()), this, SLOT(removecredit()));
     QObject::connect(ui->spinBox , SIGNAL(editingFinished()), this, SLOT(valcredit()));
-
     ui->categoriecol->addItems(cat->getStringList("titre"));
     ui->cursuscolonne->addItems(cursus->getStringList("code"));
 }
@@ -43,9 +42,11 @@ void ajouterUVwindow::ajoutCategorie(QListWidget *listCat,  QListWidget* listeCr
         listeCreditCol->addItem(valcredit);
     }
 }
-void ajouterUVwindow::ajoutCursus(QListWidget *listCursus,  QListWidget* listeCursusAjoute){
+void ajouterUVwindow::ajoutCursus(QListWidget *listCursus,  QListWidget* listeCursusAjoute,QListWidget* listeCursusObl,const bool c){
     if (listCursus->currentItem() != NULL) {
         listeCursusAjoute->addItem(listCursus->currentItem()->text());
+        if (c){listeCursusObl->addItem("true");}
+        else{listeCursusObl->addItem("false");}
         delete listCursus->currentItem();
     }
 }
@@ -60,19 +61,25 @@ void ajouterUVwindow::retraitCategorie(QListWidget *listCat, QListWidget *listeC
     }
 }
 
-void ajouterUVwindow::retraitCursus(QListWidget *listCursus, QListWidget *listeCursusAjoute)
+void ajouterUVwindow::retraitCursus(QListWidget *listCursus, QListWidget *listeCursusAjoute,QListWidget* listeCursusObl)
 {
     if (listeCursusAjoute->currentItem()!=NULL){
+        int n=listeCursusAjoute->currentRow();
         listCursus->addItem(listeCursusAjoute->currentItem()->text());
         delete listeCursusAjoute->currentItem();
+        delete listeCursusObl->item(n);
     }
 }
+
+
 
 void ajouterUVwindow::addcursus(){
     QListWidget* c1=ui->cursuscolonne;
     QListWidget* c2=ui->cursusajoute;
+    QListWidget* c3=ui->cursusobligatoire;
+    const bool c=ui->obligatoire->isChecked();
 
-    ajoutCursus( c1 , c2 );
+    ajoutCursus( c1 , c2 ,c3 ,c);
 
 
 }
@@ -92,32 +99,24 @@ void ajouterUVwindow::valcredit(){
 
 }
 
+
 void ajouterUVwindow::saveUV(){
     const QString c =  ui->codeuv->text();
     const QString t = ui->titreuv->text();
     const bool a = ui->isautomne->isChecked();
     const bool p = ui->isprintemps->isChecked();
     const bool d = ui->isdemiuv->isChecked();
+    QMap <QString,int>mapUV;
+
     for (int boucle=0;boucle<ui->creditajoute->count();++boucle)
     {
         QString texte=ui->creditajoute->item(boucle)->text();
-
+        int cred=(ui->creditcol->item(boucle)->text()).toInt();
+        mapUV[texte]=cred;
     }
-    //ui->creditajoute->findItems()
-    //    Creditable * uv = new UV(params);
-    //    uv=new CS(params,uv);
-    //    uv=new TM(params,uv);
+    UV* uv= new UV(c,t,p,a,d,mapUV);
+    fac->getUVDAO()->create(uv);
 
-    //    Creditable* uv2 = new CS(params,new TM(params, new UV(params)));
-
-    //    Creditable* uv = new UV(1,"TC","Tronc Commun",120,6,1,NULL,NULL);
-    //    if(uvdao->create(new UV())){
-    //        setUpMainWindow();
-    //    }else{
-    //        QMessageBox msgBox;
-    //        msgBox.setText("Impossible d'ajouter l'uv.");
-    //        msgBox.exec();
-    //    }
 }
 
 void ajouterUVwindow::removecredit()
@@ -133,7 +132,9 @@ void ajouterUVwindow::removecursus()
 {
     QListWidget* c1=ui->cursuscolonne;
     QListWidget* c2=ui->cursusajoute;
-    retraitCursus(c1,c2);
+    QListWidget* c3=ui->cursusobligatoire;
+
+    retraitCursus(c1,c2,c3);
 }
 
 ajouterUVwindow::~ajouterUVwindow()

@@ -2,24 +2,23 @@
 #define CATEGORIEDAO_H
 
 #include "dao/SqlDAOTemplate.h"
-#include "decorator/Creditable.h"
-#include "decorator/CS.h"
-#include "decorator/TM.h"
-#include "decorator/TSH.h"
-#include "decorator/SP.h"
 #include <QListWidget>
+#include <QStringList>
+#include <QString>
+
 
 
 class CategorieDAO : public Singleton<CategorieDAO>{
+
     friend class Singleton<CategorieDAO>;
 
 public:
 
+    QStringList getStringList(const QString colonne);
+
     QMap<int, QString> findAll();
 
     QString find(const int &id);
-
-    int findbyStr(QString str);
 
     bool update(QString str);
 
@@ -27,42 +26,19 @@ public:
 
     bool create(QString str);
 
-    QString parse(const QString& code,const QString& titre,const unsigned int& ects,const QString& creditable);
-    QMap<int, QString> getMap() const{
-        return Map;
-    }
+    int findByStr(QString str);
 
-    void setMap(const QMap<int, QString> &value){
-        Map = value;
+    QMap<int, QString> getMap() const;
 
-    }
+    void setMap(const QMap<int, QString> &value);
 
     CategorieDAO(){}
     ~CategorieDAO(){}
 
-    QStringList getStringList(QString colonne);
-    protected:
+protected:
     QMap<int,QString> Map;
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #endif // CATEGORIEDAO_H

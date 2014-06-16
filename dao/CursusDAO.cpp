@@ -1,6 +1,6 @@
 #include "CursusDAO.h"
 
-QMap<int, Creditable *> CursusDAO::findAll(){
+QMap<int, Cursus *> CursusDAO::findAll(){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         if (!query.exec("SELECT * FROM cursus;")){
@@ -39,7 +39,7 @@ QMap<int, Creditable *> CursusDAO::findAll(){
     }
 }
 
-Creditable* CursusDAO::find(const int& id){
+Cursus* CursusDAO::find(const int& id){
     try{
         if (Map.contains(id)) {
             return Map.value(id);
@@ -76,7 +76,7 @@ Creditable* CursusDAO::find(const int& id){
     }
 }
 
-bool CursusDAO::update(Creditable* obj){
+bool CursusDAO::update(Cursus* obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         query.prepare("UPDATE cursus SET (code=:code, titre=:titre, maxsemestres=:maxSem, ects=:ects, current=:current, parent=:parent, dossier:dossier) WHERE id = :id ;");
@@ -84,7 +84,7 @@ bool CursusDAO::update(Creditable* obj){
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
         query.bindValue(":maxsemestres", obj->getMaxSemestres() );
-        query.bindValue(":ects", obj->getEctsValue() );
+        query.bindValue(":ects", obj->getEcts() );
         query.bindValue(":current", obj->isCurrent() );
         query.bindValue(":dossier", obj->getDossier()->ID() );
         if(obj->getParent()){
@@ -104,7 +104,7 @@ bool CursusDAO::update(Creditable* obj){
     }
 }
 
-bool CursusDAO::remove(Creditable* obj){
+bool CursusDAO::remove(Cursus* obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         query.prepare("DELETE FROM cursus WHERE id = :id ;");
@@ -123,14 +123,14 @@ bool CursusDAO::remove(Creditable* obj){
     }
 }
 
-bool CursusDAO::create(Creditable* obj){
+bool CursusDAO::create(Cursus *obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
         query.prepare("INSERT INTO cursus (code=:code, titre=:titre, maxsemestres=:maxSem, ects=:ects, current=:current, parent=:parent, dossier:dossier) VALUES (NULL, :code, :titre, :categorie, :automne, :printemps, :demiuv);");
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
         query.bindValue(":maxsemestres", obj->getMaxSemestres() );
-        query.bindValue(":ects", obj->getEctsValue() );
+        query.bindValue(":ects", obj->getEcts() );
         query.bindValue(":current", obj->isCurrent() );
         query.bindValue(":dossier", obj->getDossier()->ID() );
         if(obj->getParent()){
