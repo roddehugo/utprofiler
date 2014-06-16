@@ -17,6 +17,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(Factory* factory,QWidget *parent = 0);
     ~MainWindow();
+    void fillMainWindow(Factory * factory);
 private:
     Ui::MainWindow *ui;
     Factory* fac;
@@ -31,6 +32,11 @@ private slots :
     void modifiercursus();
     void supprcursus();
     void on_remplirDossier_clicked();
+    void exigerUV();
+    void prefererUV();
+    void rejeterUV();
+    void retirerpref();
+
 };
 
 #endif

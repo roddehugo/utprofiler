@@ -27,7 +27,7 @@
     <item>
      <widget class="QTabWidget" name="tabwidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -234,21 +234,18 @@
           <item>
            <widget class="QWidget" name="widget" native="true">
             <layout class="QGridLayout" name="gridLayout">
-             <item row="0" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_2"/>
-             </item>
              <item row="1" column="1">
               <widget class="QWidget" name="widget_2" native="true">
                <layout class="QVBoxLayout" name="verticalLayout_7">
                 <item>
-                 <widget class="QPushButton" name="exigerUV">
-                  <property name="text">
-                   <string>Exiger cette UV</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
                  <layout class="QVBoxLayout" name="verticalLayout_6">
+                  <item>
+                   <widget class="QPushButton" name="exigerUV">
+                    <property name="text">
+                     <string>Exiger cette UV</string>
+                    </property>
+                   </widget>
+                  </item>
                   <item>
                    <widget class="QPushButton" name="prefererUV">
                     <property name="text">
@@ -263,29 +260,17 @@
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <widget class="QPushButton" name="annulerUV">
-                    <property name="text">
-                     <string>Annuler cette UV</string>
-                    </property>
-                   </widget>
-                  </item>
                  </layout>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="annulerUV">
+                  <property name="text">
+                   <string>Annuler cette UV</string>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QColumnView" name="columnView_3"/>
-             </item>
-             <item row="1" column="2">
-              <widget class="QColumnView" name="columnView_2"/>
-             </item>
-             <item row="1" column="0">
-              <widget class="QColumnView" name="columnView"/>
-             </item>
-             <item row="1" column="4">
-              <widget class="QColumnView" name="columnView_4"/>
              </item>
              <item row="0" column="2">
               <widget class="QLabel" name="label_10">
@@ -307,6 +292,18 @@
                 <string>rejet UV</string>
                </property>
               </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QListWidget" name="listUV"/>
+             </item>
+             <item row="1" column="3">
+              <widget class="QListWidget" name="listUVpref"/>
+             </item>
+             <item row="1" column="4">
+              <widget class="QListWidget" name="listUVrejet"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QListWidget" name="listUVexige"/>
              </item>
             </layout>
            </widget>

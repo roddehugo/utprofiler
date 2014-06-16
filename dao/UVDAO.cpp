@@ -72,6 +72,53 @@ UV* UVDAO::find(const int& id){
 
 }
 
+UV *UVDAO::findByCode(const QString str)
+{
+    try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        query.prepare("SELECT u.id as uid, u.titre as utitre, code, automne, printemps, demiuv, c.id as cid, c.titre as ctitre, ects FROM uvs u INNER JOIN categorie_uv_decorator cud ON cud.iduv = uid INNER JOIN categories c ON cud.idcategorie = cid WHERE code = :titre;");
+        query.bindValue(":titre",str);
+        if (!query.exec() ){
+            throw UTProfilerException("La requête a échoué : " + query.lastQuery());
+        }
+
+        if(query.first()){
+            QSqlRecord rec = query.record();
+
+            const int uid = rec.value("uid").toInt();
+            const QString code = rec.value("code").toString();
+            const QString utitre = rec.value("utitre").toString();
+            const bool automne = rec.value("automne").toBool();
+            const bool printemps = rec.value("printemps").toBool();
+            const bool demiuv = rec.value("demiuv").toBool();
+
+            LogWriter::write("UVDAO.cpp","Lecture de l'UV : " + code);
+            UV* uv = new UV(uid,code,utitre,printemps,automne,demiuv);
+
+            const QString ctitre = rec.value("ctitre").toString();
+            const int ects = rec.value("ects").toInt();
+
+            LogWriter::append(ctitre+":"+QString::number(ects)+"...");
+            QMap<QString,int> credits;
+
+            while(query.next()){
+                rec = query.record();
+                const QString ctitre = rec.value("ctitre").toString();
+                const int ects = rec.value("ects").toInt();
+
+                LogWriter::append(ctitre+":"+QString::number(ects)+"...");
+                credits.insert(ctitre,ects);
+            }
+            uv->setCredits(credits);
+            LogWriter::endl();
+            Map.insert(uid,uv);
+            return uv;
+        }
+    }catch(UTProfilerException e){
+        LogWriter::writeln("UVDAO::find()",e.getMessage());
+    }
+}
+
 bool UVDAO::update(UV* obj){
 
     try{

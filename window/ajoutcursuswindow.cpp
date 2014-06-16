@@ -7,10 +7,16 @@ ajoutcursuswindow::ajoutcursuswindow(Factory* factory,QWidget *parent) :
     fac(factory)
 {
     ui->setupUi(this);
+    QObject::connect(ui->buttonBox , SIGNAL(accepted()), this, SLOT(saveCursus()));
 
 }
 
 ajoutcursuswindow::~ajoutcursuswindow()
 {
     delete ui;
+}
+
+void ajoutcursuswindow::saveCursus()
+{
+    //Cursus* cursus=new c
 }
