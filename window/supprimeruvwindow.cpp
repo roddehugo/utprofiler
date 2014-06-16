@@ -8,18 +8,16 @@ supprimerUVwindow::supprimerUVwindow(Factory* factory,QWidget *parent) :
     fac(factory)
 {
     ui->setupUi(this);
-    QObject::connect(ui->buttonBox , SIGNAL(accepted()), this, SLOT(delUV()));
     ui->listall->addItems(fac->getUVDAO()->getStringList("code"));
+    QObject::connect(ui->buttonBox , SIGNAL(accepted()), this, SLOT(delUV()));
+
 
 }
 void supprimerUVwindow::delUV(){
     QString nom = ui->listall->currentItem()->text();
       UV* uv= fac->getUVDAO()->findByCode(nom);
-      qDebug()<<uv->getTitre();
       if(fac->getUVDAO()->remove(uv)){
             qDebug()<<"Suppression effectué";
-
-            qDebug()<<fac->getUVDAO()->findByCode(nom)->getTitre();
        }
 }
 

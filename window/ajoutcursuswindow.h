@@ -16,11 +16,15 @@ class ajoutcursuswindow : public QDialog
 public:
     explicit ajoutcursuswindow(Factory* factory,QWidget *parent = 0);
     ~ajoutcursuswindow();
-    void saveCursus();
 
 private:
     Ui::ajoutcursuswindow *ui;
     Factory* fac;
+public slots:
+    void saveCursus();
+    void ajoutCat();
+    void retireCat();
+
 };
 
 #endif // AJOUTCURSUSWINDOW_H
