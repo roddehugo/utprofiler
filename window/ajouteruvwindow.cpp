@@ -115,7 +115,7 @@ void ajouterUVwindow::saveUV(){
     for (int i=0;i<ui->cursusajoute->count();++i)
     {
         QString texte=ui->creditajoute->item(i)->text();
-        listCursus.append(fac->getCursusDAO()->findByLogin(texte));
+        listCursus.append(fac->getCursusDAO()->findByCode(texte));
     }
 
        UV* uv= new UV(c,t,p,a,d,mapUV,listCursus);

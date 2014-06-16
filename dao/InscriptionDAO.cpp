@@ -1,4 +1,6 @@
-#include "InscriptionDAO.h"
+#include "dao/InscriptionDAO.h"
+#include "dao/UVDAO.h"
+#include "dao/SemestreDAO.h"
 
 QMap<int, Inscription *> InscriptionDAO::findAll(){
     try{
@@ -17,10 +19,10 @@ QMap<int, Inscription *> InscriptionDAO::findAll(){
                 throw UTProfilerException("L'inscription' " + QString::number(id) + " existe déjà dans la QMap");
             }else{
                 LogWriter::writeln("Inscription.cpp","Lecture de l'inscription' : " + QString::number(id));
-//                UV* uv = UVDAO::getInstance()->find(u);
-//                Semestre* semestre = SemestreDAO::getInstance()->find(s);
-//                Inscription* inscription=new Inscription(uv,semestre,Inscription::resultat2str(r));
-//                Map.insert(id,inscription);
+                UV* uv = UVDAO::getInstance()->find(u);
+                Semestre* semestre = SemestreDAO::getInstance()->find(s);
+                Inscription* inscription=new Inscription(uv,semestre,Inscription::str2resultat(r));
+                Map.insert(id,inscription);
             }
         }
 
@@ -32,6 +34,7 @@ QMap<int, Inscription *> InscriptionDAO::findAll(){
 Inscription* InscriptionDAO::find(const int& id){
     try{
         if (Map.contains(id)) {
+            LogWriter::writeln("Inscription.cpp","Lecture de l'inscription depuis la map : " + QString::number(id));
             return Map.value(id);
         }
         QSqlQuery query(Connexion::getInstance()->getDataBase());
@@ -44,11 +47,41 @@ Inscription* InscriptionDAO::find(const int& id){
             const unsigned int s = rec.value("semestre").toInt();
             const unsigned int u = rec.value("uv").toInt();
             const QString r = rec.value("resultat").toString();
-            LogWriter::writeln("Inscription.cpp","Lecture de l'inscription' : " + QString::number(id));
-//                UV* uv = UVDAO::getInstance()->find(u);
-//                Semestre* semestre = SemestreDAO::getInstance()->find(s);
-//                Inscription* inscription=new Inscription(uv,semestre,Inscription::str2resultat(r));
-//                Map.insert(id,inscription);
+            LogWriter::writeln("Inscription.cpp","Lecture de l'inscription : " + QString::number(id));
+            UV* uv = UVDAO::getInstance()->find(u);
+            Semestre* semestre = SemestreDAO::getInstance()->find(s);
+            Inscription* inscription=new Inscription(uv,semestre,Inscription::str2resultat(r));
+            Map.insert(id,inscription);
+        }else{
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        }
+    }catch(UTProfilerException e){
+        LogWriter::writeln("InscriptionDAO::find()",e.getMessage());
+    }
+}
+
+Inscription *InscriptionDAO::findByUVandSemestre(UV* uv,Semestre* sem)
+{
+    try{
+
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        query.prepare("SELECT id FROM inscriptions WHERE uv = :uv AND semestre=:sem;");
+        query.bindValue(":uv",uv->ID());
+        query.bindValue(":sem",sem->ID());
+        if (!query.exec()){
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        }
+        if(query.first()){
+            QSqlRecord rec = query.record();
+            const int id = rec.value("id").toInt();
+            const QString r = rec.value("resultat").toString();
+            if (Map.contains(id)) {
+                LogWriter::writeln("Inscription.cpp","Lecture de l'inscription depuis la map : " + QString::number(id));
+                return Map.value(id);
+            }
+            LogWriter::writeln("Inscription.cpp","Lecture de l'inscription : " + QString::number(id));
+            Inscription* inscription=new Inscription(uv,sem,Inscription::str2resultat(r));
+            Map.insert(id,inscription);
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }

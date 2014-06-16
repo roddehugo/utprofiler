@@ -134,7 +134,7 @@ bool EtudiantDAO::remove(Etudiant* obj){
 bool EtudiantDAO::create(Etudiant *obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("INSERT INTO etudiants (id, login, prenom, nom, admin) VALUES (NULL, :login, :prenom, :nom, 1);");
+        query.prepare("INSERT INTO etudiants (id, login, prenom, nom) VALUES (NULL, :login, :prenom, :nom);");
         query.bindValue(":login", obj->getLogin() );
         query.bindValue(":prenom", obj->getPrenom() );
         query.bindValue(":nom", obj->getNom() );

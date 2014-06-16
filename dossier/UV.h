@@ -22,10 +22,10 @@ private:
     QList<Cursus*> cursus;
 
  public:
-    UV(const unsigned int id, const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv,QMap<QString,int> credits, QList<Cursus*> cursus);
-    UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv,QMap<QString,int> credits, QList<Cursus*> cursus);
-    UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv);
+    UV(const unsigned int id, const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv, QMap<QString,int> credits, QList<Cursus *> cursus);
     UV(const unsigned int id, const QString &code, const QString &titre, const bool printemps, const bool automne, const bool demiuv);
+    UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv, QMap<QString,int> credits, QList<Cursus *> cursus);
+    UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv);
 
     ~UV();
 
@@ -50,11 +50,9 @@ private:
     QMap<QString, int> getCredits() const;
     void setCredits(const QMap<QString, int> &value);
 
-
+    QList<Cursus *> getCursus() const;
+    void setCursus(const QList<Cursus *> &value);
 };
-
-QTextStream& operator<<(QTextStream& f, const UV& uv);
-
 
 
 #endif // UV_h

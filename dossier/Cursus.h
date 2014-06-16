@@ -3,38 +3,34 @@
 
 #include <QString>
 #include <QMap>
-#include "dossier/Dossier.h"
-
-class Dossier;
 
 class Cursus{
 
 protected:
     unsigned int id;
-    QString titre;
     QString code;
+    QString titre;
     unsigned int ects;
     unsigned int maxSemestres;
-    unsigned int previsionsSemestres;
-    bool current;
+    unsigned int previsionSemestres;
     Cursus* parent;
     QMap<QString,int> credits;
 
  public:
     Cursus(const unsigned int id, const QString &code, const QString &titre, const unsigned int ects,
-            const unsigned int maxSemestre,const unsigned int previsionsSemestres,
+            const unsigned int maxSemestre,const unsigned int previsionSemestres,
             Cursus *parent, QMap<QString, int> credits);
 
     Cursus(const QString &code, const QString &titre, const unsigned int ects,
-                   const unsigned int maxSemestre,const unsigned int previsionsSemestres,
+                   const unsigned int maxSemestre,const unsigned int previsionSemestres,
                    Cursus *parent, QMap<QString, int> credits);
 
     Cursus(const unsigned int id, const QString &code, const QString &titre, const unsigned int ects,
-            const unsigned int maxSemestre,const unsigned int previsionsSemestres,
+            const unsigned int maxSemestre,const unsigned int previsionSemestres,
             Cursus *parent);
 
     Cursus(const QString &code, const QString &titre, const unsigned int ects,
-                   const unsigned int maxSemestre,const unsigned int previsionsSemestres,
+                   const unsigned int maxSemestre,const unsigned int previsionSemestres,
                    Cursus *parent);
 
    ~Cursus();
@@ -54,14 +50,11 @@ protected:
     unsigned int ID() const;
     void setID(unsigned int value);
 
-    unsigned int getTotalCredits() const;
-    void setTotalCredits(unsigned int value);
-
     QMap<QString, int> getCredits() const;
     void setCredits(const QMap<QString, int> &value);
 
-    unsigned int getPrevisionsSemestres() const;
-    void setPrevisionsSemestres(unsigned int value);
+    unsigned int getPrevisionSemestres() const;
+    void setPrevisionSemestres(unsigned int value);
 
     Cursus *getParent() const;
     void setParent(Cursus *value);

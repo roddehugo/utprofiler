@@ -44,8 +44,6 @@ QString CategorieDAO::find(const int& id){
 
             LogWriter::writeln("Categorie.cpp","Lecture de l categorie : " + t);
             Map.insert(id,t);
-        }else{
-            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
     }catch(UTProfilerException e){
         LogWriter::writeln("CategorieDAO::find()",e.getMessage());
@@ -60,7 +58,6 @@ int CategorieDAO::findByStr(QString str){
     try {
 
         if (!Map.key(str)){
-            throw UTProfilerException("La chaine "+str+" n'est pas dans la map.");
             QSqlQuery query(Connexion::getInstance()->getDataBase());
             query.prepare("SELECT id FROM categories WHERE titre = :s ;");
             query.bindValue(":s", str);
@@ -71,14 +68,12 @@ int CategorieDAO::findByStr(QString str){
                 QSqlRecord rec = query.record();
                 const int id = rec.value("id").toInt();
                 const QString t = rec.value("titre").toString();
-                LogWriter::writeln("Categorie.cpp","Lecture de l categorie : " + t);
+                LogWriter::writeln("Categorie.cpp","Lecture de la categorie : " + str);
                 Map.insert(id,t);
-            }
-            else{
-                throw UTProfilerException("La requète a échoué : " + query.lastQuery());
             }
         }
         else{
+            LogWriter::writeln("Categorie.cpp","Lecture de la categorie depuis la map: " + str);
             return Map.key(str);
         }
     }catch(UTProfilerException e){
@@ -96,12 +91,7 @@ bool CategorieDAO::remove(QString str){
             return false;
         }else{
             LogWriter::writeln("categories.cpp","Suppression de la categorie : " + str);
-            QMap<int, QString>::iterator it=Map.begin();
-            while(it!=Map.end()||it.value()!=str){
-                ++it;
-            }
-            Map.erase(it);
-            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+            Map.erase(Map.find(Map.key(str)));
         }
     }catch(UTProfilerException e){
         LogWriter::writeln("DesiderataDAO::remove()",e.getMessage());
@@ -112,15 +102,15 @@ bool CategorieDAO::remove(QString str){
 bool CategorieDAO::create(QString str){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("INSERT INTO desiderata (id, type) VALUES (NULL, :type);");
-        query.bindValue(":type",str );
+        query.prepare("INSERT INTO categories (id, titre) VALUES (NULL, :titre);");
+        query.bindValue(":titre",str );
         if (!query.exec()){
             throw UTProfilerException("La requête a échoué : " + query.lastQuery());
             return false;
         }else{
             int i=query.lastInsertId().toInt();
             Map.insert(i,str);
-            LogWriter::writeln("categorie.cpp","Création du categories : " + str);
+            LogWriter::writeln("categorie.cpp","Création de la categorie : " + str);
             return true;
         }
 
@@ -147,7 +137,7 @@ QStringList CategorieDAO::getStringList(const QString colonne)
     }catch(UTProfilerException e){
         LogWriter::writeln("Categorie::getColonne()",e.getMessage());}
 
-   return liste;
+    return liste;
 }
 
 

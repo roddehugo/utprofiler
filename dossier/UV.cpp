@@ -1,6 +1,15 @@
 #include "UV.h"
 
 
+QList<Cursus *> UV::getCursus() const
+{
+    return cursus;
+}
+
+void UV::setCursus(const QList<Cursus *> &value)
+{
+    cursus = value;
+}
 UV::UV(const unsigned int id, const QString &code, const QString &titre, const bool printemps, const bool automne, const bool demiuv, QMap<QString, int> credits,QList<Cursus*> cursus):
     id(id),
     code(code),

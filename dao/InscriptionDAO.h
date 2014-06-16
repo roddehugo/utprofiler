@@ -3,6 +3,8 @@
 
 #include "dossier/Inscription.h"
 #include "dao/SqlDAOTemplate.h"
+#include "dossier/UV.h"
+#include "dossier/Semestre.h"
 
 class InscriptionDAO : public SqlDAOTemplate<Inscription, InscriptionDAO> {
 
@@ -14,7 +16,7 @@ public:
 
     Inscription* find(const int &id);
 
-    Inscription* findByLogin(const QString& login);
+    Inscription* findByStr(const QString& str);
 
     bool update(Inscription* obj);
 
@@ -24,7 +26,7 @@ public:
 
     QStringList getStringListResultat();
 
-
+    Inscription *findByUVandSemestre(UV *uv, Semestre *sem);
 protected:
 
     InscriptionDAO(){}

@@ -10,6 +10,7 @@
 
 //class AlgoManager;
 class Etudiant;
+class Cursus;
 
 class Dossier {
 
@@ -37,6 +38,7 @@ private:
     QString titre;
     bool solution;
     Etudiant* etudiant;
+    QList<Cursus*> cursus;
 
 };
 

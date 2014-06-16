@@ -9,8 +9,8 @@
 RemplirUV::RemplirUV(Factory* factory,QWidget *parent) :
     QDialog(parent),
     m_pTableWidget(NULL),
-    fac(factory),
-    ui(new Ui::RemplirUV)
+    ui(new Ui::RemplirUV),
+    fac(factory)
 {
     ui->setupUi(this);
 

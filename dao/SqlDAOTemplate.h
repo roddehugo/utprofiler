@@ -28,19 +28,17 @@ public:
 
     virtual bool create(T* obj) =0;
 
+protected:
+    SqlDAOTemplate(){}
+    ~SqlDAOTemplate(){}
+
+    QMap<int, T*> Map;
     QMap<int, T*> getMap() const{
         return Map;
     }
     void setMap(const QMap<int, T*> &value){
         Map = value;
     }
-
-protected:
-    SqlDAOTemplate(){}
-    ~SqlDAOTemplate(){}
-
-    QMap<int, T*> Map;
-
 };
 
 

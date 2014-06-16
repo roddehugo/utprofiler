@@ -52,16 +52,6 @@ void Etudiant::setNom(const QString &value)
     nom = value;
 }
 
-bool Etudiant::isAdmin() const
-{
-    return admin;
-}
-
-void Etudiant::setAdmin(bool value)
-{
-    admin = value;
-}
-
 QString Etudiant::getLogin() const
 {
     return login;

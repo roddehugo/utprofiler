@@ -7,11 +7,10 @@ class Etudiant
 {
 
 private:
+   unsigned int id;
    QString login;
    QString prenom;
    QString nom;
-   bool admin;
-   unsigned int id;
 
 
 public:
@@ -32,9 +31,6 @@ public:
 
     QString getNom() const;
     void setNom(const QString &value);
-
-    bool isAdmin() const;
-    void setAdmin(bool value);
 };
 
 #endif // Etudiant_h

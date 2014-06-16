@@ -1,4 +1,4 @@
-#include "SemestreDAO.h"
+#include "dao/SemestreDAO.h"
 
 QMap<int, Semestre *> SemestreDAO::findAll(){
     try{
@@ -18,9 +18,9 @@ QMap<int, Semestre *> SemestreDAO::findAll(){
                 throw UTProfilerException("Le semestre " + QString::number(id) + " existe déjà dans la QMap");
             }else{
                 LogWriter::writeln("Semestre.cpp","Lecture du semestre : " + QString::number(id));
-//                Dossier* dossier = DossierDAO::getInstance()->find(d);
-//                Semestre* newsemestre=new Semestre(id,Semestre::str2saison(s),a,e,dossier);
-//                Map.insert(id,newsemestre);
+                Dossier* dossier = DossierDAO::getInstance()->find(d);
+                Semestre* newsemestre=new Semestre(id,Semestre::str2saison(s),a,e,dossier);
+                Map.insert(id,newsemestre);
             }
         }
 
@@ -32,10 +32,13 @@ QMap<int, Semestre *> SemestreDAO::findAll(){
 Semestre* SemestreDAO::find(const int& id){
     try{
         if (Map.contains(id)) {
+            LogWriter::writeln("Semestre.cpp","Lecture du semestre depuis la map: " + QString::number(id));
             return Map.value(id);
         }
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        if (!query.exec("SELECT * FROM semestres WHERE id = " + QString(id) + ";")){
+        query.prepare("SELECT * FROM semestres WHERE id = :id;");
+        query.bindValue(":id",id);
+        if (!query.exec()){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
         if(query.first()){
@@ -46,9 +49,43 @@ Semestre* SemestreDAO::find(const int& id){
             const bool e = rec.value("isetranger").toBool();
             const unsigned int d = rec.value("dossier").toInt();
             LogWriter::writeln("Semestre.cpp","Lecture du semestre : " + QString::number(id));
-            //        Dossier* dossier = DossierDAO::getInstance()->find(d);
-            //        Semestre* newsemestre=new Semestre(Semestre::str2saison(s),a,e,dossier);
-            //        Map.insert(id,newsemestre);
+            Dossier* dossier = DossierDAO::getInstance()->find(d);
+            Semestre* newsemestre=new Semestre(Semestre::str2saison(s),a,e,dossier);
+            Map.insert(id,newsemestre);
+        }else{
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        }
+    }catch(UTProfilerException e){
+        LogWriter::writeln("SemestreDAO::find()",e.getMessage());
+    }
+}
+
+Semestre *SemestreDAO::findByStr(const QString &annee, const QString &saison)
+{
+    try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        query.prepare("SELECT * FROM semestres WHERE saison = :s AND annee =:a;");
+        query.bindValue(":s",saison);
+        query.bindValue(":a",annee);
+
+        if (!query.exec()){
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        }
+        if(query.first()){
+            QSqlRecord rec = query.record();
+            const int id = rec.value("id").toInt();
+            const QString s = rec.value("saison").toString();
+            const unsigned int a = rec.value("annee").toInt();
+            const bool e = rec.value("isetranger").toBool();
+            const unsigned int d = rec.value("dossier").toInt();
+            if (Map.contains(id)) {
+                LogWriter::writeln("Semestre.cpp","Lecture du semestre depuis la map: " + QString::number(id));
+                return Map.value(id);
+            }
+            LogWriter::writeln("Semestre.cpp","Lecture du semestre : " + QString::number(id));
+            Dossier* dossier = DossierDAO::getInstance()->find(d);
+            Semestre* newsemestre=new Semestre(Semestre::str2saison(s),a,e,dossier);
+            Map.insert(id,newsemestre);
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
@@ -70,7 +107,7 @@ bool SemestreDAO::update(Semestre* obj){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
             return false;
         }else{
-            LogWriter::writeln("SemestreDAO.cpp","Modification de l'UV : " + QString::number(obj->ID()) );
+            LogWriter::writeln("SemestreDAO.cpp","Modification de lu semestre : " + QString::number(obj->ID()) );
             return true;
         }
 

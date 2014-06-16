@@ -16,7 +16,7 @@ public:
 
     Semestre* find(const int &id);
 
-    Semestre* findByLogin(const QString& login);
+    Semestre* findByStr(const QString& annee, const QString &saison);
 
     bool update(Semestre* obj);
 

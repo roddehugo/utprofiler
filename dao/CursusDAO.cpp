@@ -1,4 +1,5 @@
-#include "CursusDAO.h"
+#include "dao/CursusDAO.h"
+#include "dao/CategorieDAO.h"
 
 QMap<int, Cursus *> CursusDAO::findAll(){
     try{
@@ -14,19 +15,21 @@ QMap<int, Cursus *> CursusDAO::findAll(){
             const QString t = rec.value("titre").toString();
             const int maxSem = rec.value("maxsemestres").toInt();
             const int ects = rec.value("ects").toInt();
-            const int cur = rec.value("current").toBool();
             const int p = rec.value("parent").toInt();
-            const int prevSem = rec.value("previsionssemestres").toInt();
+            const int prevSem = rec.value("previsionsemestres").toInt();
             if (Map.contains(id)) {
                 throw UTProfilerException("Le cursus "+c+" existe déjà dans la QMap");
             }else{
+                QMap<QString,int> ectsmap = getEctsMap(id);
+
                 LogWriter::writeln("Cursus.cpp","Lecture du cursus : " + c);
+
                 Cursus* cursus;
                 if(p != 0){
                     Cursus* par = find(p);
-                    cursus=new Cursus(id,c,t,ects,maxSem,prevSem,par);
+                    cursus=new Cursus(id,c,t,ects,maxSem,prevSem,par,ectsmap);
                 }else{
-                    cursus=new Cursus(id,c,t,ects,maxSem,prevSem,NULL);
+                    cursus=new Cursus(id,c,t,ects,maxSem,prevSem,NULL,ectsmap);
                 }
                 Map.insert(id,cursus);
             }
@@ -41,10 +44,11 @@ QMap<int, Cursus *> CursusDAO::findAll(){
 Cursus* CursusDAO::find(const int& id){
     try{
         if (Map.contains(id)) {
+            LogWriter::writeln("Cursus.cpp","Lecture du cursus depuis la map : " + Map.value(id)->getCode());
             return Map.value(id);
         }
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("SELECT c.id as cid , c.titre as ctitre, c.code as ccode, c.ects as cetcs, c.maxsemestres, c.previsionsemestres, c.parent, cat.titre as cattitre, ccd.ects FROM cursus c JOIN categorie_cursus_decorator ccd ON ccd.idcursus = cid JOIN categories cat ON cat.id = ccd.idcategorie WHERE cid = :id;");
+        query.prepare("SELECT * FROM cursus WHERE id = :id;");
         query.bindValue(":id",id);
         if (!query.exec()){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
@@ -52,40 +56,25 @@ Cursus* CursusDAO::find(const int& id){
         if(query.first()){
             QSqlRecord rec = query.record();
 
-            const int id = rec.value("cid").toInt();
-            const QString c = rec.value("ccode").toString();
-            const QString t = rec.value("ctitre").toString();
-            const int cects = rec.value("cects").toInt();
+            const int id = rec.value("id").toInt();
+            const QString c = rec.value("code").toString();
+            const QString t = rec.value("titre").toString();
+            const int cects = rec.value("ects").toInt();
             const int maxSem = rec.value("maxsemestres").toInt();
-            const int prevSem = rec.value("previsionssemestres").toInt();
+            const int prevSem = rec.value("previsionsemestres").toInt();
             const int p = rec.value("parent").toInt();
 
             LogWriter::writeln("Cursus.cpp","Lecture du cursus : " + c);
+            QMap<QString,int> ectsmap = getEctsMap(id);
             Cursus* cursus;
 
             if(p != 0){
                 Cursus* par = find(p);
-                cursus=new Cursus(id,c,t,cects,maxSem,prevSem,par);
+                cursus=new Cursus(id,c,t,cects,maxSem,prevSem,par,ectsmap);
             }else{
-                cursus=new Cursus(id,c,t,cects,maxSem,prevSem,NULL);
+                cursus=new Cursus(id,c,t,cects,maxSem,prevSem,NULL,ectsmap);
             }
 
-            const QString catitre = rec.value("catitre").toString();
-            const int ects = rec.value("ects").toInt();
-
-            LogWriter::append(catitre+":"+QString::number(ects)+"...");
-            QMap<QString,int> credits;
-
-            while(query.next()){
-                rec = query.record();
-                const QString ctitre = rec.value("catitre").toString();
-                const int ects = rec.value("ects").toInt();
-
-                LogWriter::append(catitre+":"+QString::number(ects)+"...");
-                credits.insert(catitre,ects);
-            }
-            cursus->setCredits(credits);
-            LogWriter::endl();
             Map.insert(id,cursus);
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
@@ -95,70 +84,59 @@ Cursus* CursusDAO::find(const int& id){
     }
 }
 
-Cursus *CursusDAO::findByLogin(const QString &login)
+Cursus *CursusDAO::findByCode(const QString &str)
 {
     try{
 
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("SELECT c.id as cid , c.titre as ctitre, c.code as ccode, c.ects as cetcs, c.maxsemestres, c.previsionsemestres, c.parent, cat.titre as cattitre, ccd.ects FROM cursus c JOIN categorie_cursus_decorator ccd ON ccd.idcursus = cid JOIN categories cat ON cat.id = ccd.idcategorie WHERE ctitre = :titre;");
-        query.bindValue(":titre",login);
+        query.prepare("SELECT * FROM cursus WHERE code = :code;");
+        query.bindValue(":code",str);
         if (!query.exec()){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
         if(query.first()){
             QSqlRecord rec = query.record();
-            const int id = rec.value("cid").toInt();
-            const QString c = rec.value("ccode").toString();
-            const QString t = rec.value("ctitre").toString();
-            const int cects = rec.value("cects").toInt();
-            const int maxSem = rec.value("maxsemestres").toInt();
-            const int prevSem = rec.value("previsionssemestres").toInt();
-            const int p = rec.value("parent").toInt();
 
+            const int id = rec.value("id").toInt();
+            const QString c = rec.value("code").toString();
+            const QString t = rec.value("titre").toString();
+            const int ects = rec.value("ects").toInt();
+            const int maxSem = rec.value("maxsemestres").toInt();
+            const int prevSem = rec.value("previsionsemestres").toInt();
+            const int p = rec.value("parent").toInt();
+            if (Map.contains(id)) {
+                LogWriter::writeln("Cursus.cpp","Lecture du cursus depuis la map : " + str);
+                return Map.value(id);
+            }
             LogWriter::writeln("Cursus.cpp","Lecture du cursus : " + c);
+            QMap<QString,int> ectsmap = getEctsMap(id);
             Cursus* cursus;
 
             if(p != 0){
                 Cursus* par = find(p);
-                cursus=new Cursus(id,c,t,cects,maxSem,prevSem,par);
+                cursus=new Cursus(id,c,t,ects,maxSem,prevSem,par,ectsmap);
             }else{
-                cursus=new Cursus(id,c,t,cects,maxSem,prevSem,NULL);
+                cursus=new Cursus(id,c,t,ects,maxSem,prevSem,NULL,ectsmap);
             }
 
-            const QString catitre = rec.value("catitre").toString();
-            const int ects = rec.value("ects").toInt();
-
-            LogWriter::append(catitre+":"+QString::number(ects)+"...");
-            QMap<QString,int> credits;
-
-            while(query.next()){
-                rec = query.record();
-                const QString ctitre = rec.value("catitre").toString();
-                const int ects = rec.value("ects").toInt();
-
-                LogWriter::append(catitre+":"+QString::number(ects)+"...");
-                credits.insert(catitre,ects);
-            }
-            cursus->setCredits(credits);
-            LogWriter::endl();
             Map.insert(id,cursus);
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
     }catch(UTProfilerException e){
-        LogWriter::writeln("Cursus::find()",e.getMessage());
+        LogWriter::writeln("Cursus::findByCode()",e.getMessage());
     }
 }
 
 bool CursusDAO::update(Cursus* obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("UPDATE cursus SET (code=:code, titre=:titre, ects=:ects, maxsemestres=:maxsemestres, previsionssemestres=:previsionssemestres, parent=:parent) WHERE id = :id ;");
+        query.prepare("UPDATE cursus SET (code=:code, titre=:titre, ects=:ects, maxsemestres=:maxsemestres, previsionsemestres=:previsionsemestres, parent=:parent) WHERE id = :id ;");
         query.bindValue(":id", obj->ID());
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
         query.bindValue(":maxsemestres", obj->getMaxSemestres() );
-        query.bindValue(":previsionssemestres", obj->getPrevisionsSemestres() );
+        query.bindValue(":previsionsemestres", obj->getPrevisionSemestres() );
         query.bindValue(":ects", obj->getEcts() );
         if(obj->getParent()){
             query.bindValue(":parrent", obj->getParent()->ID() );
@@ -199,14 +177,14 @@ bool CursusDAO::remove(Cursus* obj){
 }
 
 bool CursusDAO::create(Cursus *obj){
+    QSqlQuery query(Connexion::getInstance()->getDataBase());
     try{
-        QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("INSERT INTO cursus (id, code, titre, ects, maxsemestres, previsionssemestres, parent) VALUES (NULL, :code, :titre, :maxsemestres, :previsionssemestres, :parent);");
+        query.prepare("INSERT INTO cursus (code, titre, ects, maxsemestres, previsionsemestres, parent) VALUES (:code, :titre, :ects, :maxsemestres, :previsionsemestres, :parent);");
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
         query.bindValue(":ects", obj->getEcts() );
         query.bindValue(":maxsemestres", obj->getMaxSemestres() );
-        query.bindValue(":previsionssemestres", obj->getPrevisionsSemestres() );
+        query.bindValue(":previsionsemestres", obj->getPrevisionSemestres() );
         if(obj->getParent()){
             query.bindValue(":parrent", obj->getParent()->ID() );
         }else{
@@ -216,10 +194,26 @@ bool CursusDAO::create(Cursus *obj){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
             return false;
         }else{
+
             int id = query.lastInsertId().toInt();
             obj->setID(id);
+
             Map.insert(id,obj);
-            LogWriter::writeln("CursusDAO.cpp","Création de l'UV : " + obj->getCode());
+            LogWriter::writeln("CursusDAO.cpp","Création du cursus : " + obj->getCode());
+
+            QMap<QString, int> cat = obj->getCredits();
+            query.prepare("INSERT INTO categorie_cursus_decorator (idcursus, idcategorie, ects) VALUES (:idcursus, :idcategorie, :ects);");
+
+            for (QMap<QString, int>::const_iterator i = cat.begin(); i != cat.end(); ++i) {
+                int idcat = CategorieDAO::getInstance()->findByStr(i.key());
+                query.bindValue(":idcursus", obj->ID() );
+                query.bindValue(":idcategorie", idcat );
+                query.bindValue(":ects", i.value() );
+                if (!query.exec()){
+                    throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+                }
+                LogWriter::writeln("CursusDAO.cpp","Ajout de la reference categorie : " + QString::number(idcat));
+            }
             return true;
         }
     }catch(UTProfilerException e){

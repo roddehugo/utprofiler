@@ -17,6 +17,12 @@ class Semestre;
 
 class Inscription {
 
+private:
+    unsigned int id;
+    UV* uv;
+    Semestre* semestre;
+    Resultat resultat;
+
  public:
     Inscription(const unsigned int id, UV* uv, Semestre* semestre, const Resultat& resultat);
     Inscription(UV *uv, Semestre *semestre, const Resultat &resultat);
@@ -36,13 +42,6 @@ class Inscription {
 
     unsigned int ID() const;
     void setID(unsigned int value);
-
-private:
-    Resultat resultat;
-    Semestre* semestre;
-    UV* uv;
-    unsigned int id;
-
 
 };
 
