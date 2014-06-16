@@ -127,14 +127,15 @@ bool UVDAO::create(UV *obj){
     QSqlQuery query(Connexion::getInstance()->getDataBase());
     try{
         if (!query.exec("BEGIN;"))
-            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery() );
 
-        query.prepare("INSERT INTO uvs (id, code, titre, automne, printemps, demiuv) VALUES (NULL, :code, :titre, :automne, :printemps, :demiuv);");
+        query.prepare("INSERT INTO uvs (code, titre, automne, printemps, demiuv) VALUES (:code, :titre, :automne, :printemps, :demiuv);");
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
         query.bindValue(":automne", obj->isAutomne() );
         query.bindValue(":printemps", obj->isPrintemps() );
         query.bindValue(":demiuv", obj->isDemiUV() );
+
         if (!query.exec()){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }else{
@@ -142,11 +143,11 @@ bool UVDAO::create(UV *obj){
             obj->setID(id);
             Map.insert(id,obj);
             LogWriter::writeln("UVDAO.cpp","Création de l'UV : " + obj->getCode());
-            return true;
         }
+
         QMap<QString,int> cats = obj->getCredits();
         for(QMap<QString,int>::const_iterator i = cats.begin(); i!= cats.constEnd(); ++i){
-            query.prepare("INSERT INTO categorie_uv_dao (iduv, idcategorie, ects) VALUES (:iduv, :idcat, :ects);");
+            query.prepare("INSERT INTO categorie_uv_decorator (iduv, idcategorie, ects) VALUES (:iduv, :idcat, :ects);");
             query.bindValue(":iduv", obj->ID() );
             query.bindValue(":idcat", CategorieDAO::getInstance()->findByStr(i.key()) );
             query.bindValue(":ects", i.value() );

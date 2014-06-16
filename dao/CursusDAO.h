@@ -18,7 +18,7 @@ public:
 
     Cursus* find(const int &id);
 
-    Cursus* findByLogin(const QString& login);
+    Cursus* findByStr(const QString& str);
 
     bool update(Cursus *obj);
 

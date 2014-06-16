@@ -13,9 +13,13 @@ void testUVDAO(UVDAO* dao){
     ects.insert("TM",3);
 
     QList<Cursus*> cursus;
-    cursus << NULL;
+    cursus << new Cursus(1,"TT","Test",100,6,4,NULL,ects);
 
     UV* uv = new UV(999,"TT","Test",1,1,1,ects,cursus);
+
+    qDebug() << "Création de l'UV";
+
+    dao->create(uv);
 
 
 }
@@ -30,16 +34,14 @@ void runTests(Factory* fac){
 
 int main(int argc, char *argv[])
 {
+    /* Application
 
     QApplication a(argc, argv);
 
-    LogWriter::writeln("Main.cpp","Lancement de l'application");
+    LogWriter::writeln("Main.cpp","Lancement de l'application"); 
 
     Connexion::getInstance()->setConnexion("/Users/hugo/Dropbox/UVs/LO21/Projet/utprofiler.db");
     Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
-
-
-    runTests(fac);
 
 
     LoginWindow w(fac);
@@ -47,4 +49,19 @@ int main(int argc, char *argv[])
     w.show();
 
     return a.exec();
+
+    //*///
+
+    //* Tests
+
+    LogWriter::writeln("Main.cpp","Lancement de l'application");
+
+    Connexion::getInstance()->setConnexion("/Users/hugo/Dropbox/UVs/LO21/Projet/test.db");
+    Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
+
+    runTests(fac);
+
+    return 0;
+
+    //*///
 }
