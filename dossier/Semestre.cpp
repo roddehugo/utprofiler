@@ -56,7 +56,8 @@ void Semestre::setInscriptions(const QMap<int, Inscription *> &value)
 }
 Cursus *Semestre::getCursus() const
 {
-    return cursus;
+    if(cursus)
+        return cursus;
 }
 
 void Semestre::setCursus(Cursus *value)

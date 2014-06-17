@@ -58,6 +58,8 @@ protected:
 
     Cursus *getParent() const;
     void setParent(Cursus *value);
+
+    QString getFull() const;
 };
 
 

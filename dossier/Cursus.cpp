@@ -135,3 +135,8 @@ void Cursus::setParent(Cursus *value)
 {
     parent = value;
 }
+
+QString Cursus::getFull() const
+{
+    return code + " : " + titre;
+}

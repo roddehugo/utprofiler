@@ -52,6 +52,10 @@ private:
 
     QList<Cursus *> getCursus() const;
     void setCursus(const QList<Cursus *> &value);
+
+    QString getCreditsString() const;
+    QString getCursusString() const;
+
 };
 
 

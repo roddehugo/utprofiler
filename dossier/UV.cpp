@@ -1,15 +1,6 @@
 #include "UV.h"
 
 
-QList<Cursus *> UV::getCursus() const
-{
-    return cursus;
-}
-
-void UV::setCursus(const QList<Cursus *> &value)
-{
-    cursus = value;
-}
 UV::UV(const unsigned int id, const QString &code, const QString &titre, const bool printemps, const bool automne, const bool demiuv, QMap<QString, int> credits,QList<Cursus*> cursus):
     id(id),
     code(code),
@@ -131,4 +122,33 @@ QMap<QString, int> UV::getCredits() const
 void UV::setCredits(const QMap<QString, int> &value)
 {
     credits = value;
+}
+
+
+QList<Cursus *> UV::getCursus() const
+{
+    return cursus;
+}
+
+void UV::setCursus(const QList<Cursus *> &value)
+{
+    cursus = value;
+}
+
+QString UV::getCreditsString() const
+{
+    QString str = "";
+    for(QMap<QString, int>::const_iterator i = credits.begin(); i != credits.end(); ++i){
+        str += i.key() + "(" + i.value() + ")";
+    }
+    return str;
+}
+
+QString UV::getCursusString() const
+{
+    QString str = "";
+    for(QList< Cursus *>::const_iterator i = cursus.begin(); i != cursus.end(); ++i){
+        str += (*i)->getCode();
+    }
+    return str;
 }

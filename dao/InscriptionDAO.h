@@ -30,6 +30,8 @@ public:
 
     QStringList getStringListResultat();
 
+    QString getResultat(unsigned int dossier, unsigned int semestre, unsigned int uv);
+
 protected:
 
     InscriptionDAO(){}

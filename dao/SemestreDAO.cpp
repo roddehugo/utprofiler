@@ -209,18 +209,17 @@ QStringList SemestreDAO::getStringList()
 int SemestreDAO::calculEcts(const int id){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("SELECT SUM(ects) as ects FROM inscriptions ins LEFT JOIN categorie_uv_decorator cud ON cud.iduv = ins.uv WHERE semestre = :id;");
-        query.bindValue(":id", id);
-        if (!query.exec()){
+        if (!query.exec("SELECT ins.semestre, SUM(ects) as ects FROM inscriptions ins LEFT JOIN categorie_uv_decorator cud ON cud.iduv = ins.uv WHERE ins.semestre = "+ QString::number(id) +";")){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
             return false;
         }else{
-            QSqlRecord rec = query.record();
-            qDebug()<< rec;
-            LogWriter::writeln("SemestreDAO.cpp","Calcul des crédits du semestre : " + QString::number(id));
-            int res = rec.value("ects").toInt();
-            SemestreDAO::getInstance()->find(id)->setComputedEcts(res);
-            return res;
+            if(query.first()){
+                QSqlRecord rec = query.record();
+                LogWriter::writeln("SemestreDAO.cpp","Calcul des crédits du semestre : " + QString::number(id));
+                int res = rec.value("ects").toInt();
+                SemestreDAO::getInstance()->find(id)->setComputedEcts(res);
+                return res;
+            }
         }
 
     }catch(UTProfilerException e){

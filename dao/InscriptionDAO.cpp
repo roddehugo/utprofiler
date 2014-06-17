@@ -188,3 +188,28 @@ QStringList InscriptionDAO::getStringListResultat()
     return liste;
 }
 
+QString InscriptionDAO::getResultat(unsigned int dossier, unsigned int semestre, unsigned int uv)
+{
+    try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        query.prepare("SELECT id, resultat FROM inscriptions WHERE dossier = :d AND semestre = :s AND uv = :u;");
+        query.bindValue(":d",dossier);
+        query.bindValue(":s",semestre);
+        query.bindValue(":u",uv);
+        if (!query.exec()){
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        }
+        if(query.first()){
+            QSqlRecord rec = query.record();
+            const int id = rec.value("id").toInt();
+            const QString r = rec.value("resultat").toString();
+            LogWriter::writeln("Inscription.cpp","Lecture du resultat : " + QString::number(id));
+            return r;
+        }else{
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        }
+    }catch(UTProfilerException e){
+        LogWriter::writeln("InscriptionDAO::find()",e.getMessage());
+    }
+}
+

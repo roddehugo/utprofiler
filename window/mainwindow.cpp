@@ -26,14 +26,19 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     ui->nom->setText(currentEtudiant->getNom());
     ui->prenom->setText(currentEtudiant->getPrenom());
 
-    ui->m_tree->setColumnCount(4);
+    ui->m_tree->setColumnCount(5);
     QTreeWidgetItem* headerItem = new QTreeWidgetItem();
     headerItem->setText(0,QString("Nom"));
     headerItem->setText(1,QString("Titre"));
     headerItem->setText(2,QString("Crédits"));
     headerItem->setText(3,QString("Catégories"));
+    headerItem->setText(4,QString("Résultat"));
     ui->m_tree->setHeaderItem(headerItem);
-
+    ui->m_tree->header()->resizeSection(0, 150);
+    ui->m_tree->header()->resizeSection(1, 300);
+    ui->m_tree->header()->resizeSection(2, 70);
+    ui->m_tree->header()->resizeSection(3, 70);
+    ui->m_tree->header()->resizeSection(4, 40);
     ui->m_tree->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->m_tree->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->m_tree->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -54,26 +59,39 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     QList <Dossier *> myDossiers = fac->getDossierDAO()->findAllByEtudiant(currentEtudiant->ID());
 
     for (QList<Dossier *>::const_iterator d = myDossiers.begin(); d != myDossiers.end(); ++d) {
-        qDebug()<<(*d)->getTitre();
+
         QTreeWidgetItem *folderWidget = new QTreeWidgetItem(ui->m_tree,QStringList( (*d)->getTitre() ));
 
         QList<Semestre *> mySemestres = fac->getInscriptionDAO()->findSemestresByDossier( (*d)->ID() );
         for(QList<Semestre *>::const_iterator s = mySemestres.begin(); s != mySemestres.end(); ++s){
-            qDebug() << (*s)->getTitre();
 
             QStringList columns;
             columns << (*s)->getTitre()
                     << (*s)->getComputedCode()
                     << QString::number( fac->getSemestreDAO()->calculEcts( (*s)->ID() ) );
-                   // << (*s)->getCursus()->getTitre();
-            qDebug() << columns;
+            if((*s)->getCursus())
+                columns << (*s)->getCursus()->getFull();
+
             QTreeWidgetItem *semWidget = new QTreeWidgetItem(folderWidget, columns );
 
+            QList<UV *> myUVs = fac->getInscriptionDAO()->findUvsBySemestre( (*s)->ID() );
+            for(QList<UV *>::const_iterator u = myUVs.begin(); u != myUVs.end(); ++u){
+
+                QStringList columns;
+                columns << (*u)->getCode()
+                        << (*u)->getTitre()
+                        << (*u)->getCreditsString()
+                        << (*u)->getCursusString()
+                        << fac->getInscriptionDAO()->getResultat((*d)->ID(),(*s)->ID(),(*u)->ID());
+
+                QTreeWidgetItem *uvWidget = new QTreeWidgetItem(semWidget, columns);
+
+            }
         }
 
     }
 
-    ui->m_tree->header()->resizeSections(QHeaderView::ResizeToContents);
+    //ui->m_tree->header()->resizeSections(QHeaderView::ResizeToContents);
 
 
     connect(ui->actionAjoutUV , SIGNAL(triggered()), this, SLOT(on_ajouteruv()));

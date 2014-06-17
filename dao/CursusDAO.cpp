@@ -77,6 +77,7 @@ Cursus* CursusDAO::find(const int& id){
             }
 
             Map.insert(id,cursus);
+            return cursus;
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
