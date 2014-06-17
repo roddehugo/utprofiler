@@ -59,7 +59,7 @@ private:
     bool etranger;
     QMap<int, Inscription *> inscriptions;
     Cursus* cursus;
-    unsigned int computedEcts = 0;
+    unsigned int computedEcts;
     QString computedCode;
 
 };

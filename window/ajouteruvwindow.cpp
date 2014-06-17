@@ -65,7 +65,7 @@ void ajouterUVwindow::retraitCategorie(QListWidget *listCat, QListWidget *listeC
 void ajouterUVwindow::retraitCursus(QListWidget *listCursus, QListWidget *listeCursusAjoute)
 {
     if (listeCursusAjoute->currentItem()!=NULL){
-        int n=listeCursusAjoute->currentRow();
+//        int n=listeCursusAjoute->currentRow();
         listCursus->addItem(listeCursusAjoute->currentItem()->text());
         delete listeCursusAjoute->currentItem();
     }

@@ -1,5 +1,8 @@
 #include "Semestre.h"
 
+unsigned int computedEcts = 0;
+
+
 Semestre::Semestre(const unsigned int id, const QString& titre,const Saison &saison, unsigned int annee, bool etranger, Cursus *cursus):
     id(id),
     titre(titre),
