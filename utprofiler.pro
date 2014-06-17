@@ -72,7 +72,6 @@ HEADERS  += \
     dao/InscriptionDAO.h \
     dao/CursusDAO.h \
     dao/DesiderataDAO.h \
-    window/modeldossier.h\
     window/saisirinscription.h \
     window/ajoutsemestres.h \
     window/ajoutdossier.h

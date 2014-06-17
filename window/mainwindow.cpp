@@ -5,7 +5,6 @@
 #include "window/supprimeruvwindow.h"
 #include "window/modifiercursuswindow.h"
 #include "window/supprimercursus.h"
-#include "window/modeldossier.h"
 #include "window/saisirinscription.h"
 #include "window/ajoutsemestres.h"
 #include "window/ajoutdossier.h"
