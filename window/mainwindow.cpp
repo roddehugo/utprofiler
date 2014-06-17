@@ -14,6 +14,7 @@
 #include <QInputDialog>
 #include <QApplication>
 #include "ui_mainwindow.h"
+#include <QProgressBar>
 
 MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     QMainWindow(parent),
@@ -25,6 +26,41 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     ui->setupUi(this);
     ui->nom->setText(currentEtudiant->getNom());
     ui->prenom->setText(currentEtudiant->getPrenom());
+
+    /* SIGNAUX */
+
+    connect(ui->actionAjoutUV , SIGNAL(triggered()), this, SLOT(on_ajouteruv()));
+    connect(ui->actionModifierUV , SIGNAL(triggered()), this, SLOT(modifieruv()));
+    connect(ui->actionSupprimerUV , SIGNAL(triggered()), this, SLOT(suppruv()));
+    connect(ui->actionAjouterCursus , SIGNAL(triggered()), this, SLOT(ajoutercursus()));
+    connect(ui->actionSupprimerCursus , SIGNAL(triggered()), this, SLOT(supprcursus()));
+    connect(ui->actionModifierCursus , SIGNAL(triggered()), this, SLOT(modifiercursus()));
+    connect(ui->exigerUV , SIGNAL(clicked()), this, SLOT(exigerUV()));
+    connect(ui->prefererUV , SIGNAL(clicked()), this, SLOT(prefererUV()));
+    connect(ui->rejeterUV , SIGNAL(clicked()), this, SLOT(rejeterUV()));
+    connect(ui->annulerUV ,SIGNAL(clicked()), this, SLOT(retirerpref()));
+
+    fillMainWindow();
+
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::fillMainWindow()
+{
+    ui->listUV->clear();
+    ui->m_tree->clear();
+    int rows = 0;
+    for(int rows = 0; rows != ui->m_gridcursus->rowCount();rows++){
+        ui->m_gridcursus->removeItem(ui->m_gridcursus->itemAtPosition(rows,0));
+        ui->m_gridcursus->removeItem(ui->m_gridcursus->itemAtPosition(rows,1));
+        ui->m_gridcursus->removeItem(ui->m_gridcursus->itemAtPosition(rows,2));
+    }
+
+    ui->listUV->addItems(fac->getUVDAO()->getStringList("code"));
 
     /* ONGLET DOSSIER */
 
@@ -75,12 +111,11 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
                     << QString::number( fac->getSemestreDAO()->calculEcts( (*s)->ID() ) );
             if((*s)->getCursus()){
                 columns << (*s)->getCursus()->getFull();
-
-                if((*d)->isCurrent()){
-                    cursusToCompute[(*s)->getCursus()->getCode()] = (*s)->getCursus();
-                }
-
             }
+            if((*d)->isCurrent()){
+                cursusToCompute.insert( (*s)->getCursus()->getCode(), (*s)->getCursus() );
+            }
+
 
             QTreeWidgetItem *semWidget = new QTreeWidgetItem(folderWidget, columns );
 
@@ -103,51 +138,40 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
 
     /* ONGLET CURSUS */
 
+    int row = 0;
 
-    //SELECT code, categories.titre, SUM(cud.ects) as somme FROM cursus
-    //LEFT JOIN uvs_cursus ON cursus.id = uvs_cursus.idcursus
-    //LEFT JOIN inscriptions ON inscriptions.uv = uvs_cursus.iduv
-    //LEFT JOIN categorie_uv_decorator cud ON cud.iduv = uvs_cursus.iduv
-    //LEFT JOIN categories ON categories.id = cud.idcategorie
-    //WHERE inscriptions.resultat IN ('A','B','C','D','E')
-    //GROUP BY categories.titre, code;
+    qDebug() << cursusToCompute;
 
+    for(QMap<QString, Cursus*>::const_iterator i = cursusToCompute.begin(); i != cursusToCompute.end(); ++i){
+        qDebug()<<i.value()->getCode();
+        QProgressBar* pb = new QProgressBar();
+        QLabel *lab = new QLabel(i.value()->getCode());
+        pb->setMaximum(i.value()->getEcts());
 
-//    for(QMap<QString, Cursus*>::const_iterator i = cursusToCompute.constBegin(); cursusToCompute.constEnd(); ++i){
-//        ui->m_gridcursus->addItem()      ;
-//    }
+        ui->m_gridcursus->addWidget(lab,row,0);
+        ui->m_gridcursus->addWidget(pb,row,1,1,2);
 
+        row++;
+        int somme =0;
 
+        QMap<QString, int> detail = fac->getCursusDAO()->computePercent(i.value()->ID());
+        for(QMap<QString, int>::const_iterator j = detail.begin(); j != detail.end(); ++j){
+            QProgressBar* pb = new QProgressBar();
+            qDebug()<< j.key();
+            int max =  i.value()->getCredits().find(j.key()).value();
+            int val = j.value();
+            somme += val;
+            pb->setMaximum( max );
+            pb->setValue(val);
+            ui->m_gridcursus->addWidget(new QLabel(j.key() + "("+QString::number( val )+"/"+QString::number( max )+")"),row,1 );
+            ui->m_gridcursus->addWidget(pb,row,2);
+            row++;
+        }
+        pb->setValue(somme);
+        lab->setText( i.value()->getCode() + "("+QString::number( somme )+"/"+QString::number( i.value()->getEcts() )+")" );
 
+    }
 
-
-
-    /* SIGNAUX */
-
-    connect(ui->actionAjoutUV , SIGNAL(triggered()), this, SLOT(on_ajouteruv()));
-    connect(ui->actionModifierUV , SIGNAL(triggered()), this, SLOT(modifieruv()));
-    connect(ui->actionSupprimerUV , SIGNAL(triggered()), this, SLOT(suppruv()));
-    connect(ui->actionAjouterCursus , SIGNAL(triggered()), this, SLOT(ajoutercursus()));
-    connect(ui->actionSupprimerCursus , SIGNAL(triggered()), this, SLOT(supprcursus()));
-    connect(ui->actionModifierCursus , SIGNAL(triggered()), this, SLOT(modifiercursus()));
-    connect(ui->exigerUV , SIGNAL(clicked()), this, SLOT(exigerUV()));
-    connect(ui->prefererUV , SIGNAL(clicked()), this, SLOT(prefererUV()));
-    connect(ui->rejeterUV , SIGNAL(clicked()), this, SLOT(rejeterUV()));
-    connect(ui->annulerUV ,SIGNAL(clicked()), this, SLOT(retirerpref()));
-
-    fillMainWindow();
-
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;
-}
-
-void MainWindow::fillMainWindow()
-{
-    ui->listUV->clear();
-    ui->listUV->addItems(fac->getUVDAO()->getStringList("code"));
 }
 
 void MainWindow::modifieruv(){

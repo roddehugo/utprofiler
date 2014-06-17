@@ -266,6 +266,32 @@ QMap<QString, int> CursusDAO::getEctsMap(const unsigned int id)
         return ectsmap;
 
     }catch(UTProfilerException e){
-        LogWriter::writeln("CategorieDAO::getEctsMap()",e.getMessage());}
+        LogWriter::writeln("CursusDAO::getEctsMap()",e.getMessage());}
+}
+
+QMap<QString, int > CursusDAO::computePercent(unsigned int id)
+{
+    QMap<QString,int > ectsmap;
+    try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        query.prepare("SELECT categories.titre, SUM(cud.ects) as somme "
+                      "FROM cursus LEFT JOIN uvs_cursus ON cursus.id = uvs_cursus.idcursus "
+                      "LEFT JOIN inscriptions ON inscriptions.uv = uvs_cursus.iduv "
+                      "LEFT JOIN categorie_uv_decorator cud ON cud.iduv = uvs_cursus.iduv "
+                      "LEFT JOIN categories ON categories.id = cud.idcategorie "
+                      "WHERE inscriptions.resultat IN ('A','B','C','D','E') "
+                      "AND cursus.id = :id GROUP BY categories.titre;");
+        query.bindValue(":id",id);
+        if (!query.exec()){
+            throw UTProfilerException("La requête a échoué : " + query.lastQuery());
+        }
+        while (query.next()){
+            QSqlRecord rec = query.record();
+            ectsmap.insert(rec.value("titre").toString(), rec.value("somme").toInt());
+        }
+        return ectsmap;
+
+    }catch(UTProfilerException e){
+        LogWriter::writeln("CusrsusDAO::computePercent()",e.getMessage());}
 }
 

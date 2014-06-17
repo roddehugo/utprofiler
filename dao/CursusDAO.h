@@ -30,6 +30,8 @@ public:
 
     QMap<QString,int> getEctsMap(const unsigned int id);
 
+    QMap<QString, int> computePercent(unsigned int id);
+
 protected:
 
     CursusDAO(){}
