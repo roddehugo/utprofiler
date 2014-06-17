@@ -9,6 +9,7 @@
 #include "window/saisirinscription.h"
 #include "window/ajoutdossier.h"
 #include <QDebug>
+#include <QObject>
 #include <QMessageBox>
 
 #include "ui_mainwindow.h"
@@ -19,7 +20,7 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     fac(factory)
 {
 
-
+    setAttribute (Qt::WA_DeleteOnClose);
     EtudiantDAO* etudao = fac->getEtudiantDAO();
     Etudiant* me = etudao->getCurrent();
     ui->setupUi(this);
@@ -36,8 +37,7 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     QObject::connect(ui->prefererUV , SIGNAL(clicked()), this, SLOT(prefererUV()));
     QObject::connect(ui->rejeterUV , SIGNAL(clicked()), this, SLOT(rejeterUV()));
     QObject::connect(ui->annulerUV ,SIGNAL(clicked()), this, SLOT(retirerpref()));
-
-    fillMainWindow();
+        fillMainWindow();
 
 }
 
@@ -49,50 +49,50 @@ MainWindow::~MainWindow()
 void MainWindow::fillMainWindow()
 {
     ui->listUV->addItems(fac->getUVDAO()->getStringList("code"));
+        qDebug()<<"¡¡¡¡¡¡refill!!!!";
 }
 
 void MainWindow::modifieruv(){
-    modifUVwindow *uvw= new modifUVwindow(fac);
-    uvw->exec();
+    modifUVwindow uvw(fac);
+    uvw.exec();
 }
 
 void MainWindow::on_ajouteruv()
 {
-    ajouterUVwindow * uvw= new ajouterUVwindow(fac);
-    if (uvw->exec()){
+    ajouterUVwindow uvw(fac);
+    if (uvw.exec()){
         QString code;
     }
-    connect(uvw , SIGNAL(finished(int)), this, SLOT(fillMainWindow()));
 
 
 }
 void MainWindow::suppruv()
 {
-    supprimerUVwindow * uvw= new supprimerUVwindow(fac);
-    if (uvw->exec()){
+    supprimerUVwindow uvw(fac);
+    if (uvw.exec()){
         QMessageBox::information(this,"suppression", "supprimé");
     }
 }
 void MainWindow::ajoutercursus()
 {
-    ajoutcursuswindow * uvw= new ajoutcursuswindow(fac);
-    uvw->exec();
+    ajoutcursuswindow  uvw(fac);
+    uvw.exec();
 }
 void MainWindow::modifiercursus()
 {
-    modifiercursuswindow * uvw= new modifiercursuswindow(fac);
-    uvw->exec();
+    modifiercursuswindow uvw(fac);
+    uvw.exec();
 }
 void MainWindow::supprcursus()
 {
-    supprimerCursus * uvw= new supprimerCursus(fac);
-    uvw->exec();
+    supprimerCursus  uvw(fac);
+    uvw.exec();
 }
 
 void MainWindow::on_remplirDossier_clicked()
 {
-    saisirinscription* uvw=new saisirinscription(fac);
-    uvw->exec();
+    saisirinscription uvw(fac);
+    uvw.exec();
 }
 
 void MainWindow::exigerUV()
@@ -141,6 +141,6 @@ void MainWindow::retirerpref()
 
 void MainWindow::on_ajouterDossier_clicked()
 {
-    ajoutDossier *ajw = new ajoutDossier(fac);
-    ajw->exec();
+    ajoutDossier ajw(fac);
+    ajw.exec();
 }

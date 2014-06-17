@@ -22,6 +22,8 @@ private:
     Factory* fac;
 public slots:
     void delUV();
+signals:
+    void finsuppr();
 };
 
 #endif // SUPPRIMERUVWINDOW_H

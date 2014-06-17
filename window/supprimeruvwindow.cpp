@@ -19,6 +19,7 @@ void supprimerUVwindow::delUV(){
       if(fac->getUVDAO()->remove(uv)){
             qDebug()<<"Suppression effectué";
        }
+      emit finsuppr();
 }
 
 supprimerUVwindow::~supprimerUVwindow()

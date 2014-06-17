@@ -24,6 +24,8 @@ private:
     QTableWidget* m_pTableWidget;
     QStringList m_TableHeader;
 
+public slots:
+    void fillMainWindow();
 private slots :
     void on_ajouteruv();
     void modifieruv();
@@ -36,7 +38,7 @@ private slots :
     void prefererUV();
     void rejeterUV();
     void retirerpref();
-    void fillMainWindow();
+
 
     void on_ajouterDossier_clicked();
 };

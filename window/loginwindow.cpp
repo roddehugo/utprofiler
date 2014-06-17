@@ -21,7 +21,7 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::setUpMainWindow(){
     LoginWindow::hide();
-    MainWindow* m= new MainWindow(fac);
+    MainWindow * m=new MainWindow(fac);
     m->show();
 }
 
