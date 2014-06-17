@@ -10,35 +10,32 @@
 
 //class AlgoManager;
 class Etudiant;
-class Cursus;
 
 class Dossier {
 
  public:
 
-    Dossier(const unsigned int id, const QString& titre, bool solution,Etudiant* etudiant);
-    Dossier(const QString &titre, bool solution, Etudiant *etudiant);
+    Dossier(const unsigned int id, const QString& titre, bool current, Etudiant* etudiant);
+    Dossier(const QString &titre, bool current, Etudiant *etudiant);
     ~Dossier();
 
     Etudiant *getEtudiant() const;
     void setEtudiant(Etudiant *value);
 
-    bool isSolution() const;
-    void setSolution(bool value);
+    bool isCurrent() const;
+    void setCurrent(bool value);
 
     QString getTitre() const;
     void setTitre(const QString &value);
 
     unsigned int ID() const;
-
     void setID(unsigned int id);
 
 private:
     unsigned int id;
     QString titre;
-    bool solution;
+    bool current;
     Etudiant* etudiant;
-    QList<Cursus*> cursus;
 
 };
 

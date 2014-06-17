@@ -26,6 +26,8 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     ui->nom->setText(currentEtudiant->getNom());
     ui->prenom->setText(currentEtudiant->getPrenom());
 
+    /* ONGLET DOSSIER */
+
     ui->m_tree->setColumnCount(5);
     QTreeWidgetItem* headerItem = new QTreeWidgetItem();
     headerItem->setText(0,QString("Nom"));
@@ -45,7 +47,7 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
 
     listDossiers = fac->getDossierDAO()->findByEtudiant(currentEtudiant->ID());
     if(listDossiers.count()==0){
-        Dossier* fold = new Dossier("Dossier de "+currentEtudiant->getLogin(),false,currentEtudiant);
+        Dossier* fold = new Dossier("Défaut de "+currentEtudiant->getLogin(),true,currentEtudiant);
         fac->getDossierDAO()->create(fold);
         listDossiers << fold->getTitre();
         ui->dossierCombo->addItem(fold->getTitre());
@@ -58,6 +60,8 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
 
     QList <Dossier *> myDossiers = fac->getDossierDAO()->findAllByEtudiant(currentEtudiant->ID());
 
+    QMap<QString, Cursus*> cursusToCompute;
+
     for (QList<Dossier *>::const_iterator d = myDossiers.begin(); d != myDossiers.end(); ++d) {
 
         QTreeWidgetItem *folderWidget = new QTreeWidgetItem(ui->m_tree,QStringList( (*d)->getTitre() ));
@@ -69,8 +73,14 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
             columns << (*s)->getTitre()
                     << (*s)->getComputedCode()
                     << QString::number( fac->getSemestreDAO()->calculEcts( (*s)->ID() ) );
-            if((*s)->getCursus())
+            if((*s)->getCursus()){
                 columns << (*s)->getCursus()->getFull();
+
+                if((*d)->isCurrent()){
+                    cursusToCompute[(*s)->getCursus()->getCode()] = (*s)->getCursus();
+                }
+
+            }
 
             QTreeWidgetItem *semWidget = new QTreeWidgetItem(folderWidget, columns );
 
@@ -91,8 +101,28 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
 
     }
 
-    //ui->m_tree->header()->resizeSections(QHeaderView::ResizeToContents);
+    /* ONGLET CURSUS */
 
+
+    //SELECT code, categories.titre, SUM(cud.ects) as somme FROM cursus
+    //LEFT JOIN uvs_cursus ON cursus.id = uvs_cursus.idcursus
+    //LEFT JOIN inscriptions ON inscriptions.uv = uvs_cursus.iduv
+    //LEFT JOIN categorie_uv_decorator cud ON cud.iduv = uvs_cursus.iduv
+    //LEFT JOIN categories ON categories.id = cud.idcategorie
+    //WHERE inscriptions.resultat IN ('A','B','C','D','E')
+    //GROUP BY categories.titre, code;
+
+
+//    for(QMap<QString, Cursus*>::const_iterator i = cursusToCompute.constBegin(); cursusToCompute.constEnd(); ++i){
+//        ui->m_gridcursus->addItem()      ;
+//    }
+
+
+
+
+
+
+    /* SIGNAUX */
 
     connect(ui->actionAjoutUV , SIGNAL(triggered()), this, SLOT(on_ajouteruv()));
     connect(ui->actionModifierUV , SIGNAL(triggered()), this, SLOT(modifieruv()));
@@ -104,7 +134,8 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     connect(ui->prefererUV , SIGNAL(clicked()), this, SLOT(prefererUV()));
     connect(ui->rejeterUV , SIGNAL(clicked()), this, SLOT(rejeterUV()));
     connect(ui->annulerUV ,SIGNAL(clicked()), this, SLOT(retirerpref()));
-        fillMainWindow();
+
+    fillMainWindow();
 
 }
 

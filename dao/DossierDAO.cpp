@@ -14,7 +14,7 @@ QMap<int, Dossier *> DossierDAO::findAll(){
             const int id = rec.value("id").toInt();
             const QString t = rec.value("titre").toString();
             const int e = rec.value("etudiant").toInt();
-            const bool s = rec.value("issolution").toBool();
+            const bool s = rec.value("current").toBool();
             if (Map.contains(id)) {
                 throw UTProfilerException("Le dossier " + QString::number(id) + " existe déjà dans la QMap");
             }else{
@@ -42,7 +42,7 @@ QList<Dossier *> DossierDAO::findAllByEtudiant(const int etu){
             const int id = rec.value("id").toInt();
             const QString t = rec.value("titre").toString();
             const int e = rec.value("etudiant").toInt();
-            const bool s = rec.value("issolution").toBool();
+            const bool s = rec.value("current").toBool();
             if(Map.contains(id)){
                 list << Map.value(id);
             }else{
@@ -70,7 +70,7 @@ QStringList DossierDAO::findByEtudiant(const int etu){
             QSqlRecord rec = query.record();
             const int id = rec.value("id").toInt();
             const QString t = rec.value("titre").toString();
-            const bool s = rec.value("issolution").toBool();
+            const bool s = rec.value("current").toBool();
             if (Map.contains(id)) {
                 list << Map.value(id)->getTitre();
             }else{
@@ -103,7 +103,7 @@ Dossier *DossierDAO::findByStr(const QString &str)
             const int id = rec.value("id").toInt();
             const QString t = rec.value("titre").toString();
             const unsigned int e = rec.value("etudiant").toInt();
-            const bool s = rec.value("issolution").toBool();
+            const bool s = rec.value("current").toBool();
             if (Map.contains(id)) {
                 return Map.value(id);
             }
@@ -135,7 +135,7 @@ Dossier* DossierDAO::find(const int& id){
             const int id = rec.value("id").toInt();
             const QString t = rec.value("titre").toString();
             const unsigned int e = rec.value("etudiant").toInt();
-            const bool s = rec.value("issolution").toBool();
+            const bool s = rec.value("current").toBool();
             LogWriter::writeln("Dossier.cpp","Lecture du dossier : " + QString::number(id));
             Etudiant* etudiant = EtudiantDAO::getInstance()->find(e);
             Dossier* dossier = new Dossier(id,t,s,etudiant);
@@ -151,10 +151,10 @@ Dossier* DossierDAO::find(const int& id){
 bool DossierDAO::update(Dossier* obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("UPDATE dosssiers SET (titre=:titre, issolution=:issolution, etudiant=:etudiant) WHERE id = :id ;");
+        query.prepare("UPDATE dosssiers SET (titre=:titre, current=:current, etudiant=:etudiant) WHERE id = :id ;");
         query.bindValue(":id", obj->ID());
         query.bindValue(":titre", obj->getTitre() );
-        query.bindValue(":issolution", obj->isSolution() );
+        query.bindValue(":current", obj->isCurrent() );
         query.bindValue(":etudiant", obj->getEtudiant()->ID() );
         if (!query.exec()){
             throw UTProfilerException("La requete a échoué : " + query.lastQuery());
@@ -191,10 +191,10 @@ bool DossierDAO::remove(Dossier* obj){
 bool DossierDAO::create(Dossier* obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("INSERT INTO dossiers (id, titre,etudiant,issolution) VALUES (NULL, :titre, :etudiant, :issolution);");
+        query.prepare("INSERT INTO dossiers (id, titre,etudiant,current) VALUES (NULL, :titre, :etudiant, :current);");
         query.bindValue(":titre", obj->getTitre());
         query.bindValue(":etudiant", obj->getEtudiant()->ID());
-        query.bindValue(":issolution", obj->isSolution());
+        query.bindValue(":current", obj->isCurrent());
         if (!query.exec()){
             throw UTProfilerException("La requete a échoué : " + query.lastQuery());
             return false;
