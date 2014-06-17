@@ -14,7 +14,10 @@ public:
     QMap<int, Dossier *> findAll();
 
     Dossier* find(const int& id);
+
     QStringList findByEtudiant(const int etu);
+
+    QList<Dossier *> findAllByEtudiant(const int etu);
 
     bool update(Dossier* obj);
 
@@ -27,8 +30,7 @@ public:
     QMap<QString, int> getCursusMap(unsigned int id);
 
     Dossier *getCurrent() const;
-    void setCurrent(Dossier *value);
-    protected:
+    void setCurrent(Dossier *value);protected:
 
     ~DossierDAO(){}
     DossierDAO(){}

@@ -46,6 +46,10 @@ class Semestre {
     QString getTitre() const;
     void setTitre(const QString &value);
 
+    unsigned int getComputedEcts() const;
+    void setComputedEcts(unsigned int value);
+
+    QString getComputedCode() const;
 
 private:
     unsigned int id;
@@ -55,6 +59,8 @@ private:
     bool etranger;
     QMap<int, Inscription *> inscriptions;
     Cursus* cursus;
+    unsigned int computedEcts = 0;
+    QString computedCode;
 
 };
 

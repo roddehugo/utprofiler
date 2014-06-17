@@ -23,12 +23,10 @@ public:
 private:
     Ui::MainWindow *ui;
     Factory* fac;
-    QTreeWidget* m_tree;
-    QTableWidget* m_pTableWidget;
-    QStringList m_TableHeader;
     Etudiant* currentEtudiant;
     Dossier* currentDossier;
     QStringList listDossiers;
+
 private slots :
     void on_ajouteruv();
     void modifieruv();

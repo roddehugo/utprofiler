@@ -6,21 +6,9 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>680</width>
-    <height>460</height>
+    <width>736</width>
+    <height>421</height>
    </rect>
-  </property>
-  <property name="minimumSize">
-   <size>
-    <width>680</width>
-    <height>460</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>680</width>
-    <height>460</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Ajouter des semestres</string>
@@ -170,44 +158,7 @@
       <widget class="QWidget" name="frame" native="true">
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="m_pTableWidget">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>480</width>
-            <height>350</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>480</width>
-            <height>350</height>
-           </size>
-          </property>
-          <property name="baseSize">
-           <size>
-            <width>438</width>
-            <height>344</height>
-           </size>
-          </property>
-          <property name="sortingEnabled">
-           <bool>false</bool>
-          </property>
-          <attribute name="horizontalHeaderCascadingSectionResizes">
-           <bool>true</bool>
-          </attribute>
-          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-           <bool>true</bool>
-          </attribute>
-          <attribute name="verticalHeaderStretchLastSection">
-           <bool>true</bool>
-          </attribute>
-         </widget>
+         <widget class="QTableWidget" name="m_pTableWidget"/>
         </item>
        </layout>
       </widget>

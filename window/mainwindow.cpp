@@ -12,56 +12,31 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QInputDialog>
-
+#include <QApplication>
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     QMainWindow(parent),
- //   m_pTableWidget(NULL),
-    m_tree(NULL),
     ui(new Ui::MainWindow),
     fac(factory)
 {
-//    m_pTableWidget = new QTableWidget(ui->frame);
-//    m_pTableWidget->setRowCount(0);
-//    m_pTableWidget->setColumnCount(5);
-//    m_pTableWidget->verticalHeader()->setVisible(false);
-//    m_pTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-//    m_pTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-//    m_pTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
-//    m_pTableWidget->setShowGrid(true);
-//    m_pTableWidget->setGeometry(QApplication::desktop()->screenGeometry());
-//    m_pTableWidget->horizontalHeader()->setStretchLastSection(true);
-//    QTableWidgetItem *h1 = new QTableWidgetItem("Titre");
-//    h1->setTextAlignment(Qt::AlignLeft);
-//    QTableWidgetItem *h2 = new QTableWidgetItem("Saison");
-//    h2->setTextAlignment(Qt::AlignLeft);
-//    QTableWidgetItem *h3 = new QTableWidgetItem("Année");
-//    h3->setTextAlignment(Qt::AlignLeft);
-//    QTableWidgetItem *h4 = new QTableWidgetItem("Etranger");
-//    h4->setTextAlignment(Qt::AlignLeft);
-//    QTableWidgetItem *h5 = new QTableWidgetItem("Cursus");
-//    h5->setTextAlignment(Qt::AlignLeft);
-//    m_pTableWidget->setHorizontalHeaderItem(0,h1);
-//    m_pTableWidget->setHorizontalHeaderItem(1,h2);
-//    m_pTableWidget->setHorizontalHeaderItem(2,h3);
-//    m_pTableWidget->setHorizontalHeaderItem(3,h4);
-//    m_pTableWidget->setHorizontalHeaderItem(4,h5);
-//    m_pTableWidget->setFixedSize(493,370);
-
-//    m_tree = new QTreeWidget(ui->widget_3);
-//    m_tree->setColumnCount(4);
-//    QTreeWidgetItem* headerItem = new QTreeWidgetItem();
-//    headerItem->setText(0,QString("Nom"));
-//    headerItem->setText(1,QString("Titre"));
-//    headerItem->setText(2,QString("Crédits"));
-//    headerItem->setText(2,QString("Catégories"));
-//    m_tree->setHeaderItem(headerItem);
 
     currentEtudiant = fac->getEtudiantDAO()->getCurrent();
     ui->setupUi(this);
     ui->nom->setText(currentEtudiant->getNom());
     ui->prenom->setText(currentEtudiant->getPrenom());
+
+    ui->m_tree->setColumnCount(4);
+    QTreeWidgetItem* headerItem = new QTreeWidgetItem();
+    headerItem->setText(0,QString("Nom"));
+    headerItem->setText(1,QString("Titre"));
+    headerItem->setText(2,QString("Crédits"));
+    headerItem->setText(3,QString("Catégories"));
+    ui->m_tree->setHeaderItem(headerItem);
+
+    ui->m_tree->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->m_tree->setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui->m_tree->setSelectionMode(QAbstractItemView::SingleSelection);
 
     listDossiers = fac->getDossierDAO()->findByEtudiant(currentEtudiant->ID());
     if(listDossiers.count()==0){
@@ -76,17 +51,41 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     currentDossier = fac->getDossierDAO()->findByStr(ui->dossierCombo->currentText());
     fac->getDossierDAO()->setCurrent(currentDossier);
 
+    QList <Dossier *> myDossiers = fac->getDossierDAO()->findAllByEtudiant(currentEtudiant->ID());
 
-    QObject::connect(ui->actionAjoutUV , SIGNAL(triggered()), this, SLOT(on_ajouteruv()));
-    QObject::connect(ui->actionModifierUV , SIGNAL(triggered()), this, SLOT(modifieruv()));
-    QObject::connect(ui->actionSupprimerUV , SIGNAL(triggered()), this, SLOT(suppruv()));
-    QObject::connect(ui->actionAjouterCursus , SIGNAL(triggered()), this, SLOT(ajoutercursus()));
-    QObject::connect(ui->actionSupprimerCursus , SIGNAL(triggered()), this, SLOT(supprcursus()));
-    QObject::connect(ui->actionModifierCursus , SIGNAL(triggered()), this, SLOT(modifiercursus()));
-    QObject::connect(ui->exigerUV , SIGNAL(clicked()), this, SLOT(exigerUV()));
-    QObject::connect(ui->prefererUV , SIGNAL(clicked()), this, SLOT(prefererUV()));
-    QObject::connect(ui->rejeterUV , SIGNAL(clicked()), this, SLOT(rejeterUV()));
-    QObject::connect(ui->annulerUV ,SIGNAL(clicked()), this, SLOT(retirerpref()));
+    for (QList<Dossier *>::const_iterator d = myDossiers.begin(); d != myDossiers.end(); ++d) {
+        qDebug()<<(*d)->getTitre();
+        QTreeWidgetItem *folderWidget = new QTreeWidgetItem(ui->m_tree,QStringList( (*d)->getTitre() ));
+
+        QList<Semestre *> mySemestres = fac->getInscriptionDAO()->findSemestresByDossier( (*d)->ID() );
+        for(QList<Semestre *>::const_iterator s = mySemestres.begin(); s != mySemestres.end(); ++s){
+            qDebug() << (*s)->getTitre();
+
+            QStringList columns;
+            columns << (*s)->getTitre()
+                    << (*s)->getComputedCode()
+                    << QString::number( fac->getSemestreDAO()->calculEcts( (*s)->ID() ) );
+                   // << (*s)->getCursus()->getTitre();
+            qDebug() << columns;
+            QTreeWidgetItem *semWidget = new QTreeWidgetItem(folderWidget, columns );
+
+        }
+
+    }
+
+    ui->m_tree->header()->resizeSections(QHeaderView::ResizeToContents);
+
+
+    connect(ui->actionAjoutUV , SIGNAL(triggered()), this, SLOT(on_ajouteruv()));
+    connect(ui->actionModifierUV , SIGNAL(triggered()), this, SLOT(modifieruv()));
+    connect(ui->actionSupprimerUV , SIGNAL(triggered()), this, SLOT(suppruv()));
+    connect(ui->actionAjouterCursus , SIGNAL(triggered()), this, SLOT(ajoutercursus()));
+    connect(ui->actionSupprimerCursus , SIGNAL(triggered()), this, SLOT(supprcursus()));
+    connect(ui->actionModifierCursus , SIGNAL(triggered()), this, SLOT(modifiercursus()));
+    connect(ui->exigerUV , SIGNAL(clicked()), this, SLOT(exigerUV()));
+    connect(ui->prefererUV , SIGNAL(clicked()), this, SLOT(prefererUV()));
+    connect(ui->rejeterUV , SIGNAL(clicked()), this, SLOT(rejeterUV()));
+    connect(ui->annulerUV ,SIGNAL(clicked()), this, SLOT(retirerpref()));
         fillMainWindow();
 
 }

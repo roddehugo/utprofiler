@@ -32,10 +32,10 @@ QMap<int, Semestre *> SemestreDAO::findAll(){
     }
 }
 
-Semestre* SemestreDAO::find(const int& id){
+Semestre* SemestreDAO::find(const int &id){
     try{
         if (Map.contains(id)) {
-            LogWriter::writeln("Semestre.cpp","Lecture du semestre depuis la map: " + QString::number(id));
+            LogWriter::writeln("SemestreDAO.cpp","Lecture du semestre depuis la map: " + QString::number(id));
             return Map.value(id);
         }
         QSqlQuery query(Connexion::getInstance()->getDataBase());
@@ -52,10 +52,11 @@ Semestre* SemestreDAO::find(const int& id){
             const unsigned int a = rec.value("annee").toInt();
             const bool e = rec.value("isetranger").toBool();
             const unsigned int d = rec.value("cursus").toInt();
-            LogWriter::writeln("Semestre.cpp","Lecture du semestre : " + QString::number(id));
+            LogWriter::writeln("SemestreDAO.cpp","Lecture du semestre : " + QString::number(id));
             Cursus* cursus = CursusDAO::getInstance()->find(d);
             Semestre* newsemestre=new Semestre(id,t,Semestre::str2saison(s),a,e,cursus);
             Map.insert(id,newsemestre);
+            return newsemestre;
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
@@ -82,7 +83,7 @@ Semestre *SemestreDAO::findByStr(const QString &str)
             const unsigned int a = rec.value("annee").toInt();
             const bool e = rec.value("isetranger").toBool();
             const unsigned int d = rec.value("cursus").toInt();
-            qDebug() << id << t;
+
             if (Map.contains(id)) {
                 LogWriter::writeln("Semestre.cpp","Lecture du semestre depuis la map: " + QString::number(id));
                 return Map.value(id);
@@ -205,4 +206,25 @@ QStringList SemestreDAO::getStringList()
     return liste;
 }
 
+int SemestreDAO::calculEcts(const int id){
+    try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        query.prepare("SELECT SUM(ects) as ects FROM inscriptions ins LEFT JOIN categorie_uv_decorator cud ON cud.iduv = ins.uv WHERE semestre = :id;");
+        query.bindValue(":id", id);
+        if (!query.exec()){
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+            return false;
+        }else{
+            QSqlRecord rec = query.record();
+            qDebug()<< rec;
+            LogWriter::writeln("SemestreDAO.cpp","Calcul des crédits du semestre : " + QString::number(id));
+            int res = rec.value("ects").toInt();
+            SemestreDAO::getInstance()->find(id)->setComputedEcts(res);
+            return res;
+        }
 
+    }catch(UTProfilerException e){
+        LogWriter::writeln("SemestreDAO::create()",e.getMessage());
+    }
+
+}

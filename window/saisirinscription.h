@@ -25,11 +25,6 @@ public slots:
     void saveInscription();
 
 private:
-
-    QTableWidget* m_pTableWidget;
-
-    QStringList m_TableHeader;
-
     Ui::saisirinscription *ui;
     Factory* fac;
 };

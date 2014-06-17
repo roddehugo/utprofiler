@@ -14,6 +14,10 @@ public:
 
     QMap<int, Inscription *> findAll();
 
+    QList<Semestre *> findSemestresByDossier(const int dossier);
+
+    QList<UV *> findUvsBySemestre(const int semestre);
+
     Inscription* find(const int &id);
 
     Inscription* findByStr(const QString& str);
@@ -26,7 +30,6 @@ public:
 
     QStringList getStringListResultat();
 
-    Inscription *findByUVandSemestre(UV *uv, Semestre *sem);
 protected:
 
     InscriptionDAO(){}

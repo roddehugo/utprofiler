@@ -1,16 +1,7 @@
 #include "dao/DossierDAO.h"
 #include "dao/EtudiantDAO.h"
+#include <QDebug>
 
-
-Dossier *DossierDAO::getCurrent() const
-{
-    return current;
-}
-
-void DossierDAO::setCurrent(Dossier *value)
-{
-    current = value;
-}
 QMap<int, Dossier *> DossierDAO::findAll(){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
@@ -38,6 +29,36 @@ QMap<int, Dossier *> DossierDAO::findAll(){
         LogWriter::writeln("DossierDAO::findAll()",e.getMessage());
     }
 }
+
+QList<Dossier *> DossierDAO::findAllByEtudiant(const int etu){
+    try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
+        if (!query.exec("SELECT * FROM dossiers WHERE etudiant = "+QString::number(etu)+";")){
+            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        }
+        QList<Dossier *> list;
+        while (query.next()){
+            QSqlRecord rec = query.record();
+            const int id = rec.value("id").toInt();
+            const QString t = rec.value("titre").toString();
+            const int e = rec.value("etudiant").toInt();
+            const bool s = rec.value("issolution").toBool();
+            if(Map.contains(id)){
+                list << Map.value(id);
+            }else{
+                LogWriter::writeln("dossier.cpp","Lecture du dossier de l'etudiant  : " + QString::number(id));
+                Etudiant* etu=EtudiantDAO::getInstance()->find(e);
+                Dossier* dossier=new Dossier(id,t,s,etu);
+                Map.insert(id,dossier);
+                list << dossier;
+            }
+        }
+        return list;
+    }catch(UTProfilerException e){
+        LogWriter::writeln("DossierDAO::findAll()",e.getMessage());
+    }
+}
+
 QStringList DossierDAO::findByEtudiant(const int etu){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
@@ -214,3 +235,13 @@ QMap<QString, int> DossierDAO::getCursusMap(unsigned int id)
 
 }
 
+
+Dossier *DossierDAO::getCurrent() const
+{
+    return current;
+}
+
+void DossierDAO::setCurrent(Dossier *value)
+{
+    current = value;
+}

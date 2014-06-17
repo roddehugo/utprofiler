@@ -75,7 +75,7 @@ Etudiant* EtudiantDAO::find(const int& id){
             return Map.value(id);
         }
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        if (!query.exec("SELECT * FROM etudiants WHERE id = " + QString(id) + ";")){
+        if (!query.exec("SELECT * FROM etudiants WHERE id = " + QString::number(id) + ";")){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
         if(query.first()){

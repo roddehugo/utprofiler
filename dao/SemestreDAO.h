@@ -29,6 +29,7 @@ public:
     QStringList getStringList();
 
 
+    int calculEcts(const int id);
 protected:
 
     SemestreDAO(){}

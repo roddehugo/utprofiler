@@ -116,6 +116,21 @@ void Semestre::setTitre(const QString &value)
     titre = value;
 }
 
+unsigned int Semestre::getComputedEcts() const
+{
+    return computedEcts;
+}
 
+void Semestre::setComputedEcts(unsigned int value)
+{
+    computedEcts = value;
+}
+
+QString Semestre::getComputedCode() const
+{
+    QString str = saison2str(saison);
+    str.truncate(1);
+    return QString( str + QString::number(annee%100));
+}
 
 
