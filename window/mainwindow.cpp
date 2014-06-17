@@ -36,7 +36,7 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     QObject::connect(ui->rejeterUV , SIGNAL(clicked()), this, SLOT(rejeterUV()));
     QObject::connect(ui->annulerUV ,SIGNAL(clicked()), this, SLOT(retirerpref()));
 
-    fillMainWindow(fac);
+    fillMainWindow();
 
 }
 
@@ -45,9 +45,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::fillMainWindow(Factory *factory)
+void MainWindow::fillMainWindow()
 {
-     ui->listUV->addItems(fac->getUVDAO()->getStringList("code"));
+    ui->listUV->addItems(fac->getUVDAO()->getStringList("code"));
 }
 
 void MainWindow::modifieruv(){
@@ -60,10 +60,10 @@ void MainWindow::on_ajouteruv()
     ajouterUVwindow * uvw= new ajouterUVwindow(fac);
     if (uvw->exec()){
         QString code;
-
     }
+    connect(uvw , SIGNAL(finished(int)), this, SLOT(fillMainWindow()));
 
-fillMainWindow(fac);
+
 }
 void MainWindow::suppruv()
 {

@@ -114,10 +114,10 @@ void ajouterUVwindow::saveUV(){
         listCursus.append(fac->getCursusDAO()->findByCode(texte));
     }
 
-       UV* uv= new UV(c,t,p,a,d,mapUV,listCursus);
-       if(fac->getUVDAO()->create(uv)){
-           qDebug()<<"ajout effectue";
-       }
+    UV* uv= new UV(c,t,p,a,d,mapUV,listCursus);
+    if(fac->getUVDAO()->create(uv)){
+        qDebug()<<"ajout effectue";
+    }
 
 }
 

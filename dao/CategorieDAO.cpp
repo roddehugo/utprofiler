@@ -70,6 +70,7 @@ int CategorieDAO::findByStr(QString str){
                 const QString t = rec.value("titre").toString();
                 LogWriter::writeln("Categorie.cpp","Lecture de la categorie : " + str);
                 Map.insert(id,t);
+                return id;
             }
         }
         else{
