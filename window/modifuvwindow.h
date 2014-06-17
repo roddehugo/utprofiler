@@ -23,8 +23,12 @@ private:
     Factory* fac;
 
 public slots:
-    void saveUV();
+    void saveuv();
     void on_modifuv_clicked();
+    void addcursus();
+    void addcredit();
+    void removecredit();
+    void removecursus();
 };
 
 #endif // MODIFUVWINDOW_H

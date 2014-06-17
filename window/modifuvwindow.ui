@@ -91,14 +91,14 @@
                 <widget class="QWidget" name="widget_5" native="true">
                  <layout class="QGridLayout" name="gridLayout_12">
                   <item row="1" column="0">
-                   <widget class="QPushButton" name="pushButton_3">
+                   <widget class="QPushButton" name="butajoutcredit">
                     <property name="text">
                      <string>&gt;</string>
                     </property>
                    </widget>
                   </item>
                   <item row="2" column="0">
-                   <widget class="QPushButton" name="pushButton_8">
+                   <widget class="QPushButton" name="butretirecredit">
                     <property name="text">
                      <string>&lt;</string>
                     </property>
@@ -114,7 +114,7 @@
                 <widget class="QListWidget" name="catajoute"/>
                </item>
                <item>
-                <widget class="QListView" name="creditajoute"/>
+                <widget class="QListWidget" name="creditajoute"/>
                </item>
               </layout>
              </item>
@@ -141,14 +141,14 @@
            <widget class="QWidget" name="widget" native="true">
             <layout class="QGridLayout" name="gridLayout_11">
              <item row="1" column="0">
-              <widget class="QPushButton" name="pushButton_5">
+              <widget class="QPushButton" name="butretirecursus">
                <property name="text">
                 <string>&lt;</string>
                </property>
               </widget>
              </item>
              <item row="0" column="0">
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="butajoutcursus">
                <property name="text">
                 <string>&gt;</string>
                </property>

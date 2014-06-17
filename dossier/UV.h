@@ -7,7 +7,11 @@
 #include <QMap>
 
 class Cursus;
-
+/**
+ * @brief classe UV
+ * @details contient les information sur une UV
+ * 
+ */
 class UV
 {
 
@@ -22,6 +26,18 @@ private:
     QList<Cursus*> cursus;
 
  public:
+    /**
+     * @brief constructeur complet de UV
+     * @details 
+     * 
+     * @param int id
+     * @param code code de l'UV
+     * @param titre titre
+     * @param printemps uv enseigné au printemps
+     * @param automne uv enseigné au printemps
+     * @param demiuv 
+     * @param cursus Qlist de cursus auquell elle est associé
+     */     
     UV(const unsigned int id, const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv, QMap<QString,int> credits, QList<Cursus *> cursus);
     UV(const unsigned int id, const QString &code, const QString &titre, const bool printemps, const bool automne, const bool demiuv);
     UV(const QString& code, const QString& titre, const bool printemps, const bool automne, const bool demiuv, QMap<QString,int> credits, QList<Cursus *> cursus);

@@ -6,7 +6,12 @@
 #include "dao/Factories.h"
 #include "dao/Connexion.h"
 #include "window/loginwindow.h"
-
+/**
+ * @brief fonction de test des DAO
+ * @details 
+ * 
+ * @param fac pointeur vers factory
+ */
 void runTests(Factory* fac){
 
     fac->getCategorieDAO()->create("CS");
@@ -119,7 +124,7 @@ int main(int argc, char *argv[])
 
     LogWriter::writeln("Main.cpp","Lancement de l'application"); 
 
-    Connexion::getInstance()->setConnexion("/Users/hugo/Dropbox/UVs/LO21/Projet/utprofiler.db");
+    Connexion::getInstance()->setConnexion("/Users/fsamuel/Dropbox/LO21/Projet/utprofiler.db");
     Factory* fac = AbstractDAOFactory::getFactory(AbstractDAOFactory::DAO_FACTORY);
 
     LoginWindow w(fac);

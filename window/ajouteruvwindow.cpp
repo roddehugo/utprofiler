@@ -13,7 +13,7 @@ ajouterUVwindow::ajouterUVwindow(Factory* factory,QWidget *parent) :
     ui(new Ui::ajouterUVwindow),
     fac(factory)
 {
-    UVDAO* uvdao = fac->getUVDAO();
+
     CategorieDAO * cat= fac->getCategorieDAO();
     CursusDAO* cursus=fac->getCursusDAO();
     ui->setupUi(this);
@@ -22,10 +22,9 @@ ajouterUVwindow::ajouterUVwindow(Factory* factory,QWidget *parent) :
     QObject::connect(ui->retirecursus , SIGNAL(clicked()), this, SLOT(removecursus()));
     QObject::connect(ui->ajoutcredit , SIGNAL(clicked()), this, SLOT(addcredit()));
     QObject::connect(ui->retirecredit , SIGNAL(clicked()), this, SLOT(removecredit()));
-    QObject::connect(ui->spinBox , SIGNAL(editingFinished()), this, SLOT(valcredit()));
-    connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), SIGNAL(end()));
     ui->categoriecol->addItems(cat->getStringList("titre"));
     ui->cursuscolonne->addItems(cursus->getStringList("code"));
+
 }
 
 
@@ -57,7 +56,6 @@ void ajouterUVwindow::retraitCategorie(QListWidget *listCat, QListWidget *listeC
 void ajouterUVwindow::retraitCursus(QListWidget *listCursus, QListWidget *listeCursusAjoute)
 {
     if (listeCursusAjoute->currentItem()!=NULL){
-//        int n=listeCursusAjoute->currentRow();
         listCursus->addItem(listeCursusAjoute->currentItem()->text());
         delete listeCursusAjoute->currentItem();
     }
@@ -101,7 +99,7 @@ void ajouterUVwindow::saveUV(){
     }
     for (int i=0;i<ui->cursusajoute->count();++i)
     {
-        QString texte=ui->creditajoute->item(i)->text();
+        QString texte=ui->cursusajoute->item(i)->text();
         listCursus.append(fac->getCursusDAO()->findByCode(texte));
     }
 
