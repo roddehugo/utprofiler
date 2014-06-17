@@ -5,7 +5,11 @@
 #include "dao/SqlDAOTemplate.h"
 #include "dossier/UV.h"
 #include "dossier/Semestre.h"
-
+/**
+ * @brief classe manage inscription dans la BDD
+ * @details 
+ * @return 
+ */
 class InscriptionDAO : public SqlDAOTemplate<Inscription, InscriptionDAO> {
 
     friend class Singleton<InscriptionDAO>;

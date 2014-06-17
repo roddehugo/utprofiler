@@ -3,7 +3,11 @@
 
 #include "Etudiant.h"
 #include "dao/SqlDAOTemplate.h"
-
+/**
+ * @brief classe manage etudiant dans la BDD
+ * @details 
+ * @return 
+ */
 class EtudiantDAO :public SqlDAOTemplate<Etudiant, EtudiantDAO> {
 
     friend class Singleton<EtudiantDAO>;

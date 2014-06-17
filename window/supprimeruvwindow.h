@@ -7,7 +7,12 @@
 namespace Ui {
 class supprimerUVwindow;
 }
-
+/**
+ * @brief classe QDialog pour supprimer une uv
+ *
+ * @details [long description]
+ * 
+ */
 class supprimerUVwindow : public QDialog
 {
     Q_OBJECT

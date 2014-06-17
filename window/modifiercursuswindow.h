@@ -5,9 +5,14 @@
 #include "dao/Factories.h"
 
 namespace Ui {
+	
 class modifiercursuswindow;
 }
-
+/**
+	 * @brief classe QDialog modifier un cursus
+	 * @details 
+	 * @return 
+	 */
 class modifiercursuswindow : public QDialog
 {
     Q_OBJECT

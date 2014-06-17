@@ -8,9 +8,14 @@
 #include <QDialog>
 #include <QDebug>
 namespace Ui {
+   
 class ajoutSemestres;
 }
-
+ /**
+     * @brief classe QDialog ajout semestre
+     * @details 
+     * @return 
+     */
 class ajoutSemestres : public QDialog
 {
     Q_OBJECT

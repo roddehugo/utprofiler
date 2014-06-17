@@ -7,7 +7,13 @@
 #include <QString>
 
 
-
+/**
+ * @brief classe gestion categories dans la base de données
+ * @details 
+ * 
+ * @param colonne QString
+ * @return 
+ */
 class CategorieDAO : public Singleton<CategorieDAO>{
 
     friend class Singleton<CategorieDAO>;

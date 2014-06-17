@@ -5,9 +5,14 @@
 #include "dao/Factories.h"
 
 namespace Ui {
+	
 class ajoutdossier;
 }
-
+/**
+	 * @brief classe QDialog ajout dossier
+	 * @details [long description]
+	 * @return [description]
+	 */
 class ajoutdossier : public QDialog
 {
     Q_OBJECT

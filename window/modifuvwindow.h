@@ -9,7 +9,11 @@
 namespace Ui {
 class modifUVwindow;
 }
-
+/**
+ * @brief classe modifier une uv
+ * @details [long description]
+ * @return [description]
+ */
 class modifUVwindow : public QDialog
 {
     Q_OBJECT

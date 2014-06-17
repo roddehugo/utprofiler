@@ -10,7 +10,11 @@
 namespace Ui {
 class saisirinscription;
 }
-
+/**
+ * @brief  QDialog pour saisir une inscription
+ * @details [long description]
+ * @return [description]
+ */
 class saisirinscription : public QDialog
 {
     Q_OBJECT

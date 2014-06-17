@@ -7,7 +7,11 @@
 #include "dao/CursusDAO.h"
 
 #include <QStringList>
-
+/**
+ * @brief classe manage UV dans la BDD
+ * @details 
+ * @return 
+ */
 class UVDAO : public SqlDAOTemplate<UV, UVDAO> {
 
     friend class Singleton<UVDAO>;

@@ -6,7 +6,11 @@
 #include "Singleton.h"
 #include "writers/LogWriter.h"
 #include "UTProfilerException.h"
-
+/**
+ * @brief classe gérant la connexion a la BDD
+ * @details 
+ * @return 
+ */
 class Connexion : public Singleton<Connexion> {
 
     friend class Singleton<Connexion>;

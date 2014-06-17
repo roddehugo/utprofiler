@@ -5,7 +5,13 @@
 #include "dao/SqlDAOTemplate.h"
 #include "dao/DossierDAO.h"
 #include "dao/UVDAO.h"
-
+/**
+ * @brief classe gestion desiderata dans la base de données
+ * @details 
+ * 
+ * @param login QString
+ * @return 
+ */
 class DesiderataDAO : public SqlDAOTemplate<Desiderata, DesiderataDAO> {
 
     friend class Singleton<DesiderataDAO>;

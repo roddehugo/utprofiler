@@ -3,7 +3,13 @@
 
 #include "dossier/Dossier.h"
 #include "dao/SqlDAOTemplate.h"
-
+/**
+ * @brief classe gestion dossiers etudiant dans la base de données
+ * @details 
+ * 
+ * @param  
+ * @return 
+ */
 class DossierDAO : public SqlDAOTemplate<Dossier, DossierDAO> {
 
     friend class Singleton<DossierDAO>;

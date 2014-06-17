@@ -6,9 +6,15 @@
 #include "dossier/Cursus.h"
 
 namespace Ui {
+
+	
 class ajoutcursuswindow;
 }
-
+/**
+     * @brief classe QDialog ajout cursus 
+     * @details 
+     * @return 
+     */
 class ajoutcursuswindow : public QDialog
 {
     Q_OBJECT

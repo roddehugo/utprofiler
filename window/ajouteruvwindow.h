@@ -17,9 +17,14 @@
 
 
 namespace Ui {
+   
 class ajouterUVwindow;
 }
-
+ /**
+     * @brief classe QDialog ajout uv
+     * @details 
+     * @return 
+     */
 class ajouterUVwindow : public QDialog
 {
     Q_OBJECT

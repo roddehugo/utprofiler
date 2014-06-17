@@ -5,7 +5,11 @@
 #include "dossier/Semestre.h"
 #include "dao/SqlDAOTemplate.h"
 #include "dao/DossierDAO.h"
-
+/**
+ * @brief classe manage semestre dans la BDD
+ * @details 
+ * @return 
+ */
 class SemestreDAO : public SqlDAOTemplate<Semestre, SemestreDAO> {
 
     friend class Singleton<SemestreDAO>;

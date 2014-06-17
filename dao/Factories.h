@@ -12,7 +12,11 @@
 #include "dao/SemestreDAO.h"
 #include "dao/CategorieDAO.h"
 
-
+/**
+ * @brief classe modele de Factory
+ * @details 
+ * @return 
+ */
 struct Factory{
     virtual UVDAO* getUVDAO() =0;
     virtual EtudiantDAO* getEtudiantDAO() = 0;
@@ -24,7 +28,11 @@ struct Factory{
     virtual CategorieDAO* getCategorieDAO() = 0;
 
 };
-
+/**
+ * @brief classe donnant acces a toutes les classes de gestin de la BDD@
+ * @details 
+ * @return 
+ */
 class DAOFactory : public Factory, public Singleton<DAOFactory>
 {
 
@@ -39,7 +47,13 @@ public:
     SemestreDAO* getSemestreDAO() ;
 
 };
-
+/**
+ * @brief classe modele de la classe gerant les DAOfactory
+ * @details 
+ * 
+ * @param type type de la DAO voulat etre accede
+ * @return 
+ */
 class AbstractDAOFactory : public Factory
 {
 public:

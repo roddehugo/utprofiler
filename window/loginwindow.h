@@ -12,20 +12,38 @@ class EtudiantDAO;
 namespace Ui {
 class LoginWindow;
 }
-
+/**
+ * @brief classe loginwindow
+ * @details 
+ * 
+ */
 class LoginWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+	/**
+	 * @brief constructeur loginwindow
+	 * @details 
+	 * @return 
+	 */
     explicit LoginWindow(Factory* factory, QWidget *parent = 0);
 
     ~LoginWindow();
 
 
 private slots:
+/**
+ * @brief slot du login 
+ * @details 
+ */
     void loginMe();
-    void setUpMainWindow();
+ /**
+  * @brief slot pour afficher mainwindow
+  * @details 
+  */  
+  void setUpMainWindow();
+ 
     void on_ajouterEtudiant_clicked();
 
 private:

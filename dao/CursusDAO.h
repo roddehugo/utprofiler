@@ -7,7 +7,13 @@
 #include <QStringList>
 
 class Dossier;
-
+/**
+ * @brief classe gestion cursus dans la base de données
+ * @details 
+ * 
+ * @param colonne QString
+ * @return 
+ */
 class CursusDAO : public SqlDAOTemplate<Cursus, CursusDAO> {
 
     friend class Singleton<CursusDAO>;

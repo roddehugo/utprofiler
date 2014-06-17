@@ -7,7 +7,11 @@
 namespace Ui {
 class supprimerCursus;
 }
-
+/**
+ * @brief affiche Qdialog pour supprimer un cursus
+ * @details 
+ * @return 
+ */
 class supprimerCursus : public QDialog
 {
     Q_OBJECT
