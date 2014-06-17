@@ -19,6 +19,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(Factory* factory,QWidget *parent = 0);
     ~MainWindow();
+
 private:
     Ui::MainWindow *ui;
     Factory* fac;

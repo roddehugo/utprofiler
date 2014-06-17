@@ -87,8 +87,7 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     QObject::connect(ui->prefererUV , SIGNAL(clicked()), this, SLOT(prefererUV()));
     QObject::connect(ui->rejeterUV , SIGNAL(clicked()), this, SLOT(rejeterUV()));
     QObject::connect(ui->annulerUV ,SIGNAL(clicked()), this, SLOT(retirerpref()));
-
-    fillMainWindow();
+        fillMainWindow();
 
 }
 
@@ -116,6 +115,7 @@ void MainWindow::on_ajouteruv()
     if (uvw.exec()){
         fillMainWindow();
     }
+
 
 }
 void MainWindow::suppruv()
@@ -223,7 +223,7 @@ void MainWindow::on_inscrireSemestre_clicked()
 void MainWindow::on_dossierCombo_currentTextChanged(const QString &arg1)
 {
 
-    currentDossier = fac->getDossierDAO()->findByStr(ui->dossierCombo->currentText());
+    currentDossier = fac->getDossierDAO()->findByStr(arg1);
     fac->getDossierDAO()->setCurrent(currentDossier);
 //    QMessageBox msgBox;
 //    msgBox.setText("Le dossier en cours est :\n"+currentDossier->getTitre());

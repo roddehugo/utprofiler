@@ -1,5 +1,6 @@
 #include "ajouteruvwindow.h"
 #include "ui_ajouteruvwindow.h"
+#include "mainwindow.h"
 #include <QDebug>
 #include <QListView>
 #include <QListWidget>
@@ -22,6 +23,7 @@ ajouterUVwindow::ajouterUVwindow(Factory* factory,QWidget *parent) :
     QObject::connect(ui->ajoutcredit , SIGNAL(clicked()), this, SLOT(addcredit()));
     QObject::connect(ui->retirecredit , SIGNAL(clicked()), this, SLOT(removecredit()));
     QObject::connect(ui->spinBox , SIGNAL(editingFinished()), this, SLOT(valcredit()));
+    connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), SIGNAL(end()));
     ui->categoriecol->addItems(cat->getStringList("titre"));
     ui->cursuscolonne->addItems(cursus->getStringList("code"));
 }
@@ -114,11 +116,10 @@ void ajouterUVwindow::saveUV(){
         listCursus.append(fac->getCursusDAO()->findByCode(texte));
     }
 
-       UV* uv= new UV(c,t,p,a,d,mapUV,listCursus);
-       if(fac->getUVDAO()->create(uv)){
-           qDebug()<<"ajout effectue";
-       }
-
+    UV* uv= new UV(c,t,p,a,d,mapUV,listCursus);
+    if(fac->getUVDAO()->create(uv)){
+        qDebug()<<"ajout effectue";
+    }
 }
 
 void ajouterUVwindow::removecredit()

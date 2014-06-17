@@ -2,6 +2,8 @@
 #define AJOUTERUVWINDOW_H
 
 #include <QDialog>
+#include <QObject>
+
 #include "dao/Factories.h"
 #include "dao/CategorieDAO.h"
 #include "dao/UVDAO.h"
@@ -41,6 +43,8 @@ public slots:
     void removecredit();
     void removecursus();
     void valcredit();
+signals:
+    void end();
 
 };
 

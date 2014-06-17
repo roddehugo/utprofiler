@@ -26,7 +26,9 @@ QMap<int, Inscription *> InscriptionDAO::findAll(){
                 Dossier* dossier = DossierDAO::getInstance()->find(d);
                 Inscription* inscription=new Inscription(uv,semestre,Inscription::str2resultat(r),dossier);
                 Map.insert(id,inscription);
+
             }
+            return Map;
         }
 
     }catch(UTProfilerException e){
@@ -57,6 +59,7 @@ Inscription* InscriptionDAO::find(const int& id){
             Dossier* dossier = DossierDAO::getInstance()->find(d);
             Inscription* inscription=new Inscription(uv,semestre,Inscription::str2resultat(r),dossier);
             Map.insert(id,inscription);
+            return Map.value(id);
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
@@ -89,6 +92,7 @@ Inscription *InscriptionDAO::findByUVandSemestre(UV* uv,Semestre* sem)
             Dossier* dossier = DossierDAO::getInstance()->find(d);
             Inscription* inscription=new Inscription(uv,sem,Inscription::str2resultat(r),dossier);
             Map.insert(id,inscription);
+            return Map.value(id);
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
@@ -116,7 +120,9 @@ bool InscriptionDAO::update(Inscription* obj){
 
     }catch(UTProfilerException e){
         LogWriter::writeln("InscriptionsDAO::update()",e.getMessage());
+        return false;
     }
+
 }
 
 bool InscriptionDAO::remove(Inscription* obj){
@@ -134,6 +140,7 @@ bool InscriptionDAO::remove(Inscription* obj){
         }
     }catch(UTProfilerException e){
         LogWriter::writeln("InscriptionDAO::remove()",e.getMessage());
+        return false;
     }
 }
 
@@ -158,6 +165,7 @@ bool InscriptionDAO::create(Inscription* obj){
 
     }catch(UTProfilerException e){
         LogWriter::writeln("SemestreDAO::create()",e.getMessage());
+        return false;
     }
 }
 
