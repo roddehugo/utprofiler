@@ -1,17 +1,6 @@
 #include "dao/EtudiantDAO.h"
 #include <QDebug>
 
-
-Etudiant *EtudiantDAO::getCurrent() const
-{
-    return current;
-}
-
-void EtudiantDAO::setCurrent(Etudiant *value)
-{
-    current = value;
-}
-
 QMap<int, Etudiant*> EtudiantDAO::findAll(){
     try{
 
@@ -26,19 +15,18 @@ QMap<int, Etudiant*> EtudiantDAO::findAll(){
             const QString p = rec.value("prenom").toString();
             const QString n = rec.value("nom").toString();
             const QString l = rec.value("login").toString();
-            if (Map.contains(id)) {
-                throw UTProfilerException("L'étudiant "+l+" existe déjà dans la QMap");
-            }else{
+            if (!Map.contains(id)) {
                 LogWriter::writeln("EtudiantDAO.cpp","Lecture de l'étudiant : " + l);
                 Etudiant* newetu=new Etudiant(id,l,p,n);
                 Map.insert(id,newetu);
             }
         }
+        return Map;
+
     }catch(UTProfilerException e){
         LogWriter::writeln("EtudiantDAO::findAll()",e.getMessage());
     }
 
-    return Map;
 }
 
 Etudiant* EtudiantDAO::findByLogin(const QString& login){
@@ -153,3 +141,14 @@ bool EtudiantDAO::create(Etudiant *obj){
     }
 }
 
+
+
+Etudiant *EtudiantDAO::getCurrent() const
+{
+    return current;
+}
+
+void EtudiantDAO::setCurrent(Etudiant *value)
+{
+    current = value;
+}

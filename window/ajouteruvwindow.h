@@ -42,7 +42,6 @@ public slots:
     void addcredit();
     void removecredit();
     void removecursus();
-    void valcredit();
 signals:
     void end();
 

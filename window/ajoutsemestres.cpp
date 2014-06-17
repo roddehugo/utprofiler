@@ -41,9 +41,24 @@ ajoutSemestres::ajoutSemestres(Factory* factory,QWidget *parent) :
     ui->m_pTableWidget->setHorizontalHeaderItem(3,h4);
     ui->m_pTableWidget->setHorizontalHeaderItem(4,h5);
 
+    QMap<int,Semestre*> all = fac->getSemestreDAO()->findAll();
+    int row = ui->m_pTableWidget->rowCount();
+
+    for(QMap<int,Semestre*>::const_iterator i = all.begin(); i != all.end(); ++i){
+        ui->m_pTableWidget->setRowCount(row+1);
+        ui->m_pTableWidget->setItem(row, 4, new QTableWidgetItem(i.value()->getCursus()->getCode()) );
+        ui->m_pTableWidget->setItem(row, 3, new QTableWidgetItem(i.value()->isEtranger() ? "oui" : "non") );
+        ui->m_pTableWidget->setItem(row, 2, new QTableWidgetItem( QString::number(i.value()->getAnnee()) ) );
+        ui->m_pTableWidget->setItem(row, 1, new QTableWidgetItem( Semestre::saison2str(i.value()->getSaison()) ) );
+        ui->m_pTableWidget->setItem(row, 0, new QTableWidgetItem(i.value()->getTitre()) );
+        row++;
+    }
+
+
     connect(ui->ajouterBouton,SIGNAL(clicked()),this, SLOT(on_ajouterItem()));
     connect(ui->retirerBouton,SIGNAL(clicked()),this, SLOT(on_retirerItem()));
     connect(ui->buttonBox,SIGNAL(accepted()),this,SLOT(saveDossier()));
+    connect(ui->buttonBox,SIGNAL(rejected()),this,SLOT(deleteSemestres()));
 }
 
 void ajoutSemestres::on_ajouterItem()
@@ -62,6 +77,7 @@ void ajoutSemestres::on_retirerItem()
     QList<QTableWidgetItem *> l = ui->m_pTableWidget->selectedItems();
     if(!l.empty()){
         ui->m_pTableWidget->removeRow(l.first()->row());
+        toDelete << fac->getSemestreDAO()->findByStr(l.first()->text());
     }
 
 }
@@ -73,6 +89,7 @@ ajoutSemestres::~ajoutSemestres()
 
 void ajoutSemestres::saveDossier()
 {
+    deleteSemestres();
     int row = ui->m_pTableWidget->rowCount();
     for (int i = 0; i < row ; ++i)
     {
@@ -85,4 +102,13 @@ void ajoutSemestres::saveDossier()
         Cursus* cursus = fac->getCursusDAO()->findByCode(code);
         fac->getSemestreDAO()->create(new Semestre(titre,saison,annee,etranger,cursus));
     }
+}
+
+void ajoutSemestres::deleteSemestres(){
+
+    for(QList<Semestre *>::const_iterator s = toDelete.begin(); s != toDelete.end(); ++s){
+        fac->getSemestreDAO()->remove( (*s) );
+    }
+
+    toDelete.clear();
 }

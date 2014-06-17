@@ -13,7 +13,6 @@ TARGET = utprofiler
 TEMPLATE = app
 
 SOURCES += main.cpp \
-    writers/LogWriter.cpp \
     dossier/Dossier.cpp \
     dossier/Inscription.cpp \
     dossier/Semestre.cpp \

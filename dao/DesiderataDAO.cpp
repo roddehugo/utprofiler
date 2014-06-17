@@ -14,9 +14,7 @@ QMap<int, Desiderata *> DesiderataDAO::findAll(){
             const unsigned int uv = rec.value("uv").toInt();
             const unsigned int d = rec.value("dossier").toInt();
 
-            if (Map.contains(id)) {
-                throw UTProfilerException("La desiderata " + QString::number(id) + " existe déjà dans la QMap");
-            }else{
+            if (!Map.contains(id)){
                 LogWriter::writeln("Desiderata.cpp","Lecture du desiderata : " + QString::number(id));
                 Dossier* dossier = DossierDAO::getInstance()->find(d);
                 UV* newuv = UVDAO::getInstance()->find(uv);
@@ -27,9 +25,7 @@ QMap<int, Desiderata *> DesiderataDAO::findAll(){
         }
         return Map;
 
-
-    }
-    catch(UTProfilerException e){
+    }catch(UTProfilerException e){
         LogWriter::writeln("DesiderataDAO::findAll()",e.getMessage());
     }
 }

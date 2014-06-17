@@ -18,9 +18,7 @@ QMap<int, Cursus *> CursusDAO::findAll(){
             const int ects = rec.value("ects").toInt();
             const int p = rec.value("parent").toInt();
             const int prevSem = rec.value("previsionsemestres").toInt();
-            if (Map.contains(id)) {
-                throw UTProfilerException("Le cursus "+c+" existe déjà dans la QMap");
-            }else{
+            if (!Map.contains(id)) {
                 QMap<QString,int> ectsmap = getEctsMap(id);
 
                 LogWriter::writeln("Cursus.cpp","Lecture du cursus : " + c);
@@ -35,8 +33,8 @@ QMap<int, Cursus *> CursusDAO::findAll(){
                 Map.insert(id,cursus);
             }
         }
-
         return Map;
+
     }catch(UTProfilerException e){
         LogWriter::writeln("Cursus::findAll()",e.getMessage());
     }

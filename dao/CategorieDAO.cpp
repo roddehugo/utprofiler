@@ -8,20 +8,16 @@ QMap<int, QString> CategorieDAO::findAll(){
         if (!query.exec("SELECT * FROM categories;")){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
-
+        QMap<int, QString> map;
         while (query.next()){
             QSqlRecord rec = query.record();
             const int id = rec.value("id").toInt();
             const QString t = rec.value("titre").toString();
-            if (Map.contains(id)) {
-                throw UTProfilerException("La categorie "+QString::number(id)+" existe déjà dans la QMap");
-            }else{
+            if (!Map.contains(id)) {
                 LogWriter::writeln("CategorieDAO.cpp","Lecture des categories : " + QString::number(id));
-
-
+                Map.insert(id,t);
             }
         }
-
         return Map;
     }catch(UTProfilerException e){
         LogWriter::writeln("CategorieDAO::findAll()",e.getMessage());

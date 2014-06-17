@@ -53,7 +53,6 @@ void MainWindow::fillMainWindow()
 {
     ui->listUV->clear();
     ui->m_tree->clear();
-    int rows = 0;
     for(int rows = 0; rows != ui->m_gridcursus->rowCount();rows++){
         ui->m_gridcursus->removeItem(ui->m_gridcursus->itemAtPosition(rows,0));
         ui->m_gridcursus->removeItem(ui->m_gridcursus->itemAtPosition(rows,1));

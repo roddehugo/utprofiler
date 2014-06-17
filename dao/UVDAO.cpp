@@ -18,19 +18,16 @@ QMap<int, UV *> UVDAO::findAll(){
             const bool printemps = rec.value("printemps").toBool();
             const bool demiuv = rec.value("demiuv").toBool();
 
-            if (Map.contains(id)) {
-                throw UTProfilerException("L'UV "+code+" existe déjà dans la QMap");
-            }else{
+            if (!Map.contains(id)) {
                 LogWriter::writeln("UVDAO.cpp","Lecture de l'UV : " + code);
                 QMap<QString,int> ectsmap = getEctsMap(id);
                 QList<Cursus*> cursuslist = getCursusList(id);
 
-                UV* newetu=new UV(id,code,titre,automne,printemps,demiuv,ectsmap,cursuslist);
-
-                Map.insert(id,newetu);
+                UV* uv =new UV(id,code,titre,automne,printemps,demiuv,ectsmap,cursuslist);
+                Map.insert(id,uv);
             }
         }
-
+        return Map;
     }catch(UTProfilerException e){
         LogWriter::writeln("UVDAO::findAll()",e.getMessage());
     }

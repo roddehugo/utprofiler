@@ -18,9 +18,7 @@ QMap<int, Inscription *> InscriptionDAO::findAll(){
             const unsigned int d = rec.value("dossier").toInt();
             const unsigned int u = rec.value("uv").toInt();
             const QString r = rec.value("resultat").toString();
-            if (Map.contains(id)) {
-                throw UTProfilerException("L'inscription' " + QString::number(id) + " existe déjà dans la QMap");
-            }else{
+            if (!Map.contains(id)) {
                 LogWriter::writeln("Inscription.cpp","Lecture de l'inscription' : " + QString::number(id));
                 UV* uv = UVDAO::getInstance()->find(u);
                 Semestre* semestre = SemestreDAO::getInstance()->find(s);
@@ -29,8 +27,8 @@ QMap<int, Inscription *> InscriptionDAO::findAll(){
                 Map.insert(id,inscription);
 
             }
-            return Map;
         }
+        return Map;
 
     }catch(UTProfilerException e){
         LogWriter::writeln("InscriptionDAO::findAll()",e.getMessage());

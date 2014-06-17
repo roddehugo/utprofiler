@@ -15,15 +15,14 @@ QMap<int, Dossier *> DossierDAO::findAll(){
             const QString t = rec.value("titre").toString();
             const int e = rec.value("etudiant").toInt();
             const bool s = rec.value("current").toBool();
-            if (Map.contains(id)) {
-                throw UTProfilerException("Le dossier " + QString::number(id) + " existe déjà dans la QMap");
-            }else{
+            if (!Map.contains(id)) {
                 LogWriter::writeln("dossier.cpp","Lecture du dossier : " + QString::number(id));
                 Etudiant* etu=EtudiantDAO::getInstance()->find(e);
                 Dossier* dossier=new Dossier(id,t,s,etu);
                 Map.insert(id,dossier);
             }
         }
+        return Map;
 
     }catch(UTProfilerException e){
         LogWriter::writeln("DossierDAO::findAll()",e.getMessage());

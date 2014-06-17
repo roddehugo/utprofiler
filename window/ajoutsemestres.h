@@ -23,6 +23,7 @@ public slots:
     void saveDossier();
     void on_ajouterItem();
     void on_retirerItem();
+    void deleteSemestres();
 private:
 
     QTableWidget* m_pTableWidget;
@@ -31,6 +32,8 @@ private:
 
     Ui::ajoutSemestres *ui;
     Factory* fac;
+
+    QList<Semestre*> toDelete;
 };
 
 #endif // AJOUTSEMESTRES_H

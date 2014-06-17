@@ -17,15 +17,14 @@ QMap<int, Semestre *> SemestreDAO::findAll(){
             const unsigned int a = rec.value("annee").toInt();
             const bool e = rec.value("isetranger").toBool();
             const unsigned int d = rec.value("cursus").toInt();
-            if (Map.contains(id)) {
-                throw UTProfilerException("Le semestre " + QString::number(id) + " existe déjà dans la QMap");
-            }else{
+            if (!Map.contains(id)) {
                 LogWriter::writeln("Semestre.cpp","Lecture du semestre : " + QString::number(id));
                 Cursus* cursus = CursusDAO::getInstance()->find(d);
                 Semestre* newsemestre=new Semestre(id,t,Semestre::str2saison(s),a,e,cursus);
                 Map.insert(id,newsemestre);
             }
         }
+        return Map;
 
     }catch(UTProfilerException e){
         LogWriter::writeln("SemestreDAO::findAll()",e.getMessage());

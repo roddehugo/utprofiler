@@ -29,14 +29,6 @@ ajouterUVwindow::ajouterUVwindow(Factory* factory,QWidget *parent) :
 }
 
 
-//void ajouterUVwindow::ajoutItem(QListWidget *l1,  QListWidget *l2) {
-//    if (l1->currentItem() != NULL) {
-//        l2->addItem(l1->currentItem());
-//        qDebug()<<l1->currentItem()->text();
-//        delete l1->currentItem();
-//    }
-//}
-
 void ajouterUVwindow::ajoutCategorie(QListWidget *listCat,  QListWidget* listeCreditAjoute, QListWidget *listeCreditCol, QString  valcredit){
     if (listCat->currentItem() != NULL) {
         listeCreditAjoute->addItem(listCat->currentItem()->text());
@@ -90,9 +82,6 @@ void ajouterUVwindow::addcredit(){
     ajoutCategorie( c1 , c2 , c3 , v);
 
 
-}
-void ajouterUVwindow::valcredit(){
-    int valcredit=ui->spinBox->value();
 }
 
 
