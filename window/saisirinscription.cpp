@@ -13,7 +13,7 @@ saisirinscription::saisirinscription(Factory* factory,QWidget *parent) :
     fac(factory)
 {
     ui->setupUi(this);
-
+    ui->semestreCombo->addItems(fac->getSemestreDAO()->getStringList());
     ui->resultatCombo->addItems(fac->getInscriptionDAO()->getStringListResultat());
     ui->listAll->addItems(fac->getUVDAO()->getStringList("code"));
 
@@ -29,21 +29,18 @@ saisirinscription::saisirinscription(Factory* factory,QWidget *parent) :
     m_pTableWidget->horizontalHeader()->setStretchLastSection(true);
     QTableWidgetItem *h1 = new QTableWidgetItem("UV");
     h1->setTextAlignment(Qt::AlignLeft);
-    QTableWidgetItem *h2 = new QTableWidgetItem("Saison");
+    QTableWidgetItem *h2 = new QTableWidgetItem("Semestre");
     h2->setTextAlignment(Qt::AlignLeft);
-    QTableWidgetItem *h3 = new QTableWidgetItem("Année");
+    QTableWidgetItem *h3 = new QTableWidgetItem("Résultat");
     h3->setTextAlignment(Qt::AlignLeft);
-    QTableWidgetItem *h4 = new QTableWidgetItem("Résultat");
-    h4->setTextAlignment(Qt::AlignLeft);
     m_pTableWidget->setHorizontalHeaderItem(0,h1);
     m_pTableWidget->setHorizontalHeaderItem(1,h2);
     m_pTableWidget->setHorizontalHeaderItem(2,h3);
-    m_pTableWidget->setHorizontalHeaderItem(3,h4);
-    m_pTableWidget->setFixedSize(425,308);
+    m_pTableWidget->setFixedSize(349,352);
 
     connect(ui->ajouterBouton,SIGNAL(clicked()),this, SLOT(on_ajouterItem()));
     connect(ui->retirerBouton,SIGNAL(clicked()),this, SLOT(on_retirerItem()));
-    connect(ui->buttonBox,SIGNAL(accepted()),this,SLOT(saveDossier()));
+    connect(ui->buttonBox,SIGNAL(accepted()),this,SLOT(saveInscription()));
 
 }
 
@@ -66,13 +63,25 @@ void saisirinscription::on_retirerItem()
     if(!l.empty()){
         ui->listAll->addItem(l.first()->text());
         m_pTableWidget->removeRow(l.first()->row());
+        ui->listAll->sortItems();
     }
 
 }
 
-void saisirinscription::saveDossier()
+void saisirinscription::saveInscription()
 {
+    Dossier* dossier = fac->getDossierDAO()->getCurrent();
+    int row = m_pTableWidget->rowCount();
+    for (int i = 0; i < row ; ++i)
+    {
+        const QString codeuv = m_pTableWidget->item(i,0)->text();
+        const QString codesemestre = m_pTableWidget->item(i,1)->text();
+        const Resultat resultat = Inscription::str2resultat(m_pTableWidget->item(i,2)->text());
 
+        UV* uv = fac->getUVDAO()->findByCode(codeuv);
+        Semestre* sem = fac->getSemestreDAO()->findByStr(codesemestre);
+        fac->getInscriptionDAO()->create(new Inscription(uv,sem,resultat,dossier));
+    }
 }
 
 

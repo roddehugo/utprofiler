@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>UTProfiler</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="minimumSize">
@@ -42,7 +42,35 @@
              <item>
               <widget class="QWidget" name="widget_4" native="true">
                <layout class="QGridLayout" name="gridLayout_4">
-                <item row="0" column="2">
+                <item row="0" column="8">
+                 <widget class="QPushButton" name="inscrireSemestre">
+                  <property name="text">
+                   <string>Semestre</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../resources/files.qrc">
+                    <normaloff>:/images/plus</normaloff>:/images/plus</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLabel" name="prenom">
+                  <property name="text">
+                   <string>TextLabel</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="4">
+                 <widget class="QLabel" name="label_2">
+                  <property name="text">
+                   <string>Dossier</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="5">
+                 <widget class="QComboBox" name="dossierCombo"/>
+                </item>
+                <item row="0" column="3">
                  <spacer name="horizontalSpacer">
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
@@ -55,24 +83,40 @@
                   </property>
                  </spacer>
                 </item>
-                <item row="0" column="1">
-                 <widget class="QLabel" name="prenom">
+                <item row="0" column="6">
+                 <widget class="QPushButton" name="ajouterDossier">
+                  <property name="maximumSize">
+                   <size>
+                    <width>50</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
                   <property name="text">
-                   <string>TextLabel</string>
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../resources/files.qrc">
+                    <normaloff>:/images/plus</normaloff>:/images/plus</iconset>
                   </property>
                  </widget>
                 </item>
-                <item row="0" column="0">
+                <item row="0" column="7">
+                 <spacer name="horizontalSpacer_2">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item row="0" column="2">
                  <widget class="QLabel" name="nom">
                   <property name="text">
                    <string>TextLabel</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="3">
-                 <widget class="QPushButton" name="ajouterDossier">
-                  <property name="text">
-                   <string>Ajouter un dossier</string>
                   </property>
                  </widget>
                 </item>
@@ -87,7 +131,16 @@
               </widget>
              </item>
              <item>
-              <widget class="QTableWidget" name="m_afficheDossier"/>
+              <widget class="QTableWidget" name="m_pTableWidget"/>
+             </item>
+             <item>
+              <widget class="QTreeWidget" name="m_tree">
+               <column>
+                <property name="text">
+                 <string notr="true">1</string>
+                </property>
+               </column>
+              </widget>
              </item>
              <item>
               <widget class="QWidget" name="widget_5" native="true">
@@ -270,6 +323,19 @@
                  </layout>
                 </item>
                 <item>
+                 <spacer name="verticalSpacer">
+                  <property name="orientation">
+                   <enum>Qt::Vertical</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>20</width>
+                    <height>40</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
                  <widget class="QPushButton" name="annulerUV">
                   <property name="text">
                    <string>Annuler cette UV</string>
@@ -397,35 +463,53 @@
    <property name="text">
     <string>Ajouter</string>
    </property>
+   <property name="toolTip">
+    <string>Ajouter une UV</string>
+   </property>
   </action>
   <action name="actionModifierUV">
    <property name="text">
     <string>Modifier</string>
+   </property>
+   <property name="toolTip">
+    <string>Modifier une UV</string>
    </property>
   </action>
   <action name="actionSupprimerUV">
    <property name="text">
     <string>Supprimer</string>
    </property>
+   <property name="toolTip">
+    <string>Supprimer une UV</string>
+   </property>
   </action>
   <action name="actionAjouterCursus">
    <property name="text">
-    <string>Ajouter</string>
+    <string>Ajouter un cursus</string>
    </property>
   </action>
   <action name="actionModifierCursus">
    <property name="text">
     <string>Modifier</string>
    </property>
+   <property name="toolTip">
+    <string>Modifier un cursus</string>
+   </property>
   </action>
   <action name="actionSupprimerCursus">
    <property name="text">
     <string>Supprimer</string>
    </property>
+   <property name="toolTip">
+    <string>Supprimer un cursus</string>
+   </property>
   </action>
   <action name="actionAjouter_tudiant">
    <property name="text">
     <string>Ajouter étudiant</string>
+   </property>
+   <property name="toolTip">
+    <string>Ajouter un étudiant</string>
    </property>
   </action>
  </widget>
@@ -433,6 +517,8 @@
  <tabstops>
   <tabstop>tabwidget</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../resources/files.qrc"/>
+ </resources>
  <connections/>
 </ui>

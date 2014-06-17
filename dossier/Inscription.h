@@ -14,6 +14,7 @@ enum Resultat{
 
 class UV;
 class Semestre;
+class Dossier;
 
 class Inscription {
 
@@ -22,10 +23,11 @@ private:
     UV* uv;
     Semestre* semestre;
     Resultat resultat;
+    Dossier* dossier;
 
  public:
-    Inscription(const unsigned int id, UV* uv, Semestre* semestre, const Resultat& resultat);
-    Inscription(UV *uv, Semestre *semestre, const Resultat &resultat);
+    Inscription(const unsigned int id, UV* uv, Semestre* semestre, const Resultat& resultat, Dossier* dossier);
+    Inscription(UV *uv, Semestre *semestre, const Resultat &resultat, Dossier* dossier);
     ~Inscription();
 
     Resultat getResultat() const;
@@ -43,6 +45,8 @@ private:
     unsigned int ID() const;
     void setID(unsigned int value);
 
+    Dossier *getDossier() const;
+    void setDossier(Dossier *value);
 };
 
 #endif // Inscription_h

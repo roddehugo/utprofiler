@@ -1,6 +1,7 @@
 #include "dao/InscriptionDAO.h"
 #include "dao/UVDAO.h"
 #include "dao/SemestreDAO.h"
+#include "dao/DossierDAO.h"
 
 QMap<int, Inscription *> InscriptionDAO::findAll(){
     try{
@@ -13,6 +14,7 @@ QMap<int, Inscription *> InscriptionDAO::findAll(){
             QSqlRecord rec = query.record();
             const int id = rec.value("id").toInt();
             const unsigned int s = rec.value("semestre").toInt();
+            const unsigned int d = rec.value("dossier").toInt();
             const unsigned int u = rec.value("uv").toInt();
             const QString r = rec.value("resultat").toString();
             if (Map.contains(id)) {
@@ -21,7 +23,8 @@ QMap<int, Inscription *> InscriptionDAO::findAll(){
                 LogWriter::writeln("Inscription.cpp","Lecture de l'inscription' : " + QString::number(id));
                 UV* uv = UVDAO::getInstance()->find(u);
                 Semestre* semestre = SemestreDAO::getInstance()->find(s);
-                Inscription* inscription=new Inscription(uv,semestre,Inscription::str2resultat(r));
+                Dossier* dossier = DossierDAO::getInstance()->find(d);
+                Inscription* inscription=new Inscription(uv,semestre,Inscription::str2resultat(r),dossier);
                 Map.insert(id,inscription);
             }
         }
@@ -45,12 +48,14 @@ Inscription* InscriptionDAO::find(const int& id){
             QSqlRecord rec = query.record();
             const int id = rec.value("id").toInt();
             const unsigned int s = rec.value("semestre").toInt();
+            const unsigned int d = rec.value("dossier").toInt();
             const unsigned int u = rec.value("uv").toInt();
             const QString r = rec.value("resultat").toString();
             LogWriter::writeln("Inscription.cpp","Lecture de l'inscription : " + QString::number(id));
             UV* uv = UVDAO::getInstance()->find(u);
             Semestre* semestre = SemestreDAO::getInstance()->find(s);
-            Inscription* inscription=new Inscription(uv,semestre,Inscription::str2resultat(r));
+            Dossier* dossier = DossierDAO::getInstance()->find(d);
+            Inscription* inscription=new Inscription(uv,semestre,Inscription::str2resultat(r),dossier);
             Map.insert(id,inscription);
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
@@ -74,13 +79,15 @@ Inscription *InscriptionDAO::findByUVandSemestre(UV* uv,Semestre* sem)
         if(query.first()){
             QSqlRecord rec = query.record();
             const int id = rec.value("id").toInt();
+            const unsigned int d = rec.value("dossier").toInt();
             const QString r = rec.value("resultat").toString();
             if (Map.contains(id)) {
                 LogWriter::writeln("Inscription.cpp","Lecture de l'inscription depuis la map : " + QString::number(id));
                 return Map.value(id);
             }
             LogWriter::writeln("Inscription.cpp","Lecture de l'inscription : " + QString::number(id));
-            Inscription* inscription=new Inscription(uv,sem,Inscription::str2resultat(r));
+            Dossier* dossier = DossierDAO::getInstance()->find(d);
+            Inscription* inscription=new Inscription(uv,sem,Inscription::str2resultat(r),dossier);
             Map.insert(id,inscription);
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
@@ -93,10 +100,11 @@ Inscription *InscriptionDAO::findByUVandSemestre(UV* uv,Semestre* sem)
 bool InscriptionDAO::update(Inscription* obj){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        query.prepare("UPDATE inscriptions SET (resultat=:resultat, semestre=:semestre, uv=:uv) WHERE id = :id ;");
+        query.prepare("UPDATE inscriptions SET (resultat=:resultat, semestre=:semestre, uv=:uv, dossier=:dossier) WHERE id = :id ;");
         query.bindValue(":id", obj->ID());
         query.bindValue(":resultat", Inscription::resultat2str(obj->getResultat()) );
         query.bindValue(":semestre", obj->getSemestre()->ID() );
+        query.bindValue(":dossier", obj->getDossier()->ID() );
         query.bindValue(":uv", obj->getUv()->ID() );
         if (!query.exec()){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
@@ -135,6 +143,7 @@ bool InscriptionDAO::create(Inscription* obj){
         query.prepare("INSERT INTO inscriptions (id, resultat, semestre, uv) VALUES (NULL, :resultat, :semestre, :uv);");
         query.bindValue(":resultat", Inscription::resultat2str(obj->getResultat()) );
         query.bindValue(":semestre", obj->getSemestre()->ID() );
+        query.bindValue(":dossier", obj->getDossier()->ID() );
         query.bindValue(":uv", obj->getUv()->ID() );
         if (!query.exec()){
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());

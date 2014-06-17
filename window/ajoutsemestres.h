@@ -1,37 +1,36 @@
-#ifndef REMPLIRUV_H
-#define REMPLIRUV_H
+#ifndef AJOUTSEMESTRES_H
+#define AJOUTSEMESTRES_H
 
+#include <QDialog>
 #include "dao/Factories.h"
 #include <QTableWidget>
 #include <QListWidget>
 #include <QDialog>
 #include <QDebug>
-
 namespace Ui {
-class saisirinscription;
+class ajoutSemestres;
 }
 
-class saisirinscription : public QDialog
+class ajoutSemestres : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit saisirinscription(Factory* factory,QWidget *parent = 0);
-    ~saisirinscription();
+    explicit ajoutSemestres(Factory* factory,QWidget *parent = 0);
+    ~ajoutSemestres();
 
 public slots:
+    void saveDossier();
     void on_ajouterItem();
     void on_retirerItem();
-    void saveInscription();
-
 private:
 
     QTableWidget* m_pTableWidget;
 
     QStringList m_TableHeader;
 
-    Ui::saisirinscription *ui;
+    Ui::ajoutSemestres *ui;
     Factory* fac;
 };
 
-#endif // REMPLIRUV_H
+#endif // AJOUTSEMESTRES_H

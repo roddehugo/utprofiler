@@ -39,7 +39,7 @@ QMap<int, UV *> UVDAO::findAll(){
 UV* UVDAO::find(const int& id){
     try{
         if(Map.contains(id)){
-            LogWriter::write("UVDAO.cpp","Lecture de l'UV depuis la map: " + Map.value(id)->getCode());
+            LogWriter::writeln("UVDAO.cpp","Lecture de l'UV depuis la map: " + Map.value(id)->getCode());
             return Map.value(id);
         }
         QSqlQuery query(Connexion::getInstance()->getDataBase());
@@ -95,15 +95,15 @@ UV *UVDAO::findByCode(const QString& str)
             const bool demiuv = rec.value("demiuv").toBool();
 
             if(Map.contains(id)){
-                LogWriter::write("UVDAO.cpp","Lecture de l'UV depuis la map: " + Map.value(id)->getCode());
+                LogWriter::writeln("UVDAO.cpp","Lecture de l'UV depuis la map: " + Map.value(id)->getCode());
                 return Map.value(id);
             }
 
-            LogWriter::write("UVDAO.cpp","Lecture de l'UV : " + code);
+            LogWriter::writeln("UVDAO.cpp","Lecture de l'UV : " + code);
             QMap<QString,int> ectsmap = getEctsMap(id);
             QList<Cursus*> cursuslist = getCursusList(id);
 
-            UV* uv = new UV(id,code,titre,printemps,automne,demiuv,ectsmap,cursuslist);
+            UV* uv = new UV(id,code,titre,automne,printemps,demiuv,ectsmap,cursuslist);
             Map.insert(id,uv);
             return uv;
         }

@@ -1,19 +1,31 @@
 #include "Inscription.h"
 
 
-Inscription::Inscription(const unsigned int id, UV *uv, Semestre *semestre, const Resultat &resultat):
+
+Dossier *Inscription::getDossier() const
+{
+    return dossier;
+}
+
+void Inscription::setDossier(Dossier *value)
+{
+    dossier = value;
+}
+Inscription::Inscription(const unsigned int id, UV *uv, Semestre *semestre, const Resultat &resultat, Dossier *dossier):
     id(id),
     uv(uv),
     semestre(semestre),
-    resultat(resultat)
+    resultat(resultat),
+    dossier(dossier)
 {
 
 }
 
-Inscription::Inscription(UV *uv, Semestre *semestre, const Resultat &resultat):
+Inscription::Inscription(UV *uv, Semestre *semestre, const Resultat &resultat, Dossier* dossier):
     uv(uv),
     semestre(semestre),
-    resultat(resultat)
+    resultat(resultat),
+    dossier(dossier)
 {
 
 }

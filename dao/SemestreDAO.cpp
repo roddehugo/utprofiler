@@ -1,5 +1,6 @@
 #include "dao/SemestreDAO.h"
 #include "dao/CursusDAO.h"
+#include <QDebug>
 
 QMap<int, Semestre *> SemestreDAO::findAll(){
     try{
@@ -53,7 +54,7 @@ Semestre* SemestreDAO::find(const int& id){
             const unsigned int d = rec.value("cursus").toInt();
             LogWriter::writeln("Semestre.cpp","Lecture du semestre : " + QString::number(id));
             Cursus* cursus = CursusDAO::getInstance()->find(d);
-            Semestre* newsemestre=new Semestre(t,Semestre::str2saison(s),a,e,cursus);
+            Semestre* newsemestre=new Semestre(id,t,Semestre::str2saison(s),a,e,cursus);
             Map.insert(id,newsemestre);
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
@@ -81,14 +82,16 @@ Semestre *SemestreDAO::findByStr(const QString &str)
             const unsigned int a = rec.value("annee").toInt();
             const bool e = rec.value("isetranger").toBool();
             const unsigned int d = rec.value("cursus").toInt();
+            qDebug() << id << t;
             if (Map.contains(id)) {
                 LogWriter::writeln("Semestre.cpp","Lecture du semestre depuis la map: " + QString::number(id));
                 return Map.value(id);
             }
             LogWriter::writeln("Semestre.cpp","Lecture du semestre : " + QString::number(id));
             Cursus* cursus = CursusDAO::getInstance()->find(d);
-            Semestre* newsemestre=new Semestre(t,Semestre::str2saison(s),a,e,cursus);
+            Semestre* newsemestre=new Semestre(id,t,Semestre::str2saison(s),a,e,cursus);
             Map.insert(id,newsemestre);
+            return newsemestre;
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
@@ -190,7 +193,7 @@ QStringList SemestreDAO::getStringList()
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
 
-        if(!query.exec("SELECT titre FROM uvs;"))
+        if(!query.exec("SELECT titre FROM semestres;"))
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         while (query.next()) {
             QSqlRecord rec = query.record();

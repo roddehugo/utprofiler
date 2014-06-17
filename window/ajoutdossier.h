@@ -3,34 +3,22 @@
 
 #include <QDialog>
 #include "dao/Factories.h"
-#include <QTableWidget>
-#include <QListWidget>
-#include <QDialog>
-#include <QDebug>
+
 namespace Ui {
-class ajoutDossier;
+class ajoutdossier;
 }
 
-class ajoutDossier : public QDialog
+class ajoutdossier : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit ajoutDossier(Factory* factory,QWidget *parent = 0);
-    ~ajoutDossier();
+    explicit ajoutdossier(Factory* fac,QWidget *parent = 0);
+    ~ajoutdossier();
 
-public slots:
-    void saveDossier();
-    void on_ajouterItem();
-    void on_retirerItem();
 private:
-
-    QTableWidget* m_pTableWidget;
-
-    QStringList m_TableHeader;
-
-    Ui::ajoutDossier *ui;
-    Factory* fac;
+    Ui::ajoutdossier *ui;
+    Factory* factory;
 };
 
 #endif // AJOUTDOSSIER_H

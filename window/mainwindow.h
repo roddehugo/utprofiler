@@ -1,10 +1,12 @@
 #ifndef AJOUTUVWINDOW_H
 #define AJOUTUVWINDOW_H
 
-#include <QMainWindow>
-#include<QTableWidget>
 #include "dao/Factories.h"
+#include <QMainWindow>
+#include <QTableWidget>
+#include <QTreeWidget>
 #include <QTableView>
+#include <QInputDialog>
 
 namespace Ui {
 class MainWindow;
@@ -17,13 +19,15 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(Factory* factory,QWidget *parent = 0);
     ~MainWindow();
-    void fillMainWindow(Factory * factory);
 private:
     Ui::MainWindow *ui;
     Factory* fac;
+    QTreeWidget* m_tree;
     QTableWidget* m_pTableWidget;
     QStringList m_TableHeader;
-
+    Etudiant* currentEtudiant;
+    Dossier* currentDossier;
+    QStringList listDossiers;
 private slots :
     void on_ajouteruv();
     void modifieruv();
@@ -37,7 +41,10 @@ private slots :
     void rejeterUV();
     void retirerpref();
 
+    void fillMainWindow();
     void on_ajouterDossier_clicked();
+    void on_inscrireSemestre_clicked();
+    void on_dossierCombo_currentTextChanged(const QString &arg1);
 };
 
 #endif

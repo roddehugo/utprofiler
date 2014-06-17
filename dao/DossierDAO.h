@@ -7,12 +7,14 @@
 class DossierDAO : public SqlDAOTemplate<Dossier, DossierDAO> {
 
     friend class Singleton<DossierDAO>;
-
+private:
+    Dossier* current;
 public:
 
     QMap<int, Dossier *> findAll();
 
     Dossier* find(const int& id);
+    QStringList findByEtudiant(const int etu);
 
     bool update(Dossier* obj);
 
@@ -20,12 +22,13 @@ public:
 
     bool create(Dossier* obj);
 
+    Dossier *findByStr(const QString &str);
 
     QMap<QString, int> getCursusMap(unsigned int id);
 
-
-
-protected:
+    Dossier *getCurrent() const;
+    void setCurrent(Dossier *value);
+    protected:
 
     ~DossierDAO(){}
     DossierDAO(){}

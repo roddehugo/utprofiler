@@ -16,9 +16,9 @@ enum Saison{
 class Semestre {
 
  public:
-    Semestre(const unsigned int id, const QString& titre, const Saison& saison, unsigned int annee, bool etranger, Cursus* cursus, const QMap<int, Inscription*>& inscriptions);
     Semestre(const unsigned int id, const QString& titre, const Saison& saison, unsigned int annee, bool etranger, Cursus* cursus);
     Semestre(const QString& titre, const Saison& saison, unsigned int annee, bool etranger, Cursus* cursus);
+
     ~Semestre();
 
     Saison getSaison() const;
@@ -45,6 +45,7 @@ class Semestre {
 
     QString getTitre() const;
     void setTitre(const QString &value);
+
 
 private:
     unsigned int id;

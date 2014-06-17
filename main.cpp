@@ -75,8 +75,8 @@ void runTests(Factory* fac){
     fac->getUVDAO()->create(nf93);
     fac->getUVDAO()->create(lo21);
 
-    Inscription *i1 = new Inscription(nf93,tc03,B);
-    Inscription *i2 = new Inscription(lo21,gi02,EC);
+    Inscription *i1 = new Inscription(nf93,tc03,B,monDossier);
+    Inscription *i2 = new Inscription(lo21,gi02,EC,monDossier);
 
     fac->getInscriptionDAO()->create(i1);
     fac->getInscriptionDAO()->create(i2);

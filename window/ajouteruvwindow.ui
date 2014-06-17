@@ -14,125 +14,34 @@
    <string>Ajouter une UV</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_7">
-   <item row="0" column="0" rowspan="2" colspan="2">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QGroupBox" name="groupBox">
-       <property name="title">
-        <string>Ajouter une UV</string>
-       </property>
-       <layout class="QGridLayout" name="gridLayout_6">
-        <item row="0" column="0">
-         <widget class="QGroupBox" name="groupBox_2">
-          <property name="title">
-           <string>UV</string>
-          </property>
-          <layout class="QGridLayout" name="gridLayout_3">
-           <item row="0" column="0">
-            <layout class="QGridLayout" name="gridLayout_2">
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_4">
+   <item row="0" column="1">
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>Cursus</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QListWidget" name="cursuscolonne"/>
+        </item>
+        <item>
+         <widget class="QWidget" name="widget_2" native="true">
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QPushButton" name="ajoutcursus">
                <property name="text">
-                <string>Semestre</string>
+                <string>&gt;</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="label_2">
+             <item>
+              <widget class="QPushButton" name="retirecursus">
                <property name="text">
-                <string>Titre</string>
+                <string>&lt;</string>
                </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="titreuv"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_3">
-               <property name="text">
-                <string>Credits</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <layout class="QVBoxLayout" name="verticalLayout">
-               <item>
-                <widget class="QCheckBox" name="isautomne">
-                 <property name="text">
-                  <string>Automne</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="isprintemps">
-                 <property name="text">
-                  <string>Printemps</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="isdemiuv">
-                 <property name="text">
-                  <string>demi UV</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="0" column="1">
-              <widget class="QLineEdit" name="codeuv"/>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="code">
-               <property name="text">
-                <string>Code</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QWidget" name="widget" native="true">
-               <layout class="QGridLayout" name="gridLayout_4">
-                <item row="0" column="0">
-                 <layout class="QHBoxLayout" name="horizontalLayout_6">
-                  <item>
-                   <widget class="QListWidget" name="categoriecol"/>
-                  </item>
-                  <item>
-                   <widget class="QWidget" name="widget_3" native="true">
-                    <layout class="QVBoxLayout" name="verticalLayout_8">
-                     <item>
-                      <layout class="QVBoxLayout" name="verticalLayout_9">
-                       <item>
-                        <widget class="QSpinBox" name="spinBox"/>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="ajoutcredit">
-                         <property name="text">
-                          <string>&gt;</string>
-                         </property>
-                        </widget>
-                       </item>
-                       <item>
-                        <widget class="QPushButton" name="retirecredit">
-                         <property name="text">
-                          <string>&lt;</string>
-                         </property>
-                        </widget>
-                       </item>
-                      </layout>
-                     </item>
-                    </layout>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QListWidget" name="creditajoute"/>
-                  </item>
-                  <item>
-                   <widget class="QListWidget" name="creditcol"/>
-                  </item>
-                 </layout>
-                </item>
-               </layout>
               </widget>
              </item>
             </layout>
@@ -140,31 +49,106 @@
           </layout>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="QGroupBox" name="groupBox_3">
-          <property name="title">
-           <string>Cursus</string>
+        <item>
+         <widget class="QListWidget" name="cursusajoute"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>UV</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Semestre</string>
           </property>
-          <layout class="QGridLayout" name="gridLayout_5">
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Titre</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="titreuv"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Credits</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCheckBox" name="isautomne">
+            <property name="text">
+             <string>Automne</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="isprintemps">
+            <property name="text">
+             <string>Printemps</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="isdemiuv">
+            <property name="text">
+             <string>demi UV</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="codeuv"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="code">
+          <property name="text">
+           <string>Code</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QWidget" name="widget" native="true">
+          <layout class="QGridLayout" name="gridLayout_4">
            <item row="0" column="0">
-            <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
              <item>
-              <widget class="QListWidget" name="cursuscolonne"/>
+              <widget class="QListWidget" name="categoriecol"/>
              </item>
              <item>
-              <widget class="QWidget" name="widget_2" native="true">
-               <layout class="QVBoxLayout" name="verticalLayout_6">
+              <widget class="QWidget" name="widget_3" native="true">
+               <layout class="QVBoxLayout" name="verticalLayout_8">
                 <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_7">
+                 <layout class="QVBoxLayout" name="verticalLayout_9">
                   <item>
-                   <widget class="QPushButton" name="ajoutcursus">
+                   <widget class="QSpinBox" name="spinBox"/>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="ajoutcredit">
                     <property name="text">
                      <string>&gt;</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="retirecursus">
+                   <widget class="QPushButton" name="retirecredit">
                     <property name="text">
                      <string>&lt;</string>
                     </property>
@@ -176,7 +160,14 @@
               </widget>
              </item>
              <item>
-              <widget class="QListWidget" name="cursusajoute"/>
+              <widget class="QListWidget" name="creditajoute"/>
+             </item>
+             <item>
+              <widget class="QListWidget" name="creditcol">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -184,11 +175,11 @@
          </widget>
         </item>
        </layout>
-      </widget>
-     </item>
-    </layout>
+      </item>
+     </layout>
+    </widget>
    </item>
-   <item row="2" column="0">
+   <item row="1" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>

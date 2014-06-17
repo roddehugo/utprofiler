@@ -1,18 +1,6 @@
 #include "Semestre.h"
 
-Semestre::Semestre(const unsigned int id, const QString& titre,const Saison &saison, unsigned int annee, bool etranger, Cursus *cursus, const QMap<int, Inscription *> &inscriptions):
-    id(id),
-    titre(titre),
-    saison(saison),
-    annee(annee),
-    etranger(etranger),
-    cursus(cursus),
-    inscriptions(inscriptions)
-{
-
-}
-
-Semestre::Semestre(const unsigned int id, const QString& titre, const Saison &saison, unsigned int annee, bool etranger, Cursus *cursus):
+Semestre::Semestre(const unsigned int id, const QString& titre,const Saison &saison, unsigned int annee, bool etranger, Cursus *cursus):
     id(id),
     titre(titre),
     saison(saison),
@@ -105,7 +93,7 @@ QString Semestre::saison2str(Saison saison)
         case Printemps:
             return "Printemps";
         default:
-            throw UTProfilerException("Impossible de convertir Saison en QString" + saison);
+            throw UTProfilerException("Impossible de convertir Saison en QString");
     }
 }
 

@@ -30,7 +30,12 @@ public:
 
 protected:
     SqlDAOTemplate(){}
-    ~SqlDAOTemplate(){}
+    ~SqlDAOTemplate(){
+
+//        for(QMap<int, T*>::const_iterator it = Map.begin(); it != Map.end(); ++it){
+//            delete it.value();
+//        }
+    }
 
     QMap<int, T*> Map;
     QMap<int, T*> getMap() const{
