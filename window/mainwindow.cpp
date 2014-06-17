@@ -7,6 +7,7 @@
 #include "window/supprimercursus.h"
 #include "window/modeldossier.h"
 #include "window/saisirinscription.h"
+#include "window/ajoutdossier.h"
 #include <QDebug>
 #include <QMessageBox>
 
@@ -136,4 +137,10 @@ void MainWindow::retirerpref()
         ui->listUV->addItem(ui->listUVrejet->currentItem()->text());
         delete ui->listUVrejet->currentItem();
     }
+}
+
+void MainWindow::on_ajouterDossier_clicked()
+{
+    ajoutDossier *ajw = new ajoutDossier(fac);
+    ajw->exec();
 }

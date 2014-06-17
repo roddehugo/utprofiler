@@ -49,22 +49,24 @@ saisirinscription::saisirinscription(Factory* factory,QWidget *parent) :
 
 void saisirinscription::on_ajouterItem()
 {
+    if(ui->listAll->currentItem()!=NULL){
+        int row = m_pTableWidget->rowCount();
+        m_pTableWidget->setRowCount(row+1);
+        m_pTableWidget->setItem(row, 0, new QTableWidgetItem(ui->listAll->currentItem()->text()) );
+        m_pTableWidget->setItem(row, 1, new QTableWidgetItem(ui->semestreCombo->currentText()) );
+        m_pTableWidget->setItem(row, 2, new QTableWidgetItem(ui->resultatCombo->currentText()) );
 
-    int row = m_pTableWidget->rowCount();
-    m_pTableWidget->setRowCount(row+1);
-    m_pTableWidget->setItem(row, 0, new QTableWidgetItem(ui->listAll->currentItem()->text()) );
-    m_pTableWidget->setItem(row, 1, new QTableWidgetItem(ui->semestreCombo->currentText()) );
-    m_pTableWidget->setItem(row, 2, new QTableWidgetItem(ui->resultatCombo->currentText()) );
-
-
-    delete ui->listAll->currentItem();
+        delete ui->listAll->currentItem();
+    }
 }
 
 void saisirinscription::on_retirerItem()
 {
     QList<QTableWidgetItem *> l = m_pTableWidget->selectedItems();
-    ui->listAll->addItem(l.first()->text());
-    m_pTableWidget->removeRow(l.first()->row());
+    if(!l.empty()){
+        ui->listAll->addItem(l.first()->text());
+        m_pTableWidget->removeRow(l.first()->row());
+    }
 
 }
 

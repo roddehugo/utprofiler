@@ -38,6 +38,7 @@ private slots :
     void retirerpref();
     void fillMainWindow();
 
+    void on_ajouterDossier_clicked();
 };
 
 #endif

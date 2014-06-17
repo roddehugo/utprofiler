@@ -121,14 +121,13 @@ Cursus *CursusDAO::findByCode(const QString &str)
 
             }
             Map.insert(id,cursus);
-            qDebug()<<Map;
             return cursus;
 
         }else{
             throw UTProfilerException("La requète a échoué : " + query.lastQuery());
         }
     }catch(UTProfilerException e){
-        LogWriter::writeln("Cursus::findByCode()",e.getMessage());
+        LogWriter::writeln("CursusDAO::findByCode()",e.getMessage());
     }
 }
 
