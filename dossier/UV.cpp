@@ -139,7 +139,7 @@ QString UV::getCreditsString() const
 {
     QString str = "";
     for(QMap<QString, int>::const_iterator i = credits.begin(); i != credits.end(); ++i){
-        str += i.key() + "(" + i.value() + ")";
+        str += i.key() + "(" + QString::number(i.value()) + ")";
     }
     return str;
 }

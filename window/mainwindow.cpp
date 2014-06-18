@@ -40,6 +40,19 @@ MainWindow::MainWindow(Factory* factory,QWidget *parent) :
     connect(ui->rejeterUV , SIGNAL(clicked()), this, SLOT(rejeterUV()));
     connect(ui->annulerUV ,SIGNAL(clicked()), this, SLOT(retirerpref()));
 
+    listDossiers = fac->getDossierDAO()->findByEtudiant(currentEtudiant->ID());
+    //    if(listDossiers.count()==0){
+    //        Dossier* fold = new Dossier("Défaut de "+currentEtudiant->getLogin(),true,currentEtudiant);
+    //        fac->getDossierDAO()->create(fold);
+    //        listDossiers << fold->getTitre();
+    //        ui->dossierCombo->addItem(fold->getTitre());
+    //    }else{
+    //        ui->dossierCombo->addItems(listDossiers);
+    //    }
+
+    ui->dossierCombo->addItems(listDossiers);
+    currentDossier = fac->getDossierDAO()->findByStr(ui->dossierCombo->currentText());
+    fac->getDossierDAO()->setCurrent(currentDossier);
     fillMainWindow();
 
 }
@@ -53,14 +66,18 @@ void MainWindow::fillMainWindow()
 {
     ui->listUV->clear();
     ui->m_tree->clear();
-    int rows = 0;
-    for(int rows = 0; rows != ui->m_gridcursus->rowCount();rows++){
-        ui->m_gridcursus->removeItem(ui->m_gridcursus->itemAtPosition(rows,0));
-        ui->m_gridcursus->removeItem(ui->m_gridcursus->itemAtPosition(rows,1));
-        ui->m_gridcursus->removeItem(ui->m_gridcursus->itemAtPosition(rows,2));
-    }
+    int rowCount = ui->m_gridcursus->rowCount();
+    int columnCount = ui->m_gridcursus->columnCount();
+    qDebug() << rowCount << columnCount;
+    for(int i=0; i<rowCount; i++)
+    {
+        for(int j=0; j<columnCount; j++)
+        {
+            ui->m_gridcursus->removeItem(ui->m_gridcursus->itemAtPosition(i,j));
+            delete ui->m_gridcursus->itemAtPosition(i,j);
 
-    ui->listUV->addItems(fac->getUVDAO()->getStringList("code"));
+        }
+    }
 
     /* ONGLET DOSSIER */
 
@@ -81,18 +98,7 @@ void MainWindow::fillMainWindow()
     ui->m_tree->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->m_tree->setSelectionMode(QAbstractItemView::SingleSelection);
 
-    listDossiers = fac->getDossierDAO()->findByEtudiant(currentEtudiant->ID());
-    if(listDossiers.count()==0){
-        Dossier* fold = new Dossier("Défaut de "+currentEtudiant->getLogin(),true,currentEtudiant);
-        fac->getDossierDAO()->create(fold);
-        listDossiers << fold->getTitre();
-        ui->dossierCombo->addItem(fold->getTitre());
-    }else{
-        ui->dossierCombo->addItems(listDossiers);
-    }
 
-    currentDossier = fac->getDossierDAO()->findByStr(ui->dossierCombo->currentText());
-    fac->getDossierDAO()->setCurrent(currentDossier);
 
     QList <Dossier *> myDossiers = fac->getDossierDAO()->findAllByEtudiant(currentEtudiant->ID());
 
@@ -120,6 +126,7 @@ void MainWindow::fillMainWindow()
             QTreeWidgetItem *semWidget = new QTreeWidgetItem(folderWidget, columns );
 
             QList<UV *> myUVs = fac->getInscriptionDAO()->findUvsBySemestre( (*s)->ID() );
+            qDebug()<<myUVs;
             for(QList<UV *>::const_iterator u = myUVs.begin(); u != myUVs.end(); ++u){
 
                 QStringList columns;
@@ -140,10 +147,8 @@ void MainWindow::fillMainWindow()
 
     int row = 0;
 
-    qDebug() << cursusToCompute;
 
     for(QMap<QString, Cursus*>::const_iterator i = cursusToCompute.begin(); i != cursusToCompute.end(); ++i){
-        qDebug()<<i.value()->getCode();
         QProgressBar* pb = new QProgressBar();
         QLabel *lab = new QLabel(i.value()->getCode());
         pb->setMaximum(i.value()->getEcts());
@@ -157,7 +162,6 @@ void MainWindow::fillMainWindow()
         QMap<QString, int> detail = fac->getCursusDAO()->computePercent(i.value()->ID());
         for(QMap<QString, int>::const_iterator j = detail.begin(); j != detail.end(); ++j){
             QProgressBar* pb = new QProgressBar();
-            qDebug()<< j.key();
             int max =  i.value()->getCredits().find(j.key()).value();
             int val = j.value();
             somme += val;
@@ -273,8 +277,8 @@ void MainWindow::retirerpref()
 
 void MainWindow::on_ajouterDossier_clicked()
 {
-//    ajoutdossier* uvw=new ajoutdossier(fac);
-//    uvw.exec();
+    //    ajoutdossier* uvw=new ajoutdossier(fac);
+    //    uvw.exec();
     bool ok;
     QString text = QInputDialog::getText(this, "Ajouter un dossier", "Nom du dossier", QLineEdit::Normal,"",&ok);
     if (ok && !text.isEmpty()){
@@ -297,7 +301,7 @@ void MainWindow::on_dossierCombo_currentTextChanged(const QString &arg1)
 
     currentDossier = fac->getDossierDAO()->findByStr(arg1);
     fac->getDossierDAO()->setCurrent(currentDossier);
-//    QMessageBox msgBox;
-//    msgBox.setText("Le dossier en cours est :\n"+currentDossier->getTitre());
-//    msgBox.exec();
+    //    QMessageBox msgBox;
+    //    msgBox.setText("Le dossier en cours est :\n"+currentDossier->getTitre());
+    //    msgBox.exec();
 }

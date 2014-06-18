@@ -18,7 +18,7 @@ QMap<int, Semestre *> SemestreDAO::findAll(){
             const bool e = rec.value("isetranger").toBool();
             const unsigned int d = rec.value("cursus").toInt();
             if (Map.contains(id)) {
-                throw UTProfilerException("Le semestre " + QString::number(id) + " existe déjà dans la QMap");
+                //throw UTProfilerException("Le semestre " + QString::number(id) + " existe déjà dans la QMap");
             }else{
                 LogWriter::writeln("Semestre.cpp","Lecture du semestre : " + QString::number(id));
                 Cursus* cursus = CursusDAO::getInstance()->find(d);
@@ -26,6 +26,7 @@ QMap<int, Semestre *> SemestreDAO::findAll(){
                 Map.insert(id,newsemestre);
             }
         }
+        return Map;
 
     }catch(UTProfilerException e){
         LogWriter::writeln("SemestreDAO::findAll()",e.getMessage());
