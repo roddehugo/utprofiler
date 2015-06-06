@@ -38,6 +38,7 @@ QList<Dossier *> DossierDAO::findAllByEtudiant(const int etu){
         QList<Dossier *> list;
         while (query.next()){
             QSqlRecord rec = query.record();
+            qDebug()<<rec;
             const int id = rec.value("id").toInt();
             const QString t = rec.value("titre").toString();
             const int e = rec.value("etudiant").toInt();
@@ -61,8 +62,10 @@ QList<Dossier *> DossierDAO::findAllByEtudiant(const int etu){
 QStringList DossierDAO::findByEtudiant(const int etu){
     try{
         QSqlQuery query(Connexion::getInstance()->getDataBase());
-        if (!query.exec("SELECT * FROM dossiers WHERE etudiant = "+QString::number(etu)+";")){
-            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+        query.prepare("SELECT * FROM dossiers WHERE etudiant = :etu;");
+        query.bindValue(":etu",etu);
+        if (!query.exec()){
+            throw UTProfilerException("La requête a échoué : " + query.lastQuery());
         }
         QStringList list;
         while (query.next()){
@@ -87,7 +90,7 @@ QStringList DossierDAO::findByEtudiant(const int etu){
     }
 }
 
-Dossier *DossierDAO::findByStr(const QString &str)
+Dossier *DossierDAO::findByStr(const QString str)
 {
     try{
 

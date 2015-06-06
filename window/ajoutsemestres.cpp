@@ -42,6 +42,7 @@ ajoutSemestres::ajoutSemestres(Factory* factory,QWidget *parent) :
     ui->m_pTableWidget->setHorizontalHeaderItem(4,h5);
 
     QMap<int,Semestre*> all = fac->getSemestreDAO()->findAll();
+
     int row = ui->m_pTableWidget->rowCount();
 
     for(QMap<int,Semestre*>::const_iterator i = all.begin(); i != all.end(); ++i){
@@ -53,7 +54,6 @@ ajoutSemestres::ajoutSemestres(Factory* factory,QWidget *parent) :
         ui->m_pTableWidget->setItem(row, 0, new QTableWidgetItem(i.value()->getTitre()) );
         row++;
     }
-
 
     connect(ui->ajouterBouton,SIGNAL(clicked()),this, SLOT(on_ajouterItem()));
     connect(ui->retirerBouton,SIGNAL(clicked()),this, SLOT(on_retirerItem()));

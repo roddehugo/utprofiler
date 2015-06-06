@@ -79,9 +79,9 @@ void Semestre::setEtranger(bool value)
 
 Saison Semestre::str2saison(const QString &str)
 {
-    if(str=="A")
+    if(str=="Automne")
         return Automne;
-    else if(str=="P")
+    else if(str=="Printemps")
         return Printemps;
     else
         UTProfilerException("Impossible de convertir QString en Saison" + str);

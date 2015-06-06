@@ -31,7 +31,7 @@ public:
 
     bool create(Dossier* obj);
 
-    Dossier *findByStr(const QString &str);
+    Dossier *findByStr(const QString str);
 
     QMap<QString, int> getCursusMap(unsigned int id);
 

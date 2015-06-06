@@ -84,6 +84,5 @@ void saisirinscription::saveInscription()
 
 saisirinscription::~saisirinscription()
 {
-    delete ui->m_pTableWidget;
     delete ui;
 }
