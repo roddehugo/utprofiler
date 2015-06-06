@@ -58,8 +58,9 @@ int CategorieDAO::findByStr(QString str){
             query.prepare("SELECT id FROM categories WHERE titre = :s ;");
             query.bindValue(":s", str);
             if (!query.exec()){
-                throw UTProfilerException("La requete a échoué : " + query.lastQuery());
-                return false;}
+                //throw UTProfilerException("La requete a échoué : " + query.lastQuery());
+                return false;
+            }
             if(query.first()){
                 QSqlRecord rec = query.record();
                 const int id = rec.value("id").toInt();

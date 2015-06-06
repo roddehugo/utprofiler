@@ -161,8 +161,8 @@ bool UVDAO::remove(UV* obj){
 
 
 bool UVDAO::create(UV *obj){
-    QSqlQuery query(Connexion::getInstance()->getDataBase());
     try{
+        QSqlQuery query(Connexion::getInstance()->getDataBase());
         query.prepare("INSERT INTO uvs (code, titre, automne, printemps, demiuv) VALUES (:code, :titre, :automne, :printemps, :demiuv);");
         query.bindValue(":code", obj->getCode() );
         query.bindValue(":titre", obj->getTitre() );
@@ -171,7 +171,7 @@ bool UVDAO::create(UV *obj){
         query.bindValue(":demiuv", obj->isDemiUV() );
 
         if (!query.exec()){
-            throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+            //throw UTProfilerException("La requète a échoué : " + query.lastQuery());
             return false;
         }else{
 
@@ -190,7 +190,7 @@ bool UVDAO::create(UV *obj){
                 query.bindValue(":idcategorie", idcat );
                 query.bindValue(":ects", i.value() );
                 if (!query.exec()){
-                    throw UTProfilerException("La requète a échoué : " + query.lastQuery());
+                    //throw UTProfilerException("La requète a échoué : " + query.lastQuery());
                 }
                 LogWriter::writeln("UVDAO.cpp","Ajout de la reference categorie : " + QString::number(idcat));
             }
